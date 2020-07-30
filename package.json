@@ -1,0 +1,20 @@
+{
+  "name": "AWS-Thesis-Proj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Legoin/AWS-Thesis-Proj.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Legoin/AWS-Thesis-Proj/issues"
+  },
+  "homepage": "https://github.com/Legoin/AWS-Thesis-Proj#readme"
+}
