@@ -85,7 +85,7 @@ const RootQuery = new GraphQLObjectType({
         return await knex('User').select().where({ id: args.id }).first();
       },
     },
-    users: {
+    getUsers: {
       type: new GraphQLList(UserType),
       async resolve(root, args) {
         return await knex('User').select();
@@ -100,23 +100,33 @@ const RootQuery = new GraphQLObjectType({
       async resolve(root, args) {
         return await knex('Cart')
           .select()
-          .where({ userID: args.userID });
+          .where({ userID: args.userID, sold: false });
       },
     },
-    product: {
-      type: ProductType,
+    productsByUserID: {
+      type: new GraphQLList(ProductType),
       args: {
         userID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
         return await knex('Product')
           .select()
-          .where({ userID: args.userID })
-          .first();
+          .where({ userID: args.userID });
       },
     },
-    comment: {
-      type: CommentType,
+    productsByCategory: {
+      type: new GraphQLList(ProductType),
+      args: {
+        category: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(root, args) {
+        return await knex('Product')
+          .select()
+          .where({ category: args.category });
+      },
+    },
+    comments: {
+      type:  new GraphQLList(CommentType),
       args: {
         postID: { type: new GraphQLNonNull(GraphQLID) },
       },
@@ -124,11 +134,10 @@ const RootQuery = new GraphQLObjectType({
         return await knex('Comment')
           .select()
           .where({ postID: args.postID })
-          .first();
       },
     },
-    post: {
-      type: PostType,
+    posts: {
+      type: new GraphQLList(PostType),
       args: {
         userID: { type: new GraphQLNonNull(GraphQLID) },
       },
@@ -136,7 +145,6 @@ const RootQuery = new GraphQLObjectType({
         return await knex('Post')
           .select()
           .where({ userID: args.userID })
-          .first();
       },
     },
     login: {
