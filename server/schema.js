@@ -9,8 +9,8 @@ const {
   GraphQLID,
 } = require('graphql');
 const knex = require('../database/index');
-
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const UserType = new GraphQLObjectType({
   name: 'user',
@@ -111,7 +111,7 @@ const RootQuery = new GraphQLObjectType({
       async resolve(root, args) {
         return await knex('Product')
           .select()
-          .where({ userID: args.userID });
+          .where({ userID: args.userID }).limit(50);
       },
     },
     productsByCategory: {
@@ -122,7 +122,7 @@ const RootQuery = new GraphQLObjectType({
       async resolve(root, args) {
         return await knex('Product')
           .select()
-          .where({ category: args.category });
+          .where({ category: args.category }).limit(50);
       },
     },
     comments: {
@@ -154,18 +154,20 @@ const RootQuery = new GraphQLObjectType({
         password: { type: new GraphQLNonNull(GraphQLString) }
       },
       async resolve(root, args) {
-        return await knex('') //TODO Write query
-      },
-    },
-    signUp: {
-      type: UserType,
-      args: {
-        username: { type: new GraphQLNonNull(GraphQLString) },
-        password: { type: new GraphQLNonNull(GraphQLString) }
-        //TODO: Add all data
-      },
-      async resolve(root, args) {
-        return await knex('') //TODO: Write query
+        try{
+          const currentUser = await knex('User').select().where({username : args.username}).first();
+          const passwordCorrect = await bcrypt.compare(args.password, currentUser.password);
+          if(passwordCorrect){
+            const token = jwt.sign({id: currentUser.id, username: currentUser.username}, process.env.SECRET, {
+              algorithm: 'RS256',
+              expiresIn: "2d"
+            });
+            await knex('User').where({ id: currentUser.id }).update({token});
+            return currentUser;
+          }
+        }catch{           
+           return "Failed to Login";           
+        }
       },
     }
   },

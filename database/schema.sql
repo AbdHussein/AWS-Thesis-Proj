@@ -15,6 +15,7 @@ CREATE TABLE `User` (
   `service_name` VARCHAR(60) NOT NULL,
   `location` VARCHAR(30) NOT NULL,
   `address` VARCHAR(200) NOT NULL,
+  `token` VARCHAR(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
