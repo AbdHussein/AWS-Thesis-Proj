@@ -24,6 +24,7 @@ const UserType = new GraphQLObjectType({
     service_name: { type: GraphQLString },
     location: { type: GraphQLString },
     address: { type: GraphQLString },
+    token: { type: GraphQLString }
   }),
 });
 
@@ -159,10 +160,15 @@ const RootQuery = new GraphQLObjectType({
           const passwordCorrect = await bcrypt.compare(args.password, currentUser.password);
           if(passwordCorrect){
             const token = jwt.sign({id: currentUser.id, username: currentUser.username}, process.env.SECRET, {
-              algorithm: 'RS256',
+              algorithm: 'HS256',
               expiresIn: "2d"
-            });
-            await knex('User').where({ id: currentUser.id }).update({token});
+            }, async (err, data) => {
+              if(err){
+                console.log(err);
+                return;
+              }
+              await knex('User').where({ id: currentUser.id }).update({token: data});
+            });            
             return currentUser;
           }
         }catch{           

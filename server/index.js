@@ -11,9 +11,7 @@ const authMiddleware = jwt({
   secret: process.env.SECRET
 });
 
-// app.use(authMiddleware);
-
-app.use('/api',
+app.use('/api',// authMiddleware,
   expressGraphQL(req => ({
     schema,
     context: {
