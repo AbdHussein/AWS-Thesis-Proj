@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import Landing from './components/landing/landing';
 import Map from './components/mainMap/map';
+import Provider from './components/provider/provider';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={Landing} />
           <Route path='/map' component={Map} />
+          <Route path='/provider' component={Provider} />
         </Switch>
       </div>
     </Router>

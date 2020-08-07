@@ -3,7 +3,9 @@ $floatLeft: left;
 $floatRight: right;
 $mainColor: #2e3f6e;
 $mainHover: #4db7fe;
-$mainOverLayColor: rgba(0, 0, 0, 0.5); /* End Main Var */
+$mainOverLayColor: rgba(0, 0, 0, 0.6);
+$ratingHover: rgba(6, 27, 65, 0.45);
+/* End Main Var */
 /* Start Classes For Extends */
 %transition {
   transition: all 0.3s linear;
@@ -19,8 +21,20 @@ $mainOverLayColor: rgba(0, 0, 0, 0.5); /* End Main Var */
 %cover {
   background-size: cover;
 }
+%ulStyle {
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    li {
+      display: inline-block;
+      margin-right: 25px;
+      margin-bottom: 30px;
+    }
+  }
+}
 @mixin boxShadow($val) {
-  box-shadow: 0px 0px 0px $val rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 0px 0px $val rgba(255, 255, 255, 0.3);
 }
 /* End Classes For Extends */
 
@@ -144,3 +158,322 @@ nav {
 }
 
 /* =============================== End Map Page =============================== */
+
+/* =============================== Start Provider Page =============================== */
+
+.provider-header {
+  height: 80vh;
+  background-image: url("./images/mobile-store-online.png");
+  position: relative;
+  @extend %cover;
+  .overlay {
+    @extend %overlay;
+    color: #fff;
+  }
+  .MuiContainer-root {
+    position: absolute;
+    bottom: 0;
+    left: 2vw;
+  }
+}
+.provider-nav {
+  height: 10vh;
+  line-height: 10vh;
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+  margin-bottom: 70px;
+  .categories {
+    float: $floatLeft;
+    border-right: 1px solid #ddd;
+    padding-right: 20px;
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      li {
+        display: inline-block;
+        margin-right: 50px;
+        color: #7d93b2;
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        @extend %transition;
+        svg {
+          margin-right: 7px;
+        }
+
+        &:hover {
+          color: $mainHover;
+        }
+      }
+    }
+  }
+  .sharing {
+    float: $floatRight;
+    button {
+      background: $mainColor;
+      border: none;
+      color: #fff;
+      padding: 10px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      @extend %transition;
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+      svg {
+        color: $mainHover;
+        margin-right: 10px;
+      }
+      &:hover {
+        background-color: $mainHover;
+
+        svg {
+          color: $mainColor;
+        }
+      }
+    }
+    > svg {
+      cursor: pointer;
+      @extend %transition;
+      color: #7d7d7d;
+      &:hover {
+        color: $mainColor;
+      }
+    }
+  }
+}
+
+.provider-info {
+  float: $floatLeft;
+  margin-bottom: 25px;
+  span {
+    margin-right: 15px;
+    svg {
+      margin-right: 10px;
+      color: $mainHover;
+    }
+  }
+}
+
+.provider-ui {
+  width: 100%;
+  .rating {
+    float: $floatRight;
+    div {
+      float: $floatLeft;
+    }
+    div:first-child {
+      border-radius: 50%;
+      background-color: $mainColor;
+      padding: 15px;
+      font-weight: 700;
+      margin-right: 20px;
+    }
+    border-radius: 50px;
+    padding: 10px 10px 0;
+    width: 250px;
+    @extend %transition;
+    cursor: pointer;
+    @include boxShadow(4px);
+    .chat svg {
+      float: $floatRight;
+      font-size: 46px;
+      color: rgba(255, 255, 255, 0.2);
+      margin-left: 25px;
+    }
+    svg {
+      font-size: 20px;
+      display: block;
+    }
+    &:nth-child(2) p {
+      margin-top: 0px;
+    }
+    &:hover {
+      background-color: $ratingHover;
+    }
+  }
+}
+hr {
+  width: 100%;
+  height: 1px;
+  border: none;
+  background-color: rgb(95, 95, 95);
+  margin-top: 20px;
+}
+.provider-bottom-header {
+  p {
+    float: $floatRight;
+    border: 1px dashed rgba(255, 255, 255, 0.21);
+    background: rgba(255, 255, 255, 0.11);
+    color: #fff;
+    display: block;
+    padding: 8px 15px;
+    font-size: 12px;
+    border-radius: 4px;
+
+    &:not(:first-child) svg {
+      color: $mainHover;
+      margin-right: 7px;
+    }
+
+    &:nth-child(3) {
+      margin-right: 20px;
+    }
+  }
+  p:first-child {
+    float: $floatLeft;
+    margin-bottom: 10px;
+    line-height: 30px;
+    border: none;
+    background: none;
+    svg {
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      padding: 10px;
+      background-color: #f75c96;
+    }
+  }
+}
+
+.provider-content {
+  float: $floatLeft;
+  width: 60%;
+  margin-right: 5%;
+  .provider-promo {
+    width: 100%;
+    border-radius: 10px;
+    background-image: url(./images/48.jpg);
+    background-size: cover;
+    height: 80vh;
+    position: relative;
+    margin-bottom: 40px;
+    button {
+      background-color: #fff;
+      border: none;
+      cursor: pointer;
+      @include boxShadow(4px);
+      color: #7d93b2;
+      padding: 10px 20px;
+      border-radius: 50px;
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      svg {
+        margin-right: 30px;
+        border-radius: 50%;
+        padding: 10px;
+        background-color: $mainHover;
+        color: #fff;
+        @extend %transition;
+        margin-bottom: -9px;
+      }
+      span {
+        padding: 10px 10px 10px 0px;
+        display: inline-block;
+        margin-bottom: 0;
+      }
+      &:hover {
+        svg {
+          background-color: $mainColor;
+        }
+      }
+    }
+  }
+  .provider-description {
+    margin-bottom: 40px;
+    div {
+      padding: 15px;
+      p {
+        color: #878c9f;
+      }
+    }
+    & div:first-child {
+      border: 1px solid #ddd;
+      border-radius: 10px 10px 0 0;
+      color: #566985;
+      font-size: 15px;
+      font-weight: 600;
+      svg {
+        float: $floatRight;
+        font-size: 10px;
+        color: $mainHover;
+        margin-top: 7px;
+      }
+    }
+    & div:last-child {
+      border: 1px solid #ddd;
+      border-radius: 0 0 10px 10px;
+      border-top: none;
+    }
+    button {
+      background-color: $mainColor;
+      border: none;
+      padding: 15px 25px;
+      color: #fff;
+      border-radius: 10px;
+      outline: none;
+      cursor: pointer;
+      margin-top: 30px;
+      svg {
+        color: $mainHover;
+        margin-left: 15px;
+      }
+    }
+  }
+
+  .provider-features {
+    @extend .provider-description;
+    div {
+      @extend %ulStyle;
+      ul {
+        li {
+          color: #878c9f;
+          svg {
+            color: $mainHover;
+          }
+        }
+      }
+    }
+  }
+  .provider-photos {
+    @extend .provider-description;
+  }
+  .provider-single-fact {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    > div {
+      background-color: #4db7fe;
+      border-radius: 10px;
+      width: 26%;
+      padding: 20px;
+      .fac {
+        float: $floatLeft;
+        width: 73%;
+        color: #fff;
+        p {
+          font-size: 40px;
+          font-weight: 700;
+          margin: -10px 0 -15px;
+        }
+      }
+      .icon {
+        float: $floatLeft;
+        width: 24%;
+        color: rgba(255, 255, 255, 0.21);
+        font-size: 50px;
+        margin-left: 3%;
+      }
+    }
+  }
+}
+.provider-sidebar {
+  float: $floatLeft;
+  width: 35%;
+  background-color: #ddd;
+}
+
+/* =============================== End Provider Page =============================== */

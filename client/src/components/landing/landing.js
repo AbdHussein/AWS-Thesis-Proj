@@ -11,6 +11,7 @@ class Landing extends React.Component {
         return (
             <div className="landing">
                 <Navbar />
+                {/* Start Header */}
                 <header>
                     <div className="overlay">
                         <Container>
@@ -40,6 +41,7 @@ class Landing extends React.Component {
                         </Container>
                     </div>
                 </header>
+                {/* End Header */}
             </div>
         )
     }
