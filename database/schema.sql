@@ -8,13 +8,20 @@ DROP TABLE IF EXISTS `User`;
 CREATE TABLE `User` (
   `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(50) NOT NULL UNIQUE,
-  `email` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(50) NOT NULL UNIQUE,
   `password` VARCHAR(64) NOT NULL,
-  `pay_service` VARCHAR(20) NOT NULL,
+  `RoleID` INTEGER(11) NOT NULL,
+  `payService` VARCHAR(20) DEFAULT NULL,
   `mobile` INTEGER(11) NOT NULL,
-  `service_name` VARCHAR(60) NOT NULL,
-  `location` VARCHAR(30) NOT NULL,
+  `serviceName` VARCHAR(60) NOT NULL,
+  `location` VARCHAR(30) DEFAULT NULL,
   `address` VARCHAR(200) NOT NULL,
+  `avatar` VARCHAR(200) NOT NULL,
+  `cover` VARCHAR(200) NOT NULL,
+  `video` VARCHAR(200) NOT NULL,
+  `description` VARCHAR(500) NOT NULL,
+  `workingHours` VARCHAR(500) DEFAULT NULL,
+  `categoryID` INTEGER(11) NOT NULL,
   `token` VARCHAR(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
@@ -31,6 +38,19 @@ CREATE TABLE `Cart` (
   `userID` INTEGER(11) NOT NULL,
   `productID` INTEGER(11) NOT NULL,
   `sold` TINYINT(1) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Category'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Category`;
+		
+CREATE TABLE `Category` (
+  `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
+  `category` VARCHAR(11) NOT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -86,11 +106,53 @@ CREATE TABLE `Post` (
 );
 
 -- ---
+-- Table 'Gallery'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Gallery`;
+		
+CREATE TABLE `Gallery` (
+  `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
+  `userID` INTEGER(11) NOT NULL ,
+  `image` VARCHAR(200) NOT NULL ,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Bookmark'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Bookmark`;
+		
+CREATE TABLE `Bookmark` (
+  `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
+  `userID` INTEGER(11) NOT NULL ,
+  `providerID` VARCHAR(200) NOT NULL ,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Roles'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Roles`;
+		
+CREATE TABLE `Roles` (
+  `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
+  `Role` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
 -- Table Properties
 -- ---
 
 ALTER TABLE `User` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ALTER TABLE `Cart` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+ALTER TABLE `Category` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ALTER TABLE `Product` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ALTER TABLE `Comment` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ALTER TABLE `Post` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -105,3 +167,8 @@ ALTER TABLE `Product` ADD FOREIGN KEY (userID) REFERENCES `User` (`id`);
 ALTER TABLE `Comment` ADD FOREIGN KEY (userID) REFERENCES `User` (`id`);
 ALTER TABLE `Comment` ADD FOREIGN KEY (postID) REFERENCES `Post` (`id`);
 ALTER TABLE `Post` ADD FOREIGN KEY (userID) REFERENCES `User` (`id`);
+ALTER TABLE `User` ADD FOREIGN KEY (categoryID) REFERENCES `Category` (`id`);
+ALTER TABLE `User` ADD FOREIGN KEY (RoleID) REFERENCES `Roles` (`id`);
+ALTER TABLE `Gallery` ADD FOREIGN KEY (userID) REFERENCES `User` (`id`);
+ALTER TABLE `Bookmark` ADD FOREIGN KEY (userID) REFERENCES `User` (`id`);
+ALTER TABLE `Bookmark` ADD FOREIGN KEY (providerID) REFERENCES `User` (`id`);
