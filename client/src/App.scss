@@ -108,7 +108,7 @@ nav {
 .landing {
   header {
     height: 90vh;
-    background-image: url("../src/images/1.jpg");
+    background-image: url('../src/images/1.jpg');
     position: relative;
     @extend %cover;
     .overlay {
@@ -163,7 +163,7 @@ nav {
 
 .provider-header {
   height: 80vh;
-  background-image: url("./images/mobile-store-online.png");
+  background-image: url('./images/6.jpg');
   position: relative;
   @extend %cover;
   .overlay {
