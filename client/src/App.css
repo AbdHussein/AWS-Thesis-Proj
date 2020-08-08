@@ -161,7 +161,7 @@ nav .auth span {
 /* =============================== Start Provider Page =============================== */
 .provider-header {
   height: 80vh;
-  background-image: url("./images/mobile-store-online.png");
+  background-image: url("./images/6.jpg");
   position: relative;
 }
 
@@ -497,6 +497,10 @@ hr {
   float: left;
   width: 35%;
   background-color: #ddd;
+}
+
+.provider-content > div:not(:first-child) {
+  display: none;
 }
 
 /* =============================== End Provider Page =============================== */

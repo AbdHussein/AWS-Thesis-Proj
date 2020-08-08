@@ -476,4 +476,9 @@ hr {
   background-color: #ddd;
 }
 
+.provider-content > div:not(:first-child)
+{
+  display: none;
+}
+
 /* =============================== End Provider Page =============================== */
