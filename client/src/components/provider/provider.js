@@ -57,7 +57,7 @@ class Provider extends React.Component {
                     <Container>
                         <div className="categories">
                             <ul>
-                                <li data-type=".provider-details"><FontAwesomeIcon icon={faInfo} /> Details</li>
+                                <li className="active" data-type=".provider-details"><FontAwesomeIcon icon={faInfo} /> Details</li>
                                 <li data-type=".provider-posts"><FontAwesomeIcon icon={faClipboard} /> Posts</li>
                                 <li data-type=".provider-gallery"><FontAwesomeIcon icon={faImage} /> Gallery</li>
                                 <li data-type=".provider-store"><FontAwesomeIcon icon={faStore} /> Store</li>

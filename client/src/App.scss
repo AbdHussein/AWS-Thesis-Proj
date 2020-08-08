@@ -108,7 +108,7 @@ nav {
 .landing {
   header {
     height: 90vh;
-    background-image: url('../src/images/1.jpg');
+    background-image: url("../src/images/1.jpg");
     position: relative;
     @extend %cover;
     .overlay {
@@ -163,7 +163,7 @@ nav {
 
 .provider-header {
   height: 80vh;
-  background-image: url('./images/6.jpg');
+  background-image: url("./images/6.jpg");
   position: relative;
   @extend %cover;
   .overlay {
@@ -342,6 +342,9 @@ hr {
   float: $floatLeft;
   width: 60%;
   margin-right: 5%;
+  > div:not(:first-child) {
+    display: none;
+  }
   .provider-promo {
     width: 100%;
     border-radius: 10px;
@@ -469,6 +472,104 @@ hr {
       }
     }
   }
+  .provider-content > div:not(:first-child) {
+    display: none;
+  }
+  // Post Component
+  .posts {
+    border: 1px solid #ccc;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px;
+    .post-img {
+      border: 1px solid #ccc;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 5px 5px 0px #ccc;
+    }
+    .post-img img {
+      width: 100%;
+    }
+    .post-describe {
+      margin-top: 40px;
+      h2 {
+        color: #566985;
+        margin-top: 0;
+      }
+      p {
+        color: #878c9f;
+      }
+      hr {
+        background-color: #ccc;
+      }
+      .post-info {
+        span {
+          color: #7d93b2;
+          svg {
+            color: $mainHover;
+          }
+        }
+        button {
+          float: $floatRight;
+          background-color: $mainColor;
+          color: #fff;
+          border: none;
+          padding: 12px 35px;
+          border-radius: 10px;
+          cursor: pointer;
+          @extend %transition;
+          svg {
+            margin-left: 20px;
+            color: $mainHover;
+          }
+          &:hover {
+            background-color: $mainHover;
+            svg {
+              color: $mainColor;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .gallery {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px;
+    .gallery-img {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      float: $floatLeft;
+      width: (100% / 3);
+      overflow: hidden;
+      position: relative;
+      img {
+        width: 100%;
+      }
+      .img-overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: $ratingHover;
+        display: none;
+        svg {
+          position: absolute;
+          top: 70px;
+          left: 105px;
+          padding: 10px;
+          border-radius: 50%;
+          background-color: $mainHover;
+          color: #fff;
+          @include boxShadow(5px);
+        }
+      }
+    }
+  }
 }
 .provider-sidebar {
   float: $floatLeft;
@@ -476,9 +577,8 @@ hr {
   background-color: #ddd;
 }
 
-.provider-content > div:not(:first-child)
-{
-  display: none;
+.active {
+  color: $mainHover !important;
+  display: block;
 }
-
 /* =============================== End Provider Page =============================== */

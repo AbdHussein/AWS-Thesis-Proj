@@ -1,7 +1,7 @@
 /* Start Main Var */
 /* End Main Var */
 /* Start Classes For Extends */
-nav .auth a, .provider-nav .categories ul li, .provider-nav .sharing button, .provider-nav .sharing > svg, .provider-ui .rating, .provider-content .provider-promo button svg {
+nav .auth a, .provider-nav .categories ul li, .provider-nav .sharing button, .provider-nav .sharing > svg, .provider-ui .rating, .provider-content .provider-promo button svg, .provider-content .posts .post-describe .post-info button {
   transition: all 0.3s linear;
 }
 
@@ -361,6 +361,10 @@ hr {
   margin-right: 5%;
 }
 
+.provider-content > div:not(:first-child) {
+  display: none;
+}
+
 .provider-content .provider-promo {
   width: 100%;
   border-radius: 10px;
@@ -493,14 +497,127 @@ hr {
   margin-left: 3%;
 }
 
+.provider-content .provider-content > div:not(:first-child) {
+  display: none;
+}
+
+.provider-content .posts {
+  border: 1px solid #ccc;
+  margin-bottom: 40px;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.provider-content .posts .post-img {
+  border: 1px solid #ccc;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px 0px #ccc;
+}
+
+.provider-content .posts .post-img img {
+  width: 100%;
+}
+
+.provider-content .posts .post-describe {
+  margin-top: 40px;
+}
+
+.provider-content .posts .post-describe h2 {
+  color: #566985;
+  margin-top: 0;
+}
+
+.provider-content .posts .post-describe p {
+  color: #878c9f;
+}
+
+.provider-content .posts .post-describe hr {
+  background-color: #ccc;
+}
+
+.provider-content .posts .post-describe .post-info span {
+  color: #7d93b2;
+}
+
+.provider-content .posts .post-describe .post-info span svg {
+  color: #4db7fe;
+}
+
+.provider-content .posts .post-describe .post-info button {
+  float: right;
+  background-color: #2e3f6e;
+  color: #fff;
+  border: none;
+  padding: 12px 35px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.provider-content .posts .post-describe .post-info button svg {
+  margin-left: 20px;
+  color: #4db7fe;
+}
+
+.provider-content .posts .post-describe .post-info button:hover {
+  background-color: #4db7fe;
+}
+
+.provider-content .posts .post-describe .post-info button:hover svg {
+  color: #2e3f6e;
+}
+
+.provider-content .gallery {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.provider-content .gallery .gallery-img {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  float: left;
+  width: 33.33333%;
+  overflow: hidden;
+  position: relative;
+}
+
+.provider-content .gallery .gallery-img img {
+  width: 100%;
+}
+
+.provider-content .gallery .gallery-img .img-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(6, 27, 65, 0.45);
+  display: none;
+}
+
+.provider-content .gallery .gallery-img .img-overlay svg {
+  position: absolute;
+  top: 70px;
+  left: 105px;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: #4db7fe;
+  color: #fff;
+  box-shadow: 0px 0px 0px 5px rgba(255, 255, 255, 0.3);
+}
+
 .provider-sidebar {
   float: left;
   width: 35%;
   background-color: #ddd;
 }
 
-.provider-content > div:not(:first-child) {
-  display: none;
+.active {
+  color: #4db7fe !important;
+  display: block;
 }
 
 /* =============================== End Provider Page =============================== */
