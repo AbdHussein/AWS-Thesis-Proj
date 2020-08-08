@@ -128,8 +128,8 @@ DROP TABLE IF EXISTS `Bookmark`;
 		
 CREATE TABLE `Bookmark` (
   `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
-  `userID` INTEGER(11) NOT NULL ,
-  `providerID` VARCHAR(200) NOT NULL ,
+  `userID` INTEGER(11) NOT NULL,
+  `providerID` INTEGER(11) NOT NULL,
   PRIMARY KEY (`id`)
 );
 
