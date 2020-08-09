@@ -25,6 +25,13 @@ import {
 } from '@reach/combobox';
 import mapStyles from './mapStyle';
 
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
+
+const client = new ApolloClient({
+  uri: '/api',
+});
+
 const center = {
   lat: 31.3547,
   lng: 34.3088,
@@ -41,7 +48,7 @@ const options = {
   zoomControl: true,
 };
 
-function MyComponent() {
+function MyComponent(props) {
   // componentDidMount() {
   //   const { provider } = this.props.location.state;
   //   this.setState({
@@ -79,6 +86,7 @@ function MyComponent() {
           ✖
         </span>
       </h1> */}
+      {/* <h1>{props.category}</h1> */}
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={10}
@@ -124,13 +132,25 @@ function MyComponent() {
 }
 
 class Map extends React.Component {
+  state = {
+    category: '',
+  };
+
+  componentDidMount() {
+    const { category } = this.props.location.state;
+    this.setState({
+      category,
+    });
+  }
   render() {
     return (
-      <div className='map'>
-        <Navbar />
-        <MyComponent />
-        <Filter />
-      </div>
+      <ApolloProvider client={client}>
+        <div className='map'>
+          <Navbar />
+          <MyComponent category={this.state.category} />
+          <Filter />
+        </div>
+      </ApolloProvider>
     );
   }
 }
