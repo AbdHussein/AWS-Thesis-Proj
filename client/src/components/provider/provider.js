@@ -12,6 +12,7 @@ import ProviderPosts from './providerPosts';
 import ProviderGallery from './providerGallerry';
 import ProviderStore from './providerStore';
 import ProviderReviews from './providerReviews';
+import Footer from '../footer/footer';
 
 class Provider extends React.Component {
 
@@ -91,7 +92,7 @@ class Provider extends React.Component {
                 <div className="provider-sidebar">
                     sidebar
                 </div>
-            </div >
+            </div>
         )
     }
 

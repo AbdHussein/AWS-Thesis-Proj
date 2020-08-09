@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
+import Footer from '../footer/footer';
 
 class ProviderGallery extends React.Component {
     render() {

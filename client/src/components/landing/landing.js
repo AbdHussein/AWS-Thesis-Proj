@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKeyboard } from '@fortawesome/free-regular-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '../mainComp/navbar';
+import Footer from '../footer/footer';
 
 class Landing extends React.Component {
 
@@ -42,6 +43,7 @@ class Landing extends React.Component {
                     </div>
                 </header>
                 {/* End Header */}
+                <Footer />
             </div>
         )
     }
