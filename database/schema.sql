@@ -10,7 +10,7 @@ CREATE TABLE `User` (
   `username` VARCHAR(50) NOT NULL UNIQUE,
   `email` VARCHAR(50) NOT NULL UNIQUE,
   `password` VARCHAR(64) NOT NULL,
-  `RoleID` INTEGER(11) NOT NULL,
+  `roleID` INTEGER(11) NOT NULL,
   `payService` VARCHAR(20) DEFAULT NULL,
   `mobile` INTEGER(11) NOT NULL,
   `serviceName` VARCHAR(60) NOT NULL,
