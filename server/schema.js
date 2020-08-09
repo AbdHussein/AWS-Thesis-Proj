@@ -8,6 +8,7 @@ const {
   GraphQLBoolean,
   GraphQLID,
 } = require('graphql');
+
 const knex = require('../database/index');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
