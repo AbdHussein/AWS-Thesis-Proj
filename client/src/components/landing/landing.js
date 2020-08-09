@@ -5,6 +5,7 @@ import { faKeyboard } from '@fortawesome/free-regular-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
 import Navbar from '../mainComp/navbar';
+import Footer from '../footer/footer';
 
 class Landing extends React.Component {
   state = {
@@ -102,6 +103,7 @@ class Landing extends React.Component {
           </div>
         </header>
         {/* End Header */}
+        <Footer />
       </div>
     );
   }
