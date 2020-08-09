@@ -22,6 +22,7 @@ import {
   ComboboxPopover,
   ComboboxList,
   ComboboxOption,
+  ComboboxOptionText,
 } from '@reach/combobox';
 import mapStyles from './mapStyle';
 
@@ -55,6 +56,16 @@ function MyComponent() {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY,
     libraries,
   });
+
+  const mapRef = React.useRef();
+  const onMapload = React.useCallback((map) => {
+    mapRef.current = map;
+  }, []);
+  const panTo = React.useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(15);
+  }, []);
+
   if (loadError) return 'Error loading Map';
   if (!isLoaded) return 'Loading...';
   /* the magic if statment*/
@@ -79,11 +90,15 @@ function MyComponent() {
           ✖
         </span>
       </h1> */}
+
+      {/* <Search panTo={panTo} /> */}
+      <Locate panTo={panTo} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={10}
         center={center}
         options={options}
+        onLoad={onMapload}
       >
         {allData.data.map((provider, index) => (
           <Marker
@@ -122,6 +137,72 @@ function MyComponent() {
     </div>
   );
 }
+
+function Locate({ panTo }) {
+  return (
+    <button
+      className='locate'
+      onClick={() => {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            panTo({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            });
+          },
+          () => null,
+          options
+        );
+      }}
+    >
+      <img src={require('./compass.png')} alt='compass - locate me' />
+    </button>
+  );
+}
+
+// function Search() {
+//   const {
+//     ready,
+//     value,
+//     suggestions: { status, data },
+//     setValue,
+//     clearSuggestions,
+//   } = usePlacesAutocomplete({
+//     requestOptions: {
+//       location: {
+//         lat: () => 31.3547,
+//         lng: () => 34.3088,
+//         radius: 200 * 1000,
+//       },
+//     },
+//   });
+//   return (
+//     <div className='search'>
+//       <Combobox
+//         onSelect={(address) => {
+//           console.log(address);
+//         }}
+//       >
+//         <ComboboxInput
+//           value={value}
+//           onChange={(e) => {
+//             setValue(e.target.value);
+//           }}
+//           disabled={!ready}
+//           placeholder='Enter an address'
+//         />
+//         <ComboboxPopover>
+//           <ComboboxList>
+//             {status === 'OK' &&
+//               data.map(({ id, description }) => (
+//                 <ComboboxOption key={id} value={description} />
+//               ))}
+//           </ComboboxList>
+//         </ComboboxPopover>
+//       </Combobox>
+//     </div>
+//   );
+// }
 
 class Map extends React.Component {
   render() {
