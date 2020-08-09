@@ -41,20 +41,20 @@ import ProviderPosts from './providerPosts';
 import ProviderGallery from './providerGallerry';
 import ProviderStore from './providerStore';
 import ProviderReviews from './providerReviews';
-import waterMelon from '../../main';
 import Footer from '../footer/footer';
+import waterMelon from '../../main';
 
 class Provider extends React.Component {
   state = {
     provider: null,
   };
 
-  componentDidMount() {
-    waterMelon();
-    const { provider } = this.props.location.state;
-    this.setState({
-      provider,
-    });
+    componentDidMount() {
+      waterMelon();
+      const { provider } = this.props.location.state;
+      this.setState({
+        provider,
+      });
   }
 
   render() {
