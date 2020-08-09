@@ -1,7 +1,7 @@
 const express = require('express');
 const expressGraphQL = require('express-graphql').graphqlHTTP;
 const schema = require('./schema');
-const jwt = require('express-jwt')
+const jwt = require('express-jwt');
 const app = express();
 
 app.use(express.json());

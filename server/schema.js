@@ -32,6 +32,16 @@ const UserType = new GraphQLObjectType({
     workingHours: { type: GraphQLString },
     categoryID: { type: GraphQLInt },
     token: { type: GraphQLString },
+    // category: {
+    //   //CategoryType
+    //   type:CategoryType,
+    //   async resolve(parent, args){
+    //     console.log(parent);
+    //     // return await knex('category').select().where({
+    //     //   id: categoryID
+    //     // });
+    //   }
+    // }
   }),
 });
 
@@ -50,6 +60,12 @@ const CategoryType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID, unique: true },
     category: { type: GraphQLString },
+    // user: {
+    //   type: new GraphQLList(UserType),
+    //   async resolve(parent, args){
+    //     return await knex('User').select().where({categoryID : parent.id});
+    //   }
+    // }
   }),
 });
 
@@ -186,6 +202,20 @@ const RootQuery = new GraphQLObjectType({
         return await knex('Post').select().where({ userID: args.userID });
       },
     },
+    usersByCategory: {
+      type: new GraphQLList(UserType),
+      args:{
+        category: {type: new GraphQLNonNull(GraphQLString)}
+      },
+      async resolve(parent, args){
+        try{
+          var categoryData = await knex('category').select().where({category: args.category}).first();
+          return await knex('User').select().where({categoryID : categoryData.id});
+        }catch(err){
+          return err;
+        }
+      }
+    },
     category: {
       type: CategoryType,
       args: {
@@ -246,42 +276,12 @@ const RootQuery = new GraphQLObjectType({
         username: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
-      async resolve(root, args) {
-        try {
-          const currentUser = await knex('User')
-            .select()
-            .where({ username: args.username })
-            .first();
-          const passwordCorrect = await bcrypt.compare(
-            args.password,
-            currentUser.password
-          );
-          if (passwordCorrect) {
-            const token = jwt.sign(
-              { id: currentUser.id, username: currentUser.username },
-              process.env.SECRET,
-              {
-                algorithm: 'HS256',
-                expiresIn: '2d',
-              },
-              async (err, data) => {
-                if (err) {
-                  console.log(err);
-                  return;
-                }
-                await knex('User')
-                  .where({ id: currentUser.id })
-                  .update({ token: data });
-              }
-            );
-            return currentUser;
-          }
-        } catch {
-          return 'Failed to Login';
-        }
-      },
-    },
-  },
+      resolve(root, args) {
+        //login
+      }
+    }
+
+  }
 });
 
 const Mutation = new GraphQLObjectType({
