@@ -1,7 +1,6 @@
 import $ from 'jquery';
 
 function waterMelon() {
-  // $(document).ready(function () {
   $('.provider-nav .categories ul li').click(function () {
     var type = $(this).data('type');
     $(this).addClass('active').siblings().removeClass('active');
@@ -22,7 +21,6 @@ function waterMelon() {
   $('.img-popup svg').click(function () {
     $('.img-popup').hide();
   });
-  // });
 }
 
 export default waterMelon;
