@@ -614,6 +614,99 @@ hr {
 }
 /* =============================== End Provider Page =============================== */
 
+
+/* =============================== Start Dashboard Page =============================== */
+
+.dashboard
+{
+  *
+  {
+    box-sizing: border-box;
+  }
+  .dashboard-header
+  {
+    background-color: #6DB6FD;
+    height: 40vh;
+    position: relative;
+    h3
+    {
+      margin-top: 0;
+      position: absolute;
+      bottom: 0px;
+      left: 200px;
+      color: #fff;
+    }
+  }
+  .dashboard-nav
+  {
+    background-color: #ccc;
+    height: 15vh;
+    position: relative;
+    .dashboard-avatar
+    {
+      position: absolute;
+      top: -65px;
+      left: 60px;
+      .avatar
+      {
+        width: 120px;
+        height: 120px;
+        font-size: 3.25em;  
+        border: 5px solid #fff;
+        border-radius: 50%;  
+        background-color: $mainColor;
+      }
+    }
+  }
+  .main-dashboard
+  {
+    margin-top: 70px;
+    .dashboard-sidebar
+    {
+      float: $floatLeft;
+      width: 25%;
+      margin-right: 5%;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      
+      div
+      {
+        cursor: pointer;
+        padding: 20px;
+        &:not(:nth-child(3)):not(:nth-child(5)):hover
+        {
+          background-color: $mainHover;
+        }
+      }
+      .dash-show-add
+      {
+        display: none;
+      }
+      .dash-des
+      {
+        display: none;
+      }
+    }
+    .dashboard-content
+    {
+      float: $floatLeft;
+      width: 70%;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 10px;
+      height: 2000px;
+      > div:not(:first-child)
+      {
+        display: none;
+      }
+    }
+  }
+}
+
+/* =============================== End Dashboard Page =============================== */
+
+
 /* Start Footer */
 
 .main-footer {

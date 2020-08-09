@@ -22,6 +22,7 @@ function waterMelon() {
   $('.img-popup svg').click(function () {
     $('.img-popup').hide();
   });
+
   // });
 }
 
