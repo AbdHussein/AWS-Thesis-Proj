@@ -441,9 +441,6 @@ hr {
       }
     }
   }
-  .provider-photos {
-    @extend .provider-description;
-  }
   .provider-single-fact {
     display: flex;
     justify-content: space-between;
@@ -487,9 +484,11 @@ hr {
       overflow: hidden;
       border-radius: 10px;
       box-shadow: 0 5px 5px 0px #ccc;
+      height: 490px;
     }
     .post-img img {
       width: 100%;
+      height: 490px;
     }
     .post-describe {
       margin-top: 40px;
@@ -539,15 +538,19 @@ hr {
     border-radius: 10px;
     overflow: hidden;
     padding: 10px;
+    margin-bottom: 50px;
     .gallery-img {
       border: 1px solid #ccc;
       border-radius: 10px;
       float: $floatLeft;
-      width: (100% / 3);
+      width: 33.06%;
+      height: 167px;
       overflow: hidden;
       position: relative;
+      cursor: pointer;
       img {
         width: 100%;
+        height: 167px;
       }
       .img-overlay {
         position: absolute;
@@ -566,6 +569,34 @@ hr {
           background-color: $mainHover;
           color: #fff;
           @include boxShadow(5px);
+        }
+      }
+    }
+
+    .img-popup {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: $mainOverLayColor;
+      display: none;
+      z-index: 9999;
+      img {
+        width: 700px;
+        margin: 15vh 23vw;
+      }
+      svg {
+        color: #fff;
+        z-index: 20;
+        font-size: 30px;
+        position: absolute;
+        right: 50px;
+        top: 20px;
+        cursor: pointer;
+        @extend %transition;
+        &:hover {
+          color: $mainHover;
         }
       }
     }

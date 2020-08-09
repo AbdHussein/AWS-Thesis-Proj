@@ -11,4 +11,18 @@ $(document).ready(function () {
 
     });
 
+    $('.gallery-img').hover(function () {
+        $(this).children('.img-overlay').toggle(500);
+    });
+
+    $('.gallery > div .img-overlay').click(function () {
+        $(this).parent().siblings().show();
+        $('.img-popup').css({
+            position: 'fixed',
+        })
+    });
+    $('.img-popup svg').click(function () {
+        $('.img-popup').hide();
+    });
+
 });

@@ -36,10 +36,6 @@ class ProviderDetails extends React.Component {
                             </ul>
                         </div>
                     </div>
-                    <div className="provider-photos">
-                        <div>Gallery / Photos <FontAwesomeIcon icon={faChevronDown} /></div>
-                        <div>test</div>
-                    </div>
                     <div className="provider-single-fact">
                         <div>
                             <div className="fac">

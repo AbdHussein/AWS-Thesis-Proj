@@ -1,7 +1,7 @@
 /* Start Main Var */
 /* End Main Var */
 /* Start Classes For Extends */
-nav .auth a, .provider-nav .categories ul li, .provider-nav .sharing button, .provider-nav .sharing > svg, .provider-ui .rating, .provider-content .provider-promo button svg, .provider-content .posts .post-describe .post-info button {
+nav .auth a, .provider-nav .categories ul li, .provider-nav .sharing button, .provider-nav .sharing > svg, .provider-ui .rating, .provider-content .provider-promo button svg, .provider-content .posts .post-describe .post-info button, .provider-content .gallery .img-popup svg {
   transition: all 0.3s linear;
 }
 
@@ -407,19 +407,19 @@ hr {
   background-color: #2e3f6e;
 }
 
-.provider-content .provider-description, .provider-content .provider-features, .provider-content .provider-photos {
+.provider-content .provider-description, .provider-content .provider-features {
   margin-bottom: 40px;
 }
 
-.provider-content .provider-description div, .provider-content .provider-features div, .provider-content .provider-photos div {
+.provider-content .provider-description div, .provider-content .provider-features div {
   padding: 15px;
 }
 
-.provider-content .provider-description div p, .provider-content .provider-features div p, .provider-content .provider-photos div p {
+.provider-content .provider-description div p, .provider-content .provider-features div p {
   color: #878c9f;
 }
 
-.provider-content .provider-description div:first-child, .provider-content .provider-features div:first-child, .provider-content .provider-photos div:first-child {
+.provider-content .provider-description div:first-child, .provider-content .provider-features div:first-child {
   border: 1px solid #ddd;
   border-radius: 10px 10px 0 0;
   color: #566985;
@@ -427,20 +427,20 @@ hr {
   font-weight: 600;
 }
 
-.provider-content .provider-description div:first-child svg, .provider-content .provider-features div:first-child svg, .provider-content .provider-photos div:first-child svg {
+.provider-content .provider-description div:first-child svg, .provider-content .provider-features div:first-child svg {
   float: right;
   font-size: 10px;
   color: #4db7fe;
   margin-top: 7px;
 }
 
-.provider-content .provider-description div:last-child, .provider-content .provider-features div:last-child, .provider-content .provider-photos div:last-child {
+.provider-content .provider-description div:last-child, .provider-content .provider-features div:last-child {
   border: 1px solid #ddd;
   border-radius: 0 0 10px 10px;
   border-top: none;
 }
 
-.provider-content .provider-description button, .provider-content .provider-features button, .provider-content .provider-photos button {
+.provider-content .provider-description button, .provider-content .provider-features button {
   background-color: #2e3f6e;
   border: none;
   padding: 15px 25px;
@@ -451,7 +451,7 @@ hr {
   margin-top: 30px;
 }
 
-.provider-content .provider-description button svg, .provider-content .provider-features button svg, .provider-content .provider-photos button svg {
+.provider-content .provider-description button svg, .provider-content .provider-features button svg {
   color: #4db7fe;
   margin-left: 15px;
 }
@@ -514,10 +514,12 @@ hr {
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 5px 5px 0px #ccc;
+  height: 490px;
 }
 
 .provider-content .posts .post-img img {
   width: 100%;
+  height: 490px;
 }
 
 .provider-content .posts .post-describe {
@@ -573,19 +575,23 @@ hr {
   border-radius: 10px;
   overflow: hidden;
   padding: 10px;
+  margin-bottom: 50px;
 }
 
 .provider-content .gallery .gallery-img {
   border: 1px solid #ccc;
   border-radius: 10px;
   float: left;
-  width: 33.33333%;
+  width: 33.06%;
+  height: 167px;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
 }
 
 .provider-content .gallery .gallery-img img {
   width: 100%;
+  height: 167px;
 }
 
 .provider-content .gallery .gallery-img .img-overlay {
@@ -607,6 +613,36 @@ hr {
   background-color: #4db7fe;
   color: #fff;
   box-shadow: 0px 0px 0px 5px rgba(255, 255, 255, 0.3);
+}
+
+.provider-content .gallery .img-popup {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  z-index: 9999;
+}
+
+.provider-content .gallery .img-popup img {
+  width: 700px;
+  margin: 15vh 23vw;
+}
+
+.provider-content .gallery .img-popup svg {
+  color: #fff;
+  z-index: 20;
+  font-size: 30px;
+  position: absolute;
+  right: 50px;
+  top: 20px;
+  cursor: pointer;
+}
+
+.provider-content .gallery .img-popup svg:hover {
+  color: #4db7fe;
 }
 
 .provider-sidebar {
