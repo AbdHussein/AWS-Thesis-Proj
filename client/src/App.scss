@@ -108,7 +108,7 @@ nav {
 .landing {
   header {
     height: 90vh;
-    background-image: url('../src/images/1.jpg');
+    background-image: url("../src/images/1.jpg");
     position: relative;
     @extend %cover;
     .overlay {
@@ -163,7 +163,7 @@ nav {
 
 .provider-header {
   height: 80vh;
-  background-image: url('./images/6.jpg');
+  background-image: url("./images/6.jpg");
   position: relative;
   @extend %cover;
   .overlay {
@@ -614,6 +614,7 @@ hr {
 }
 /* =============================== End Provider Page =============================== */
 
+<<<<<<< HEAD
 
 /* =============================== Start Dashboard Page =============================== */
 
@@ -707,13 +708,21 @@ hr {
 /* =============================== End Dashboard Page =============================== */
 
 
+=======
+>>>>>>> cf81a2239d045a54635c36b426013b675583474f
 /* Start Footer */
 
 .main-footer {
   background-color: #325096;
   overflow: hidden;
+<<<<<<< HEAD
   * {
     box-sizing: border-box;
+=======
+  *
+  {
+   box-sizing: border-box;
+>>>>>>> cf81a2239d045a54635c36b426013b675583474f
   }
 }
 .main-footer .subscribe .MuiContainer-maxWidthLg div {
@@ -797,7 +806,11 @@ p {
   background: #b5b5b56b;
 }
 .footer-news .last-news h3::after {
+<<<<<<< HEAD
   content: '';
+=======
+  content: "";
+>>>>>>> cf81a2239d045a54635c36b426013b675583474f
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -839,7 +852,11 @@ p {
   padding-bottom: 25px;
 }
 .footer-news .twitter h3::after {
+<<<<<<< HEAD
   content: '';
+=======
+  content: "";
+>>>>>>> cf81a2239d045a54635c36b426013b675583474f
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -863,7 +880,11 @@ p {
   position: relative;
 }
 .footer-news .twitter ul li::after {
+<<<<<<< HEAD
   content: '';
+=======
+  content: "";
+>>>>>>> cf81a2239d045a54635c36b426013b675583474f
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(255, 255, 255, 0.11);
   border-bottom: 10px solid transparent;

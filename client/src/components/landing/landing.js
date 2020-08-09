@@ -21,11 +21,41 @@ class Landing extends React.Component {
     });
   }
 
+<<<<<<< HEAD
   handleSubmit() {
     if (this.state.category !== '') {
       this.setState({
         done: true,
       });
+=======
+                            <div className="search-bar">
+                                <div className="search">
+                                    <FontAwesomeIcon icon={faKeyboard} />
+                                    <input type="text" name="search" placeholder="What Are You Looking For?" />
+                                </div>
+                                <div className="between"></div>
+                                <div className="location">
+                                    <FontAwesomeIcon icon={faKeyboard} />
+                                    <input type="text" name="search" placeholder="Location" />
+                                </div>
+                                <div className="between"></div>
+                                <div className="categories">
+                                    <FontAwesomeIcon icon={faKeyboard} />
+                                    <input type="text" name="search" placeholder="All Categories" />
+                                </div>
+                                <div className="between"></div>
+                                <div className="search-button">
+                                    <button>Search <FontAwesomeIcon icon={faSearch} /> </button>
+                                </div>
+                            </div>
+                        </Container>
+                    </div>
+                </header>
+                {/* End Header */}
+                <Footer />
+            </div>
+        )
+>>>>>>> cf81a2239d045a54635c36b426013b675583474f
     }
   }
 

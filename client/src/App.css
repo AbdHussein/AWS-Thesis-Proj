@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 /* Start Main Var */
 /* End Main Var */
 /* Start Classes For Extends */
@@ -657,6 +661,7 @@ hr {
 }
 
 /* =============================== End Provider Page =============================== */
+<<<<<<< HEAD
 /* =============================== Start Dashboard Page =============================== */
 .dashboard * {
   box-sizing: border-box;
@@ -741,16 +746,21 @@ hr {
 }
 
 /* =============================== End Dashboard Page =============================== */
+=======
+>>>>>>> cf81a2239d045a54635c36b426013b675583474f
 /* Start Footer */
 .main-footer {
   background-color: #325096;
   overflow: hidden;
 }
 
+<<<<<<< HEAD
 .main-footer * {
   box-sizing: border-box;
 }
 
+=======
+>>>>>>> cf81a2239d045a54635c36b426013b675583474f
 .main-footer .subscribe .MuiContainer-maxWidthLg div {
   float: left;
 }
@@ -846,7 +856,11 @@ p {
 }
 
 .footer-news .last-news h3::after {
+<<<<<<< HEAD
   content: '';
+=======
+  content: "";
+>>>>>>> cf81a2239d045a54635c36b426013b675583474f
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -894,7 +908,11 @@ p {
 }
 
 .footer-news .twitter h3::after {
+<<<<<<< HEAD
   content: '';
+=======
+  content: "";
+>>>>>>> cf81a2239d045a54635c36b426013b675583474f
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -920,7 +938,11 @@ p {
 }
 
 .footer-news .twitter ul li::after {
+<<<<<<< HEAD
   content: '';
+=======
+  content: "";
+>>>>>>> cf81a2239d045a54635c36b426013b675583474f
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(255, 255, 255, 0.11);
   border-bottom: 10px solid transparent;

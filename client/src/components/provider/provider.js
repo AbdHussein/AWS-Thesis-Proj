@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../mainComp/navbar';
 import { Container } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+<<<<<<< HEAD
 import {
   faMapMarkerAlt,
   faPhoneAlt,
@@ -33,6 +34,10 @@ import {
   faImages,
   faImage,
 } from '@fortawesome/free-regular-svg-icons';
+=======
+import { faMapMarkerAlt, faPhoneAlt, faHamburger, faInfo, faUtensils, faShare, faEllipsisH, faVideo, faChevronDown, faChevronRight, faWifi, faBicycle, faCloud, faShoppingCart, faPaw, faRocket, faSmile, faUsers, faAward, faMobileAlt, faClipboard, faStore } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faComments, faEye, faImages, faImage } from '@fortawesome/free-regular-svg-icons';
+>>>>>>> cf81a2239d045a54635c36b426013b675583474f
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import Rating from '@material-ui/lab/Rating';
@@ -42,7 +47,10 @@ import ProviderGallery from './providerGallerry';
 import ProviderStore from './providerStore';
 import ProviderReviews from './providerReviews';
 import Footer from '../footer/footer';
+<<<<<<< HEAD
 import waterMelon from '../../main';
+=======
+>>>>>>> cf81a2239d045a54635c36b426013b675583474f
 
 class Provider extends React.Component {
   state = {
@@ -91,6 +99,7 @@ class Provider extends React.Component {
                       : ''}
                   </span>
                 </div>
+<<<<<<< HEAD
                 <div className='rating'>
                   <div className='rate-number'>5.0</div>
                   <div>
@@ -100,6 +109,45 @@ class Provider extends React.Component {
                   <div className='chat'>
                     <FontAwesomeIcon icon={faComments} />
                   </div>
+=======
+                <div className="provider-nav">
+                    <Container>
+                        <div className="categories">
+                            <ul>
+                                <li className="active" data-type=".provider-details"><FontAwesomeIcon icon={faInfo} /> Details</li>
+                                <li data-type=".provider-posts"><FontAwesomeIcon icon={faClipboard} /> Posts</li>
+                                <li data-type=".provider-gallery"><FontAwesomeIcon icon={faImage} /> Gallery</li>
+                                <li data-type=".provider-store"><FontAwesomeIcon icon={faStore} /> Store</li>
+                                <li data-type=".provider-reviews"><FontAwesomeIcon icon={faComments} /> Reviews</li>
+                            </ul>
+                        </div>
+                        <div className="sharing">
+                            <button><FontAwesomeIcon icon={faShare} /> Share</button>
+                            <button><FontAwesomeIcon icon={faHeart} /> Save</button>
+                            <FontAwesomeIcon icon={faEllipsisH} />
+                        </div>
+                    </Container>
+                </div>
+                <div className="provider-content">
+                    <div className="provider-details">
+                        <ProviderDetails />
+                    </div>
+                    <div className="provider-posts">
+                        <ProviderPosts />
+                    </div>
+                    <div className="provider-gallery">
+                        <ProviderGallery />
+                    </div>
+                    <div className="provider-store">
+                        <ProviderStore />
+                    </div>
+                    <div className="provider-reviews">
+                        <ProviderReviews />
+                    </div>
+                </div>
+                <div className="provider-sidebar">
+                    sidebar
+>>>>>>> cf81a2239d045a54635c36b426013b675583474f
                 </div>
               </div>
               <hr />
