@@ -19,12 +19,19 @@ const UserType = new GraphQLObjectType({
     username: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
-    pay_service: { type: GraphQLString },
+    roleID: { type: GraphQLInt },
+    payService: { type: GraphQLString },
     mobile: { type: GraphQLInt },
-    service_name: { type: GraphQLString },
+    serviceName: { type: GraphQLString },
     location: { type: GraphQLString },
     address: { type: GraphQLString },
-    token: { type: GraphQLString }
+    avatar: { type: GraphQLString },
+    cover: { type: GraphQLString },
+    video: { type: GraphQLString },
+    description: { type: GraphQLString },
+    workingHours: { type: GraphQLString },
+    categoryID: { type: GraphQLInt },
+    token: { type: GraphQLString },
   }),
 });
 
@@ -35,6 +42,14 @@ const CartType = new GraphQLObjectType({
     userID: { type: GraphQLID },
     productID: { type: GraphQLID },
     sold: { type: GraphQLBoolean },
+  }),
+});
+
+const CategoryType = new GraphQLObjectType({
+  name: 'category',
+  fields: () => ({
+    id: { type: GraphQLID, unique: true },
+    category: { type: GraphQLString },
   }),
 });
 
@@ -74,6 +89,32 @@ const PostType = new GraphQLObjectType({
   }),
 });
 
+const GalleryType = new GraphQLObjectType({
+  name: 'gallery',
+  fields: () => ({
+    id: { type: GraphQLID, unique: true },
+    userID: { type: GraphQLID },
+    image: { type: GraphQLString },
+  }),
+});
+
+const BookmarkType = new GraphQLObjectType({
+  name: 'bookmark',
+  fields: () => ({
+    id: { type: GraphQLID, unique: true },
+    userID: { type: GraphQLID },
+    providerID: { type: GraphQLID },
+  }),
+});
+
+const RolesType = new GraphQLObjectType({
+  name: 'roles',
+  fields: () => ({
+    id: { type: GraphQLID, unique: true },
+    Role: { type: GraphQLString },
+  }),
+});
+
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -95,13 +136,12 @@ const RootQuery = new GraphQLObjectType({
     carts: {
       type: new GraphQLList(CartType),
       args: {
-        // what we need as an arguments
         userID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
         return await knex('Cart')
           .select()
-          .where({ userID: args.userID, sold: false });
+          .where({ userID: args.userID, sold: false }); // why sold is false
       },
     },
     productsByUserID: {
@@ -112,7 +152,8 @@ const RootQuery = new GraphQLObjectType({
       async resolve(root, args) {
         return await knex('Product')
           .select()
-          .where({ userID: args.userID }).limit(50);
+          .where({ userID: args.userID })
+          .limit(50);
       },
     },
     productsByCategory: {
@@ -123,18 +164,17 @@ const RootQuery = new GraphQLObjectType({
       async resolve(root, args) {
         return await knex('Product')
           .select()
-          .where({ category: args.category }).limit(50);
+          .where({ category: args.category })
+          .limit(50);
       },
     },
     comments: {
-      type:  new GraphQLList(CommentType),
+      type: new GraphQLList(CommentType),
       args: {
         postID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Comment')
-          .select()
-          .where({ postID: args.postID })
+        return await knex('Comment').select().where({ postID: args.postID });
       },
     },
     posts: {
@@ -143,39 +183,104 @@ const RootQuery = new GraphQLObjectType({
         userID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Post')
+        return await knex('Post').select().where({ userID: args.userID });
+      },
+    },
+    category: {
+      type: CategoryType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(root, args) {
+        return await knex('Category').select().where({ id: args.id }).first();
+      },
+    },
+    getAllCategories: {
+      type: new GraphQLList(CategoryType),
+      async resolve(root, args) {
+        return await knex('Category').select();
+      },
+    },
+    gallery: {
+      type: GalleryType,
+      args: {
+        userID: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(root, args) {
+        return await knex('Gallery')
           .select()
           .where({ userID: args.userID })
+          .first();
+      },
+    },
+    getRoles: {
+      type: new GraphQLList(RolesType),
+      async resolve(root, args) {
+        return await knex('Roles').select();
+      },
+    },
+    bookmark: {
+      type: BookmarkType,
+      args: {
+        userID: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(root, args) {
+        return await knex('Bookmark')
+          .select()
+          .where({ userID: args.userID })
+          .first();
+      },
+    },
+    role: {
+      type: RolesType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(root, args) {
+        return await knex('Roles').select().where({ id: args.id }).first();
       },
     },
     login: {
       type: UserType,
       args: {
         username: { type: new GraphQLNonNull(GraphQLString) },
-        password: { type: new GraphQLNonNull(GraphQLString) }
+        password: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
-        try{
-          const currentUser = await knex('User').select().where({username : args.username}).first();
-          const passwordCorrect = await bcrypt.compare(args.password, currentUser.password);
-          if(passwordCorrect){
-            const token = jwt.sign({id: currentUser.id, username: currentUser.username}, process.env.SECRET, {
-              algorithm: 'HS256',
-              expiresIn: "2d"
-            }, async (err, data) => {
-              if(err){
-                console.log(err);
-                return;
+        try {
+          const currentUser = await knex('User')
+            .select()
+            .where({ username: args.username })
+            .first();
+          const passwordCorrect = await bcrypt.compare(
+            args.password,
+            currentUser.password
+          );
+          if (passwordCorrect) {
+            const token = jwt.sign(
+              { id: currentUser.id, username: currentUser.username },
+              process.env.SECRET,
+              {
+                algorithm: 'HS256',
+                expiresIn: '2d',
+              },
+              async (err, data) => {
+                if (err) {
+                  console.log(err);
+                  return;
+                }
+                await knex('User')
+                  .where({ id: currentUser.id })
+                  .update({ token: data });
               }
-              await knex('User').where({ id: currentUser.id }).update({token: data});
-            });            
+            );
             return currentUser;
           }
-        }catch{           
-           return "Failed to Login";           
+        } catch {
+          return 'Failed to Login';
         }
       },
-    }
+    },
   },
 });
 
@@ -189,22 +294,32 @@ const Mutation = new GraphQLObjectType({
         username: { type: new GraphQLNonNull(GraphQLString) },
         email: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
+        roleID: { type: new GraphQLNonNull(GraphQLString) },
         mobile: { type: new GraphQLNonNull(GraphQLInt) },
+        serviceName: { type: new GraphQLNonNull(GraphQLString) },
         address: { type: new GraphQLNonNull(GraphQLString) },
+        avatar: { type: new GraphQLNonNull(GraphQLString) },
+        cover: { type: new GraphQLNonNull(GraphQLString) },
+        video: { type: new GraphQLNonNull(GraphQLString) },
+        description: { type: new GraphQLNonNull(GraphQLString) },
+        categoryID: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
         // add User with crpted password to database
         var crptPass = await bcrypt.hash(args.password, 10);
-        return await knex('User').insert({
-          username: args.username,
-          email: args.email,
-          password: crptPass,
-          mobile: args.mobile,
-          address: args.address,
-          pay_service: '',
-          service_name: '',
-          location: '',
-        });
+        args.password = crptPass;
+        return await knex('User').insert(args);
+        //   return await knex('User').insert({
+        //     username: args.username,
+        //     email: args.email,
+        //     password: crptPass,
+        //     mobile: args.mobile,
+        //     address: args.address,
+        //     pay_service: '',
+        //     service_name: '',
+        //     location: '',
+        //   });
+        // },
       },
     },
     deleteUser: {
@@ -223,8 +338,18 @@ const Mutation = new GraphQLObjectType({
         username: { type: GraphQLString },
         email: { type: GraphQLString },
         password: { type: GraphQLString },
+        roleID: { type: GraphQLInt },
+        payService: { type: GraphQLString },
         mobile: { type: GraphQLInt },
+        serviceName: { type: GraphQLString },
+        location: { type: GraphQLString },
         address: { type: GraphQLString },
+        avatar: { type: GraphQLString },
+        cover: { type: GraphQLString },
+        video: { type: GraphQLString },
+        description: { type: GraphQLString },
+        workingHours: { type: GraphQLString },
+        categoryID: { type: GraphQLInt },
       },
       async resolve(root, args) {
         args.password = await bcrypt.hash(args.password, 10);
@@ -372,6 +497,111 @@ const Mutation = new GraphQLObjectType({
       },
       async resolve(root, args) {
         return await knex('Post').where({ id: args.id }).update(args);
+      },
+    },
+    addCategory: {
+      type: CategoryType,
+      args: {
+        category: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(root, args) {
+        return await knex('Category').insert(args);
+      },
+    },
+    deleteCategory: {
+      type: CategoryType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(root, args) {
+        return await knex('Category').where(args).del();
+      },
+    },
+    editCategory: {
+      type: CategoryType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        category: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(root, args) {
+        return await knex('Category').where({ id: args.id }).update(args);
+      },
+    },
+    addGallery: {
+      type: GalleryType,
+      args: {
+        userID: { type: new GraphQLNonNull(GraphQLID) },
+        image: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(root, args) {
+        return await knex('Gallery').insert(args);
+      },
+    },
+    deleteGallery: {
+      type: GalleryType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(root, args) {
+        return await knex('Gallery').where(args).del();
+      },
+    },
+    editGallery: {
+      type: GalleryType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        userID: { type: new GraphQLNonNull(GraphQLID) },
+        image: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(root, args) {
+        return await knex('Gallery').where({ id: args.id }).update(args);
+      },
+    },
+    addBookmark: {
+      type: BookmarkType,
+      args: {
+        userID: { type: new GraphQLNonNull(GraphQLID) },
+        providerID: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(root, args) {
+        return await knex('Bookmark').insert(args);
+      },
+    },
+    deleteBookmark: {
+      type: BookmarkType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(root, args) {
+        return await knex('Bookmark').where(args).del();
+      },
+    },
+    addRole: {
+      type: RolesType,
+      args: {
+        Role: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(root, args) {
+        return await knex('Roles').insert(args);
+      },
+    },
+    deleteRoles: {
+      type: RolesType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(root, args) {
+        return await knex('Roles').where(args).del();
+      },
+    },
+    editRoles: {
+      type: RolesType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        Role: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(root, args) {
+        return await knex('Roles').where({ id: args.id }).update(args);
       },
     },
   },
