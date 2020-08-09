@@ -202,7 +202,7 @@ const RootQuery = new GraphQLObjectType({
       async resolve(root, args) {
         return await knex('Post').select().where({ userID: args.userID });
       },
-    },
+    },    
     usersByCategory: {
       type: new GraphQLList(UserType),
       args:{
