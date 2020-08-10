@@ -666,6 +666,10 @@ hr {
         &:not(:nth-child(3)):not(:nth-child(5)):hover {
           background-color: $mainHover;
         }
+        #fac:hover
+        {
+          background-color: $mainHover;
+        }
       }
       .dash-show-add {
         display: none;
