@@ -276,6 +276,18 @@ const RootQuery = new GraphQLObjectType({
         //login
       },
     },
+    getCategoryByID: {
+      type: CategoryType,
+      args: {
+        categoryID: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        return await knex('category')
+          .select('category')
+          .where({ id: args.categoryID })
+          .first();
+      },
+    },
   },
 });
 
