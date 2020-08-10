@@ -25,13 +25,6 @@ import {
 } from '@reach/combobox';
 import mapStyles from './mapStyle';
 
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
-
-const client = new ApolloClient({
-  uri: '/api',
-});
-
 const center = {
   lat: 31.3547,
   lng: 34.3088,
@@ -144,13 +137,11 @@ class Map extends React.Component {
   }
   render() {
     return (
-      <ApolloProvider client={client}>
-        <div className='map'>
-          <Navbar />
-          <MyComponent category={this.state.category} />
-          <Filter />
-        </div>
-      </ApolloProvider>
+      <div className='map'>
+        <Navbar />
+        <MyComponent category={this.state.category} />
+        <Filter />
+      </div>
     );
   }
 }
