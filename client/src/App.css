@@ -1,7 +1,7 @@
 /* Start Main Var */
 /* End Main Var */
 /* Start Classes For Extends */
-nav .auth a, .provider-nav .categories ul li, .provider-nav .sharing button, .provider-nav .sharing > svg, .provider-ui .rating, .provider-content .provider-promo button svg, .provider-content .posts .post-describe .post-info button, .provider-content .gallery .img-popup svg {
+nav .auth a, .provider-nav .categories ul li, .provider-nav .sharing button, .provider-nav .sharing > svg, .provider-ui .rating, .provider-content .provider-promo button svg, .provider-content .posts .post-describe .post-info button, .provider-content .gallery .img-popup svg, .view-post .main-view-post .add-comments button {
   transition: all 0.3s linear;
 }
 
@@ -656,6 +656,206 @@ hr {
   display: block;
 }
 
+.view-post nav {
+  margin-bottom: 70px;
+}
+
+.view-post * {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.view-post .main-view-post {
+  float: left;
+  width: 70%;
+}
+
+.view-post .main-view-post .whole-post {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+.view-post .main-view-post .whole-post .img {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  height: 550px;
+  box-shadow: 0px 5px 5px 0px #ccc;
+  margin-bottom: 40px;
+}
+
+.view-post .main-view-post .whole-post .img img {
+  width: 100%;
+  height: 550px;
+}
+
+.view-post .main-view-post .whole-post .str p {
+  color: #878c9f;
+  line-height: 30px;
+}
+
+.view-post .main-view-post .whole-post .str hr {
+  background-color: #ccc;
+}
+
+.view-post .main-view-post .whole-post .str .poster-info {
+  margin-top: 25px;
+}
+
+.view-post .main-view-post .whole-post .str .poster-info .avatar {
+  float: left;
+  margin-right: 20px;
+  background-color: #2e3f6e;
+}
+
+.view-post .main-view-post .whole-post .str .poster-info p {
+  float: left;
+  margin-right: 30px;
+  margin-top: 6px;
+}
+
+.view-post .main-view-post .whole-post .str .poster-info p svg {
+  margin-right: 7px;
+  color: #4db7fe;
+}
+
+.view-post .main-view-post .posts-comments, .view-post .main-view-post .add-comments {
+  margin-bottom: 40px;
+}
+
+.view-post .main-view-post .posts-comments > div, .view-post .main-view-post .add-comments > div {
+  padding: 15px;
+}
+
+.view-post .main-view-post .posts-comments > div p, .view-post .main-view-post .add-comments > div p {
+  color: #878c9f;
+}
+
+.view-post .main-view-post .posts-comments > div:first-child, .view-post .main-view-post .add-comments > div:first-child {
+  border: 1px solid #ddd;
+  border-radius: 10px 10px 0 0;
+  color: #566985;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.view-post .main-view-post .posts-comments > div:first-child span, .view-post .main-view-post .add-comments > div:first-child span {
+  color: #4db7fe;
+  font-weight: 700;
+}
+
+.view-post .main-view-post .posts-comments > div:first-child svg, .view-post .main-view-post .add-comments > div:first-child svg {
+  float: right;
+  font-size: 10px;
+  color: #4db7fe;
+  margin-top: 7px;
+}
+
+.view-post .main-view-post .posts-comments > div:last-child, .view-post .main-view-post .add-comments > div:last-child {
+  border: 1px solid #ddd;
+  border-radius: 0 0 10px 10px;
+  border-top: none;
+}
+
+.view-post .main-view-post .posts-comments > div:last-child .post-img, .view-post .main-view-post .add-comments > div:last-child .post-img {
+  float: left;
+  width: 15%;
+}
+
+.view-post .main-view-post .posts-comments > div:last-child .post-img .avatar, .view-post .main-view-post .add-comments > div:last-child .post-img .avatar {
+  width: 85px;
+  height: 85px;
+  margin-left: 20px;
+  font-size: 40px;
+  margin-top: 25px;
+  background-color: #2e3f6e;
+}
+
+.view-post .main-view-post .posts-comments > div:last-child .comment, .view-post .main-view-post .add-comments > div:last-child .comment {
+  float: right;
+  width: 82%;
+  background-color: #f5f6fa;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  overflow: visible;
+}
+
+.view-post .main-view-post .posts-comments > div:last-child .comment h3, .view-post .main-view-post .add-comments > div:last-child .comment h3 {
+  color: #566985;
+  margin-top: 0;
+}
+
+.view-post .main-view-post .posts-comments > div:last-child .comment p, .view-post .main-view-post .add-comments > div:last-child .comment p {
+  margin-top: -10px;
+}
+
+.view-post .main-view-post .posts-comments > div:last-child .comment hr, .view-post .main-view-post .add-comments > div:last-child .comment hr {
+  background-color: #e5e7f2;
+}
+
+.view-post .main-view-post .posts-comments > div:last-child .comment svg, .view-post .main-view-post .add-comments > div:last-child .comment svg {
+  color: #4db7fe;
+  margin-right: 10px;
+}
+
+.view-post .main-view-post .posts-comments > div:last-child .comment span, .view-post .main-view-post .add-comments > div:last-child .comment span {
+  color: #878c9f;
+}
+
+.view-post .main-view-post .posts-comments > div:last-child .comment::before, .view-post .main-view-post .add-comments > div:last-child .comment::before {
+  content: "";
+  display: block;
+  width: 0;
+  border-top: 15px solid transparent;
+  border-right: 15px solid #f5f6fa;
+  border-bottom: 15px solid transparent;
+  position: absolute;
+  top: 50px;
+  left: -15px;
+}
+
+.view-post .main-view-post .add-comments textarea {
+  background-color: #f5f6fa;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  outline: none;
+  display: block;
+  width: 100%;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+.view-post .main-view-post .add-comments button {
+  padding: 10px 20px;
+  background-color: #2e3f6e;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.view-post .main-view-post .add-comments button:hover {
+  background-color: #4db7fe;
+}
+
+.view-post .main-view-post .add-comments button:hover svg {
+  color: #2e3f6e;
+}
+
+.view-post .main-view-post .add-comments button svg {
+  margin-left: 20px;
+  color: #4db7fe;
+}
+
+.view-post .sidebar-post {
+  float: left;
+  width: 25%;
+  margin-left: 5%;
+  background-color: #ddd;
+}
+
 /* =============================== End Provider Page =============================== */
 /* =============================== Start Dashboard Page =============================== */
 .dashboard * {
@@ -850,7 +1050,7 @@ p {
 }
 
 .footer-news .last-news h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -898,7 +1098,7 @@ p {
 }
 
 .footer-news .twitter h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -924,7 +1124,7 @@ p {
 }
 
 .footer-news .twitter ul li::after {
-  content: '';
+  content: "";
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(255, 255, 255, 0.11);
   border-bottom: 10px solid transparent;
