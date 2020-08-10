@@ -1054,3 +1054,102 @@ h1 {
 }
 
 /* End Footer */
+
+
+/////////////////////////Show Component//////////////////////////////////////////////
+h1{
+color: #566985;
+}
+.post-block{
+  //height: 103px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px 0 #ccc;
+  clear: both;
+  position: relative;
+}
+
+.post-img-div{
+  float: left;
+  width: 12%;
+  overflow: hidden;
+  height: 60px;
+  margin-right: 2%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  
+  img
+  {
+    width: 100%;
+    height: 60px;
+  }
+  
+}
+.post-descri-div{
+  float: left;
+  width: 60%;
+
+  h4{
+    color: #566985;
+    font-size: small;
+    margin-top: 0;
+  }
+  p{
+    color: #7d93b2;
+    font-size: 12px;
+    margin-block-start: -1em;
+    display: block;
+  }
+}
+.post-edit-delete{
+  position: absolute;
+    top: 10;
+    right: 0;
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 50px 0 0 50px;
+    box-shadow: 5px 4px 5px #b1b1b1;
+    p
+    {
+      position: absolute;
+    z-index: 9999;
+    color: #fff;
+    background-color: $mainColor;
+    padding: 10px 25px;
+    display: none;
+    &:first-of-type
+    {
+      top: -9px;
+      right: 120px;
+    }
+    &:last-of-type
+    {
+      top: -9px;
+      right: 60px;
+    }
+    }
+  .edit-icon{
+    background-color: #4DB7FE;
+  }
+  .delete-icon{
+    background-color: #fe4d65;
+  }
+  svg{
+    color: #fff;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+}
+
+
+
+
+/////////////////////////End Component//////////////////////////////////////////////
