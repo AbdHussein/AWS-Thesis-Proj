@@ -108,7 +108,7 @@ nav {
 .landing {
   header {
     height: 90vh;
-    background-image: url("../src/images/1.jpg");
+    background-image: url('../src/images/1.jpg');
     position: relative;
     @extend %cover;
     .overlay {
@@ -163,7 +163,7 @@ nav {
 
 .provider-header {
   height: 80vh;
-  background-image: url("./images/6.jpg");
+  background-image: url('./images/6.jpg');
   position: relative;
   @extend %cover;
   .overlay {
@@ -733,7 +733,7 @@ hr {
             color: #878c9f;
           }
           &::before {
-            content: "";
+            content: '';
             display: block;
             width: 0;
             border-top: 15px solid transparent;
@@ -957,7 +957,7 @@ p {
   background: #b5b5b56b;
 }
 .footer-news .last-news h3::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -999,7 +999,7 @@ p {
   padding-bottom: 25px;
 }
 .footer-news .twitter h3::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1023,7 +1023,7 @@ p {
   position: relative;
 }
 .footer-news .twitter ul li::after {
-  content: "";
+  content: '';
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(255, 255, 255, 0.11);
   border-bottom: 10px solid transparent;
@@ -1055,12 +1055,11 @@ h1 {
 
 /* End Footer */
 
-
 /////////////////////////Show Component//////////////////////////////////////////////
-h1{
-color: #566985;
-}
-.post-block{
+// h1{
+// color: #566985;
+// }
+.post-block {
   //height: 103px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
@@ -1072,7 +1071,7 @@ color: #566985;
   position: relative;
 }
 
-.post-img-div{
+.post-img-div {
   float: left;
   width: 12%;
   overflow: hidden;
@@ -1080,64 +1079,59 @@ color: #566985;
   margin-right: 2%;
   border: 1px solid #ccc;
   border-radius: 10px;
-  
-  img
-  {
+
+  img {
     width: 100%;
     height: 60px;
   }
-  
 }
-.post-descri-div{
+.post-descri-div {
   float: left;
   width: 60%;
 
-  h4{
+  h4 {
     color: #566985;
     font-size: small;
     margin-top: 0;
   }
-  p{
+  p {
     color: #7d93b2;
     font-size: 12px;
     margin-block-start: -1em;
     display: block;
   }
 }
-.post-edit-delete{
+.post-edit-delete {
   position: absolute;
-    top: 10;
-    right: 0;
-    padding: 7px;
-    border: 1px solid #ccc;
-    border-radius: 50px 0 0 50px;
-    box-shadow: 5px 4px 5px #b1b1b1;
-    p
-    {
-      position: absolute;
+  top: 10;
+  right: 0;
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 50px 0 0 50px;
+  box-shadow: 5px 4px 5px #b1b1b1;
+  p {
+    position: absolute;
     z-index: 9999;
     color: #fff;
     background-color: $mainColor;
     padding: 10px 25px;
     display: none;
-    &:first-of-type
-    {
+    &:first-of-type {
       top: -9px;
       right: 120px;
     }
-    &:last-of-type
-    {
+    &:last-of-type {
       top: -9px;
       right: 60px;
     }
-    }
-  .edit-icon{
-    background-color: #4DB7FE;
   }
-  .delete-icon{
+  .edit-icon {
+    background-color: #4db7fe;
+  }
+  .delete-icon {
     background-color: #fe4d65;
   }
-  svg{
+  svg {
     color: #fff;
     width: 40px !important;
     height: 40px !important;
@@ -1146,10 +1140,6 @@ color: #566985;
     border-radius: 50%;
     cursor: pointer;
   }
-
 }
-
-
-
 
 /////////////////////////End Component//////////////////////////////////////////////
