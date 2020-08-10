@@ -108,7 +108,7 @@ nav {
 .landing {
   header {
     height: 90vh;
-    background-image: url('../src/images/1.jpg');
+    background-image: url("../src/images/1.jpg");
     position: relative;
     @extend %cover;
     .overlay {
@@ -163,7 +163,7 @@ nav {
 
 .provider-header {
   height: 80vh;
-  background-image: url('./images/6.jpg');
+  background-image: url("./images/6.jpg");
   position: relative;
   @extend %cover;
   .overlay {
@@ -612,6 +612,180 @@ hr {
   color: $mainHover !important;
   display: block;
 }
+.view-post {
+  nav {
+    margin-bottom: 70px;
+  }
+  * {
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .main-view-post {
+    float: $floatLeft;
+    width: 70%;
+    .whole-post {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 40px;
+      .img {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        height: 550px;
+        box-shadow: 0px 5px 5px 0px #ccc;
+        margin-bottom: 40px;
+        img {
+          width: 100%;
+          height: 550px;
+        }
+      }
+      .str {
+        p {
+          color: #878c9f;
+          line-height: 30px;
+        }
+        hr {
+          background-color: #ccc;
+        }
+        .poster-info {
+          margin-top: 25px;
+          .avatar {
+            float: $floatLeft;
+            margin-right: 20px;
+            background-color: $mainColor;
+          }
+          p {
+            float: $floatLeft;
+            margin-right: 30px;
+            margin-top: 6px;
+            svg {
+              margin-right: 7px;
+              color: $mainHover;
+            }
+          }
+        }
+      }
+    }
+    .posts-comments {
+      margin-bottom: 40px;
+      > div {
+        padding: 15px;
+        p {
+          color: #878c9f;
+        }
+      }
+      & > div:first-child {
+        border: 1px solid #ddd;
+        border-radius: 10px 10px 0 0;
+        color: #566985;
+        font-size: 15px;
+        font-weight: 600;
+        span {
+          color: $mainHover;
+          font-weight: 700;
+        }
+        svg {
+          float: $floatRight;
+          font-size: 10px;
+          color: $mainHover;
+          margin-top: 7px;
+        }
+      }
+      & > div:last-child {
+        border: 1px solid #ddd;
+        border-radius: 0 0 10px 10px;
+        border-top: none;
+        .post-img {
+          float: $floatLeft;
+          width: 15%;
+          .avatar {
+            width: 85px;
+            height: 85px;
+            margin-left: 20px;
+            font-size: 40px;
+            margin-top: 25px;
+            background-color: $mainColor;
+          }
+        }
+        .comment {
+          float: $floatRight;
+          width: 82%;
+          background-color: #f5f6fa;
+          padding: 20px;
+          border-radius: 10px;
+          position: relative;
+          overflow: visible;
+          h3 {
+            color: #566985;
+            margin-top: 0;
+          }
+          p {
+            margin-top: -10px;
+          }
+          hr {
+            background-color: #e5e7f2;
+          }
+          svg {
+            color: $mainHover;
+            margin-right: 10px;
+          }
+          span {
+            color: #878c9f;
+          }
+          &::before {
+            content: "";
+            display: block;
+            width: 0;
+            border-top: 15px solid transparent;
+            border-right: 15px solid #f5f6fa;
+            border-bottom: 15px solid transparent;
+            position: absolute;
+            top: 50px;
+            left: -15px;
+          }
+        }
+      }
+    }
+    .add-comments {
+      @extend .posts-comments;
+      textarea {
+        background-color: #f5f6fa;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        outline: none;
+        display: block;
+        width: 100%;
+        height: 200px;
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: $mainColor;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 3px;
+        @extend %transition;
+        &:hover {
+          background-color: $mainHover;
+          svg {
+            color: $mainColor;
+          }
+        }
+        svg {
+          margin-left: 20px;
+          color: $mainHover;
+        }
+      }
+    }
+  }
+  .sidebar-post {
+    float: $floatLeft;
+    width: 25%;
+    margin-left: 5%;
+    background-color: #ddd;
+  }
+}
 /* =============================== End Provider Page =============================== */
 
 /* =============================== Start Dashboard Page =============================== */
@@ -664,6 +838,9 @@ hr {
         cursor: pointer;
         padding: 20px;
         &:not(:nth-child(3)):not(:nth-child(5)):hover {
+          background-color: $mainHover;
+        }
+        #fac:hover {
           background-color: $mainHover;
         }
       }
@@ -780,7 +957,7 @@ p {
   background: #b5b5b56b;
 }
 .footer-news .last-news h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -822,7 +999,7 @@ p {
   padding-bottom: 25px;
 }
 .footer-news .twitter h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -846,7 +1023,7 @@ p {
   position: relative;
 }
 .footer-news .twitter ul li::after {
-  content: '';
+  content: "";
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(255, 255, 255, 0.11);
   border-bottom: 10px solid transparent;
@@ -877,3 +1054,102 @@ h1 {
 }
 
 /* End Footer */
+
+
+/////////////////////////Show Component//////////////////////////////////////////////
+h1{
+color: #566985;
+}
+.post-block{
+  //height: 103px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px 0 #ccc;
+  clear: both;
+  position: relative;
+}
+
+.post-img-div{
+  float: left;
+  width: 12%;
+  overflow: hidden;
+  height: 60px;
+  margin-right: 2%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  
+  img
+  {
+    width: 100%;
+    height: 60px;
+  }
+  
+}
+.post-descri-div{
+  float: left;
+  width: 60%;
+
+  h4{
+    color: #566985;
+    font-size: small;
+    margin-top: 0;
+  }
+  p{
+    color: #7d93b2;
+    font-size: 12px;
+    margin-block-start: -1em;
+    display: block;
+  }
+}
+.post-edit-delete{
+  position: absolute;
+    top: 10;
+    right: 0;
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 50px 0 0 50px;
+    box-shadow: 5px 4px 5px #b1b1b1;
+    p
+    {
+      position: absolute;
+    z-index: 9999;
+    color: #fff;
+    background-color: $mainColor;
+    padding: 10px 25px;
+    display: none;
+    &:first-of-type
+    {
+      top: -9px;
+      right: 120px;
+    }
+    &:last-of-type
+    {
+      top: -9px;
+      right: 60px;
+    }
+    }
+  .edit-icon{
+    background-color: #4DB7FE;
+  }
+  .delete-icon{
+    background-color: #fe4d65;
+  }
+  svg{
+    color: #fff;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+}
+
+
+
+
+/////////////////////////End Component//////////////////////////////////////////////

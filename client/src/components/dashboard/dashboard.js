@@ -26,19 +26,19 @@ class Dashboard extends React.Component {
                 <div className="main-dashboard">
                     <Container>
                         <div className="dashboard-sidebar">
-                            <div id="dash1" data-dashboard=".ch-dash-main-dashboard" className="dash">Dashboard</div>
+                            <div data-dashboard=".ch-dash-main-dashboard" className="dash">Dashboard</div>
                             <div className="dash-posts">Posts</div>
                             <div className="dash-show-add">
-                                <div id="dash1" data-dashboard=".dash-add-post">Add</div>
-                                <div id="dash1" data-dashboard=".dash-show-post">Show</div>
+                                <div data-dashboard=".dash-add-post">Add</div>
+                                <div data-dashboard=".dash-show-post">Show</div>
                             </div>
                             <div className="dash-details">Details</div>
                             <div className="dash-des">
-                                <div id="dash1" data-dashboard=".dash-demo">Demo Video</div>
-                                <div id="dash1" data-dashboard=".dash-describe">Description</div>
-                                <div id="dash1" data-dashboard=".dash-facility">Facility</div>
+                                <div data-dashboard=".dash-demo">Demo Video</div>
+                                <div data-dashboard=".dash-describe">Description</div>
+                                <div id="fac" data-dashboard=".dash-facility">Facility</div>
                             </div>
-                            <div id="dash1" data-dashboard=".dash-provider-information" className="dash-provider-info">Provider Info</div>
+                            <div data-dashboard=".dash-provider-information" className="dash-provider-info">Provider Info</div>
                         </div>
                         <div className="dashboard-content">
                             <div className="ch-dash-main-dashboard">
