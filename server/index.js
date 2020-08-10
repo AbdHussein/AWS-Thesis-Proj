@@ -3,21 +3,24 @@ const expressGraphQL = require('express-graphql').graphqlHTTP;
 const schema = require('./schema');
 const jwt = require('express-jwt');
 const app = express();
+const cors = require('cors');
 
 app.use(express.json());
+app.use(cors());
 
 const authMiddleware = jwt({
   algorithms: ['HS256'],
-  secret: process.env.SECRET
+  secret: process.env.SECRET,
 });
 
-app.use('/api',// authMiddleware,
-  expressGraphQL(req => ({
+app.use(
+  '/api', // authMiddleware,
+  expressGraphQL((req) => ({
     schema,
     context: {
-      user: req.user
+      user: req.user,
     },
-    graphiql: true
+    graphiql: true,
   }))
 );
 

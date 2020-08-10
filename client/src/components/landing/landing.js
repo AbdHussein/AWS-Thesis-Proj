@@ -88,8 +88,8 @@ class Landing extends React.Component {
                     <option>choose...</option>
                     <option>phones</option>
                     <option>restaurant</option>
-                    <option>PC</option>
-                    <option>FMCGs</option>
+                    {/* <option>PC</option>
+                    <option>FMCGs</option> */}
                   </select>
                 </div>
                 <div className='between'></div>

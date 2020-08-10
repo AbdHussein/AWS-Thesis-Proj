@@ -33,16 +33,6 @@ const UserType = new GraphQLObjectType({
     workingHours: { type: GraphQLString },
     categoryID: { type: GraphQLInt },
     token: { type: GraphQLString },
-    // category: {
-    //   //CategoryType
-    //   type:CategoryType,
-    //   async resolve(parent, args){
-    //     console.log(parent);
-    //     // return await knex('category').select().where({
-    //     //   id: categoryID
-    //     // });
-    //   }
-    // }
   }),
 });
 
@@ -202,20 +192,25 @@ const RootQuery = new GraphQLObjectType({
       async resolve(root, args) {
         return await knex('Post').select().where({ userID: args.userID });
       },
-    },    
+    },
     usersByCategory: {
       type: new GraphQLList(UserType),
-      args:{
-        category: {type: new GraphQLNonNull(GraphQLString)}
+      args: {
+        category: { type: new GraphQLNonNull(GraphQLString) },
       },
-      async resolve(parent, args){
-        try{
-          var categoryData = await knex('category').select().where({category: args.category}).first();
-          return await knex('User').select().where({categoryID : categoryData.id});
-        }catch(err){
+      async resolve(parent, args) {
+        try {
+          var categoryData = await knex('category')
+            .select()
+            .where({ category: args.category })
+            .first();
+          return await knex('User')
+            .select()
+            .where({ categoryID: categoryData.id });
+        } catch (err) {
           return err;
         }
-      }
+      },
     },
     category: {
       type: CategoryType,
@@ -279,10 +274,9 @@ const RootQuery = new GraphQLObjectType({
       },
       resolve(root, args) {
         //login
-      }
-    }
-
-  }
+      },
+    },
+  },
 });
 
 const Mutation = new GraphQLObjectType({

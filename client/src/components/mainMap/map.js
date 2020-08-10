@@ -3,7 +3,7 @@ import Navbar from '../mainComp/navbar';
 import Filter from '../mainComp/filterComp';
 import { Redirect } from 'react-router-dom';
 //import { formatRelative } from 'data-fns';
-import * as allData from '../../data/data.json';
+// import * as allData from '../../data/data.json';
 import {
   GoogleMap,
   useLoadScript,
@@ -25,6 +25,10 @@ import {
 } from '@reach/combobox';
 import mapStyles from './mapStyle';
 
+// Ib
+import axios from 'axios';
+import Constants from '../constants/Queries';
+
 const center = {
   lat: 31.3547,
   lng: 34.3088,
@@ -42,12 +46,6 @@ const options = {
 };
 
 function MyComponent(props) {
-  // componentDidMount() {
-  //   const { provider } = this.props.location.state;
-  //   this.setState({
-  //     provider,
-  //   });
-  // }
   const [selectedProvider, setSelectedProvider] = React.useState(null);
   const [provider, setProvider] = React.useState(null);
 
@@ -55,6 +53,8 @@ function MyComponent(props) {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY,
     libraries,
   });
+  const allProviders =
+    props.providers.data && props.providers.data.usersByCategory;
   if (loadError) return 'Error loading Map';
   if (!isLoaded) return 'Loading...';
   /* the magic if statment*/
@@ -86,7 +86,7 @@ function MyComponent(props) {
         center={center}
         options={options}
       >
-        {allData.data.map((provider, index) => (
+        {/* {allData.data.map((provider, index) => (
           <Marker
             key={index}
             position={{ lat: Number(provider.lat), lng: Number(provider.lng) }}
@@ -94,7 +94,23 @@ function MyComponent(props) {
               setSelectedProvider(provider);
             }}
           />
-        ))}
+        ))} */}
+        {allProviders &&
+          allProviders.map((provider, index) => {
+            var loc = JSON.parse(provider.location);
+            return (
+              <Marker
+                key={index}
+                position={{
+                  lat: Number(loc.lat),
+                  lng: Number(loc.lng),
+                }}
+                onClick={() => {
+                  setSelectedProvider(provider);
+                }}
+              />
+            );
+          })}
         {selectedProvider && (
           <InfoWindow
             position={{
@@ -106,8 +122,8 @@ function MyComponent(props) {
             }}
           >
             <div>
-              <h2>{selectedProvider.service_name}</h2>
-              <h4>phone: {selectedProvider.phone}</h4>
+              <h2>{selectedProvider.serviceName}</h2>
+              <h4>phone: {selectedProvider.mobile}</h4>
               <button
                 onClick={() => {
                   setProvider(selectedProvider);
@@ -127,19 +143,34 @@ function MyComponent(props) {
 class Map extends React.Component {
   state = {
     category: '',
+    providers: [],
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { category } = this.props.location.state;
     this.setState({
       category,
     });
+    const USERS = Constants.userByCategory(category);
+    await axios
+      .post('http://localhost:5000/api', {
+        query: USERS,
+      })
+      .then((response) => {
+        const providers = response.data;
+        this.setState({
+          providers,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   render() {
     return (
       <div className='map'>
         <Navbar />
-        <MyComponent category={this.state.category} />
+        <MyComponent providers={this.state.providers} />
         <Filter />
       </div>
     );

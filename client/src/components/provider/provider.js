@@ -49,12 +49,12 @@ class Provider extends React.Component {
     provider: null,
   };
 
-    componentDidMount() {
-      waterMelon();
-      const { provider } = this.props.location.state;
-      this.setState({
-        provider,
-      });
+  componentDidMount() {
+    waterMelon();
+    const { provider } = this.props.location.state;
+    this.setState({
+      provider,
+    });
   }
 
   render() {
@@ -69,19 +69,19 @@ class Provider extends React.Component {
                 <div className='provider-info'>
                   <h1>
                     {this.state.provider !== null
-                      ? this.state.provider.service_name
+                      ? this.state.provider.serviceName
                       : ''}
                   </h1>
                   <span>
                     <FontAwesomeIcon icon={faMapMarkerAlt} />
                     {this.state.provider !== null
-                      ? this.state.provider.Address
+                      ? this.state.provider.address
                       : ''}
                   </span>
                   <span>
                     <FontAwesomeIcon icon={faPhoneAlt} />{' '}
                     {this.state.provider !== null
-                      ? this.state.provider.phone
+                      ? this.state.provider.mobile
                       : ''}
                   </span>
                   <span>
