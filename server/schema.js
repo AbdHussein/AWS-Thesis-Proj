@@ -310,7 +310,7 @@ const Mutation = new GraphQLObjectType({
         username: { type: new GraphQLNonNull(GraphQLString) },
         email: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
-        roleID: { type: new GraphQLNonNull(GraphQLString) },
+        roleID: { type: GraphQLString },
         mobile: { type: new GraphQLNonNull(GraphQLInt) },
         serviceName: { type: new GraphQLNonNull(GraphQLString) },
         address: { type: new GraphQLNonNull(GraphQLString) },
@@ -318,7 +318,6 @@ const Mutation = new GraphQLObjectType({
         cover: { type: new GraphQLNonNull(GraphQLString) },
         video: { type: new GraphQLNonNull(GraphQLString) },
         description: { type: new GraphQLNonNull(GraphQLString) },
-        categoryID: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
         // add User with crpted password to database
@@ -365,7 +364,7 @@ const Mutation = new GraphQLObjectType({
         video: { type: GraphQLString },
         description: { type: GraphQLString },
         workingHours: { type: GraphQLString },
-        categoryID: { type: GraphQLInt },
+        categoryID: { type: GraphQLID },
       },
       async resolve(root, args) {
         args.password = await bcrypt.hash(args.password, 10);
