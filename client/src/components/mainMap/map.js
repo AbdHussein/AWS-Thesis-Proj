@@ -134,7 +134,6 @@ function MyComponent(props) {
                   setProvider(selectedProvider);
                 }}
               >
-                {/* {for fron-end dev. : remove the border of the button} */}
                 Details
               </button>
             </div>

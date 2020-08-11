@@ -59,9 +59,9 @@ class Provider extends React.Component {
     this.setState({
       provider,
     });
-    console.log(provider.categoryID);
+    console.log(provider.location);
     const categoryQuery = Constants.categoryNameByID(provider.categoryID);
-    console.log(categoryQuery);
+    //console.log(categoryQuery);
     await axios
       .post('http://localhost:5000/api', {
         query: categoryQuery,
@@ -185,7 +185,7 @@ class Provider extends React.Component {
           </div>
         </div>
         <div className='provider-sidebar'>
-          <MiniMap />
+          <MiniMap providerL={this.state.provider} />
         </div>
       </div>
     );
