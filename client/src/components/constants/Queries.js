@@ -37,7 +37,7 @@ const login = (username, password) => {
     }
   }`;
   return query;
-}
+};
 
 const request = async (query) => {
   try {
@@ -49,16 +49,17 @@ const request = async (query) => {
   }
 };
 
-// .then((response) => {
-//   const providers = response.data;
-//   this.setState({
-//     providers,
-//   });
-// })
-// .catch((err) => {
-//   console.log(err);
-// });
+const signUp = (username, email, password, mobile) => {
+  const q = `mutation{
+    addUser(username:"${username}", email:"${email}", password:"${password}",roleID:"3", mobile:${mobile},avatar:"${username[0]}",serviceName:"",address:"", cover:"", video:"",description:""){
+      token
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
 module.exports.login = login;
+module.exports.signUp = signUp;
