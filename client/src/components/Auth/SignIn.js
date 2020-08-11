@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
     const [state , setState] = useState({
         email : "",
         password : ""
@@ -60,9 +60,12 @@ export default function SignIn() {
         }))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        
+        const Login = Constants.login(state.email, state.password);
+        const request = await Constants.request(Login);
+        localStorage.setItem("xTown", request.data.data.login.token);
+        props.history.push('/');
     }
 
     const classes = useStyles();

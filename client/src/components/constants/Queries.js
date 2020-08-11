@@ -30,9 +30,9 @@ const categoryNameByID = (categoryID) => {
   return name;
 };
 
-const login = (username, password) => {
+const login = (email, password) => {
   const query = `query {
-    login(username: "${username}", password: "${password}"){
+    login(email: "${email}", password: "${password}"){
       token
     }
   }`;

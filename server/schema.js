@@ -269,11 +269,20 @@ const RootQuery = new GraphQLObjectType({
     login: {
       type: UserType,
       args: {
-        username: { type: new GraphQLNonNull(GraphQLString) },
+        email: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
-      resolve(root, args) {
+      async resolve(root, args) {
         //login
+        const data = await knex('user').select('*').where({email: args.email}).first();
+        if(await bcrypt.compare(args.password, data.password)){
+          const token = jwt.sign({id: data.id, username: data.username, email: data.email}, process.env.SECRET,{
+            algorithm: "HS256",
+            expiresIn: "2 days"
+          });
+          await knex('user').update({token: token}).where({id: data.id});
+        }
+        return await knex('user').select('token').where({email: args.email}).first();
       },
     },
     getCategoryByID: {
