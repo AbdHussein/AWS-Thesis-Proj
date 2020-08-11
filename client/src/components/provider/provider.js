@@ -43,18 +43,34 @@ import ProviderStore from './providerStore';
 import ProviderReviews from './providerReviews';
 import Footer from '../footer/footer';
 import waterMelon from '../../main';
+import axios from 'axios';
+import Constants from '../constants/Queries';
 
 class Provider extends React.Component {
   state = {
     provider: null,
+    categoryName: '',
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     waterMelon();
     const { provider } = this.props.location.state;
     this.setState({
       provider,
     });
+    console.log(provider.categoryID);
+    const categoryQuery = Constants.categoryNameByID(provider.categoryID);
+    console.log(categoryQuery);
+    await axios
+      .post('http://localhost:5000/api', {
+        query: categoryQuery,
+      })
+      .then((response) => {
+        this.setState({
+          categoryName: response.data.data.getCategoryByID.category,
+        });
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {
@@ -94,7 +110,7 @@ class Provider extends React.Component {
                 <div className='rating'>
                   <div className='rate-number'>5.0</div>
                   <div>
-                    <Rating value='5' readOnly />
+                    <Rating value={5} readOnly />
                     <p>17.5K reviews</p>
                   </div>
                   <div className='chat'>
@@ -106,9 +122,7 @@ class Provider extends React.Component {
               <div className='provider-bottom-header'>
                 <p>
                   <FontAwesomeIcon icon={faMobileAlt} />
-                  {this.state.provider !== null
-                    ? this.state.provider.categories
-                    : ''}
+                  {this.state.provider !== null ? this.state.categoryName : ''}
                 </p>
                 <p>
                   <FontAwesomeIcon icon={faHeart} /> Bookmark - 516

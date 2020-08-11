@@ -19,4 +19,14 @@ const userByCategory = (category) => {
   return us;
 };
 
+const categoryNameByID = (categoryID) => {
+  const name = `query{
+    getCategoryByID(categoryID: ${categoryID}){
+      category
+    }
+  }`;
+  return name;
+};
+
 module.exports.userByCategory = userByCategory;
+module.exports.categoryNameByID = categoryNameByID;
