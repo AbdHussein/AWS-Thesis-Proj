@@ -84,12 +84,27 @@ nav {
 //Filter Search
 .filter-search {
   margin: 50px auto;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 3px;
   .first {
     width: 100%;
     > div {
       float: left;
       margin-right: 20px;
       width: 31%;
+      input {
+        width: 100%;
+        height: 46px;
+        border-radius: 3px;
+        outline: none;
+        border: 1px solid #e5e7f2;
+        padding-left: 10px;
+        background-color: #f9f9f9;
+        color: #7d93b2;
+        margin-bottom: 20px;
+      }
     }
   }
   .second {
@@ -97,7 +112,35 @@ nav {
     > div {
       float: left;
       margin-right: 20px;
-      width: 31%;
+      width: 40%;
+      &:last-child {
+        width: 14.3%;
+      }
+      input {
+        width: 100%;
+        height: 46px;
+        border-radius: 3px;
+        outline: none;
+        border: 1px solid #e5e7f2;
+        padding-left: 10px;
+        background-color: #f9f9f9;
+        color: #7d93b2;
+        margin-bottom: 20px;
+      }
+      button {
+        @extend input;
+        background-color: $mainHover;
+        color: #fff;
+        height: 50px;
+        cursor: pointer;
+        @extend %transition;
+        &:hover {
+          background-color: $mainColor;
+          svg {
+            color: $mainHover;
+          }
+        }
+      }
     }
   }
 }
@@ -108,7 +151,7 @@ nav {
 .landing {
   header {
     height: 90vh;
-    background-image: url('../src/images/1.jpg');
+    background-image: url("../src/images/1.jpg");
     position: relative;
     @extend %cover;
     .overlay {
@@ -163,7 +206,7 @@ nav {
 
 .provider-header {
   height: 80vh;
-  background-image: url('./images/6.jpg');
+  background-image: url("./images/6.jpg");
   position: relative;
   @extend %cover;
   .overlay {
@@ -732,7 +775,7 @@ hr {
             color: #878c9f;
           }
           &::before {
-            content: '';
+            content: "";
             display: block;
             width: 0;
             border-top: 15px solid transparent;
@@ -956,7 +999,7 @@ p {
   background: #b5b5b56b;
 }
 .footer-news .last-news h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -998,7 +1041,7 @@ p {
   padding-bottom: 25px;
 }
 .footer-news .twitter h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1022,7 +1065,7 @@ p {
   position: relative;
 }
 .footer-news .twitter ul li::after {
-  content: '';
+  content: "";
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(255, 255, 255, 0.11);
   border-bottom: 10px solid transparent;
@@ -1154,6 +1197,7 @@ h1 {
   img {
     height: 100px;
     width: 100px;
+    cursor: pointer;
   }
 }
 

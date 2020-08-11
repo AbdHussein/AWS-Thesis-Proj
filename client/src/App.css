@@ -1,7 +1,7 @@
 /* Start Main Var */
 /* End Main Var */
 /* Start Classes For Extends */
-nav .auth a, .provider-nav .categories ul li, .provider-nav .sharing button, .provider-nav .sharing > svg, .provider-ui .rating, .provider-content .provider-promo button svg, .provider-content .posts .post-describe .post-info button, .provider-content .gallery .img-popup svg, .view-post .main-view-post .add-comments button {
+nav .auth a, .filter-search .second > div button, .provider-nav .categories ul li, .provider-nav .sharing button, .provider-nav .sharing > svg, .provider-ui .rating, .provider-content .provider-promo button svg, .provider-content .posts .post-describe .post-info button, .provider-content .gallery .img-popup svg, .view-post .main-view-post .add-comments button {
   transition: all 0.3s linear;
 }
 
@@ -81,6 +81,10 @@ nav .auth span {
 
 .filter-search {
   margin: 50px auto;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 3px;
 }
 
 .filter-search .first {
@@ -93,6 +97,18 @@ nav .auth span {
   width: 31%;
 }
 
+.filter-search .first > div input, .filter-search .first > div .second > div button, .filter-search .second > div .first > div button {
+  width: 100%;
+  height: 46px;
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid #e5e7f2;
+  padding-left: 10px;
+  background-color: #f9f9f9;
+  color: #7d93b2;
+  margin-bottom: 20px;
+}
+
 .filter-search .second {
   width: 100%;
 }
@@ -100,7 +116,38 @@ nav .auth span {
 .filter-search .second > div {
   float: left;
   margin-right: 20px;
-  width: 31%;
+  width: 40%;
+}
+
+.filter-search .second > div:last-child {
+  width: 14.3%;
+}
+
+.filter-search .second > div input, .filter-search .second > div button {
+  width: 100%;
+  height: 46px;
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid #e5e7f2;
+  padding-left: 10px;
+  background-color: #f9f9f9;
+  color: #7d93b2;
+  margin-bottom: 20px;
+}
+
+.filter-search .second > div button {
+  background-color: #4db7fe;
+  color: #fff;
+  height: 50px;
+  cursor: pointer;
+}
+
+.filter-search .second > div button:hover {
+  background-color: #2e3f6e;
+}
+
+.filter-search .second > div button:hover svg {
+  color: #4db7fe;
 }
 
 /* End Main Components */
@@ -145,7 +192,7 @@ nav .auth span {
   width: 25%;
 }
 
-.landing header .search-bar div input {
+.landing header .search-bar div input, .landing header .search-bar .filter-search .second > div button, .filter-search .landing header .search-bar .second > div button {
   outline: none;
   border: none;
 }
@@ -968,7 +1015,7 @@ hr {
   width: 60%;
 }
 
-.main-footer .subscribe .MuiContainer-maxWidthLg div:last-child input {
+.main-footer .subscribe .MuiContainer-maxWidthLg div:last-child input, .main-footer .subscribe .MuiContainer-maxWidthLg div:last-child .filter-search .second > div button, .filter-search .second > div .main-footer .subscribe .MuiContainer-maxWidthLg div:last-child button {
   border: none;
   outline: none;
   width: 80%;
@@ -1157,3 +1204,110 @@ h1 {
 }
 
 /* End Footer */
+.post-block {
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px 0 #ccc;
+  clear: both;
+  position: relative;
+}
+
+.post-img-div {
+  float: left;
+  width: 12%;
+  overflow: hidden;
+  height: 60px;
+  margin-right: 2%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.post-img-div img {
+  width: 100%;
+  height: 60px;
+}
+
+.post-descri-div {
+  float: left;
+  width: 60%;
+}
+
+.post-descri-div h4 {
+  color: #566985;
+  font-size: small;
+  margin-top: 0;
+}
+
+.post-descri-div p {
+  color: #7d93b2;
+  font-size: 12px;
+  margin-block-start: -1em;
+  display: block;
+}
+
+.post-edit-delete {
+  position: absolute;
+  top: 10;
+  right: 0;
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 50px 0 0 50px;
+  box-shadow: 5px 4px 5px #b1b1b1;
+}
+
+.post-edit-delete p {
+  position: absolute;
+  z-index: 9999;
+  color: #fff;
+  background-color: #2e3f6e;
+  padding: 10px 25px;
+  display: none;
+}
+
+.post-edit-delete p:first-of-type {
+  top: -9px;
+  right: 120px;
+}
+
+.post-edit-delete p:last-of-type {
+  top: -9px;
+  right: 60px;
+}
+
+.post-edit-delete .edit-icon {
+  background-color: #4db7fe;
+}
+
+.post-edit-delete .delete-icon {
+  background-color: #fe4d65;
+}
+
+.post-edit-delete svg {
+  color: #fff;
+  width: 40px !important;
+  height: 40px !important;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/*cooper style*/
+.locate {
+  position: absolute;
+  top: 100px;
+  right: 10px;
+  background: none;
+  border: none;
+  z-index: 10;
+  outline: none;
+}
+
+.locate img {
+  height: 100px;
+  width: 100px;
+  cursor: pointer;
+}
