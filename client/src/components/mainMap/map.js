@@ -42,7 +42,6 @@ function MyComponent(props) {
   const [provider, setProvider] = React.useState(null);
   const [lat, setLat] = React.useState(37.2431);
   const [lng, setLng] = React.useState(-34.3088);
-  console.log(props.providers);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY,
     libraries,

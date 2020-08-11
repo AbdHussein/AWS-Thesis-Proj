@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../mainComp/navbar';
 import { Container } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import MiniMap from '../mainMap/miniMap/minimap';
 import {
   faMapMarkerAlt,
   faPhoneAlt,
@@ -183,7 +184,9 @@ class Provider extends React.Component {
             <ProviderReviews />
           </div>
         </div>
-        <div className='provider-sidebar'>sidebar</div>
+        <div className='provider-sidebar'>
+          <MiniMap />
+        </div>
       </div>
     );
   }

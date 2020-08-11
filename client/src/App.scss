@@ -605,7 +605,6 @@ hr {
 .provider-sidebar {
   float: $floatLeft;
   width: 35%;
-  background-color: #ddd;
 }
 
 .active {
@@ -1157,3 +1156,27 @@ h1 {
     width: 100px;
   }
 }
+
+/* Start Mini Map */
+
+.mini-map {
+  > div {
+    border: 1px solid #ccc;
+    padding: 20px;
+    &:not(:last-child) {
+      border-bottom: none;
+    }
+    &:nth-child(2) {
+      height: 320px;
+      overflow: hidden;
+    }
+    &:first-child {
+      border-radius: 5px 5px 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 5px 5px;
+    }
+  }
+}
+
+/* End Mini Map */
