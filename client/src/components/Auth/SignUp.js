@@ -53,14 +53,14 @@ export default function SignUp(props) {
       state.mobile
     );
     const request = Constants.request(query);
-    props.history.push('/');
+    props.history.push('/signIn');
   };
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component='h1' variant='h5'>
-          Welcome to Login system.
+          Create new Account
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
