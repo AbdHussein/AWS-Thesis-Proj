@@ -3,7 +3,6 @@ import Navbar from '../mainComp/navbar';
 import Filter from '../mainComp/filterComp';
 import { Redirect } from 'react-router-dom';
 //import { formatRelative } from 'data-fns';
-// import * as allData from '../../data/data.json';
 import {
   GoogleMap,
   useLoadScript,
@@ -25,14 +24,7 @@ import {
 } from '@reach/combobox';
 import mapStyles from './mapStyle';
 
-import axios from 'axios';
-
 import Constants from '../constants/Queries';
-
-// const center = {
-//   lat: 31.3547,
-//   lng: 34.3088,
-// };
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -50,13 +42,12 @@ function MyComponent(props) {
   const [provider, setProvider] = React.useState(null);
   const [lat, setLat] = React.useState(37.2431);
   const [lng, setLng] = React.useState(-34.3088);
-
+  console.log(props.providers);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY,
     libraries,
   });
-  const allProviders =
-    props.providers.data && props.providers.data.usersByCategory;
+  const allProviders = props.providers;
 
   navigator.geolocation.getCurrentPosition(function (position) {
     setLat(position.coords.latitude);
@@ -110,15 +101,6 @@ function MyComponent(props) {
         options={options}
         onLoad={onMapload}
       >
-        {/* {allData.data.map((provider, index) => (
-          <Marker
-            key={index}
-            position={{ lat: Number(provider.lat), lng: Number(provider.lng) }}
-            onClick={() => {
-              setSelectedProvider(provider);
-            }}
-          />
-        ))} */}
         {allProviders &&
           allProviders.map((provider, index) => {
             var loc = JSON.parse(provider.location);
@@ -251,19 +233,10 @@ class Map extends React.Component {
       category,
     });
     const USERS = Constants.userByCategory(category);
-    await axios
-      .post('http://localhost:5000/api', {
-        query: USERS,
-      })
-      .then((response) => {
-        const providers = response.data;
-        this.setState({
-          providers,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const request = await Constants.request(USERS);
+    this.setState({
+      providers: request.data.data.usersByCategory,
+    });
   }
   render() {
     return (
