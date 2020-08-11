@@ -1,5 +1,7 @@
 import React from 'react'
 import { Container } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 class Filter extends React.Component {
     render() {
@@ -14,7 +16,7 @@ class Filter extends React.Component {
                     <div className="second">
                         <div><input type="text" name="" id="" placeholder="Where To Look?" /></div>
                         <div><input type="text" name="" id="" placeholder="price" /></div>
-                        <div><button>Test</button></div>
+                        <div><button><FontAwesomeIcon icon={faSearch} /> | Search </button></div>
                     </div>
                 </div>
             </Container>
