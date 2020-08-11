@@ -15,9 +15,9 @@ class Navbar extends React.Component {
                         <EmojiTransportationIcon /> x<span>-town</span>
                     </div>
                     <div className="auth">
-                        <a href="/signin"><FontAwesomeIcon icon={faUser} /> Sign In </a>
+                        <a href="/signIn"><FontAwesomeIcon icon={faUser} /> Sign In </a>
                         <span>|</span>
-                        <a href="/signup"><FontAwesomeIcon icon={faUserPlus} /> Sign Up</a>
+                        <a href="/signUp"><FontAwesomeIcon icon={faUserPlus} /> Sign Up</a>
                     </div>
                 </Container>
             </nav>
