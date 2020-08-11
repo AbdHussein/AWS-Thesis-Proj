@@ -30,6 +30,15 @@ const categoryNameByID = (categoryID) => {
   return name;
 };
 
+const login = (username, password) => {
+  const query = `query {
+    login(username: "${username}", password: "${password}"){
+      token
+    }
+  }`;
+  return query;
+}
+
 const request = async (query) => {
   try {
     return await axios.post('http://localhost:5000/api', {
@@ -52,3 +61,4 @@ const request = async (query) => {
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
+module.exports.login = login;
