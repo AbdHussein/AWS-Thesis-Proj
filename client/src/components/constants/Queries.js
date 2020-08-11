@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 const userByCategory = (category) => {
   const us = `query{
         usersByCategory(category:"${category}"){
@@ -28,5 +30,25 @@ const categoryNameByID = (categoryID) => {
   return name;
 };
 
+const request = async (query) => {
+  try {
+    return await axios.post('http://localhost:5000/api', {
+      query: query,
+    });
+  } catch (error) {
+    return error;
+  }
+};
+
+// .then((response) => {
+//   const providers = response.data;
+//   this.setState({
+//     providers,
+//   });
+// })
+// .catch((err) => {
+//   console.log(err);
+// });
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
+module.exports.request = request;
