@@ -31,7 +31,7 @@ const UserType = new GraphQLObjectType({
     video: { type: GraphQLString },
     description: { type: GraphQLString },
     workingHours: { type: GraphQLString },
-    categoryID: { type: GraphQLInt },
+    categoryID: { type: GraphQLID },
     token: { type: GraphQLString },
   }),
 });
