@@ -25,14 +25,14 @@ import {
 } from '@reach/combobox';
 import mapStyles from './mapStyle';
 
-// Ib
 import axios from 'axios';
+
 import Constants from '../constants/Queries';
 
-const center = {
-  lat: 31.3547,
-  lng: 34.3088,
-};
+// const center = {
+//   lat: 31.3547,
+//   lng: 34.3088,
+// };
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -48,6 +48,8 @@ const options = {
 function MyComponent(props) {
   const [selectedProvider, setSelectedProvider] = React.useState(null);
   const [provider, setProvider] = React.useState(null);
+  const [lat, setLat] = React.useState(37.2431);
+  const [lng, setLng] = React.useState(-34.3088);
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY,
@@ -55,6 +57,26 @@ function MyComponent(props) {
   });
   const allProviders =
     props.providers.data && props.providers.data.usersByCategory;
+
+  navigator.geolocation.getCurrentPosition(function (position) {
+    setLat(position.coords.latitude);
+    setLng(position.coords.longitude);
+  });
+
+  const mapRef = React.useRef();
+  const onMapload = React.useCallback((map) => {
+    mapRef.current = map;
+  }, []);
+  const panTo = React.useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(15);
+  }, []);
+
+  const center = {
+    lat: lat,
+    lng: lng,
+  };
+
   if (loadError) return 'Error loading Map';
   if (!isLoaded) return 'Loading...';
   /* the magic if statment*/
@@ -80,11 +102,13 @@ function MyComponent(props) {
         </span>
       </h1> */}
       {/* <h1>{props.category}</h1> */}
+      <Locate panTo={panTo} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={10}
+        zoom={13}
         center={center}
         options={options}
+        onLoad={onMapload}
       >
         {/* {allData.data.map((provider, index) => (
           <Marker
@@ -139,6 +163,81 @@ function MyComponent(props) {
     </div>
   );
 }
+
+/****************************************************************/
+
+function Locate({ panTo }) {
+  return (
+    <button
+      className='locate'
+      onClick={() => {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            panTo({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            });
+          },
+          () => null,
+          options
+        );
+      }}
+    >
+      <img
+        src={require('../../images/compass.png')}
+        alt='compass - locate me'
+      />
+    </button>
+  );
+}
+
+/******************   why this func is exist   ****************************/
+
+function Search() {
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      location: {
+        lat: () => 31.3547,
+        lng: () => 34.3088,
+        radius: 200 * 1000,
+      },
+    },
+  });
+  return (
+    <div className='search'>
+      <Combobox
+        onSelect={(address) => {
+          console.log(address);
+        }}
+      >
+        <ComboboxInput
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
+          disabled={!ready}
+          placeholder='Enter an address'
+        />
+        <ComboboxPopover>
+          <ComboboxList>
+            {status === 'OK' &&
+              data.map(({ id, description }) => (
+                <ComboboxOption key={id} value={description} />
+              ))}
+          </ComboboxList>
+        </ComboboxPopover>
+      </Combobox>
+    </div>
+  );
+}
+
+/**********************************************/
 
 class Map extends React.Component {
   state = {
