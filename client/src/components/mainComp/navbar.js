@@ -14,11 +14,13 @@ class Navbar extends React.Component {
                     <div className="brand">
                         <EmojiTransportationIcon /> x<span>-town</span>
                     </div>
-                    <div className="auth">
+                    {                    
+                        localStorage.getItem('xTown') ? <span>Logged In</span> :  <div className="auth">
                         <a href="/signIn"><FontAwesomeIcon icon={faUser} /> Sign In </a>
                         <span>|</span>
                         <a href="/signUp"><FontAwesomeIcon icon={faUserPlus} /> Sign Up</a>
-                    </div>
+                        </div>
+                    }
                 </Container>
             </nav>
 
