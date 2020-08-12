@@ -13,9 +13,7 @@ class Navbar extends React.Component {
                     <div className="brand">
                         <EmojiTransportationIcon /> x<span>-town</span>
                     </div>
-                    {/* {localStorage.getItem('xTown') ? */}
-                    <LoggedInNavbar />
-                    {/* : <LoggedOutNavbar /> } */}
+                    {localStorage.getItem('xTown') ? <LoggedInNavbar /> : <LoggedOutNavbar />}
 
                 </Container>
             </nav>

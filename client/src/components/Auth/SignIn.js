@@ -16,9 +16,9 @@ import Constants from '../constants/Queries';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color='inherit' href='https://material-ui.com/'>
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -49,73 +49,80 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn(props) {
   const [state, setState] = useState({
-    email: "",
-    password: ""
-  })
+    email: '',
+    password: '',
+  });
   const handelChange = (e) => {
-    const { id, value } = e.target
-    setState(prevState => ({
+    const { id, value } = e.target;
+    setState((prevState) => ({
       ...prevState,
-      [id]: value
-    }))
-  }
+      [id]: value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const Login = Constants.login(state.email, state.password);
     const request = await Constants.request(Login);
-    localStorage.setItem("xTown", request.data.data.login.token);
-    props.history.push('/');
-  }
+    localStorage.setItem('xTown', request.data.data.login.token);
+    const n = request.data.data.login.RoleID;
+    if (n == 1) {
+      // props.history.push("/admin")
+    } else if (n == 2) {
+      props.history.push('/dashboard');
+    } else if (n == 3) {
+      props.history.push('/');
+    }
+  };
 
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component='h1' variant='h5'>
           Sign in
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
-            variant="outlined"
-            margin="normal"
+            variant='outlined'
+            margin='normal'
             required
             fullWidth
-            id="email"
+            id='email'
             value={state.email}
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            label='Email Address'
+            name='email'
+            autoComplete='email'
             autoFocus
             onChange={handelChange}
           />
           <TextField
-            variant="outlined"
-            margin="normal"
+            variant='outlined'
+            margin='normal'
             required
             fullWidth
-            name="password"
-            label="Password"
+            name='password'
+            label='Password'
             value={state.password}
-            type="password"
-            id="password"
+            type='password'
+            id='password'
             onChange={handelChange}
-            autoComplete="current-password"
+            autoComplete='current-password'
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            control={<Checkbox value='remember' color='primary' />}
+            label='Remember me'
           />
           <Button
-            type="submit"
+            type='submit'
             fullWidth
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
             className={classes.submit}
             onClick={handleSubmit}
           >
@@ -123,7 +130,7 @@ export default function SignIn(props) {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href='#' variant='body2'>
                 Forgot password?
               </Link>
             </Grid>
