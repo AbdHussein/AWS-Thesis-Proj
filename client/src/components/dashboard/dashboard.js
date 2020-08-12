@@ -9,17 +9,33 @@ import Add from './posts/addPost';
 import Show from './posts/showPost';
 import DashProviderInfo from './dashProviderInfo';
 import MainDashboard from './mainDashboard';
+import Constants from '../constants/Queries';
 
 class Dashboard extends React.Component {
+  state = {
+    username: '',
+    avatar: '',
+  };
+
+  async componentWillMount() {
+    const query = Constants.getUserByToken(localStorage.getItem('xTown'));
+    const request = await Constants.request(query);
+    const { username, avatar } = request.data.data.user;
+    this.setState({
+      username,
+      avatar,
+    });
+  }
+
   render() {
     return (
       <div className='dashboard'>
         <div className='dashboard-header'>
-          <h3>Welcome: Alisa Noory</h3>
+          <h3>Welcome: {this.state.username}</h3>
         </div>
         <div className='dashboard-nav'>
           <div className='dashboard-avatar'>
-            <Avatar className='avatar'>A</Avatar>
+            <Avatar className='avatar'>{this.state.avatar}</Avatar>
           </div>
         </div>
         <div className='main-dashboard'>
