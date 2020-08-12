@@ -48,27 +48,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn(props) {
-    const [state , setState] = useState({
-        email : "",
-        password : ""
-    })
-    const handelChange = (e)=>{
-        const {id , value} = e.target   
-        setState(prevState => ({
-            ...prevState,
-            [id] : value
-        }))
-    }
+  const [state, setState] = useState({
+    email: "",
+    password: ""
+  })
+  const handelChange = (e) => {
+    const { id, value } = e.target
+    setState(prevState => ({
+      ...prevState,
+      [id]: value
+    }))
+  }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const Login = Constants.login(state.email, state.password);
-        const request = await Constants.request(Login);
-        localStorage.setItem("xTown", request.data.data.login.token);
-        props.history.push('/');
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const Login = Constants.login(state.email, state.password);
+    const request = await Constants.request(Login);
+    localStorage.setItem("xTown", request.data.data.login.token);
+    props.history.push('/');
+  }
 
-    const classes = useStyles();
+  const classes = useStyles();
 
   return (
     <Container component="main" maxWidth="xs">
@@ -87,12 +87,12 @@ export default function SignIn(props) {
             required
             fullWidth
             id="email"
-            value = {state.email}
+            value={state.email}
             label="Email Address"
             name="email"
             autoComplete="email"
             autoFocus
-            onChange = {handelChange}
+            onChange={handelChange}
           />
           <TextField
             variant="outlined"
@@ -101,10 +101,10 @@ export default function SignIn(props) {
             fullWidth
             name="password"
             label="Password"
-            value = {state.password}
+            value={state.password}
             type="password"
             id="password"
-            onChange = {handelChange}
+            onChange={handelChange}
             autoComplete="current-password"
           />
           <FormControlLabel
@@ -117,7 +117,7 @@ export default function SignIn(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick= {handleSubmit}
+            onClick={handleSubmit}
           >
             Sign In
           </Button>
@@ -128,7 +128,7 @@ export default function SignIn(props) {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signUp" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
