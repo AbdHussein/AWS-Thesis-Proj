@@ -163,7 +163,7 @@ CREATE TABLE `post` (
   `id` int NOT NULL AUTO_INCREMENT,
   `userID` int NOT NULL,
   `likes` int NOT NULL,
-  `date` date NOT NULL,
+  `date` varchar(50) NOT NULL,
   `text` varchar(3000) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `image` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id`),
