@@ -698,9 +698,10 @@ hr {
   float: $floatLeft;
   width: 35%;
   .working-hours {
+    margin-bottom: 30px;
     div:first-child {
       border: 1px solid #ddd;
-      border-radius: 10px 10px 0 0;
+      border-radius: 5px 5px 0 0;
       padding: 20px;
       h3 {
         text-align: left;
@@ -719,7 +720,8 @@ hr {
     }
     div:last-child {
       border: 1px solid #ddd;
-      border-radius: 0 0 10px 10px;
+      border-radius: 0 0 5px 565
+      px;
       overflow: hidden;
       padding: 0 20px 20px;
       border-top: none;
