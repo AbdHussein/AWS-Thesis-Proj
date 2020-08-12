@@ -697,6 +697,53 @@ hr {
 .provider-sidebar {
   float: $floatLeft;
   width: 35%;
+  .working-hours {
+    div:first-child {
+      border: 1px solid #ddd;
+      border-radius: 10px 10px 0 0;
+      padding: 20px;
+      h3 {
+        text-align: left;
+        font-size: 15px;
+        font-weight: 600;
+        color: #566985;
+        font-family: "Nunito", sans-serif;
+        margin: 0;
+      }
+      svg {
+        float: $floatRight;
+        font-size: 10px;
+        color: $mainHover;
+        margin-top: 4px;
+      }
+    }
+    div:last-child {
+      border: 1px solid #ddd;
+      border-radius: 0 0 10px 10px;
+      overflow: hidden;
+      padding: 0 20px 20px;
+      border-top: none;
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      li {
+        width: 100%;
+        padding: 13px 0px 0px 0px;
+        float: left;
+        color: #878c9f;
+        font-weight: 600;
+        border-bottom: 1px solid #ddd;
+        pre {
+          font-size: 121%;
+          float: $floatRight;
+          margin-top: 4px;
+          color: #878c9f;
+        }
+      }
+    }
+  }
 }
 
 .active {
@@ -1317,3 +1364,4 @@ nav {
     border-radius: 20px;
   }
 }
+///////////////////////////end post////////////////////////////////////
