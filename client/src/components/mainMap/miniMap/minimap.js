@@ -1,18 +1,39 @@
 import React from 'react';
-import mapStyles from '../mapStyle';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-const containerStyle = {
-  width: '400px',
-  height: '400px',
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+
+import mapStyles from '../mapStyle';
+import { Container } from '@material-ui/core';
+
+const libraries = ['places'];
+const mapContainerStyle = {
+  width: '100%',
+  height: '320px',
+};
+const options = {
+  styles: mapStyles,
+  disableDefaultUI: true,
+  zoomControl: true,
 };
 
 function MinMap(props) {
   const provider = props.providerL && props.providerL.location;
   var loc = JSON.parse(provider);
-  const [map, setMap] = React.useState(null);
-  //const [selectedProvider, setSelectedProvider] = React.useState(null);
+
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY,
+    libraries,
+  });
+
+  const mapRef = React.useRef();
+  const onMapload = React.useCallback((map) => {
+    mapRef.current = map;
+  }, []);
   const center = {
+    lat: Number(loc && loc.lat),
+    lng: Number(loc && loc.lng),
+  };
+  const position = {
     lat: Number(loc && loc.lat),
     lng: Number(loc && loc.lng),
   };
@@ -21,47 +42,38 @@ function MinMap(props) {
     disableDefaultUI: true,
     zoomControl: true,
   };
-  const position = {
-    lat: Number(loc && loc.lat),
-    lng: Number(loc && loc.lng),
-  };
-  const onLoad = React.useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds();
-    map.fitBounds(bounds);
-    setMap(map);
-  }, []);
 
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null);
-  }, []);
+  if (loadError) return 'Error loading Map';
+  if (!isLoaded) return 'Loading...';
 
   return (
-    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_KEY}>
+    <div>
       <GoogleMap
-        mapContainerStyle={containerStyle}
+        mapContainerStyle={mapContainerStyle}
+        zoom={16}
         center={center}
         options={options}
-        zoom={10}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
+        onLoad={onMapload}
       >
-        {/* Child components, such as markers, info windows, etc. */}
         <Marker position={position} />
       </GoogleMap>
-    </LoadScript>
+    </div>
   );
 }
+
 class MiniMap extends React.Component {
   render() {
     return (
-      <div className='mini-map'>
-        <div>Location / Contacts</div>
-        <div>
-          <MinMap providerL={this.props.providerL} />
+      <Container>
+        <div className='mini-map'>
+          <div>Location / Contacts</div>
+          <div>
+            <MinMap providerL={this.props.providerL} />
+          </div>
+          <div>adress</div>
+          <div>Media</div>
         </div>
-        <div>adress</div>
-        <div>Media</div>
-      </div>
+      </Container>
     );
   }
 }

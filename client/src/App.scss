@@ -151,7 +151,7 @@ nav {
 .landing {
   header {
     height: 90vh;
-    background-image: url("../src/images/1.jpg");
+    background-image: url('../src/images/1.jpg');
     position: relative;
     @extend %cover;
     .overlay {
@@ -206,7 +206,7 @@ nav {
 
 .provider-header {
   height: 80vh;
-  background-image: url("./images/6.jpg");
+  background-image: url('./images/6.jpg');
   position: relative;
   @extend %cover;
   .overlay {
@@ -775,7 +775,7 @@ hr {
             color: #878c9f;
           }
           &::before {
-            content: "";
+            content: '';
             display: block;
             width: 0;
             border-top: 15px solid transparent;
@@ -999,7 +999,7 @@ p {
   background: #b5b5b56b;
 }
 .footer-news .last-news h3::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1041,7 +1041,7 @@ p {
   padding-bottom: 25px;
 }
 .footer-news .twitter h3::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1065,7 +1065,7 @@ p {
   position: relative;
 }
 .footer-news .twitter ul li::after {
-  content: "";
+  content: '';
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(255, 255, 255, 0.11);
   border-bottom: 10px solid transparent;
@@ -1213,6 +1213,7 @@ h1 {
     &:nth-child(2) {
       height: 320px;
       overflow: hidden;
+      padding: 0;
     }
     &:first-child {
       border-radius: 5px 5px 0 0;
