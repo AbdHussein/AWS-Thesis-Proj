@@ -82,8 +82,49 @@ nav {
   .logged-nav {
     .user-logged-info {
       float: $floatRight;
+      color: #fff;
+      cursor: pointer;
       .avatar {
-        display: inline;
+        display: inline-block;
+        padding: 9px 8px 8px 10px;
+        width: 40px;
+        height: 40px;
+        margin-top: 10px;
+        margin-right: 10px;
+        text-align: center;
+        background-color: #4db7fe;
+        border: 2px solid #fff;
+      }
+      span {
+        vertical-align: top;
+        font-weight: 600;
+        svg {
+          font-size: 12px;
+          margin-left: 10px;
+        }
+      }
+    }
+    .user-details {
+      ul {
+        background-color: #ccc;
+        position: absolute;
+        margin: 0;
+        top: 63px;
+        right: 51px;
+        width: 200px;
+        border-radius: 0 0 5px 5px;
+        padding: 0;
+        display: none;
+        z-index: 999999;
+        li {
+          display: block;
+          cursor: pointer;
+          padding: 0 10px;
+          color: #000;
+          &:hover {
+            background-color: #eee;
+          }
+        }
       }
     }
   }
@@ -746,6 +787,18 @@ hr {
         }
         .poster-info {
           margin-top: 25px;
+          .MuiFormControlLabel-root {
+            .MuiFormControlLabel-label {
+              color: #878c9f;
+            }
+            .MuiCheckbox-colorSecondary.Mui-checked {
+              color: $mainColor;
+              &:hover {
+                background-color: #2e3f6e17;
+              }
+            }
+            float: $floatRight;
+          }
           .avatar {
             float: $floatLeft;
             margin-right: 20px;

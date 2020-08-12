@@ -1,14 +1,15 @@
-import React from "react";
-import $ from "jquery";
-import { Container } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
-import DemoVideo from "./details/demoVideo";
-import Description from "./details/description";
-import Facility from "./details/facility";
-import Add from "./posts/addPost";
-import Show from "./posts/showPost";
-import DashProviderInfo from "./dashProviderInfo";
-import MainDashboard from "./mainDashboard";
+import React from 'react';
+import $ from 'jquery';
+import { Container } from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
+import DemoVideo from './details/demoVideo';
+import Description from './details/description';
+import Facility from './details/facility';
+import Add from './posts/addPost';
+import Show from './posts/showPost';
+import DashProviderInfo from './dashProviderInfo';
+import MainDashboard from './mainDashboard';
+import Navbar from '../mainComp/navbar';
 import Constants from "../constants/Queries";
 
 class Dashboard extends React.Component {
@@ -30,6 +31,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className="dashboard">
+        <Navbar />
         <div className="dashboard-header">
           <h3>Welcome: {this.state.username}</h3>
         </div>
