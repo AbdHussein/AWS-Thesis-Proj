@@ -1,5 +1,6 @@
 import React from 'react';
 import constants from '../constants/Queries';
+const jwt = require('jsonwebtoken');
 
 class ImageUpload extends React.Component{
   state = {
@@ -28,9 +29,13 @@ class ImageUpload extends React.Component{
           imageAlt: `An image of ${res.original_filename}`
         }, async () => {
           try{
-            const addPost = constants.addPost(constants.getUserByToken(localStorage.getItem('xTown')),this.state.imageUrl, this.props.text);
-            // const request = await constants.request(addPost);
-            
+            const data = jwt.verify(localStorage.getItem('xTown'), 'somesuperdupersecret', {
+              algorithm: 'HS256',
+            });
+
+            const addPost = constants.addPost(data.id, this.state.imageUrl, this.props.text);
+            console.log(addPost);
+            const request = await constants.request(addPost);            
           }catch(err){
             console.log(err);
           }

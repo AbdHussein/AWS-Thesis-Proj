@@ -39,15 +39,14 @@ const getDate = () =>{
   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
   var yyyy = today.getFullYear();
   today = mm + '/' + dd + '/' + yyyy;
-  console.log(today);
+  // console.log(today);
   return today;
 }
 
-const addPost = (data, imageUrl,postText) =>{
-  console.log(data);
-  
+const addPost = (id, imageUrl,postText) =>{
+  // console.log(id);  
   const mutation = `mutation{
-    addPost(userID: , likes: 0, date: "${getDate()}", text: "${postText}", image: "${imageUrl}")
+    addPost(userID: ${id}, likes: 0, date: "${getDate()}", text: "${postText}", image: "${imageUrl}"){
       id
     }
   }`;
