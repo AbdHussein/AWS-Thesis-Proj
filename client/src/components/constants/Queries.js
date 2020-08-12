@@ -1,4 +1,7 @@
 const axios = require('axios');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const userByCategory = (category) => {
   const us = `query{
@@ -59,8 +62,22 @@ const signUp = (username, email, password, mobile) => {
   return q;
 };
 
+const getUserByToken = (token) => {
+  const result = jwt.verify(token, 'somesuperdupersecret', {
+    algorithm: 'HS256',
+  });
+  const q = `query {
+    user(id:${result.id}){
+      username
+      avatar
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
 module.exports.login = login;
 module.exports.signUp = signUp;
+module.exports.getUserByToken = getUserByToken;
