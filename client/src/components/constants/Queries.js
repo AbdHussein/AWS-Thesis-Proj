@@ -30,6 +30,19 @@ const categoryNameByID = (categoryID) => {
   return name;
 };
 
+const addPost = () =>{
+  const mutation = `mutation{
+    addPost(userID: , likes: Int!
+      date: String!
+      text: String!
+      image: String!
+      )
+      token
+    }
+  }`;
+  return mutation;
+}
+
 const login = (email, password) => {
   const query = `query {
     login(email: "${email}", password: "${password}"){
@@ -64,3 +77,4 @@ module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
 module.exports.login = login;
 module.exports.signUp = signUp;
+module.exports.addPost = addPost;
