@@ -33,7 +33,7 @@ const categoryNameByID = (categoryID) => {
   return name;
 };
 
-const getDate = () =>{
+const getDate = () => {
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -41,17 +41,17 @@ const getDate = () =>{
   today = mm + '/' + dd + '/' + yyyy;
   // console.log(today);
   return today;
-}
+};
 
-const addPost = (id, imageUrl,postText) =>{
-  // console.log(id);  
+const addPost = (id, imageUrl, postText) => {
+  // console.log(id);
   const mutation = `mutation{
     addPost(userID: ${id}, likes: 0, date: "${getDate()}", text: "${postText}", image: "${imageUrl}"){
       id
     }
   }`;
   return mutation;
-}
+};
 
 const login = (email, password) => {
   const query = `query {
@@ -90,6 +90,18 @@ const getUserByToken = (token) => {
     user(id:${result.id}){
       username
       avatar
+      id
+      email
+      RoleID
+      payService
+      mobile
+      serviceName
+      location
+      address
+      cover
+      video
+      description
+      workingHours
     }
   }`;
   return q;
