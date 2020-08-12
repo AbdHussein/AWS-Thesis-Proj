@@ -79,6 +79,14 @@ nav {
   background-color: $mainColor;
   height: 10vh;
   line-height: 10vh;
+  .logged-nav {
+    .user-logged-info {
+      float: $floatRight;
+      .avatar {
+        display: inline;
+      }
+    }
+  }
 }
 
 //Filter Search
@@ -1225,3 +1233,34 @@ h1 {
 }
 
 /* End Mini Map */
+////////////////////////////////////////////////////////////////////////////////
+/////////////////////*User Nav Bar*/////////////////////////
+nav {
+  ul {
+    list-style: none;
+    float: $floatRight;
+    line-height: 55px;
+    li {
+      display: inline-block;
+      a {
+        color: #fff;
+        text-decoration: none;
+        margin-right: 20px;
+        @extend %transition;
+        &:hover {
+          color: $mainHover;
+        }
+      }
+    }
+  }
+}
+/////////////////////* End User Nav Bar*/////////////////////////
+///////////////////////////Add Post//////////////////////////////
+.dash-add {
+  display: flex;
+  flex-direction: column;
+  .post-area {
+    border: 2px solid $mainColor;
+    border-radius: 20px;
+  }
+}

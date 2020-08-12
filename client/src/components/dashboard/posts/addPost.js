@@ -16,9 +16,9 @@ class Add extends React.Component {
         return (
             <div className="dash-add">
                 <form>
+                    <textarea  className="post-area"name="text" cols="80" rows="30" value={this.state.text} onChange={this.handelChange.bind(this)}></textarea>
                     <input type="file" name="image"  value={this.state.image} onChange={this.handelChange.bind(this)}/>
-                    <textarea name="text" cols="30" rows="10" value={this.state.text} onChange={this.handelChange.bind(this)}></textarea>
-                    <button>Post</button>
+                     <button>Post</button>
                 </form>
             </div>
         )

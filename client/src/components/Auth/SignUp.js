@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Constants from '../constants/Queries';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
- 
+
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(3),
@@ -28,117 +29,110 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+export default function SignUp(props) {
   const classes = useStyles();
-  const [state , setState] = useState({
-    email : "",
-    password : "",
-    userName : "",
-    address : "",
-    mobile : "",
-})
-const handelChange = (e)=>{
-    const {id , value} = e.target   
-    setState(prevState => ({
-        ...prevState,
-        [id] : value
-    }))
-}
-const handleSubmit = (e) =>{
+  const [state, setState] = useState({
+    email: '',
+    password: '',
+    userName: '',
+    mobile: '',
+  });
+  const handelChange = (e) => {
+    const { id, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(state.email,state.password,state.userName,state.address,state.mobile)
-}
+    const query = Constants.signUp(
+      state.userName,
+      state.email,
+      state.password,
+      state.mobile
+    );
+    const request = Constants.request(query);
+    props.history.push('/signIn');
+  };
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-        Welcome to Login system.
+        <Typography component='h1' variant='h5'>
+          Create new Account
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                autoComplete="username"
-                name="userName"
-                variant="outlined"
+                autoComplete='username'
+                name='userName'
+                variant='outlined'
                 required
                 fullWidth
-                onChange = {handelChange}
-                value = {state.userName}
-                id="userName"
-                label="userName"
+                onChange={handelChange}
+                value={state.userName}
+                id='userName'
+                label='userName'
                 autoFocus
               />
             </Grid>
-            <Grid item xs={12} >
+            <Grid item xs={12}>
               <TextField
-                variant="outlined"
+                variant='outlined'
                 required
                 fullWidth
-                id="address"
-                onChange = {handelChange}
-                value = {state.address}
-                label="address"
-                name="address"
-                autoComplete="address"
+                id='email'
+                onChange={handelChange}
+                value={state.email}
+                label='Email Address'
+                name='email'
+                autoComplete='email'
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
+                variant='outlined'
                 required
                 fullWidth
-                id="email"
-                onChange = {handelChange}
-                value = {state.email}
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                name='mobile'
+                label='Mobile Number'
+                onChange={handelChange}
+                value={state.mobile}
+                type='text'
+                id='mobile'
+                autoComplete='current-password'
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
+                variant='outlined'
                 required
                 fullWidth
-                name="mobile"
-                label="Mobile Number"
-                onChange = {handelChange}
-                value = {state.mobile}
-                type="text"
-                id="mobile"
-                autoComplete="current-password"
-              />
-              </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                onChange = {handelChange}
-                value = {state.password}
-                id="password"
-                autoComplete="current-password"
+                name='password'
+                label='Password'
+                type='password'
+                onChange={handelChange}
+                value={state.password}
+                id='password'
+                autoComplete='current-password'
               />
             </Grid>
           </Grid>
           <Button
-            type="submit"
+            type='submit'
             fullWidth
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
             className={classes.submit}
-            onClick= {handleSubmit}
+            onClick={handleSubmit}
           >
             Sign Up
           </Button>
-          <Grid container justify="flex-end">
+          <Grid container justify='flex-end'>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href='signIn' variant='body2'>
                 Already have an account? Sign in
               </Link>
             </Grid>

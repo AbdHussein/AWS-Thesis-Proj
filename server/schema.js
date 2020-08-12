@@ -20,7 +20,7 @@ const UserType = new GraphQLObjectType({
     username: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
-    roleID: { type: GraphQLInt },
+    RoleID: { type: GraphQLInt },
     payService: { type: GraphQLString },
     mobile: { type: GraphQLInt },
     serviceName: { type: GraphQLString },
@@ -269,11 +269,20 @@ const RootQuery = new GraphQLObjectType({
     login: {
       type: UserType,
       args: {
-        username: { type: new GraphQLNonNull(GraphQLString) },
+        email: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
-      resolve(root, args) {
+      async resolve(root, args) {
         //login
+        const data = await knex('user').select('*').where({ email: args.email }).first();
+        if (await bcrypt.compare(args.password, data.password)) {
+          const token = jwt.sign({ id: data.id, username: data.username, email: data.email }, process.env.SECRET, {
+            algorithm: "HS256",
+            expiresIn: "2 days"
+          });
+          await knex('user').update({ token: token }).where({ id: data.id });
+        }
+        return await knex('user').select('*').where({ email: args.email }).first();
       },
     },
     getCategoryByID: {
@@ -301,7 +310,7 @@ const Mutation = new GraphQLObjectType({
         username: { type: new GraphQLNonNull(GraphQLString) },
         email: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
-        roleID: { type: new GraphQLNonNull(GraphQLString) },
+        RoleID: { type: GraphQLString },
         mobile: { type: new GraphQLNonNull(GraphQLInt) },
         serviceName: { type: new GraphQLNonNull(GraphQLString) },
         address: { type: new GraphQLNonNull(GraphQLString) },
@@ -309,7 +318,6 @@ const Mutation = new GraphQLObjectType({
         cover: { type: new GraphQLNonNull(GraphQLString) },
         video: { type: new GraphQLNonNull(GraphQLString) },
         description: { type: new GraphQLNonNull(GraphQLString) },
-        categoryID: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
         // add User with crpted password to database
@@ -345,7 +353,7 @@ const Mutation = new GraphQLObjectType({
         username: { type: GraphQLString },
         email: { type: GraphQLString },
         password: { type: GraphQLString },
-        roleID: { type: GraphQLInt },
+        RoleID: { type: GraphQLInt },
         payService: { type: GraphQLString },
         mobile: { type: GraphQLInt },
         serviceName: { type: GraphQLString },
@@ -356,7 +364,7 @@ const Mutation = new GraphQLObjectType({
         video: { type: GraphQLString },
         description: { type: GraphQLString },
         workingHours: { type: GraphQLString },
-        categoryID: { type: GraphQLInt },
+        categoryID: { type: GraphQLID },
       },
       async resolve(root, args) {
         args.password = await bcrypt.hash(args.password, 10);
