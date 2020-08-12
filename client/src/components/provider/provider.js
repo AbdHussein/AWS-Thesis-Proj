@@ -219,9 +219,7 @@ class Provider extends React.Component {
               </div>
             </div>
           </Container>
-          <div className="provider-sidebar">
-            <MiniMap providerL={this.state.provider} />
-          </div>
+          <MiniMap providerL={this.state.provider} />
         </div>
       </div>
     );
