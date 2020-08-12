@@ -9,12 +9,14 @@ import Add from "./posts/addPost";
 import Show from "./posts/showPost";
 import DashProviderInfo from "./dashProviderInfo";
 import MainDashboard from "./mainDashboard";
+import UserNavbar from "../mainComp/userNav";
 
 class Dashboard extends React.Component {
 
     render() {
         return (
             <div className="dashboard">
+                <UserNavbar />
                 <div className="dashboard-header">
                     <h3>Welcome: Alisa Noory</h3>
                 </div>
