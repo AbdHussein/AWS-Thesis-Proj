@@ -64,8 +64,9 @@ export default function SignIn(props) {
     e.preventDefault();
     const Login = Constants.login(state.email, state.password);
     const request = await Constants.request(Login);
-    localStorage.setItem('xTown', request.data.data.login.token);
-    props.history.push('/');
+    console.log(request.data.data.login);
+    // localStorage.setItem("xTown", request.data.data.login.token);
+    // props.history.push('/');
   };
 
   const classes = useStyles();
