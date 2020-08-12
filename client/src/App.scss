@@ -116,6 +116,7 @@ nav {
         padding: 0;
         display: none;
         z-index: 999999;
+        overflow: hidden;
         li {
           display: block;
           cursor: pointer;
