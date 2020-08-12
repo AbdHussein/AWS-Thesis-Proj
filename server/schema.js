@@ -20,7 +20,7 @@ const UserType = new GraphQLObjectType({
     username: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
-    roleID: { type: GraphQLInt },
+    RoleID: { type: GraphQLInt },
     payService: { type: GraphQLString },
     mobile: { type: GraphQLInt },
     serviceName: { type: GraphQLString },
@@ -282,7 +282,7 @@ const RootQuery = new GraphQLObjectType({
           });
           await knex('user').update({token: token}).where({id: data.id});
         }
-        return await knex('user').select('token').where({email: args.email}).first();
+        return await knex('user').select('*').where({email: args.email}).first();
       },
     },
     getCategoryByID: {
