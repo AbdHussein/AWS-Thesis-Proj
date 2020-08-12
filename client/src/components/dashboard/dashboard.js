@@ -18,7 +18,19 @@ class Dashboard extends React.Component {
     avatar: '',
   };
 
-  async componentWillMount() {
+  async componentDidMount() {
+    $('.dash-posts').click(function () {
+      $('.dash-show-add').slideToggle();
+    });
+    $('.dash-details').click(function () {
+      $('.dash-des').slideToggle();
+    });
+
+    $('.dashboard-sidebar div').on('click', function () {
+      let dashboard = $(this).data('dashboard');
+      $(dashboard).show().siblings().hide();
+      console.log($(this).data('dashboard'));
+    });
     const query = Constants.getUserByToken(localStorage.getItem('xTown'));
     const request = await Constants.request(query);
     const { username, avatar } = request.data.data.user;
@@ -97,18 +109,3 @@ class Dashboard extends React.Component {
 }
 
 export default Dashboard;
-
-$(document).ready(function () {
-  $('.dash-posts').click(function () {
-    $('.dash-show-add').slideToggle();
-  });
-  $('.dash-details').click(function () {
-    $('.dash-des').slideToggle();
-  });
-
-  $('.dashboard-sidebar div').on('click', function () {
-    let dashboard = $(this).data('dashboard');
-    $(dashboard).show().siblings().hide();
-    console.log($(this).data('dashboard'));
-  });
-});
