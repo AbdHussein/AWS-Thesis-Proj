@@ -1,9 +1,12 @@
 import React from 'react';
+import constants from '../constants/Queries';
+const jwt = require('jsonwebtoken');
 
 class ImageUpload extends React.Component{
   state = {
     imageUrl: null,
     imageAlt: null,
+    postStatus: ""
   }
 
   handleImageUpload = () => {
@@ -24,9 +27,20 @@ class ImageUpload extends React.Component{
         this.setState({
           imageUrl: res.secure_url,
           imageAlt: `An image of ${res.original_filename}`
+        }, async () => {
+          try{
+            const data = jwt.verify(localStorage.getItem('xTown'), 'somesuperdupersecret', {
+              algorithm: 'HS256',
+            });
+
+            const addPost = constants.addPost(data.id, this.state.imageUrl, this.props.text);
+            console.log(addPost);
+            const request = await constants.request(addPost);            
+          }catch(err){
+            console.log(err);
+          }
         })
-      })
-      .catch(err => console.log(err));
+      }).catch(err => console.log(err));
   }
 
   render() {
@@ -38,7 +52,8 @@ class ImageUpload extends React.Component{
             <div className="form-group">
               <input type="file"/>
             </div>
-            <button type="button" className="btn" onClick={this.handleImageUpload}>Submit</button>
+              <button type="button" className="btn" onClick={this.handleImageUpload}>{this.props.ButtonText}</button>
+              <span>{}</span>
           </form>
         </section>
       </main>
