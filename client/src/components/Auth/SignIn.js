@@ -64,9 +64,16 @@ export default function SignIn(props) {
     e.preventDefault();
     const Login = Constants.login(state.email, state.password);
     const request = await Constants.request(Login);
-    console.log(request.data.data.login);
-    // localStorage.setItem("xTown", request.data.data.login.token);
-    // props.history.push('/');
+    localStorage.setItem('xTown', request.data.data.login.token);
+    const n = request.data.data.login.RoleID;
+    console.log(typeof n);
+    if (n == 1) {
+      // props.history.push("/admin")
+    } else if (n == 2) {
+      props.history.push('/dashboard');
+    } else if (n == 3) {
+      props.history.push('/');
+    }
   };
 
   const classes = useStyles();
