@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Constants from '../constants/Queries';
+import { Redirect } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -51,6 +52,7 @@ export default function SignIn(props) {
   const [state, setState] = useState({
     email: '',
     password: '',
+    RoleID: 0,
   });
   const handelChange = (e) => {
     const { id, value } = e.target;
@@ -66,85 +68,114 @@ export default function SignIn(props) {
     const request = await Constants.request(Login);
     localStorage.setItem('xTown', request.data.data.login.token);
     const n = request.data.data.login.RoleID;
-    if (n == 1) {
-      // props.history.push("/admin")
-    } else if (n == 2) {
-      props.history.push('/dashboard');
-    } else if (n == 3) {
-      props.history.push('/');
-    }
+    setState({
+      RoleID: n,
+    });
+    // if (n == 1) {
+    //   // props.history.push("/admin")
+    // } else if (n == 2) {
+    //   props.history.push('/dashboard');
+    // } else if (n == 3) {
+    //   props.history.push('/');
+    // }
   };
 
   const classes = useStyles();
 
-  return (
-    <Container component='main' maxWidth='xs'>
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component='h1' variant='h5'>
-          Sign in
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant='outlined'
-            margin='normal'
-            required
-            fullWidth
-            id='email'
-            value={state.email}
-            label='Email Address'
-            name='email'
-            autoComplete='email'
-            autoFocus
-            onChange={handelChange}
-          />
-          <TextField
-            variant='outlined'
-            margin='normal'
-            required
-            fullWidth
-            name='password'
-            label='Password'
-            value={state.password}
-            type='password'
-            id='password'
-            onChange={handelChange}
-            autoComplete='current-password'
-          />
-          <FormControlLabel
-            control={<Checkbox value='remember' color='primary' />}
-            label='Remember me'
-          />
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            color='primary'
-            className={classes.submit}
-            onClick={handleSubmit}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href='#' variant='body2'>
-                Forgot password?
-              </Link>
+  if (state.RoleID == 1) {
+    return (
+      <Redirect
+        to={{
+          pathname: `/provider`,
+        }}
+      />
+    );
+  } else if (state.RoleID == 2) {
+    return (
+      <Redirect
+        to={{
+          pathname: `/dashboard`,
+        }}
+      />
+    );
+  } else if (state.RoleID == 3) {
+    return (
+      <Redirect
+        to={{
+          pathname: `/`,
+        }}
+      />
+    );
+  } else {
+    return (
+      <Container component='main' maxWidth='xs'>
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component='h1' variant='h5'>
+            Sign in
+          </Typography>
+          <form className={classes.form} noValidate>
+            <TextField
+              variant='outlined'
+              margin='normal'
+              required
+              fullWidth
+              id='email'
+              value={state.email}
+              label='Email Address'
+              name='email'
+              autoComplete='email'
+              autoFocus
+              onChange={handelChange}
+            />
+            <TextField
+              variant='outlined'
+              margin='normal'
+              required
+              fullWidth
+              name='password'
+              label='Password'
+              value={state.password}
+              type='password'
+              id='password'
+              onChange={handelChange}
+              autoComplete='current-password'
+            />
+            <FormControlLabel
+              control={<Checkbox value='remember' color='primary' />}
+              label='Remember me'
+            />
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+              color='primary'
+              className={classes.submit}
+              onClick={handleSubmit}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href='#' variant='body2'>
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href='/signUp' variant='body2'>
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link href='/signUp' variant='body2'>
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
-  );
+          </form>
+        </div>
+        <Box mt={8}>
+          <Copyright />
+        </Box>
+      </Container>
+    );
+  }
 }
