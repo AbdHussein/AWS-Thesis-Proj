@@ -1,9 +1,8 @@
 import React from 'react'
 import { Container } from '@material-ui/core';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import EmojiTransportationIcon from '@material-ui/icons/EmojiTransportation';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import LoggedOutNavbar from './loggedOutNav';
+import LoggedInNavbar from './loggedInNav';
 
 
 class Navbar extends React.Component {
@@ -14,13 +13,8 @@ class Navbar extends React.Component {
                     <div className="brand">
                         <EmojiTransportationIcon /> x<span>-town</span>
                     </div>
-                    {                    
-                        localStorage.getItem('xTown') ? <span>Logged In</span> :  <div className="auth">
-                        <a href="/signIn"><FontAwesomeIcon icon={faUser} /> Sign In </a>
-                        <span>|</span>
-                        <a href="/signUp"><FontAwesomeIcon icon={faUserPlus} /> Sign Up</a>
-                        </div>
-                    }
+                    {localStorage.getItem('xTown') ? <LoggedInNavbar /> : <LoggedOutNavbar />}
+
                 </Container>
             </nav>
 

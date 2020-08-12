@@ -66,7 +66,6 @@ export default function SignIn(props) {
     const request = await Constants.request(Login);
     localStorage.setItem('xTown', request.data.data.login.token);
     const n = request.data.data.login.RoleID;
-    console.log(typeof n);
     if (n == 1) {
       // props.history.push("/admin")
     } else if (n == 2) {
@@ -136,7 +135,7 @@ export default function SignIn(props) {
               </Link>
             </Grid>
             <Grid item>
-              <Link href='#' variant='body2'>
+              <Link href="/signUp" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

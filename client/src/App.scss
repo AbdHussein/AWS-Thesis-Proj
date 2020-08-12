@@ -79,6 +79,14 @@ nav {
   background-color: $mainColor;
   height: 10vh;
   line-height: 10vh;
+  .logged-nav {
+    .user-logged-info {
+      float: $floatRight;
+      .avatar {
+        display: inline;
+      }
+    }
+  }
 }
 
 //Filter Search
@@ -1224,12 +1232,11 @@ nav {
 }
 /////////////////////* End User Nav Bar*/////////////////////////
 ///////////////////////////Add Post//////////////////////////////
-.dash-add{
+.dash-add {
   display: flex;
   flex-direction: column;
-  .post-area{
-     border: 2px solid $mainColor;
-     border-radius: 20px;
-    
-   }
+  .post-area {
+    border: 2px solid $mainColor;
+    border-radius: 20px;
+  }
 }

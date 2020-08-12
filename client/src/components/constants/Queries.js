@@ -52,9 +52,8 @@ const request = async (query) => {
 
 const signUp = (username, email, password, mobile) => {
   const q = `mutation{
-    addUser(username:"${username}", email:"${email}", password:"${password}",roleID:"3", mobile:${mobile},avatar:"${username[0]}",serviceName:"",address:"", cover:"", video:"",description:""){
+    addUser(username:"${username}", email:"${email}", password:"${password}",RoleID:"3", mobile:${mobile},avatar:"${username[0]}",serviceName:"",address:"", cover:"", video:"",description:""){
       token
-      roleID
     }
   }`;
   return q;

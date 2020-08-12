@@ -1,7 +1,7 @@
 /* Start Main Var */
 /* End Main Var */
 /* Start Classes For Extends */
-nav .auth a, .filter-search .second > div button, .provider-nav .categories ul li, .provider-nav .sharing button, .provider-nav .sharing > svg, .provider-ui .rating, .provider-content .provider-promo button svg, .provider-content .posts .post-describe .post-info button, .provider-content .gallery .img-popup svg, .view-post .main-view-post .add-comments button {
+nav .auth a, .filter-search .second > div button, .provider-nav .categories ul li, .provider-nav .sharing button, .provider-nav .sharing > svg, .provider-ui .rating, .provider-content .provider-promo button svg, .provider-content .posts .post-describe .post-info button, .provider-content .gallery .img-popup svg, .view-post .main-view-post .add-comments button, nav ul li a {
   transition: all 0.3s linear;
 }
 
@@ -77,6 +77,14 @@ nav .auth a svg {
 
 nav .auth span {
   color: #fff;
+}
+
+nav .logged-nav .user-logged-info {
+  float: right;
+}
+
+nav .logged-nav .user-logged-info .avatar {
+  display: inline;
 }
 
 .filter-search {
@@ -1310,4 +1318,34 @@ h1 {
   height: 100px;
   width: 100px;
   cursor: pointer;
+}
+
+nav ul {
+  list-style: none;
+  float: right;
+  line-height: 55px;
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+nav ul li a:hover {
+  color: #4db7fe;
+}
+
+.dash-add {
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-add .post-area {
+  border: 2px solid #2e3f6e;
+  border-radius: 20px;
 }
