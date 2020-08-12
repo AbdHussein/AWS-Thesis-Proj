@@ -20,7 +20,7 @@ const UserType = new GraphQLObjectType({
     username: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
-    roleID: { type: GraphQLInt },
+    RoleID: { type: GraphQLInt },
     payService: { type: GraphQLString },
     mobile: { type: GraphQLInt },
     serviceName: { type: GraphQLString },
@@ -274,15 +274,15 @@ const RootQuery = new GraphQLObjectType({
       },
       async resolve(root, args) {
         //login
-        const data = await knex('user').select('*').where({email: args.email}).first();
-        if(await bcrypt.compare(args.password, data.password)){
-          const token = jwt.sign({id: data.id, username: data.username, email: data.email}, process.env.SECRET,{
+        const data = await knex('user').select('*').where({ email: args.email }).first();
+        if (await bcrypt.compare(args.password, data.password)) {
+          const token = jwt.sign({ id: data.id, username: data.username, email: data.email }, process.env.SECRET, {
             algorithm: "HS256",
             expiresIn: "2 days"
           });
-          await knex('user').update({token: token}).where({id: data.id});
+          await knex('user').update({ token: token }).where({ id: data.id });
         }
-        return await knex('user').select('token').where({email: args.email}).first();
+        return await knex('user').select('*').where({ email: args.email }).first();
       },
     },
     getCategoryByID: {
@@ -310,7 +310,7 @@ const Mutation = new GraphQLObjectType({
         username: { type: new GraphQLNonNull(GraphQLString) },
         email: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
-        roleID: { type: GraphQLString },
+        RoleID: { type: GraphQLString },
         mobile: { type: new GraphQLNonNull(GraphQLInt) },
         serviceName: { type: new GraphQLNonNull(GraphQLString) },
         address: { type: new GraphQLNonNull(GraphQLString) },
@@ -353,7 +353,7 @@ const Mutation = new GraphQLObjectType({
         username: { type: GraphQLString },
         email: { type: GraphQLString },
         password: { type: GraphQLString },
-        roleID: { type: GraphQLInt },
+        RoleID: { type: GraphQLInt },
         payService: { type: GraphQLString },
         mobile: { type: GraphQLInt },
         serviceName: { type: GraphQLString },

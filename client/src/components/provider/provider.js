@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../mainComp/navbar";
 import { Container } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import MiniMap from "../mainMap/miniMap/minimap";
 import {
   faMapMarkerAlt,
   faPhoneAlt,
@@ -51,6 +52,27 @@ class Provider extends React.Component {
     provider: null,
     categoryName: "",
   };
+  // need to rewrite
+  async componentDidMount() {
+    waterMelon();
+    const { provider } = this.props.location.state;
+    this.setState({
+      provider,
+    });
+    console.log(provider.location);
+    const categoryQuery = Constants.categoryNameByID(provider.categoryID);
+    //console.log(categoryQuery);
+    await axios
+      .post("http://localhost:5000/api", {
+        query: categoryQuery,
+      })
+      .then((response) => {
+        this.setState({
+          categoryName: response.data.data.getCategoryByID.category,
+        });
+      })
+      .catch((err) => console.log(err));
+  }
 
   render() {
     const [value] = "80";
@@ -197,6 +219,9 @@ class Provider extends React.Component {
               </div>
             </div>
           </Container>
+          <div className="provider-sidebar">
+            <MiniMap providerL={this.state.provider} />
+          </div>
         </div>
       </div>
     );

@@ -79,6 +79,14 @@ nav {
   background-color: $mainColor;
   height: 10vh;
   line-height: 10vh;
+  .logged-nav {
+    .user-logged-info {
+      float: $floatRight;
+      .avatar {
+        display: inline;
+      }
+    }
+  }
 }
 
 //Filter Search
@@ -692,8 +700,6 @@ hr {
           margin-top: 4px;
           color: #878c9f;
         }
-        hr {
-        }
       }
     }
   }
@@ -1249,6 +1255,31 @@ h1 {
     cursor: pointer;
   }
 }
+
+/* Start Mini Map */
+
+.mini-map {
+  > div {
+    border: 1px solid #ccc;
+    padding: 20px;
+    &:not(:last-child) {
+      border-bottom: none;
+    }
+    &:nth-child(2) {
+      height: 320px;
+      overflow: hidden;
+      padding: 0;
+    }
+    &:first-child {
+      border-radius: 5px 5px 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 5px 5px;
+    }
+  }
+}
+
+/* End Mini Map */
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////*User Nav Bar*/////////////////////////
 nav {
