@@ -1,8 +1,8 @@
-import React from 'react';
-import Navbar from '../mainComp/navbar';
-import { Container } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import MiniMap from '../mainMap/miniMap/minimap';
+import React from "react";
+import Navbar from "../mainComp/navbar";
+import { Container } from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import MiniMap from "../mainMap/miniMap/minimap";
 import {
   faMapMarkerAlt,
   faPhoneAlt,
@@ -26,33 +26,33 @@ import {
   faMobileAlt,
   faClipboard,
   faStore,
-} from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-solid-svg-icons";
 import {
   faEnvelope,
   faComments,
   faEye,
   faImages,
   faImage,
-} from '@fortawesome/free-regular-svg-icons';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-regular-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-import Rating from '@material-ui/lab/Rating';
-import ProviderDetails from './providerDetails';
-import ProviderPosts from './providerPosts';
-import ProviderGallery from './providerGallerry';
-import ProviderStore from './providerStore';
-import ProviderReviews from './providerReviews';
-import Footer from '../footer/footer';
-import waterMelon from '../../main';
-import axios from 'axios';
-import Constants from '../constants/Queries';
+import Rating from "@material-ui/lab/Rating";
+import ProviderDetails from "./providerDetails";
+import ProviderPosts from "./providerPosts";
+import ProviderGallery from "./providerGallerry";
+import ProviderStore from "./providerStore";
+import ProviderReviews from "./providerReviews";
+import Footer from "../footer/footer";
+import waterMelon from "../../main";
+import axios from "axios";
+import Constants from "../constants/Queries";
 
 class Provider extends React.Component {
   state = {
     provider: null,
-    categoryName: '',
+    categoryName: "",
   };
-
+  // need to rewrite
   async componentDidMount() {
     waterMelon();
     const { provider } = this.props.location.state;
@@ -63,7 +63,7 @@ class Provider extends React.Component {
     const categoryQuery = Constants.categoryNameByID(provider.categoryID);
     //console.log(categoryQuery);
     await axios
-      .post('http://localhost:5000/api', {
+      .post("http://localhost:5000/api", {
         query: categoryQuery,
       })
       .then((response) => {
@@ -75,55 +75,55 @@ class Provider extends React.Component {
   }
 
   render() {
-    const [value] = '80';
+    const [value] = "80";
     return (
-      <div className='provider'>
+      <div className="provider">
         <Navbar />
-        <div className='provider-header'>
-          <div className='overlay'>
+        <div className="provider-header">
+          <div className="overlay">
             <Container>
-              <div className='provider-ui'>
-                <div className='provider-info'>
+              <div className="provider-ui">
+                <div className="provider-info">
                   <h1>
                     {this.state.provider !== null
                       ? this.state.provider.serviceName
-                      : ''}
+                      : ""}
                   </h1>
                   <span>
                     <FontAwesomeIcon icon={faMapMarkerAlt} />
                     {this.state.provider !== null
                       ? this.state.provider.address
-                      : ''}
+                      : ""}
                   </span>
                   <span>
-                    <FontAwesomeIcon icon={faPhoneAlt} />{' '}
+                    <FontAwesomeIcon icon={faPhoneAlt} />{" "}
                     {this.state.provider !== null
                       ? this.state.provider.mobile
-                      : ''}
+                      : ""}
                   </span>
                   <span>
                     <FontAwesomeIcon icon={faEnvelope} />
                     {this.state.provider !== null
                       ? this.state.provider.email
-                      : ''}
+                      : ""}
                   </span>
                 </div>
-                <div className='rating'>
-                  <div className='rate-number'>5.0</div>
+                <div className="rating">
+                  <div className="rate-number">5.0</div>
                   <div>
                     <Rating value={5} readOnly />
                     <p>17.5K reviews</p>
                   </div>
-                  <div className='chat'>
+                  <div className="chat">
                     <FontAwesomeIcon icon={faComments} />
                   </div>
                 </div>
               </div>
               <hr />
-              <div className='provider-bottom-header'>
+              <div className="provider-bottom-header">
                 <p>
                   <FontAwesomeIcon icon={faMobileAlt} />
-                  {this.state.provider !== null ? this.state.categoryName : ''}
+                  {this.state.provider !== null ? this.state.categoryName : ""}
                 </p>
                 <p>
                   <FontAwesomeIcon icon={faHeart} /> Bookmark - 516
@@ -135,28 +135,28 @@ class Provider extends React.Component {
             </Container>
           </div>
         </div>
-        <div className='provider-nav'>
+        <div className="provider-nav">
           <Container>
-            <div className='categories'>
+            <div className="categories">
               <ul>
-                <li className='active' data-type='.provider-details'>
+                <li className="active" data-type=".provider-details">
                   <FontAwesomeIcon icon={faInfo} /> Details
                 </li>
-                <li data-type='.provider-posts'>
+                <li data-type=".provider-posts">
                   <FontAwesomeIcon icon={faClipboard} /> Posts
                 </li>
-                <li data-type='.provider-gallery'>
+                <li data-type=".provider-gallery">
                   <FontAwesomeIcon icon={faImage} /> Gallery
                 </li>
-                <li data-type='.provider-store'>
+                <li data-type=".provider-store">
                   <FontAwesomeIcon icon={faStore} /> Store
                 </li>
-                <li data-type='.provider-reviews'>
+                <li data-type=".provider-reviews">
                   <FontAwesomeIcon icon={faComments} /> Reviews
                 </li>
               </ul>
             </div>
-            <div className='sharing'>
+            <div className="sharing">
               <button>
                 <FontAwesomeIcon icon={faShare} /> Share
               </button>
@@ -167,25 +167,61 @@ class Provider extends React.Component {
             </div>
           </Container>
         </div>
-        <div className='provider-content'>
-          <div className='provider-details'>
+        <div className="provider-content">
+          <div className="provider-details">
             <ProviderDetails />
           </div>
-          <div className='provider-posts'>
+          <div className="provider-posts">
             <ProviderPosts />
           </div>
-          <div className='provider-gallery'>
+          <div className="provider-gallery">
             <ProviderGallery />
           </div>
-          <div className='provider-store'>
+          <div className="provider-store">
             <ProviderStore />
           </div>
-          <div className='provider-reviews'>
+          <div className="provider-reviews">
             <ProviderReviews />
           </div>
         </div>
-        <div className='provider-sidebar'>
-          <MiniMap providerL={this.state.provider} />
+        <div className="provider-sidebar">
+          <Container>
+            <div className="working-hours">
+              <div>
+                <h3>
+                  Working Hours <FontAwesomeIcon icon={faChevronDown} />
+                </h3>
+              </div>
+              <div>
+                <ul>
+                  <li>
+                    Monday<pre> 9AM - 5PM</pre>
+                  </li>
+                  <li>
+                    Tuseday<pre> 9AM - 5PM</pre>
+                  </li>
+                  <li>
+                    wednesday<pre> 9AM - 5PM</pre>
+                  </li>
+                  <li>
+                    Thursday<pre> 9AM - 5PM</pre>
+                  </li>
+                  <li>
+                    Friday<pre> 9AM - 5PM</pre>
+                  </li>
+                  <li>
+                    Saturday<pre> 9AM - 5PM</pre>
+                  </li>
+                  <li>
+                    Sunday<pre> 9AM - 5PM</pre>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </Container>
+          <div className="provider-sidebar">
+            <MiniMap providerL={this.state.provider} />
+          </div>
         </div>
       </div>
     );
