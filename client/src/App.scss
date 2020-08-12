@@ -200,7 +200,7 @@ nav {
 .landing {
   header {
     height: 90vh;
-    background-image: url("../src/images/1.jpg");
+    background-image: url('../src/images/1.jpg');
     position: relative;
     @extend %cover;
     .overlay {
@@ -255,7 +255,7 @@ nav {
 
 .provider-header {
   height: 80vh;
-  background-image: url("./images/6.jpg");
+  background-image: url('./images/6.jpg');
   position: relative;
   @extend %cover;
   .overlay {
@@ -420,6 +420,13 @@ hr {
     line-height: 30px;
     border: none;
     background: none;
+    span {
+      vertical-align: top;
+      display: inline-block;
+      margin-left: 15px;
+      font-size: 20px;
+      font-weight: 500;
+    }
     svg {
       border-radius: 50%;
       width: 20px;
@@ -708,7 +715,7 @@ hr {
         font-size: 15px;
         font-weight: 600;
         color: #566985;
-        font-family: "Nunito", sans-serif;
+        font-family: 'Nunito', sans-serif;
         margin: 0;
       }
       svg {
@@ -884,7 +891,7 @@ hr {
             color: #878c9f;
           }
           &::before {
-            content: "";
+            content: '';
             display: block;
             width: 0;
             border-top: 15px solid transparent;
@@ -1108,7 +1115,7 @@ p {
   background: #b5b5b56b;
 }
 .footer-news .last-news h3::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1150,7 +1157,7 @@ p {
   padding-bottom: 25px;
 }
 .footer-news .twitter h3::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1174,7 +1181,7 @@ p {
   position: relative;
 }
 .footer-news .twitter ul li::after {
-  content: "";
+  content: '';
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(255, 255, 255, 0.11);
   border-bottom: 10px solid transparent;
