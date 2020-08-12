@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 
-import mapStyles from '../mapStyle';
+import mapStyles from './minmapStyle';
 import { Container } from '@material-ui/core';
 
 const libraries = ['places'];
