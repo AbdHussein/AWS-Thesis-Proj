@@ -81,10 +81,15 @@ nav .auth span {
 
 nav .logged-nav .user-logged-info {
   float: right;
+  color: #fff;
 }
 
 nav .logged-nav .user-logged-info .avatar {
-  display: inline;
+  display: inline-block;
+  padding: 7px;
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
 }
 
 .filter-search {
@@ -703,7 +708,6 @@ hr {
 .provider-sidebar {
   float: left;
   width: 35%;
-  background-color: #ddd;
 }
 
 .active {
@@ -756,6 +760,18 @@ hr {
 
 .view-post .main-view-post .whole-post .str .poster-info {
   margin-top: 25px;
+}
+
+.view-post .main-view-post .whole-post .str .poster-info .MuiFormControlLabel-root {
+  float: right;
+}
+
+.view-post .main-view-post .whole-post .str .poster-info .MuiFormControlLabel-root .MuiFormControlLabel-label {
+  color: #878c9f;
+}
+
+.view-post .main-view-post .whole-post .str .poster-info .MuiFormControlLabel-root .MuiCheckbox-colorSecondary.Mui-checked {
+  color: #2e3f6e;
 }
 
 .view-post .main-view-post .whole-post .str .poster-info .avatar {
@@ -1320,6 +1336,31 @@ h1 {
   cursor: pointer;
 }
 
+/* Start Mini Map */
+.mini-map > div {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.mini-map > div:not(:last-child) {
+  border-bottom: none;
+}
+
+.mini-map > div:nth-child(2) {
+  height: 320px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.mini-map > div:first-child {
+  border-radius: 5px 5px 0 0;
+}
+
+.mini-map > div:last-child {
+  border-radius: 0 0 5px 5px;
+}
+
+/* End Mini Map */
 nav ul {
   list-style: none;
   float: right;

@@ -4,6 +4,10 @@ import Navbar from '../../mainComp/navbar';
 import Avatar from "@material-ui/core/Avatar";
 import { faCalendar, faEye, faTags, faChevronDown, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
 class ViewPost extends React.Component {
     render() {
@@ -26,6 +30,10 @@ Duis mattis laoreet neque, et ornare neque sollicitudin at. Proin sagittis dolor
                                     <p>By, Dany Cohen</p>
                                     <p><FontAwesomeIcon icon={faCalendar} /> 25 April 2018</p>
                                     <p><FontAwesomeIcon icon={faEye} /> 251</p>
+                                    <FormControlLabel
+                                        control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
+                                        label="25 Like"
+                                    />
                                 </div>
                             </div>
                         </div>
