@@ -34,7 +34,6 @@ const login = (email, password) => {
   const query = `query {
     login(email: "${email}", password: "${password}"){
       token
-      roleID
     }
   }`;
   return query;

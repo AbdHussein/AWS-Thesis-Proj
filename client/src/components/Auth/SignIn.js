@@ -64,7 +64,6 @@ export default function SignIn(props) {
     e.preventDefault();
     const Login = Constants.login(state.email, state.password);
     const request = await Constants.request(Login);
-    console.log(require);
     localStorage.setItem('xTown', request.data.data.login.token);
     props.history.push('/');
   };
