@@ -28,9 +28,8 @@ class ImageUpload extends React.Component{
           imageAlt: `An image of ${res.original_filename}`
         }, async () => {
           try{
-            const addPost = constants.addPost(/* data */);
-            const request = await constants.request(addPost);
-            // await 
+            const addPost = constants.addPost(constants.getUserByToken(localStorage.getItem('xTown')),this.state.imageUrl, this.props.text);
+            // const request = await constants.request(addPost);
             
           }catch(err){
             console.log(err);

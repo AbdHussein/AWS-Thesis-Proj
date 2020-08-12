@@ -1,4 +1,7 @@
 const axios = require('axios');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const userByCategory = (category) => {
   const us = `query{
@@ -30,14 +33,22 @@ const categoryNameByID = (categoryID) => {
   return name;
 };
 
-const addPost = () =>{
+const getDate = () =>{
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  today = mm + '/' + dd + '/' + yyyy;
+  console.log(today);
+  return today;
+}
+
+const addPost = (data, imageUrl,postText) =>{
+  console.log(data);
+  
   const mutation = `mutation{
-    addPost(userID: , likes: Int!
-      date: String!
-      text: String!
-      image: String!
-      )
-      token
+    addPost(userID: , likes: 0, date: "${getDate()}", text: "${postText}", image: "${imageUrl}")
+      id
     }
   }`;
   return mutation;
@@ -72,9 +83,23 @@ const signUp = (username, email, password, mobile) => {
   return q;
 };
 
+const getUserByToken = (token) => {
+  const result = jwt.verify(token, 'somesuperdupersecret', {
+    algorithm: 'HS256',
+  });
+  const q = `query {
+    user(id:${result.id}){
+      username
+      avatar
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
 module.exports.login = login;
 module.exports.signUp = signUp;
 module.exports.addPost = addPost;
+module.exports.getUserByToken = getUserByToken;
