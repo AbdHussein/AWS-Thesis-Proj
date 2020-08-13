@@ -25,7 +25,9 @@ class Show extends React.Component {
       posts: requestForPosts.data.data.posts,
     });
   }
+  
   render() {
+    console.log(this.state.posts);
     return (
       <div className='dash-show'>
         {this.state.posts.map((post, index) => {
