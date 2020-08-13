@@ -1,7 +1,11 @@
 import React from 'react';
-
+import MailOutlineIcon from "@material-ui/icons/MailOutline";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+import PhoneEnabledIcon from "@material-ui/icons/PhoneEnabled";
+import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-
 import mapStyles from './minmapStyle';
 import { Container } from '@material-ui/core';
 
@@ -70,8 +74,14 @@ class MiniMap extends React.Component {
           <div>
             <MinMap providerL={this.props.providerL} />
           </div>
-          <div>adress</div>
-          <div>Media</div>
+          <div className="map-adress">
+            <ul>
+              <li><LocationOnIcon /><span>Adress:</span><span> Palestine Gaza </span></li>
+              <li><PhoneEnabledIcon /><span>Phone:</span><span>+970 0000000 </span></li>
+              <li><MailOutlineIcon /><span>Mail:</span><span> email@gmail.com </span></li>
+            </ul>
+          </div>
+          <div><FacebookIcon /> <TwitterIcon /> <InstagramIcon/></div>
         </div>
       </Container>
     );
