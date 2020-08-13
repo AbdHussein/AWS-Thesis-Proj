@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKeyboard } from '@fortawesome/free-regular-svg-icons';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faMapMarkerAlt, faBars } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
 import Navbar from '../mainComp/navbar';
 import Footer from '../footer/footer';
@@ -81,7 +81,7 @@ class Landing extends React.Component {
                 </div>
                 <div className='between'></div>
                 <div className='location'>
-                  <FontAwesomeIcon icon={faKeyboard} />
+                  <FontAwesomeIcon icon={faMapMarkerAlt} />
                   <input
                     type='text'
                     name='location'
@@ -92,7 +92,7 @@ class Landing extends React.Component {
                 </div>
                 <div className='between'></div>
                 <div className='categories'>
-                  <FontAwesomeIcon icon={faKeyboard} />
+                  <FontAwesomeIcon icon={faBars} />
                   <select
                     name='category'
                     onChange={this.handleChange.bind(this)}
