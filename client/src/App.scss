@@ -1214,9 +1214,6 @@ h1 {
 /* End Footer */
 
 /////////////////////////Show Component//////////////////////////////////////////////
-// h1{
-// color: #566985;
-// }
 .post-block {
   //height: 103px;
   margin-bottom: 15px;
@@ -1373,3 +1370,31 @@ nav {
   }
 }
 ///////////////////////////end post////////////////////////////////////
+
+//---------------------***Adress Slierbar***-----------------------//
+.map-adress{
+  ul{
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    li{
+      span{
+        display: inline-block;
+        &:last-child
+        {
+          margin-left: 20px;
+          color: #878C9F;
+        }
+      }
+      font-weight: 600;
+    }
+  }
+  svg{
+    color: #4db7fe;
+    margin-right: 15px;
+    width: 16px;
+  }
+  span{
+    vertical-align: top;
+  }
+}
