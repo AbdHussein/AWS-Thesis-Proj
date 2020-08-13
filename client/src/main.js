@@ -5,7 +5,6 @@ function waterMelon() {
     var type = $(this).data('type');
     $(this).addClass('active').siblings().removeClass('active');
     $(type).show().siblings().hide();
-    console.log(type);
   });
 
   $('.gallery-img').hover(function () {

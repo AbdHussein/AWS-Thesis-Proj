@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import Navbar from "../mainComp/navbar";
-import Filter from "../mainComp/filterComp";
-import { Redirect } from "react-router-dom";
+import React, { useState } from 'react';
+import Navbar from '../mainComp/navbar';
+import Filter from '../mainComp/filterComp';
+import { Redirect } from 'react-router-dom';
 //import { formatRelative } from 'data-fns';
 import {
   GoogleMap,
   useLoadScript,
   Marker,
   InfoWindow,
-} from "@react-google-maps/api";
+} from '@react-google-maps/api';
 
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
-} from "use-places-autocomplete";
+} from 'use-places-autocomplete';
 
 import {
   Combobox,
@@ -21,15 +21,15 @@ import {
   ComboboxPopover,
   ComboboxList,
   ComboboxOption,
-} from "@reach/combobox";
-import mapStyles from "./mapStyle";
+} from '@reach/combobox';
+import mapStyles from './mapStyle';
 
-import Constants from "../constants/Queries";
+import Constants from '../constants/Queries';
 
-const libraries = ["places"];
+const libraries = ['places'];
 const mapContainerStyle = {
-  width: "100%",
-  height: "100vh",
+  width: '100%',
+  height: '100vh',
 };
 const options = {
   styles: mapStyles,
@@ -67,8 +67,8 @@ function MyComponent(props) {
     lng: lng,
   };
 
-  if (loadError) return "Error loading Map";
-  if (!isLoaded) return "Loading...";
+  if (loadError) return 'Error loading Map';
+  if (!isLoaded) return 'Loading...';
   /* the magic if statment*/
   if (provider !== null) {
     return (
@@ -149,7 +149,7 @@ function MyComponent(props) {
 function Locate({ panTo }) {
   return (
     <button
-      className="locate"
+      className='locate'
       onClick={() => {
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -164,8 +164,8 @@ function Locate({ panTo }) {
       }}
     >
       <img
-        src={require("../../images/compass.png")}
-        alt="compass - locate me"
+        src={require('../../images/compass.png')}
+        alt='compass - locate me'
       />
     </button>
   );
@@ -190,7 +190,7 @@ function Search() {
     },
   });
   return (
-    <div className="search">
+    <div className='search'>
       <Combobox
         onSelect={(address) => {
           console.log(address);
@@ -202,11 +202,11 @@ function Search() {
             setValue(e.target.value);
           }}
           disabled={!ready}
-          placeholder="Enter an address"
+          placeholder='Enter an address'
         />
         <ComboboxPopover>
           <ComboboxList>
-            {status === "OK" &&
+            {status === 'OK' &&
               data.map(({ id, description }) => (
                 <ComboboxOption key={id} value={description} />
               ))}
@@ -221,8 +221,9 @@ function Search() {
 
 class Map extends React.Component {
   state = {
-    category: "",
+    category: '',
     providers: [],
+    user: null,
   };
 
   async componentDidMount() {
@@ -232,15 +233,22 @@ class Map extends React.Component {
     });
     const USERS = Constants.userByCategory(category);
     const request = await Constants.request(USERS);
-    console.log();
     this.setState({
       providers: request.data.data.usersByCategory,
     });
+    if (localStorage.getItem('xTown')) {
+      const query = Constants.getUserByToken(localStorage.getItem('xTown'));
+      const request = await Constants.request(query);
+      const { user } = request.data.data;
+      this.setState({
+        user,
+      });
+    }
   }
   render() {
     return (
-      <div className="map">
-        <Navbar />
+      <div className='map'>
+        <Navbar provider={this.state.user} />
         <MyComponent providers={this.state.providers} />
         <Filter />
       </div>
