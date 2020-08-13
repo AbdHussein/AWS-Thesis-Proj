@@ -4,15 +4,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import $ from 'jquery';
 import { Redirect } from 'react-router-dom';
+import jwt from 'jsonwebtoken';
 
 class LoggedInNavbar extends React.Component {
   state = {
     loggedOut: false,
+    userData: {}
   };
 
   componentDidMount() {
     $('.user-logged-info').click(function () {
       $('.user-details ul').slideToggle();
+    });
+    const data = jwt.verify(localStorage.getItem('xTown'), "somesuperdupersecret", {
+      algorithm: "HS256"
+    });
+    this.setState({
+      userData : data
+    }, ()=> {
+      console.log(this.state.userData);
     });
   }
 
@@ -33,7 +43,9 @@ class LoggedInNavbar extends React.Component {
         />
       );
     }
-    return (
+    const {username} = this.state.userData ;
+
+    return (      
       <div className='logged-nav'>
         <div className='user-logged-info'>
           <Avatar className='avatar'>
