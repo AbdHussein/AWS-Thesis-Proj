@@ -51,6 +51,7 @@ class Provider extends React.Component {
   state = {
     provider: null,
     categoryName: '',
+    user: null,
   };
   // need to rewrite
   async componentDidMount() {
@@ -64,13 +65,21 @@ class Provider extends React.Component {
     this.setState({
       categoryName: request.data.data.getCategoryByID.category,
     });
+    if (localStorage.getItem('xTown')) {
+      const query = Constants.getUserByToken(localStorage.getItem('xTown'));
+      const request = await Constants.request(query);
+      const { user } = request.data.data;
+      this.setState({
+        user,
+      });
+    }
   }
 
   render() {
     const [value] = '80';
     return (
       <div className='provider'>
-        <Navbar />
+        <Navbar provider={this.state.user} />
         <div className='provider-header'>
           <div className='overlay'>
             <Container>
