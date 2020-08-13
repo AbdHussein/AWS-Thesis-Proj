@@ -55,7 +55,7 @@ class LoggedInNavbar extends React.Component {
           </Avatar>{' '}
           <span>
             Hello,{' '}
-            {this.props.provider !== null ? this.props.provider.username : ''}{' '}
+            {this.props.provider !== null ? this.props.provider.username.substr(0, this.props.provider.username.indexOf(' ')) : ''}{' '}
             <FontAwesomeIcon icon={faChevronDown} />{' '}
           </span>
         </div>
