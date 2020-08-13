@@ -59,19 +59,11 @@ class Provider extends React.Component {
     this.setState({
       provider,
     });
-    console.log(provider.location);
     const categoryQuery = Constants.categoryNameByID(provider.categoryID);
-    //console.log(categoryQuery);
-    await axios
-      .post('http://localhost:5000/api', {
-        query: categoryQuery,
-      })
-      .then((response) => {
-        this.setState({
-          categoryName: response.data.data.getCategoryByID.category,
-        });
-      })
-      .catch((err) => console.log(err));
+    const request = await Constants.request(categoryQuery);
+    this.setState({
+      categoryName: request.data.data.getCategoryByID.category,
+    });
   }
 
   render() {
