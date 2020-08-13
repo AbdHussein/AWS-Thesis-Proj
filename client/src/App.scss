@@ -1433,6 +1433,12 @@ nav {
           color: #878C9F;
         }
       }
+      padding-top: 12px;
+      &:not(:last-child)
+      {
+        border-bottom: 1px solid #ccc;
+        padding: 12px 0;
+      }
       font-weight: 600;
     }
   }
@@ -1443,5 +1449,12 @@ nav {
   }
   span{
     vertical-align: top;
+  }
+}
+.map-media{
+  svg{
+    color: #4db7fe;
+    margin-right: 15px;
+    width: 20px;
   }
 }
