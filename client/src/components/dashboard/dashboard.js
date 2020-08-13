@@ -14,8 +14,7 @@ import Constants from '../constants/Queries';
 
 class Dashboard extends React.Component {
   state = {
-    username: '',
-    avatar: '',
+    provider: null,
   };
 
   async componentDidMount() {
@@ -31,25 +30,32 @@ class Dashboard extends React.Component {
       $(dashboard).show().siblings().hide();
       console.log($(this).data('dashboard'));
     });
+
     const query = Constants.getUserByToken(localStorage.getItem('xTown'));
     const request = await Constants.request(query);
-    const { username, avatar } = request.data.data.user;
+    const provider = request.data.data.user;
     this.setState({
-      username,
-      avatar,
+      provider,
     });
   }
 
   render() {
     return (
       <div className='dashboard'>
-        <Navbar />
+        <Navbar provider={this.state.provider} />
         <div className='dashboard-header'>
-          <h3>Welcome: {this.state.username}</h3>
+          <h3>
+            Welcome:{' '}
+            {this.state.provider !== null ? this.state.provider.username : ''}
+          </h3>
         </div>
         <div className='dashboard-nav'>
           <div className='dashboard-avatar'>
-            <Avatar className='avatar'>{this.state.avatar}</Avatar>
+            <Avatar className='avatar'>
+              {this.state.provider !== null
+                ? this.state.provider.username[0]
+                : ''}
+            </Avatar>
           </div>
         </div>
         <div className='main-dashboard'>
