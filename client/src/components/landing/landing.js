@@ -2,18 +2,31 @@ import React from 'react';
 import { Container } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKeyboard } from '@fortawesome/free-regular-svg-icons';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faMapMarkerAlt, faBars } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
 import Navbar from '../mainComp/navbar';
 import Footer from '../footer/footer';
+import Constants from '../constants/Queries';
 
 class Landing extends React.Component {
   state = {
     search: '',
     location: '',
     category: '',
+    user: null,
     done: false,
   };
+
+  async componentDidMount() {
+    if (localStorage.getItem('xTown')) {
+      const query = Constants.getUserByToken(localStorage.getItem('xTown'));
+      const request = await Constants.request(query);
+      const { user } = request.data.data;
+      this.setState({
+        user,
+      });
+    }
+  }
 
   handleChange(e) {
     this.setState({
@@ -44,7 +57,7 @@ class Landing extends React.Component {
     }
     return (
       <div className='landing'>
-        <Navbar />
+        <Navbar provider={this.state.user} />
         {/* Start Header */}
         <header>
           <div className='overlay'>
@@ -68,7 +81,7 @@ class Landing extends React.Component {
                 </div>
                 <div className='between'></div>
                 <div className='location'>
-                  <FontAwesomeIcon icon={faKeyboard} />
+                  <FontAwesomeIcon icon={faMapMarkerAlt} />
                   <input
                     type='text'
                     name='location'
@@ -79,7 +92,7 @@ class Landing extends React.Component {
                 </div>
                 <div className='between'></div>
                 <div className='categories'>
-                  <FontAwesomeIcon icon={faKeyboard} />
+                  <FontAwesomeIcon icon={faBars} />
                   <select
                     name='category'
                     onChange={this.handleChange.bind(this)}

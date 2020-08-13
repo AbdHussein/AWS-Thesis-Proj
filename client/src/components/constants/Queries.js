@@ -107,6 +107,20 @@ const getUserByToken = (token) => {
   return q;
 };
 
+const getPostByProviderID = (userID) => {
+  const q = ` query {
+    posts(userID:${userID}){
+      id
+      userID
+      likes
+      date
+      text
+      image
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -114,3 +128,4 @@ module.exports.login = login;
 module.exports.signUp = signUp;
 module.exports.addPost = addPost;
 module.exports.getUserByToken = getUserByToken;
+module.exports.getPostByProviderID = getPostByProviderID;

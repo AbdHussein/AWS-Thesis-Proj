@@ -48,9 +48,15 @@ class LoggedInNavbar extends React.Component {
     return (      
       <div className='logged-nav'>
         <div className='user-logged-info'>
-    <Avatar className='avatar'>{String(username).charAt(0)}</Avatar>{' '}
+          <Avatar className='avatar'>
+            {this.props.provider !== null
+              ? this.props.provider.username[0]
+              : ''}
+          </Avatar>{' '}
           <span>
-            Hello, {String(username).substr(0,String(username).indexOf(" "))} <FontAwesomeIcon icon={faChevronDown} />{' '}
+            Hello,{' '}
+            {this.props.provider !== null ? this.props.provider.username : ''}{' '}
+            <FontAwesomeIcon icon={faChevronDown} />{' '}
           </span>
         </div>
         <div className='user-details'>
