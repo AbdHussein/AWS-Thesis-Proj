@@ -1,6 +1,6 @@
 /* Start Main Var */
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Montserrat&family=Open+Sans&family=Oswald&family=Roboto&display=swap');
-$fontFamily: 'Lobster', cursive;
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Montserrat&family=Open+Sans&family=Oswald&family=Roboto&display=swap");
+$fontFamily: "Lobster", cursive;
 $floatLeft: left;
 $floatRight: right;
 $mainColor: #2e3f6e;
@@ -128,6 +128,13 @@ nav {
           cursor: pointer;
           padding: 0 10px;
           color: #000;
+          a {
+            text-decoration: none;
+            color: #000;
+            width: 100%;
+            height: 100%;
+            display: block;
+          }
           &:hover {
             background-color: #eee;
           }
@@ -153,6 +160,17 @@ nav {
       input {
         width: 100%;
         height: 46px;
+        border-radius: 3px;
+        outline: none;
+        border: 1px solid #e5e7f2;
+        padding-left: 10px;
+        background-color: #f9f9f9;
+        color: #7d93b2;
+        margin-bottom: 20px;
+      }
+      select {
+        width: 100%;
+        height: 50px;
         border-radius: 3px;
         outline: none;
         border: 1px solid #e5e7f2;
@@ -207,7 +225,7 @@ nav {
 .landing {
   header {
     height: 90vh;
-    background-image: url('../src/images/1.jpg');
+    background-image: url("../src/images/1.jpg");
     position: relative;
     @extend %cover;
     .overlay {
@@ -286,6 +304,96 @@ nav {
       @include boxShadow(8px);
     }
   }
+  .popular-palces {
+    margin-bottom: 70px;
+    h2 {
+      text-align: center;
+      color: #697891;
+    }
+    > hr {
+      height: 3px;
+      background-color: $mainHover;
+      width: 50px;
+    }
+    p {
+      color: #7d93b2;
+      text-align: center;
+      width: 600px;
+      margin: auto;
+      font-size: 14px;
+      margin-bottom: 70px;
+    }
+    .popular-slider {
+      overflow: hidden;
+      * {
+        box-sizing: border-box;
+      }
+      .single-popular {
+        float: $floatLeft;
+        width: ((100% - 4%) / 3);
+        overflow: hidden;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        height: 300px;
+        position: relative;
+        img {
+          width: 100%;
+          height: 300px;
+        }
+        &:not(:last-child) {
+          margin-right: 2%;
+        }
+        .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: $mainOverLayColor;
+          padding: 20px;
+          color: #fff;
+          > span {
+            font-size: 13px;
+          }
+          svg:first-of-type {
+            color: $mainHover;
+          }
+
+          div {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            h3 {
+              margin-bottom: 5px;
+            }
+            p {
+              float: $floatLeft;
+              margin-bottom: 0;
+              > svg {
+                width: 30px;
+                height: 30px;
+                padding: 7px;
+                border-radius: 50%;
+                background-color: #f75c96;
+                color: #fff !important;
+                float: $floatLeft;
+                span {
+                  float: $floatLeft;
+                  margin-left: 10px;
+                  margin-top: 3px;
+                  font-size: 17px;
+                  font-weight: 600;
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 /* =============================== End Landing Page =============================== */
@@ -303,7 +411,7 @@ nav {
 
 .provider-header {
   height: 80vh;
-  background-image: url('./images/6.jpg');
+  background-image: url("./images/6.jpg");
   position: relative;
   @extend %cover;
   .overlay {
@@ -846,7 +954,7 @@ hr {
         font-size: 15px;
         font-weight: 600;
         color: #566985;
-        font-family: 'Nunito', sans-serif;
+        font-family: "Nunito", sans-serif;
         margin: 0;
       }
       svg {
@@ -1021,7 +1129,7 @@ hr {
             color: #878c9f;
           }
           &::before {
-            content: '';
+            content: "";
             display: block;
             width: 0;
             border-top: 15px solid transparent;
@@ -1252,7 +1360,7 @@ p {
   background: #b5b5b56b;
 }
 .footer-news .last-news h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1294,7 +1402,7 @@ p {
   padding-bottom: 25px;
 }
 .footer-news .twitter h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1318,7 +1426,7 @@ p {
   position: relative;
 }
 .footer-news .twitter ul li::after {
-  content: '';
+  content: "";
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(255, 255, 255, 0.11);
   border-bottom: 10px solid transparent;
@@ -1590,7 +1698,6 @@ nav {
 }
 /*description*/
 .description {
-  
   h2 {
     color: #566985;
   }
@@ -1612,7 +1719,7 @@ nav {
 }
 .description-div {
   overflow: hidden;
-  border-bottom: 1px solid  #4db7fe;
+  border-bottom: 1px solid #4db7fe;
 }
 .gallrey {
 }

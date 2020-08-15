@@ -29,7 +29,7 @@ import Constants from '../constants/Queries';
 const libraries = ['places'];
 const mapContainerStyle = {
   width: '100%',
-  height: '100vh',
+  height: '70vh',
 };
 const options = {
   styles: mapStyles,
@@ -53,7 +53,7 @@ function MyComponent(props) {
     setLng(position.coords.longitude);
   });
 
-  const locationData = (stringObj) =>{
+  const locationData = (stringObj) => {
     return JSON.parse(stringObj);
   }
 
@@ -116,14 +116,14 @@ function MyComponent(props) {
                 }}
                 onClick={() => {
                   setSelectedProvider(provider);
-                  console.log(selectedProvider);         
+                  console.log(selectedProvider);
                   // console.log(JSON.parse(selectedProvider.location).lat);      
                 }}
               />
             );
           })}
         {selectedProvider && (
-          <InfoWindow            
+          <InfoWindow
             position={{
               lat: Number(locationData(selectedProvider.location).lat),
               lng: Number(locationData(selectedProvider.location).lng),

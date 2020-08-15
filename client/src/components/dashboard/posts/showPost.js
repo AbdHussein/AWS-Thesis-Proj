@@ -10,12 +10,7 @@ class Show extends React.Component {
   };
 
   async componentDidMount() {
-    $('.edit-icon').hover(function () {
-      $(this).siblings('p:first-of-type').toggle();
-    });
-    $('.delete-icon').hover(function () {
-      $(this).siblings('p:last-of-type').toggle();
-    });
+
 
     const query = Constants.getUserByToken(localStorage.getItem('xTown'));
     const requestForProviderID = await Constants.request(query);
@@ -25,9 +20,16 @@ class Show extends React.Component {
     this.setState({
       posts: requestForPosts.data.data.posts,
     });
+
+    $('.edit-icon').hover(function () {
+      $(this).siblings('.edit-hover').toggle();
+    });
+    $('.delete-icon').hover(function () {
+      $(this).siblings('.delete-hover').toggle();
+    });
   }
 
-  async handleDelete(id){
+  async handleDelete(id) {
     const mutation = Constants.deletePost(id);
     await Constants.request(mutation);
     const query = Constants.getUserByToken(localStorage.getItem('xTown'));
@@ -40,13 +42,13 @@ class Show extends React.Component {
     });
   }
 
-  async handleEdit(id){
+  async handleEdit(id) {
     console.log('Edit clicked');
   }
 
   render() {
-    
-    return (      
+
+    return (
       <div className='dash-show'>
         {this.state.posts.map((post, index) => {
           return (
@@ -66,11 +68,11 @@ class Show extends React.Component {
                 <FontAwesomeIcon icon={faEdit} className='edit-icon' onClick={() => {
                   this.handleEdit(post.id)
                 }} />
-                <p>Edit</p>
+                <p className="edit-hover">Edit</p>
                 <FontAwesomeIcon icon={faTrash} className='delete-icon' onClick={() => {
                   this.handleDelete(post.id)
-                }}/>
-                <p>Delete</p>
+                }} />
+                <p className="delete-hover">Delete</p>
               </div>
             </div>
           );
