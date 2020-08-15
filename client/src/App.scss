@@ -1119,11 +1119,12 @@ hr {
   }
   .main-dashboard {
     margin-top: 70px;
+    background: #f6f6f6;
     .dashboard-sidebar {
       float: $floatLeft;
       width: 25%;
       margin-right: 5%;
-      border: 1px solid #ccc;
+      border: 2px solid $mainColor;
       border-radius: 10px;
       overflow: hidden;
 
@@ -1144,10 +1145,11 @@ hr {
         display: none;
       }
     }
+
     .dashboard-content {
       float: $floatLeft;
       width: 70%;
-      border: 1px solid #ccc;
+      border: 2px solid $mainColor;
       padding: 20px;
       border-radius: 10px;
       height: 2000px;
@@ -1499,10 +1501,47 @@ nav {
 .dash-add {
   display: flex;
   flex-direction: column;
-  .post-area {
-    border: 2px solid $mainColor;
-    border-radius: 20px;
+  h2 {
+    color: #566985;
   }
+  h4 {
+    color: #878c9f;
+    margin-top: 2%;
+  }
+}
+.post-area {
+  float: left;
+  border: 1px solid #e5e7f2;
+  background: #f9f9f9;
+  width: 100%;
+  margin-bottom: 4%;
+}
+.form-group {
+  width: 200px;
+  height: 20px;
+  background: #384f95;
+  overflow: hidden;
+
+  input {
+    display: block !important;
+    //opacity: 0 !important;
+    overflow: hidden !important;
+  }
+}
+.btn {
+  background: #384f95;
+  float: left;
+  position: relative;
+  padding: 10px 30px;
+  border: none;
+  margin: 10px 0 0 20px;
+  color: #fff;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
 }
 ///////////////////////////end post////////////////////////////////////
 
@@ -1520,6 +1559,11 @@ nav {
           color: #878c9f;
         }
       }
+      padding-top: 12px;
+      &:not(:last-child) {
+        border-bottom: 1px solid #ccc;
+        padding: 12px 0;
+      }
       font-weight: 600;
     }
   }
@@ -1530,5 +1574,51 @@ nav {
   }
   span {
     vertical-align: top;
+  }
+}
+.map-media {
+  svg {
+    color: #4db7fe;
+    margin-right: 15px;
+    width: 20px;
+  }
+}
+.form-group {
+  svg {
+    color: #4db7fe;
+  }
+}
+/*description*/
+.description {
+  
+  h2 {
+    color: #566985;
+  }
+}
+.description-btn {
+  background: #384f95;
+  float: right;
+  position: relative;
+  padding: 10px 30px;
+  border: none;
+  margin: 10px 0 0 20px;
+  color: #fff;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+}
+.description-div {
+  overflow: hidden;
+  border-bottom: 1px solid  #4db7fe;
+}
+.gallrey {
+}
+/*Demo && Thumbnail*/
+.upload-Thumbnail {
+  h3 {
+    color: #566985;
   }
 }
