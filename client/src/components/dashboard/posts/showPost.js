@@ -8,6 +8,7 @@ class Show extends React.Component {
   state = {
     posts: [],
   };
+
   async componentDidMount() {
     $('.edit-icon').hover(function () {
       $(this).siblings('p:first-of-type').toggle();
@@ -26,8 +27,26 @@ class Show extends React.Component {
     });
   }
 
+  async handleDelete(id){
+    const mutation = Constants.deletePost(id);
+    await Constants.request(mutation);
+    const query = Constants.getUserByToken(localStorage.getItem('xTown'));
+    const requestForProviderID = await Constants.request(query);
+    const provider = requestForProviderID.data.data.user;
+    const allPostsQuery = Constants.getPostByProviderID(provider.id);
+    const requestForPosts = await Constants.request(allPostsQuery);
+    this.setState({
+      posts: requestForPosts.data.data.posts,
+    });
+  }
+
+  async handleEdit(id){
+    console.log('Edit clicked');
+  }
+
   render() {
-    return (
+    
+    return (      
       <div className='dash-show'>
         {this.state.posts.map((post, index) => {
           return (
@@ -44,9 +63,13 @@ class Show extends React.Component {
                 <p>{post.date}</p>
               </div>
               <div className='post-edit-delete'>
-                <FontAwesomeIcon icon={faEdit} className='edit-icon' />
+                <FontAwesomeIcon icon={faEdit} className='edit-icon' onClick={() => {
+                  this.handleEdit(post.id)
+                }} />
                 <p>Edit</p>
-                <FontAwesomeIcon icon={faTrash} className='delete-icon' />
+                <FontAwesomeIcon icon={faTrash} className='delete-icon' onClick={() => {
+                  this.handleDelete(post.id)
+                }}/>
                 <p>Delete</p>
               </div>
             </div>
