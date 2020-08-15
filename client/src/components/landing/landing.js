@@ -19,8 +19,11 @@ class Landing extends React.Component {
 
   async componentDidMount() {
     if (localStorage.getItem('xTown')) {
+      
       const query = Constants.getUserByToken(localStorage.getItem('xTown'));
+      console.log(query);
       const request = await Constants.request(query);
+      console.log(request);
       const { user } = request.data.data;
       this.setState({
         user,

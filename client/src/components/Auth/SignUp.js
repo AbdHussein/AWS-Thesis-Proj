@@ -34,27 +34,43 @@ export default function SignUp(props) {
   const [state, setState] = useState({
     email: '',
     password: '',
-    userName: '',
-    mobile: '',
+    username: '',
+    mobile: '',    
   });
-  const handelChange = (e) => {
+  const handleChange = (e) => {
     const { id, value } = e.target;
     setState((prevState) => ({
       ...prevState,
       [id]: value,
     }));
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const query = Constants.signUp(
-      state.userName,
+      state.username,
       state.email,
       state.password,
       state.mobile
     );
-    const request = Constants.request(query);
-    props.history.push('/signIn');
+
+    console.log(query);
+    Constants.request(query).then(response => {
+      // console.log('from then');
+      if(response.data.addUser) {
+        console.log(response.data.addUser);
+        props.history.push('/signIn');
+      } else {
+        console.log(response);
+        alert('Error in sign up');
+      }
+    }).catch(err => {
+      // console.log('from catch');
+      console.log(err);
+      alert('Error in sign up');
+    });    
   };
+
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -67,14 +83,14 @@ export default function SignUp(props) {
             <Grid item xs={12}>
               <TextField
                 autoComplete='username'
-                name='userName'
+                name='username'
                 variant='outlined'
                 required
                 fullWidth
-                onChange={handelChange}
+                onChange={handleChange}
                 value={state.userName}
-                id='userName'
-                label='userName'
+                id='username'
+                label='username'
                 autoFocus
               />
             </Grid>
@@ -84,10 +100,11 @@ export default function SignUp(props) {
                 required
                 fullWidth
                 id='email'
-                onChange={handelChange}
+                onChange={handleChange}
                 value={state.email}
                 label='Email Address'
                 name='email'
+                type='email'
                 autoComplete='email'
               />
             </Grid>
@@ -98,7 +115,7 @@ export default function SignUp(props) {
                 fullWidth
                 name='mobile'
                 label='Mobile Number'
-                onChange={handelChange}
+                onChange={handleChange}
                 value={state.mobile}
                 type='text'
                 id='mobile'
@@ -113,7 +130,7 @@ export default function SignUp(props) {
                 name='password'
                 label='Password'
                 type='password'
-                onChange={handelChange}
+                onChange={handleChange}
                 value={state.password}
                 id='password'
                 autoComplete='current-password'
