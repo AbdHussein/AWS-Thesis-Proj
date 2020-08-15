@@ -66,6 +66,7 @@ export default function SignIn(props) {
     e.preventDefault();
     const Login = Constants.login(state.email, state.password);
     const request = await Constants.request(Login);
+    localStorage.removeItem('xTown');
     localStorage.setItem('xTown', request.data.data.login.token);
     const n = request.data.data.login.RoleID;
     setState({
