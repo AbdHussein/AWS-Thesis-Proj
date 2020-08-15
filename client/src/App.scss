@@ -242,13 +242,13 @@ nav {
         input {
           outline: none;
           border: none;
-          margin-top: 12px;
+          margin-top: 2.5vh;
           margin-left: 10px;
         }
         select {
           border: none;
           width: 75%;
-          margin-top: 12px;
+          margin-top: 2.5vh;
           margin-left: 10px;
           &:focus {
             outline: none;
@@ -262,6 +262,7 @@ nav {
           color: #fff;
           font-size: 15px;
           cursor: pointer;
+          margin-top: 0.001vh;
           @extend %transition;
           svg {
             margin-left: 20px;
@@ -747,9 +748,92 @@ hr {
       }
     }
   }
+  .provider-store {
+    .main-store {
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      float: $floatLeft;
+      width: (100% / 4);
+      overflow: hidden;
+      .store-img {
+        overflow: hidden;
+        height: 125px;
+        img {
+          width: 100%;
+          height: 125px;
+        }
+      }
+      .store-info {
+        padding: 10px;
+        text-align: center;
+        h3 {
+          margin: 0 0 20px;
+          color: #566985;
+          font-weight: 600;
+        }
+        span {
+          font-family: $fontFamily;
+          color: #878c9f;
+        }
+      }
+      .store-overlay {
+        position: absolute;
+        background-color: rgba($color: $mainColor, $alpha: 0.5);
+        width: 100%;
+        height: 100%;
+        right: 0;
+        bottom: 0;
+        display: none;
+        span {
+          @extend %transition;
+          @include boxShadow(4px);
+          &:hover {
+            background-color: $mainColor;
+          }
+        }
+        > span {
+          color: #fff;
+          border-radius: 50%;
+          width: 20px !important;
+          height: 20px !important;
+          padding: 5px;
+          background-color: #4db7fe;
+          left: 80px;
+          top: 45px;
+          text-align: center;
+          position: absolute;
+          cursor: pointer;
+        }
+        > div {
+          position: absolute;
+          bottom: 10px;
+          left: 11% !important;
+          span {
+            background-color: $mainHover;
+            padding: 7px;
+            border-radius: 50%;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            &:first-child {
+              margin-right: 15px;
+              border-radius: 20px;
+            }
+            &:last-child {
+              width: 20px;
+              height: 20px;
+              display: inline-block;
+              text-align: center;
+            }
+          }
+        }
+      }
+      position: relative;
+    }
+  }
 }
 .provider-sidebar {
-  float: $floatLeft;
+  float: $floatRight;
   width: 35%;
   .working-hours {
     margin-bottom: 30px;

@@ -81,7 +81,7 @@ class MiniMap extends React.Component {
               <li><MailOutlineIcon /><span>Mail:</span><span> email@gmail.com </span></li>
             </ul>
           </div>
-          <div><FacebookIcon /> <TwitterIcon /> <InstagramIcon/></div>
+          <div><FacebookIcon /> <TwitterIcon /> <InstagramIcon /></div>
         </div>
       </Container>
     );
