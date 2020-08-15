@@ -1,6 +1,6 @@
 /* Start Main Var */
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Montserrat&family=Open+Sans&family=Oswald&family=Roboto&display=swap');
-$fontFamily: 'Lobster', cursive;
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Montserrat&family=Open+Sans&family=Oswald&family=Roboto&display=swap");
+$fontFamily: "Lobster", cursive;
 $floatLeft: left;
 $floatRight: right;
 $mainColor: #2e3f6e;
@@ -207,7 +207,7 @@ nav {
 .landing {
   header {
     height: 90vh;
-    background-image: url('../src/images/1.jpg');
+    background-image: url("../src/images/1.jpg");
     position: relative;
     @extend %cover;
     .overlay {
@@ -303,7 +303,7 @@ nav {
 
 .provider-header {
   height: 80vh;
-  background-image: url('./images/6.jpg');
+  background-image: url("./images/6.jpg");
   position: relative;
   @extend %cover;
   .overlay {
@@ -846,7 +846,7 @@ hr {
         font-size: 15px;
         font-weight: 600;
         color: #566985;
-        font-family: 'Nunito', sans-serif;
+        font-family: "Nunito", sans-serif;
         margin: 0;
       }
       svg {
@@ -1021,7 +1021,7 @@ hr {
             color: #878c9f;
           }
           &::before {
-            content: '';
+            content: "";
             display: block;
             width: 0;
             border-top: 15px solid transparent;
@@ -1252,7 +1252,7 @@ p {
   background: #b5b5b56b;
 }
 .footer-news .last-news h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1294,7 +1294,7 @@ p {
   padding-bottom: 25px;
 }
 .footer-news .twitter h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1318,7 +1318,7 @@ p {
   position: relative;
 }
 .footer-news .twitter ul li::after {
-  content: '';
+  content: "";
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(255, 255, 255, 0.11);
   border-bottom: 10px solid transparent;
@@ -1590,7 +1590,6 @@ nav {
 }
 /*description*/
 .description {
-  
   h2 {
     color: #566985;
   }
@@ -1612,9 +1611,7 @@ nav {
 }
 .description-div {
   overflow: hidden;
-  border-bottom: 1px solid  #4db7fe;
-}
-.gallrey {
+  border-bottom: 1px solid #4db7fe;
 }
 /*Demo && Thumbnail*/
 .upload-Thumbnail {
@@ -1622,3 +1619,49 @@ nav {
     color: #566985;
   }
 }
+/* End Demo && Thumbnail*/
+
+/*Facility*/
+.facility {
+  li {
+    list-style: none;
+    color: #283669;
+  }
+  h2 {
+    color: #566985;
+  }
+  input[type="submit"] {
+    background: #384f95;
+    float: left;
+    position: relative;
+    padding: 10px 30px;
+    border: none;
+    margin: 10px 0 0 20px;
+    color: #fff;
+    border-radius: 4px;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+  }
+}
+/* End Facility*/
+
+/*dash-provider-info*/
+.dash-provider-info {
+  .your-profile{
+    h2{
+      color: #566985;
+    }
+  }
+  .your-profile-div {
+    border: 1px solid #e5e7f2;
+    padding: 30px;
+  }
+  .upload-cover-img{
+    overflow: hidden;
+  }
+}
+
+/*End dash-provider-info*/

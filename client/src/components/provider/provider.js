@@ -219,7 +219,7 @@ class Provider extends React.Component {
                     Tuseday<pre> 9AM - 5PM</pre>
                   </li>
                   <li>
-                    wednesday<pre> 9AM - 5PM</pre>
+                    Wednesday<pre> 9AM - 5PM</pre>
                   </li>
                   <li>
                     Thursday<pre> 9AM - 5PM</pre>
