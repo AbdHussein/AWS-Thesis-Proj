@@ -124,11 +124,11 @@ class Provider extends React.Component {
               <div className='provider-bottom-header'>
                 <p>
                   {this.state.provider !== null &&
-                  this.state.categoryName === 'phones' ? (
-                    <FontAwesomeIcon icon={faMobileAlt} />
-                  ) : (
-                    <FontAwesomeIcon icon={faUtensils} />
-                  )}
+                    this.state.categoryName === 'phones' ? (
+                      <FontAwesomeIcon icon={faMobileAlt} />
+                    ) : (
+                      <FontAwesomeIcon icon={faUtensils} />
+                    )}
                   <span>
                     {this.state.provider !== null
                       ? this.state.categoryName
@@ -205,6 +205,12 @@ class Provider extends React.Component {
               <div>
                 <ul>
                   <li>
+                    Saturday<pre> 9AM - 5PM</pre>
+                  </li>
+                  <li>
+                    Sunday<pre> 9AM - 5PM</pre>
+                  </li>
+                  <li>
                     Monday<pre> 9AM - 5PM</pre>
                   </li>
                   <li>
@@ -217,13 +223,7 @@ class Provider extends React.Component {
                     Thursday<pre> 9AM - 5PM</pre>
                   </li>
                   <li>
-                    Friday<pre> 9AM - 5PM</pre>
-                  </li>
-                  <li>
-                    Saturday<pre> 9AM - 5PM</pre>
-                  </li>
-                  <li>
-                    Sunday<pre> 9AM - 5PM</pre>
+                    Friday<pre> Closed</pre>
                   </li>
                 </ul>
               </div>
