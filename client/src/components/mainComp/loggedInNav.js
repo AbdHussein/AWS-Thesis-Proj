@@ -9,20 +9,22 @@ import jwt from 'jsonwebtoken';
 class LoggedInNavbar extends React.Component {
   state = {
     loggedOut: false,
-    userData: {}
+    userData: {},
   };
 
   componentDidMount() {
     $('.user-logged-info').click(function () {
       $('.user-details ul').slideToggle();
     });
-    const data = jwt.verify(localStorage.getItem('xTown'), "somesuperdupersecret", {
-      algorithm: "HS256"
-    });
+    const data = jwt.verify(
+      localStorage.getItem('xTown'),
+      'somesuperdupersecret',
+      {
+        algorithm: 'HS256',
+      }
+    );
     this.setState({
-      userData : data
-    }, ()=> {
-      console.log(this.state.userData);
+      userData: data,
     });
   }
 
@@ -34,6 +36,7 @@ class LoggedInNavbar extends React.Component {
   }
 
   render() {
+    const username = this.props.provider && this.props.provider.username;
     if (this.state.loggedOut) {
       return (
         <Redirect
@@ -43,9 +46,7 @@ class LoggedInNavbar extends React.Component {
         />
       );
     }
-    const {username} = this.state.userData ;
-
-    return (      
+    return (
       <div className='logged-nav'>
         <div className='user-logged-info'>
           <Avatar className='avatar'>
@@ -55,7 +56,9 @@ class LoggedInNavbar extends React.Component {
           </Avatar>{' '}
           <span>
             Hello,{' '}
-            {this.props.provider !== null ? this.props.provider.username.substr(0, this.props.provider.username.indexOf(' ')) : ''}{' '}
+            {username && username.indexOf(' ') !== -1
+              ? username.substring(0, username.indexOf(' '))
+              : username}
             <FontAwesomeIcon icon={faChevronDown} />{' '}
           </span>
         </div>
