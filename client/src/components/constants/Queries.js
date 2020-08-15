@@ -150,6 +150,18 @@ const getProviderById = (userID) => {
   return q;
 };
 
+const getAllCommentsByPostID = (postID) => {
+  const q = `query {
+    comments(postID:${postID}){
+      userID
+      postID
+      text
+      date
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -160,3 +172,4 @@ module.exports.getUserByToken = getUserByToken;
 module.exports.getPostByProviderID = getPostByProviderID;
 module.exports.getProviderById = getProviderById;
 module.exports.addComment = addComment;
+module.exports.getAllCommentsByPostID = getAllCommentsByPostID;

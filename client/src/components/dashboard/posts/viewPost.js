@@ -15,7 +15,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import Constants from '../../constants/Queries';
-import { post } from 'jquery';
 
 class ViewPost extends React.Component {
   state = {
@@ -40,7 +39,27 @@ class ViewPost extends React.Component {
       post,
       user: user || null,
       provider,
+      comment: '',
     });
+  }
+
+  handleChange(e) {
+    this.setState({
+      comment: e.target.value,
+    });
+  }
+
+  hanldeSubmit() {
+    if (localStorage.getItem('xTown')) {
+      const addPost = Constants.addComment(
+        this.state.user.id,
+        this.state.provider.id,
+        this.state.comment
+      );
+      const request = Constants.request(addPost);
+    } else {
+      alert('Please sign in to comment');
+    }
   }
 
   render() {
@@ -116,8 +135,14 @@ class ViewPost extends React.Component {
               </div>
               <div>
                 <form>
-                  <textarea name='comment' id='' cols='30' rows='10'></textarea>
-                  <button>
+                  <textarea
+                    name='comment'
+                    id=''
+                    cols='30'
+                    rows='10'
+                    onChange={this.handleChange.bind(this)}
+                  ></textarea>
+                  <button onClick={this.hanldeSubmit.bind(this)}>
                     Submit Comment <FontAwesomeIcon icon={faPaperPlane} />{' '}
                   </button>
                 </form>
