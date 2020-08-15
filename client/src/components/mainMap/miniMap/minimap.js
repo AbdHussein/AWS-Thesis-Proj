@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import PhoneEnabledIcon from "@material-ui/icons/PhoneEnabled";
-import FacebookIcon from '@material-ui/icons/Facebook';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-import mapStyles from './minmapStyle';
-import { Container } from '@material-ui/core';
+import FacebookIcon from "@material-ui/icons/Facebook";
+import InstagramIcon from "@material-ui/icons/Instagram";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import mapStyles from "./minmapStyle";
+import { Container } from "@material-ui/core";
 
-const libraries = ['places'];
+const libraries = ["places"];
 const mapContainerStyle = {
-  width: '100%',
-  height: '320px',
+  width: "100%",
+  height: "320px",
 };
 const options = {
   styles: mapStyles,
@@ -47,8 +47,8 @@ function MinMap(props) {
     zoomControl: true,
   };
 
-  if (loadError) return 'Error loading Map';
-  if (!isLoaded) return 'Loading...';
+  if (loadError) return "Error loading Map";
+  if (!isLoaded) return "Loading...";
 
   return (
     <div>
@@ -69,19 +69,33 @@ class MiniMap extends React.Component {
   render() {
     return (
       <Container>
-        <div className='mini-map'>
+        <div className="mini-map">
           <div>Location / Contacts</div>
           <div>
             <MinMap providerL={this.props.providerL} />
           </div>
           <div className="map-adress">
             <ul>
-              <li><LocationOnIcon /><span>Adress:</span><span> Palestine Gaza </span></li>
-              <li><PhoneEnabledIcon /><span>Phone:</span><span>+970 0000000 </span></li>
-              <li><MailOutlineIcon /><span>Mail:</span><span> email@gmail.com </span></li>
+              <li>
+                <LocationOnIcon />
+                <span>Adress:</span>
+                <span> Palestine Gaza </span>
+              </li>
+              <li>
+                <PhoneEnabledIcon />
+                <span>Phone:</span>
+                <span>+970 0000000 </span>
+              </li>
+              <li>
+                <MailOutlineIcon />
+                <span>Mail:</span>
+                <span> email@gmail.com </span>
+              </li>
             </ul>
           </div>
-          <div className="map-media" ><FacebookIcon /> <TwitterIcon /> <InstagramIcon/></div>
+          <div className="map-media">
+            <FacebookIcon /> <TwitterIcon /> <InstagramIcon />
+          </div>
         </div>
       </Container>
     );

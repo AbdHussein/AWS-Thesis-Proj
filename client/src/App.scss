@@ -1,6 +1,6 @@
 /* Start Main Var */
-@import url("https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Montserrat&family=Open+Sans&family=Oswald&family=Roboto&display=swap");
-$fontFamily: "Lobster", cursive;
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Montserrat&family=Open+Sans&family=Oswald&family=Roboto&display=swap');
+$fontFamily: 'Lobster', cursive;
 $floatLeft: left;
 $floatRight: right;
 $mainColor: #2e3f6e;
@@ -207,7 +207,7 @@ nav {
 .landing {
   header {
     height: 90vh;
-    background-image: url("../src/images/1.jpg");
+    background-image: url('../src/images/1.jpg');
     position: relative;
     @extend %cover;
     .overlay {
@@ -242,13 +242,13 @@ nav {
         input {
           outline: none;
           border: none;
-          margin-top: 12px;
+          margin-top: 2.5vh;
           margin-left: 10px;
         }
         select {
           border: none;
           width: 75%;
-          margin-top: 12px;
+          margin-top: 2.5vh;
           margin-left: 10px;
           &:focus {
             outline: none;
@@ -262,6 +262,7 @@ nav {
           color: #fff;
           font-size: 15px;
           cursor: pointer;
+          margin-top: 0.001vh;
           @extend %transition;
           svg {
             margin-left: 20px;
@@ -302,7 +303,7 @@ nav {
 
 .provider-header {
   height: 80vh;
-  background-image: url("./images/6.jpg");
+  background-image: url('./images/6.jpg');
   position: relative;
   @extend %cover;
   .overlay {
@@ -747,9 +748,92 @@ hr {
       }
     }
   }
+  .provider-store {
+    .main-store {
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      float: $floatLeft;
+      width: (100% / 4);
+      overflow: hidden;
+      .store-img {
+        overflow: hidden;
+        height: 125px;
+        img {
+          width: 100%;
+          height: 125px;
+        }
+      }
+      .store-info {
+        padding: 10px;
+        text-align: center;
+        h3 {
+          margin: 0 0 20px;
+          color: #566985;
+          font-weight: 600;
+        }
+        span {
+          font-family: $fontFamily;
+          color: #878c9f;
+        }
+      }
+      .store-overlay {
+        position: absolute;
+        background-color: rgba($color: $mainColor, $alpha: 0.5);
+        width: 100%;
+        height: 100%;
+        right: 0;
+        bottom: 0;
+        display: none;
+        span {
+          @extend %transition;
+          @include boxShadow(4px);
+          &:hover {
+            background-color: $mainColor;
+          }
+        }
+        > span {
+          color: #fff;
+          border-radius: 50%;
+          width: 20px !important;
+          height: 20px !important;
+          padding: 5px;
+          background-color: #4db7fe;
+          left: 80px;
+          top: 45px;
+          text-align: center;
+          position: absolute;
+          cursor: pointer;
+        }
+        > div {
+          position: absolute;
+          bottom: 10px;
+          left: 11% !important;
+          span {
+            background-color: $mainHover;
+            padding: 7px;
+            border-radius: 50%;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            &:first-child {
+              margin-right: 15px;
+              border-radius: 20px;
+            }
+            &:last-child {
+              width: 20px;
+              height: 20px;
+              display: inline-block;
+              text-align: center;
+            }
+          }
+        }
+      }
+      position: relative;
+    }
+  }
 }
 .provider-sidebar {
-  float: $floatLeft;
+  float: $floatRight;
   width: 35%;
   .working-hours {
     margin-bottom: 30px;
@@ -762,7 +846,7 @@ hr {
         font-size: 15px;
         font-weight: 600;
         color: #566985;
-        font-family: "Nunito", sans-serif;
+        font-family: 'Nunito', sans-serif;
         margin: 0;
       }
       svg {
@@ -896,9 +980,8 @@ hr {
           margin-top: 7px;
         }
       }
-      & > div:last-child {
+      & > div.real-comment {
         border: 1px solid #ddd;
-        border-radius: 0 0 10px 10px;
         border-top: none;
         .post-img {
           float: $floatLeft;
@@ -938,7 +1021,7 @@ hr {
             color: #878c9f;
           }
           &::before {
-            content: "";
+            content: '';
             display: block;
             width: 0;
             border-top: 15px solid transparent;
@@ -953,6 +1036,11 @@ hr {
     }
     .add-comments {
       @extend .posts-comments;
+      > div:last-child {
+        border: 1px solid #ccc;
+        border-top: none;
+        border-radius: 0 0 8px 8px;
+      }
       textarea {
         background-color: #f5f6fa;
         border: 1px solid #ccc;
@@ -1164,7 +1252,7 @@ p {
   background: #b5b5b56b;
 }
 .footer-news .last-news h3::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1206,7 +1294,7 @@ p {
   padding-bottom: 25px;
 }
 .footer-news .twitter h3::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1230,7 +1318,7 @@ p {
   position: relative;
 }
 .footer-news .twitter ul li::after {
-  content: "";
+  content: '';
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(255, 255, 255, 0.11);
   border-bottom: 10px solid transparent;

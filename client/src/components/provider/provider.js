@@ -44,15 +44,14 @@ import ProviderStore from './providerStore';
 import ProviderReviews from './providerReviews';
 import Footer from '../footer/footer';
 import waterMelon from '../../main';
-import axios from 'axios';
 import Constants from '../constants/Queries';
 
 class Provider extends React.Component {
   state = {
     provider: null,
     categoryName: '',
+    user: null,
   };
-  // need to rewrite
   async componentDidMount() {
     waterMelon();
     const { provider } = this.props.location.state;
@@ -64,13 +63,21 @@ class Provider extends React.Component {
     this.setState({
       categoryName: request.data.data.getCategoryByID.category,
     });
+    if (localStorage.getItem('xTown')) {
+      const query = Constants.getUserByToken(localStorage.getItem('xTown'));
+      const request = await Constants.request(query);
+      const { user } = request.data.data;
+      this.setState({
+        user,
+      });
+    }
   }
 
   render() {
     const [value] = '80';
     return (
       <div className='provider'>
-        <Navbar />
+        <Navbar provider={this.state.user} />
         <div className='provider-header'>
           <div className='overlay'>
             <Container>
@@ -115,11 +122,11 @@ class Provider extends React.Component {
               <div className='provider-bottom-header'>
                 <p>
                   {this.state.provider !== null &&
-                  this.state.categoryName === 'phones' ? (
-                    <FontAwesomeIcon icon={faMobileAlt} />
-                  ) : (
-                    <FontAwesomeIcon icon={faUtensils} />
-                  )}
+                    this.state.categoryName === 'phones' ? (
+                      <FontAwesomeIcon icon={faMobileAlt} />
+                    ) : (
+                      <FontAwesomeIcon icon={faUtensils} />
+                    )}
                   <span>
                     {this.state.provider !== null
                       ? this.state.categoryName
@@ -173,7 +180,9 @@ class Provider extends React.Component {
             <ProviderDetails />
           </div>
           <div className='provider-posts'>
-            <ProviderPosts />
+            {this.state.provider && (
+              <ProviderPosts id={this.state.provider.id} />
+            )}
           </div>
           <div className='provider-gallery'>
             <ProviderGallery />
@@ -196,6 +205,12 @@ class Provider extends React.Component {
               <div>
                 <ul>
                   <li>
+                    Saturday<pre> 9AM - 5PM</pre>
+                  </li>
+                  <li>
+                    Sunday<pre> 9AM - 5PM</pre>
+                  </li>
+                  <li>
                     Monday<pre> 9AM - 5PM</pre>
                   </li>
                   <li>
@@ -208,13 +223,7 @@ class Provider extends React.Component {
                     Thursday<pre> 9AM - 5PM</pre>
                   </li>
                   <li>
-                    Friday<pre> 9AM - 5PM</pre>
-                  </li>
-                  <li>
-                    Saturday<pre> 9AM - 5PM</pre>
-                  </li>
-                  <li>
-                    Sunday<pre> 9AM - 5PM</pre>
+                    Friday<pre> Closed</pre>
                   </li>
                 </ul>
               </div>

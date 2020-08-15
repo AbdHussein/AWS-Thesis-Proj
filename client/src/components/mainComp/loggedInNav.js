@@ -4,15 +4,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import $ from 'jquery';
 import { Redirect } from 'react-router-dom';
+import jwt from 'jsonwebtoken';
 
 class LoggedInNavbar extends React.Component {
   state = {
     loggedOut: false,
+    userData: {},
   };
 
   componentDidMount() {
     $('.user-logged-info').click(function () {
       $('.user-details ul').slideToggle();
+    });
+    const data = jwt.verify(
+      localStorage.getItem('xTown'),
+      'somesuperdupersecret',
+      {
+        algorithm: 'HS256',
+      }
+    );
+    this.setState({
+      userData: data,
     });
   }
 
@@ -24,6 +36,7 @@ class LoggedInNavbar extends React.Component {
   }
 
   render() {
+    const username = this.props.provider && this.props.provider.username;
     if (this.state.loggedOut) {
       return (
         <Redirect
@@ -43,7 +56,9 @@ class LoggedInNavbar extends React.Component {
           </Avatar>{' '}
           <span>
             Hello,{' '}
-            {this.props.provider !== null ? this.props.provider.username : ''}{' '}
+            {username && username.indexOf(' ') !== -1
+              ? username.substring(0, username.indexOf(' '))
+              : username}
             <FontAwesomeIcon icon={faChevronDown} />{' '}
           </span>
         </div>

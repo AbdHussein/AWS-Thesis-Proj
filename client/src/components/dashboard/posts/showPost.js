@@ -25,6 +25,7 @@ class Show extends React.Component {
       posts: requestForPosts.data.data.posts,
     });
   }
+
   render() {
     return (
       <div className='dash-show'>
