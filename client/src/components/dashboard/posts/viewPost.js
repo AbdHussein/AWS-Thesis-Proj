@@ -23,6 +23,7 @@ class ViewPost extends React.Component {
     provider: null,
     comment: '',
     allComments: [],
+    commentUser: null,
   };
 
   async componentDidMount() {
@@ -37,16 +38,14 @@ class ViewPost extends React.Component {
       var user = requestForUser.data.data.user;
     }
     // git provider info by postID
-    const getProviderById = Constants.getProviderById(post.userID);
-    const requestForProvider = await Constants.request(getProviderById);
-    var provider = requestForProvider.data.data.user;
+    var provider = await this.getUserNameForComment(post.userID);
     // put data in the state
     this.setState({
       post,
       user: user || null,
       provider,
     });
-    this.getAllComments();
+    await this.getAllComments();
   }
 
   async getAllComments() {
@@ -77,6 +76,13 @@ class ViewPost extends React.Component {
     } else {
       alert('Please sign in to comment');
     }
+  }
+
+  async getUserNameForComment(userID) {
+    const getProviderById = Constants.getProviderById(userID);
+    const requestForProvider = await Constants.request(getProviderById);
+    var provider = requestForProvider.data.data.user;
+    return provider;
   }
 
   render() {
@@ -130,12 +136,10 @@ class ViewPost extends React.Component {
                 return (
                   <div className='real-comment' key={i}>
                     <div className='post-img'>
-                      <Avatar className='avatar'>
-                        {this.state.user && this.state.user.username[0]}
-                      </Avatar>
+                      <Avatar className='avatar'>{comment.user.avatar}</Avatar>
                     </div>
                     <div className='comment'>
-                      <h3>{this.state.user && this.state.user.username}</h3>
+                      <h3>{comment.user.username}</h3>
                       <p>{comment.text}</p>
                       <hr />
                       <FontAwesomeIcon icon={faCalendar} />{' '}
