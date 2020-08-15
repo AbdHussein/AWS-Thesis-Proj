@@ -108,7 +108,7 @@ CREATE TABLE `comment` (
   `userID` int NOT NULL,
   `postID` int NOT NULL,
   `text` varchar(3000) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `date` date NOT NULL,
+  `date` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userID` (`userID`),
   KEY `postID` (`postID`),

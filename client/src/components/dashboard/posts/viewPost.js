@@ -21,10 +21,14 @@ class ViewPost extends React.Component {
     post: null,
     user: null,
     provider: null,
+    comment: '',
+    allComments: [],
   };
 
   async componentDidMount() {
+    // get post from Redirect
     const { post } = this.props.location.state;
+    // get user info if he signed in
     if (localStorage.getItem('xTown')) {
       const getUserByToken = Constants.getUserByToken(
         localStorage.getItem('xTown')
@@ -32,14 +36,25 @@ class ViewPost extends React.Component {
       const requestForUser = await Constants.request(getUserByToken);
       var user = requestForUser.data.data.user;
     }
+    // git provider info by postID
     const getProviderById = Constants.getProviderById(post.userID);
     const requestForProvider = await Constants.request(getProviderById);
     var provider = requestForProvider.data.data.user;
+    // put data in the state
     this.setState({
       post,
       user: user || null,
       provider,
-      comment: '',
+    });
+    this.getAllComments();
+  }
+
+  async getAllComments() {
+    // git comments By postID
+    const commentsQuery = Constants.getAllCommentsByPostID(this.state.post.id);
+    const allComments = await Constants.request(commentsQuery);
+    this.setState({
+      allComments: allComments.data.data.comments,
     });
   }
 
@@ -49,14 +64,16 @@ class ViewPost extends React.Component {
     });
   }
 
-  hanldeSubmit() {
+  async hanldeSubmit(e) {
+    e.preventDefault();
     if (localStorage.getItem('xTown')) {
-      const addPost = Constants.addComment(
+      const addComment = Constants.addComment(
         this.state.user.id,
-        this.state.provider.id,
+        this.state.post.id,
         this.state.comment
       );
-      const request = Constants.request(addPost);
+      const request = await Constants.request(addComment);
+      this.getAllComments();
     } else {
       alert('Please sign in to comment');
     }
@@ -109,24 +126,24 @@ class ViewPost extends React.Component {
               <div>
                 Comments <FontAwesomeIcon icon={faChevronDown} />
               </div>
-              <div>
-                <div className='post-img'>
-                  <Avatar className='avatar'>N</Avatar>
-                </div>
-                <div className='comment'>
-                  <h3>Ibrahim Nemer</h3>
-                  <p>
-                    " Donec quam felis, ultricies nec, pellentesque eu, pretium
-                    quis, sem. Nulla consequat massa quis enim. Donec pede
-                    justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
-                    enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
-                    Nullam dictum felis eu pede mollis pretium. "
-                  </p>
-                  <hr />
-                  <FontAwesomeIcon icon={faCalendar} />{' '}
-                  <span>12 April 2018</span>
-                </div>
-              </div>
+              {this.state.allComments.map((comment, i) => {
+                return (
+                  <div className='real-comment' key={i}>
+                    <div className='post-img'>
+                      <Avatar className='avatar'>
+                        {this.state.user.username[0]}
+                      </Avatar>
+                    </div>
+                    <div className='comment'>
+                      <h3>{this.state.user.username}</h3>
+                      <p>{comment.text}</p>
+                      <hr />
+                      <FontAwesomeIcon icon={faCalendar} />{' '}
+                      <span>{comment.date}</span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
             <div className='add-comments'>
               <div>
