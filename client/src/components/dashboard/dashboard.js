@@ -72,7 +72,7 @@ class Dashboard extends React.Component {
               <div className='dash-details'>Details</div>
               <div className='dash-des'>
                 <div data-dashboard='.dash-demo'>Demo Video</div>
-                <div data-dashboard='.dash-describe'>Description</div>
+                <div data-dashboard='.dash-describe'>Description/Gallery</div>
                 <div id='fac' data-dashboard='.dash-facility'>
                   Facility
                 </div>
