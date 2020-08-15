@@ -39,18 +39,25 @@ const getDate = () => {
   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
   var yyyy = today.getFullYear();
   today = mm + '/' + dd + '/' + yyyy;
-  // console.log(today);
   return today;
 };
 
 const addPost = (id, imageUrl, postText) => {
-  // console.log(id);
   const mutation = `mutation{
     addPost(userID: ${id}, likes: 0, date: "${getDate()}", text: "${postText}", image: "${imageUrl}"){
       id
     }
   }`;
   return mutation;
+};
+
+const addComment = (userID, postID, text) => {
+  const q = `mutation {
+    addComment(userID:${userID}, postID:${postID}, text:"${text}", date:"${getDate()}"){
+      id
+    }
+  }`;
+  return q;
 };
 
 const login = (email, password) => {
@@ -121,6 +128,28 @@ const getPostByProviderID = (userID) => {
   return q;
 };
 
+const getProviderById = (userID) => {
+  const q = `query {
+    user(id:${userID}){
+      username
+      avatar
+      id
+      email
+      RoleID
+      payService
+      mobile
+      serviceName
+      location
+      address
+      cover
+      video
+      description
+      workingHours
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -129,3 +158,5 @@ module.exports.signUp = signUp;
 module.exports.addPost = addPost;
 module.exports.getUserByToken = getUserByToken;
 module.exports.getPostByProviderID = getPostByProviderID;
+module.exports.getProviderById = getProviderById;
+module.exports.addComment = addComment;

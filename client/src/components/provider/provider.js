@@ -44,7 +44,6 @@ import ProviderStore from './providerStore';
 import ProviderReviews from './providerReviews';
 import Footer from '../footer/footer';
 import waterMelon from '../../main';
-import axios from 'axios';
 import Constants from '../constants/Queries';
 
 class Provider extends React.Component {
@@ -53,7 +52,6 @@ class Provider extends React.Component {
     categoryName: '',
     user: null,
   };
-  // need to rewrite
   async componentDidMount() {
     waterMelon();
     const { provider } = this.props.location.state;
@@ -182,7 +180,9 @@ class Provider extends React.Component {
             <ProviderDetails />
           </div>
           <div className='provider-posts'>
-            <ProviderPosts />
+            {this.state.provider && (
+              <ProviderPosts id={this.state.provider.id} />
+            )}
           </div>
           <div className='provider-gallery'>
             <ProviderGallery />
