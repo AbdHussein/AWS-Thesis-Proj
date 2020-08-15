@@ -62,16 +62,26 @@ export default function SignIn(props) {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const Login = Constants.login(state.email, state.password);
-    const request = await Constants.request(Login);
-    localStorage.removeItem('xTown');
-    localStorage.setItem('xTown', request.data.data.login.token);
-    const n = request.data.data.login.RoleID;
-    setState({
-      RoleID: n,
-    });
+    Constants.request(Login).then(response => {
+      console.log(response.data.data.login);
+      if(response.data.data.login) {
+        localStorage.removeItem('xTown');
+        localStorage.setItem('xTown', response.data.data.login.token);
+        const n = response.data.data.login.RoleID;
+        setState({
+          RoleID: n,
+        });
+      }else{
+        console.log(response);
+        alert('Error in sign up');
+      }
+    }).catch(err =>{
+      alert('access denied');
+      console.log(err);
+    });    
     // if (n == 1) {
     //   // props.history.push("/admin")
     // } else if (n == 2) {
