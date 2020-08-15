@@ -274,25 +274,6 @@ const RootQuery = new GraphQLObjectType({
         return await knex('Roles').select().where({ id: args.id }).first();
       },
     },
-    login: {
-      type: UserType,
-      args: {
-        email: { type: new GraphQLNonNull(GraphQLString) },
-        password: { type: new GraphQLNonNull(GraphQLString) },
-      },
-      async resolve(root, args) {
-        //login
-        const data = await knex('user').select('*').where({ email: args.email }).first();
-        if (await bcrypt.compare(args.password, data.password)) {
-          const token = jwt.sign({ id: data.id, username: data.username, email: data.email }, process.env.SECRET, {
-            algorithm: "HS256",
-            expiresIn: "2 days"
-          });
-          await knex('user').update({ token: token }).where({ id: data.id });
-        }
-        return await knex('user').select('*').where({ email: args.email }).first();
-      },
-    },
     getCategoryByID: {
       type: CategoryType,
       args: {
@@ -313,6 +294,35 @@ const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
     // for user table
+    login:{
+      type: UserType,
+      args: {
+        email: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(root, args) {
+        //login
+       try{
+          const data = await knex('user').select('*').where({ email: args.email }).first();
+          // console.log(data.password);
+          if(data.password) {
+            if(await bcrypt.compare(args.password, data.password)) {
+              const token = jwt.sign({ id: data.id, username: data.username, email: data.email }, 
+                process.env.SECRET, {
+                algorithm: "HS256",
+                expiresIn: "2 days"
+              });
+              await knex('user').update({ token: token }).where({ email: args.email });              
+              return await knex('user').select('*').where({ email: args.email }).first();
+            }
+          } else {
+            console.log('invalid username or password');
+          }
+       } catch(err) {
+         console.log(err);
+       }
+      },
+    },
     addUser: {
       type: UserType,
       args: {
