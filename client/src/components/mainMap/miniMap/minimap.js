@@ -1,18 +1,18 @@
-import React from "react";
-import MailOutlineIcon from "@material-ui/icons/MailOutline";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
-import PhoneEnabledIcon from "@material-ui/icons/PhoneEnabled";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import InstagramIcon from "@material-ui/icons/Instagram";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import mapStyles from "./minmapStyle";
-import { Container } from "@material-ui/core";
+import React from 'react';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import PhoneEnabledIcon from '@material-ui/icons/PhoneEnabled';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import mapStyles from './minmapStyle';
+import { Container } from '@material-ui/core';
 
-const libraries = ["places"];
+const libraries = ['places'];
 const mapContainerStyle = {
-  width: "100%",
-  height: "320px",
+  width: '100%',
+  height: '320px',
 };
 const options = {
   styles: mapStyles,
@@ -46,9 +46,16 @@ function MinMap(props) {
     disableDefaultUI: true,
     zoomControl: true,
   };
+  const [lat, setLat] = React.useState(37.2431);
+  const [lng, setLng] = React.useState(-34.3088);
 
-  if (loadError) return "Error loading Map";
-  if (!isLoaded) return "Loading...";
+  navigator.geolocation.getCurrentPosition(function (position) {
+    setLat(position.coords.latitude);
+    setLng(position.coords.longitude);
+  });
+
+  if (loadError) return 'Error loading Map';
+  if (!isLoaded) return 'Loading...';
 
   return (
     <div>
@@ -60,6 +67,18 @@ function MinMap(props) {
         onLoad={onMapload}
       >
         <Marker position={position} />
+        <Marker
+          position={{
+            lat: lat,
+            lng: lng,
+          }}
+          icon={{
+            url: './currLoc.png',
+            scaledSize: new window.google.maps.Size(40, 40),
+            origin: new window.google.maps.Point(0, 0),
+            anchor: new window.google.maps.Point(15, 15),
+          }}
+        />
       </GoogleMap>
     </div>
   );
@@ -69,12 +88,12 @@ class MiniMap extends React.Component {
   render() {
     return (
       <Container>
-        <div className="mini-map">
+        <div className='mini-map'>
           <div>Location / Contacts</div>
           <div>
             <MinMap providerL={this.props.providerL} />
           </div>
-          <div className="map-adress">
+          <div className='map-adress'>
             <ul>
               <li>
                 <LocationOnIcon />
@@ -93,7 +112,7 @@ class MiniMap extends React.Component {
               </li>
             </ul>
           </div>
-          <div className="map-media">
+          <div className='map-media'>
             <FacebookIcon /> <TwitterIcon /> <InstagramIcon />
           </div>
         </div>
