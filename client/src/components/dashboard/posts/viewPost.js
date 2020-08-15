@@ -131,11 +131,11 @@ class ViewPost extends React.Component {
                   <div className='real-comment' key={i}>
                     <div className='post-img'>
                       <Avatar className='avatar'>
-                        {this.state.user.username[0]}
+                        {this.state.user && this.state.user.username[0]}
                       </Avatar>
                     </div>
                     <div className='comment'>
-                      <h3>{this.state.user.username}</h3>
+                      <h3>{this.state.user && this.state.user.username}</h3>
                       <p>{comment.text}</p>
                       <hr />
                       <FontAwesomeIcon icon={faCalendar} />{' '}
