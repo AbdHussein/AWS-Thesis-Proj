@@ -20,14 +20,14 @@ class Show extends React.Component {
     const query = Constants.getUserByToken(localStorage.getItem('xTown'));
     const requestForProviderID = await Constants.request(query);
     const provider = requestForProviderID.data.data.user;
-    const allPostsQuery = Constants.getPostByProviderID(provider.id);
+    const allPostsQuery = await Constants.getPostByProviderID(provider.id);
     const requestForPosts = await Constants.request(allPostsQuery);
     this.setState({
       posts: requestForPosts.data.data.posts,
     });
   }
 
-  async handleDelete(id){
+  async handleDelete(id) {
     const mutation = Constants.deletePost(id);
     await Constants.request(mutation);
     const query = Constants.getUserByToken(localStorage.getItem('xTown'));
@@ -40,13 +40,12 @@ class Show extends React.Component {
     });
   }
 
-  async handleEdit(id){
+  async handleEdit(id) {
     console.log('Edit clicked');
   }
 
   render() {
-    
-    return (      
+    return (
       <div className='dash-show'>
         {this.state.posts.map((post, index) => {
           return (
@@ -63,13 +62,21 @@ class Show extends React.Component {
                 <p>{post.date}</p>
               </div>
               <div className='post-edit-delete'>
-                <FontAwesomeIcon icon={faEdit} className='edit-icon' onClick={() => {
-                  this.handleEdit(post.id)
-                }} />
+                <FontAwesomeIcon
+                  icon={faEdit}
+                  className='edit-icon'
+                  onClick={() => {
+                    this.handleEdit(post.id);
+                  }}
+                />
                 <p>Edit</p>
-                <FontAwesomeIcon icon={faTrash} className='delete-icon' onClick={() => {
-                  this.handleDelete(post.id)
-                }}/>
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  className='delete-icon'
+                  onClick={() => {
+                    this.handleDelete(post.id);
+                  }}
+                />
                 <p>Delete</p>
               </div>
             </div>
