@@ -36,6 +36,14 @@ const UserType = new GraphQLObjectType({
   }),
 });
 
+const facilityType = new GraphQLObjectType({
+  name: 'facility',
+  fields: () => ({
+    id: { type: GraphQLID, unique: true },
+    name: { type: GraphQLString }
+  }),
+});
+
 const CartType = new GraphQLObjectType({
   name: 'cart',
   fields: () => ({
@@ -297,6 +305,7 @@ const RootQuery = new GraphQLObjectType({
           .first();
       },
     },
+    
   },
 });
 

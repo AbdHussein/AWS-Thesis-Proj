@@ -51,6 +51,14 @@ const addPost = (id, imageUrl, postText) => {
   return mutation;
 };
 
+const deletePost = (id) => {
+  const mutation = `mutation{
+    deletePost(id: ${id}){
+      id
+    }
+  }`;
+  return mutation;
+}
 const addComment = (userID, postID, text) => {
   const q = `mutation {
     addComment(userID:${userID}, postID:${postID}, text:"${text}", date:"${getDate()}"){
@@ -170,6 +178,7 @@ module.exports.signUp = signUp;
 module.exports.addPost = addPost;
 module.exports.getUserByToken = getUserByToken;
 module.exports.getPostByProviderID = getPostByProviderID;
+module.exports.deletePost = deletePost;
 module.exports.getProviderById = getProviderById;
 module.exports.addComment = addComment;
 module.exports.getAllCommentsByPostID = getAllCommentsByPostID;
