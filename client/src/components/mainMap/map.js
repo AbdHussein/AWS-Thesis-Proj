@@ -53,6 +53,10 @@ function MyComponent(props) {
     setLng(position.coords.longitude);
   });
 
+  const locationData = (stringObj) =>{
+    return JSON.parse(stringObj);
+  }
+
   const mapRef = React.useRef();
   const onMapload = React.useCallback((map) => {
     mapRef.current = map;
@@ -102,7 +106,7 @@ function MyComponent(props) {
       >
         {allProviders &&
           allProviders.map((provider, index) => {
-            var loc = JSON.parse(provider.location);
+            var loc = locationData(provider.location)
             return (
               <Marker
                 key={index}
@@ -112,15 +116,17 @@ function MyComponent(props) {
                 }}
                 onClick={() => {
                   setSelectedProvider(provider);
+                  console.log(selectedProvider);         
+                  // console.log(JSON.parse(selectedProvider.location).lat);      
                 }}
               />
             );
           })}
         {selectedProvider && (
-          <InfoWindow
+          <InfoWindow            
             position={{
-              lat: Number(selectedProvider.lat),
-              lng: Number(selectedProvider.lng),
+              lat: Number(locationData(selectedProvider.location).lat),
+              lng: Number(locationData(selectedProvider.location).lng),
             }}
             onCloseClick={() => {
               setSelectedProvider(null);

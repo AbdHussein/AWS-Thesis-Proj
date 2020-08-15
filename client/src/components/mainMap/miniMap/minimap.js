@@ -76,7 +76,7 @@ class MiniMap extends React.Component {
           </div>
           <div className="map-adress">
             <ul>
-              <li><LocationOnIcon /><span>Adress:</span><span> Palestine Gaza </span></li>
+              <li><LocationOnIcon /><span>Address:</span><span> Palestine Gaza </span></li>
               <li><PhoneEnabledIcon /><span>Phone:</span><span>+970 0000000 </span></li>
               <li><MailOutlineIcon /><span>Mail:</span><span> email@gmail.com </span></li>
             </ul>

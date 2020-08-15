@@ -31,7 +31,7 @@ CREATE TABLE `bookmark` (
   KEY `providerID` (`providerID`),
   CONSTRAINT `bookmark_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`id`),
   CONSTRAINT `bookmark_ibfk_2` FOREIGN KEY (`providerID`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,7 +81,7 @@ DROP TABLE IF EXISTS `category`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `category` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `category` varchar(11) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `category` varchar(11) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -107,7 +107,7 @@ CREATE TABLE `comment` (
   `id` int NOT NULL AUTO_INCREMENT,
   `userID` int NOT NULL,
   `postID` int NOT NULL,
-  `text` varchar(3000) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `text` varchar(3000) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userID` (`userID`),
@@ -127,6 +127,34 @@ LOCK TABLES `comment` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `facilities`
+--
+
+DROP TABLE IF EXISTS `facilities`;
+
+CREATE TABLE `facilities` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `Userfacilities`
+--
+DROP TABLE IF EXISTS `Userfacilities`;
+
+CREATE TABLE `Userfacilities` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `facilityID` int NOT NULL,
+  `userID` int NOT NULL, 
+  PRIMARY KEY (`id`),
+  KEY `userID` (`userID`),
+  KEY `facilityID` (`facilityID`),
+  CONSTRAINT `Userfacilities_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`id`),
+  CONSTRAINT `Userfacilities_ibfk_2` FOREIGN KEY (`facilityID`) REFERENCES `facilities` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
 -- Table structure for table `gallery`
 --
 
@@ -140,7 +168,7 @@ CREATE TABLE `gallery` (
   PRIMARY KEY (`id`),
   KEY `userID` (`userID`),
   CONSTRAINT `gallery_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,8 +192,8 @@ CREATE TABLE `post` (
   `userID` int NOT NULL,
   `likes` int NOT NULL,
   `date` varchar(50) NOT NULL,
-  `text` varchar(3000) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `image` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `text` varchar(3000) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `image` varchar(200) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userID` (`userID`),
   CONSTRAINT `post_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`id`)
@@ -190,8 +218,8 @@ DROP TABLE IF EXISTS `product`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `category` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `category` varchar(50) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
   `price` int NOT NULL,
   `userID` int NOT NULL,
   `rating` int NOT NULL,
@@ -222,7 +250,7 @@ CREATE TABLE `roles` (
   `id` int NOT NULL AUTO_INCREMENT,
   `Role` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,22 +272,22 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `email` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `password` varchar(64) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `password` varchar(64) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
   `RoleID` int NOT NULL,
-  `payService` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `payService` varchar(20) CHARACTER SET utf8 COLLATE utf8_swedish_ci DEFAULT NULL,
   `mobile` int NOT NULL,
-  `serviceName` varchar(60) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `serviceName` varchar(60) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
   `location` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `address` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `avatar` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `cover` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `video` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `description` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `workingHours` varchar(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `avatar` varchar(200) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `cover` varchar(200) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `video` varchar(200) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `description` varchar(500) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `workingHours` varchar(500) CHARACTER SET utf8 COLLATE utf8_swedish_ci DEFAULT NULL,
   `categoryID` int DEFAULT NULL,
-  `token` varchar(400) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `token` varchar(400) CHARACTER SET utf8 COLLATE utf8_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),

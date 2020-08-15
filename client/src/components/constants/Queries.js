@@ -53,6 +53,15 @@ const addPost = (id, imageUrl, postText) => {
   return mutation;
 };
 
+const deletePost = (id) => {
+  const mutation = `mutation{
+    deletePost(id: ${id}){
+      id
+    }
+  }`;
+  return mutation;
+}
+
 const login = (email, password) => {
   const query = `query {
     login(email: "${email}", password: "${password}"){
@@ -129,3 +138,4 @@ module.exports.signUp = signUp;
 module.exports.addPost = addPost;
 module.exports.getUserByToken = getUserByToken;
 module.exports.getPostByProviderID = getPostByProviderID;
+module.exports.deletePost = deletePost;
