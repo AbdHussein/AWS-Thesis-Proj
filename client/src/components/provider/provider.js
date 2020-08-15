@@ -122,11 +122,11 @@ class Provider extends React.Component {
               <div className='provider-bottom-header'>
                 <p>
                   {this.state.provider !== null &&
-                    this.state.categoryName === 'phones' ? (
-                      <FontAwesomeIcon icon={faMobileAlt} />
-                    ) : (
-                      <FontAwesomeIcon icon={faUtensils} />
-                    )}
+                  this.state.categoryName === 'phones' ? (
+                    <FontAwesomeIcon icon={faMobileAlt} />
+                  ) : (
+                    <FontAwesomeIcon icon={faUtensils} />
+                  )}
                   <span>
                     {this.state.provider !== null
                       ? this.state.categoryName
@@ -185,7 +185,9 @@ class Provider extends React.Component {
             )}
           </div>
           <div className='provider-gallery'>
-            <ProviderGallery />
+            {this.state.provider && (
+              <ProviderGallery id={this.state.provider.id} />
+            )}
           </div>
           <div className='provider-store'>
             <ProviderStore />
