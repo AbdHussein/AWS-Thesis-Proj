@@ -58,7 +58,7 @@ const deletePost = (id) => {
     }
   }`;
   return mutation;
-}
+};
 const addComment = (userID, postID, text) => {
   const q = `mutation {
     addComment(userID:${userID}, postID:${postID}, text:"${text}", date:"${getDate()}"){
@@ -166,6 +166,21 @@ const getAllCommentsByPostID = (postID) => {
       postID
       text
       date
+      user {
+        username
+        avatar
+      }
+    }
+  }`;
+  return q;
+};
+
+const getAllGalary = (userID) => {
+  const q = `query{
+    gallery(userID: ${userID}){
+      id 
+      userID
+      image
     }
   }`;
   return q;
@@ -183,3 +198,4 @@ module.exports.deletePost = deletePost;
 module.exports.getProviderById = getProviderById;
 module.exports.addComment = addComment;
 module.exports.getAllCommentsByPostID = getAllCommentsByPostID;
+module.exports.getAllGalary = getAllGalary;
