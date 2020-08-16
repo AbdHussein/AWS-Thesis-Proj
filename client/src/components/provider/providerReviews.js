@@ -83,7 +83,7 @@ class ProviderReviews extends React.Component {
                   </div>
                   <div className='text-comment'>
                     <h3>{review.user.username}</h3>
-                    <Rating value={2} readOnly />
+                    <Rating value={review.rating} readOnly />
                     <p>{review.text}</p>
                     <div className='reviews-img'>
                       <img src={review.pic} />
