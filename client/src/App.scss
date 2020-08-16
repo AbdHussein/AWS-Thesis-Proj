@@ -2056,3 +2056,49 @@ nav {
   cursor: pointer;
 }
 /*End dash-provider-info*/
+///////////////////////////////////////////////////
+/*Store Dashboard*/
+.product-data {
+  border: 1px solid #4db7fe;
+  border-radius: 20px;
+  padding: 30px;
+
+}
+.store-dashboard{
+
+  h2{
+    color:#566985;
+  }
+}
+.product-data input[type="text"] {
+  float: left;
+  border: 1px solid #e5e7f2;
+  background: #f9f9f9;
+  width: 100%;
+  padding: 15px 20px 15px 45px;
+  border-radius: 4px;
+  font-size: 12px;
+  outline-color: #4db7fe;
+}
+.product-data label {
+  color: #878c9f;
+  font-weight: 500;
+  margin-bottom: 25px;
+  display: block;
+  margin-top: 25px;
+}
+.add-product{
+  background: #384f95;
+  position: relative;
+  padding: 10px 30px;
+  border: none;
+  margin: 10px 0 0 20px;
+  color: #fff;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 20px;
+}
