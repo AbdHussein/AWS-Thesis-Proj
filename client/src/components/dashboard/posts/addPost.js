@@ -15,6 +15,12 @@ class Add extends React.Component {
     });
   }
 
+  handelChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
   updateImgUrl(url) {
     this.setState({
       imgUrl: url,

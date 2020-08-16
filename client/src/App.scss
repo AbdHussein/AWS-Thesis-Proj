@@ -1449,7 +1449,7 @@ hr {
       float: $floatLeft;
       width: 25%;
       margin-right: 5%;
-      border: 2px solid $mainColor;
+      border: 2px solid $mainHover;
       border-radius: 10px;
       overflow: hidden;
 
@@ -1474,7 +1474,7 @@ hr {
     .dashboard-content {
       float: $floatLeft;
       width: 70%;
-      border: 2px solid $mainColor;
+      //border: 2px solid $mainColor;
       padding: 20px;
       border-radius: 10px;
       height: 2000px;
@@ -1675,7 +1675,7 @@ h1 {
 
 /* End Footer */
 
-/////////////////////////Show Component//////////////////////////////////////////////
+/////////////////////////Show Post Dashboard//////////////////////////////////////////////
 .post-block {
   //height: 103px;
   margin-bottom: 15px;
@@ -1687,7 +1687,16 @@ h1 {
   clear: both;
   position: relative;
 }
-
+.post-block {
+  border: 1px solid #4db7fe;
+  border-radius: 20px;
+  padding: 30px;
+}
+.dash-show {
+  h1{
+    color: #566985;
+  }
+}
 .post-img-div {
   float: left;
   width: 12%;
@@ -1826,20 +1835,27 @@ nav {
 .dash-add {
   display: flex;
   flex-direction: column;
-  h2 {
+  h1 {
     color: #566985;
+    margin-bottom: 40px;
   }
   h4 {
     color: #878c9f;
     margin-top: 2%;
   }
 }
+.dash-add-div {
+  border: 1px solid #4db7fe;
+  border-radius: 20px;
+  padding: 30px;
+}
 .post-area {
-  float: left;
   border: 1px solid #e5e7f2;
   background: #f9f9f9;
-  width: 100%;
+  width: 80%;
   margin-bottom: 4%;
+  outline-color: $mainHover;
+  display: block;
 }
 .form-group {
   width: 200px;
@@ -1870,7 +1886,7 @@ nav {
 }
 ///////////////////////////end post////////////////////////////////////
 
-//---------------------***Adress Slierbar***-----------------------//
+//---------------------***Adress Slierbar Under Mini Map***-----------------------//
 .map-adress {
   ul {
     padding: 0px;
@@ -1914,14 +1930,23 @@ nav {
   }
 }
 /*description*/
-.description {
+.description-dash {
   h2 {
     color: #566985;
+    margin-bottom: 30px;
+  }
+  .post-area{
+    width: 60%;
   }
 }
-.description-btn {
+.description-div-inner,.upload-gallrey-img{
+  border: 1px solid #4db7fe;
+  border-radius: 10px;
+  padding: 30px;
+  overflow: hidden;
+}
+.description-btn , .upload-gallery{
   background: #384f95;
-  float: right;
   position: relative;
   padding: 10px 30px;
   border: none;
@@ -1936,7 +1961,12 @@ nav {
 }
 .description-div {
   overflow: hidden;
-  border-bottom: 1px solid #4db7fe;
+}
+.gallrey{
+  h2{
+    margin-top:40px;
+  }
+  
 }
 /*Demo && Thumbnail*/
 .upload-Thumbnail {
@@ -1974,19 +2004,55 @@ nav {
 /* End Facility*/
 
 /*dash-provider-info*/
-.dash-provider-info {
-  .your-profile {
-    h2 {
-      color: #566985;
-    }
+
+.your-profile,
+.your-socials {
+  h1 {
+    color: #566985;
   }
-  .your-profile-div {
-    border: 1px solid #e5e7f2;
-    padding: 30px;
-  }
-  .upload-cover-img {
-    overflow: hidden;
+}
+.your-socials {
+  h1 {
+    color: #566985;
+    margin-top: 57px;
   }
 }
 
+.your-profile-div,
+.your-socials-div {
+  border: 1px solid #4db7fe;
+  border-radius: 20px;
+  padding: 30px;
+}
+.upload-cover-img {
+  overflow: hidden;
+}
+
+.dash-provider-info input[type="text"] {
+  float: left;
+  border: 1px solid #e5e7f2;
+  background: #f9f9f9;
+  width: 100%;
+  padding: 15px 20px 15px 45px;
+  border-radius: 4px;
+  font-size: 12px;
+  outline-color: #4db7fe;
+}
+.dash-provider-info label {
+  color: #878c9f;
+  font-weight: 500;
+  margin-bottom: 25px;
+  display: block;
+  margin-top: 25px;
+}
+.button-edit,
+.button-change {
+  background: #384f95;
+  padding: 10px 30px;
+  border: none;
+  margin: 50px 0px 0 0px;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
 /*End dash-provider-info*/
