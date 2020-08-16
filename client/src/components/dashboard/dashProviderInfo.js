@@ -39,6 +39,8 @@ class DashProviderInfo extends React.Component {
                 id="serviceName"
                 name="serviceName"
                 placeholder="Nadera Mobile"
+                value={this.state.serviceName}
+                onChange={this.handelChange.bind(this)}
               ></input>
               <br />
               <br />
