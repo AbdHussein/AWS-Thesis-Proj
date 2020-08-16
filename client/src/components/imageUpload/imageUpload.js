@@ -1,57 +1,46 @@
 import React from 'react';
 import constants from '../constants/Queries';
+import axios from 'axios';
 const jwt = require('jsonwebtoken');
+
 
 class ImageUpload extends React.Component {
   state = {
     imageUrl: null,
     imageAlt: null,
     postStatus: '',
+    selectedFile: null
   };
 
-  handleImageUpload = () => {
-    // get the first input element with the type of file
-    const { files } = document.querySelector('input[type="file"]');
-    const formData = new FormData();
-    formData.append('file', files[0]);
-    // replace this with your upload preset name
-    formData.append('upload_preset', 'pm0oht2i');
-    const options = {
-      method: 'POST',
-      body: formData,
-    };
-    // replace cloudname with your Cloudinary cloud_name
-    return fetch('https://api.Cloudinary.com/v1_1/xtown/image/upload', options)
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState(
-          {
-            imageUrl: res.secure_url,
-            imageAlt: `An image of ${res.original_filename}`,
-          },
-          async () => {
-            try {
-              const data = jwt.verify(
-                localStorage.getItem('xTown'),
-                'somesuperdupersecret',
-                {
-                  algorithm: 'HS256',
-                }
-              );
+  onFileChange = (event) => {      
+    // Update the state 
+    this.setState({ selectedFile: event.target.files[0] }, async () => {
+      this.handleImageUpload()
+    });    
+  }; 
 
-              const addPost = await constants.addPost(
-                data.id,
-                this.state.imageUrl,
-                this.props.text
-              );
-              const request = await constants.request(addPost);
-            } catch (err) {
-              console.log(err);
-            }
-          }
-        );
-      })
-      .catch((err) => console.log(err));
+  handleImageUpload = () => {
+    const formData = new FormData(); 
+    formData.append( 
+      "file", 
+      this.state.selectedFile
+    ); 
+    formData.append('upload_preset', 'pm0oht2i');
+    console.log(this.state.selectedFile); 
+    axios.post('https://api.cloudinary.com/v1_1/xtown/image/upload', formData)
+    .then((response) => {
+      console.log(response);
+      this.setState(
+        {
+          imageUrl: response.data.secure_url,
+          imageAlt: `An image of ${response.data.original_filename}`,
+        }, async () => {
+          this.props.getImgUrl(response.data.secure_url);          
+        });
+    }).catch((err) => {      
+      console.log(err);    
+      alert('Failed to upload file');  
+    })
   };
 
   render() {
@@ -61,15 +50,9 @@ class ImageUpload extends React.Component {
         <section className='left-side'>
           <form>
             <div className='form-group'>
-              <input type='file' multiple/>
-            </div>
-            <button
-              type='button'
-              className='btn'
-              onClick={this.handleImageUpload}
-            >
-              {this.props.ButtonText}
-            </button>
+                <input type="file" onChange={this.onFileChange} /> 
+                <br></br>
+            </div>            
             <span>{}</span>
           </form>
         </section>
