@@ -61,7 +61,7 @@ class ImageUpload extends React.Component {
         <section className='left-side'>
           <form>
             <div className='form-group'>
-              <input type='file' />
+              <input type='file' multiple/>
             </div>
             <button
               type='button'
