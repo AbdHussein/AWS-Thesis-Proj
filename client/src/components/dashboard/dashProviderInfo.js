@@ -2,14 +2,21 @@ import React from "react";
 import ImageUpload from "../imageUpload/imageUpload";
 class DashProviderInfo extends React.Component {
   state = {
-    serviceName:"",
+    serviceName: "",
     email: "",
     mobile: "",
     address: "",
+    imgUrl: "",
     facebook: "",
     instgram: "",
     twitter: "",
   };
+
+  updateImgUrl(url) {
+    this.setState({
+      imgUrl: url,
+    });
+  }
 
   handelChange(e) {
     this.setState({
@@ -26,7 +33,7 @@ class DashProviderInfo extends React.Component {
           <h1>Your Profile</h1>
           <div className="your-profile-div">
             <form>
-              <label for="serviceName">Service name: </label>
+              <label htmlFor="serviceName">Service name: </label>
               <input
                 type="text"
                 id="serviceName"
@@ -35,7 +42,7 @@ class DashProviderInfo extends React.Component {
               ></input>
               <br />
               <br />
-              <label for="email">Email: </label>
+              <label htmlFor="email">Email: </label>
               <input
                 type="text"
                 id="email"
@@ -46,7 +53,7 @@ class DashProviderInfo extends React.Component {
               ></input>
               <br />
               <br />
-              <label for="mobile">Mobile: </label>
+              <label htmlFor="mobile">Mobile: </label>
               <input
                 type="text"
                 id="mobile"
@@ -57,7 +64,7 @@ class DashProviderInfo extends React.Component {
               ></input>
               <br />
               <br />
-              <label for="adress">Adress: </label>
+              <label htmlFor="adress">Adress: </label>
               <input
                 type="text"
                 id="address"
@@ -68,18 +75,20 @@ class DashProviderInfo extends React.Component {
               ></input>
               <br />
               <br />
-              <button class="button-edit" onClick={this.handleClick}>
+              <button className="button-edit" onClick={this.handleClick}>
                 Edit
               </button>
             </form>
-          
-          <div className="upload-cover-img">
-            <label for="Change-cover">Change your cover photo : </label>
-            <br />
-            <br />
-            <ImageUpload ButtonText={"Upload Image"} />
-            <br />
-            <br />
+
+            <div className="upload-cover-img">
+              <label htmlFor="Change-cover">Change your cover photo : </label>
+              <br />
+              <br />
+              <div className="upload">
+                <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} />
+              </div>
+              <br />
+              <br />
             </div>
           </div>
         </div>
@@ -87,47 +96,47 @@ class DashProviderInfo extends React.Component {
         <div className="your-socials">
           <h1>Your Socials</h1>
           <div className="your-socials-div">
-          <form onSubmit={this.handleSubmit}>
-            <label for="facebook">Facebook: </label>
-            <input
-              type="text"
-              id="facebook"
-              name="facebook"
-              placeholder="facebook.com"
-              value={this.state.facebook}
-              onChange={this.handelChange.bind(this)}
-            ></input>
-            <br />
-            <br />
-            <label for="instgram">Instgram: </label>
-            <input
-              type="text"
-              id="instgram"
-              name="instgram"
-              placeholder="instgram.com"
-              value={this.state.instgram}
-              onChange={this.handelChange.bind(this)}
-            ></input>
-            <br />
-            <br />
-            <label for="twitter">Twitter: </label>
-            <input
-              type="text"
-              id="twitter"
-              name="twitter"
-              placeholder="twitter.com"
-              value={this.state.twitter}
-              onChange={this.handelChange.bind(this)}
-            ></input>
-            <br />
-            <br />
-            <br />
-            <button class="button-change" onClick={this.handleClick}>
+            <form onSubmit={this.handleSubmit}>
+              <label htmlFor="facebook">Facebook: </label>
+              <input
+                type="text"
+                id="facebook"
+                name="facebook"
+                placeholder="facebook.com"
+                value={this.state.facebook}
+                onChange={this.handelChange.bind(this)}
+              ></input>
+              <br />
+              <br />
+              <label htmlFor="instgram">Instgram: </label>
+              <input
+                type="text"
+                id="instgram"
+                name="instgram"
+                placeholder="instgram.com"
+                value={this.state.instgram}
+                onChange={this.handelChange.bind(this)}
+              ></input>
+              <br />
+              <br />
+              <label htmlFor="twitter">Twitter: </label>
+              <input
+                type="text"
+                id="twitter"
+                name="twitter"
+                placeholder="twitter.com"
+                value={this.state.twitter}
+                onChange={this.handelChange.bind(this)}
+              ></input>
+              <br />
+              <br />
+              <br />
+              <button className="button-change" onClick={this.handleClick}>
                 Change
               </button>
-          </form>
+            </form>
           </div>
-          </div>
+        </div>
       </div>
     );
   }

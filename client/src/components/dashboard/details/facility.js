@@ -42,25 +42,25 @@ class Facility extends React.Component {
       <div className="facility">
         <h2>What are facilities your shop have? </h2>
         <div className="facility-div">
-        <form onSubmit={this.handleSubmit}>
-          {this.state.facility.map((item) => (
-            <li>
-              <label>
-                <input
-                  type="checkbox"
-                  value={item.id}
-                  onChange={this.handleChange}
-                />{" "}
-                {item.value}
-              </label>
-            </li>
-          ))}
+          <form onSubmit={this.handleSubmit}>
+            {this.state.facility.map((item, index) => (
+              <li key={index}>
+                <label>
+                  <input
+                    type="checkbox"
+                    value={item.id}
+                    onChange={this.handleChange}
+                  />{" "}
+                  {item.value}
+                </label>
+              </li>
+            ))}
 
-          <br />
-          <input type="submit" value="Submit" />
-        </form>
+            <br />
+            <input type="submit" value="Submit" />
+          </form>
         </div>
-        </div>
+      </div>
     );
   }
 }

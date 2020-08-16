@@ -90,7 +90,9 @@ const request = async (query) => {
 
 const signUp = (username, email, password, mobile) => {
   const q = `mutation{
-    addUser(username:"${username}", email:"${email}", password:"${password}",RoleID:"3", mobile: ${Number(mobile)},avatar:"${username[0]}",
+    addUser(username:"${username}", email:"${email}", password:"${password}",RoleID:"3", mobile: ${Number(
+    mobile
+  )},avatar:"${username[0]}",
     serviceName:"", address:"", cover:"", video:"", description:""){
       id
     }
@@ -186,6 +188,22 @@ const getAllGalary = (userID) => {
   return q;
 };
 
+const getAllReviews = (providerID) => {
+  const q = `query {
+    getReviews(providerID:${providerID}){
+      text
+      rating
+      pic
+      date
+      user{
+        username
+        avatar
+      }
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -199,3 +217,4 @@ module.exports.getProviderById = getProviderById;
 module.exports.addComment = addComment;
 module.exports.getAllCommentsByPostID = getAllCommentsByPostID;
 module.exports.getAllGalary = getAllGalary;
+module.exports.getAllReviews = getAllReviews;
