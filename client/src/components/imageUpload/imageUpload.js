@@ -63,7 +63,7 @@ class ImageUpload extends React.Component {
             imageAlt: `An image of ${response.data.original_filename}`,
           },
           async () => {
-            this.props.getImgUrl(response.data.secure_url);
+            await this.props.getImgUrl(response.data.secure_url);
           }
         );
       })
