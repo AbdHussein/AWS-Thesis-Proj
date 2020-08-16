@@ -8,6 +8,7 @@ import Dashboard from './components/dashboard/dashboard';
 import ViewPost from './components/dashboard/posts/viewPost';
 import signIn from './components/Auth/SignIn';
 import signUp from './components/Auth/SignUp';
+import MyCart from './components/provider/myCart';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/post' component={ViewPost} />
           <Route path='/signIn' component={signIn} />
           <Route path='/signUp' component={signUp} />
+          <Route path='/mycart' component={MyCart} />
         </Switch>
       </div>
     </Router>

@@ -10,7 +10,15 @@ class Filter extends React.Component {
                 <div className="filter-search">
                     <div className="first">
                         <div><input type="text" name="" id="" placeholder="What Are You Looking For?" /></div>
-                        <div><input type="text" name="" id="" placeholder="All Categories" /></div>
+                        <div><select
+                            name='category'
+                        >
+                            <option>choose...</option>
+                            <option>phones</option>
+                            <option>restaurant</option>
+                            {/* <option>PC</option>
+                    <option>FMCGs</option> */}
+                        </select></div>
                         <div><input type="text" name="" id="" placeholder="All Cities" /></div>
                     </div>
                     <div className="second">

@@ -40,7 +40,7 @@ const facilityType = new GraphQLObjectType({
   name: 'facility',
   fields: () => ({
     id: { type: GraphQLID, unique: true },
-    name: { type: GraphQLString }
+    name: { type: GraphQLString },
   }),
 });
 
@@ -89,6 +89,12 @@ const CommentType = new GraphQLObjectType({
     postID: { type: GraphQLID },
     text: { type: GraphQLString },
     date: { type: GraphQLString },
+    user: {
+      type: UserType,
+      async resolve(root, args) {
+        return await knex('User').select().where({ id: root.userID }).first();
+      },
+    },
   }),
 });
 
@@ -236,15 +242,12 @@ const RootQuery = new GraphQLObjectType({
       },
     },
     gallery: {
-      type: GalleryType,
+      type: new GraphQLList(GalleryType),
       args: {
         userID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Gallery')
-          .select()
-          .where({ userID: args.userID })
-          .first();
+        return await knex('Gallery').select().where({ userID: args.userID });
       },
     },
     getRoles: {
@@ -286,7 +289,6 @@ const RootQuery = new GraphQLObjectType({
           .first();
       },
     },
-    
   },
 });
 
