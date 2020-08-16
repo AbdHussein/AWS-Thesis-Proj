@@ -177,7 +177,9 @@ class Provider extends React.Component {
         </div>
         <div className='provider-content'>
           <div className='provider-details'>
-            <ProviderDetails />
+            {this.state.provider && (
+              <ProviderDetails provider={this.state.provider} />
+            )}
           </div>
           <div className='provider-posts'>
             {this.state.provider && (

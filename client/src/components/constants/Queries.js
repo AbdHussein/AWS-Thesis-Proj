@@ -213,6 +213,24 @@ const addReview = (providerID, userID, text, rating, pic) => {
   return q;
 };
 
+const addPhoto = (userID, image) => {
+  const q = `mutation {
+    addGallery(userID:${userID}, image:"${image}"){
+      id
+    }
+  }`;
+  return q;
+};
+
+const addDesc = (id, desc) => {
+  const q = `mutation{
+    editUser(id:${id}, description:"${desc}"){
+      id
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -228,3 +246,5 @@ module.exports.getAllCommentsByPostID = getAllCommentsByPostID;
 module.exports.getAllGalary = getAllGalary;
 module.exports.getAllReviews = getAllReviews;
 module.exports.addReview = addReview;
+module.exports.addPhoto = addPhoto;
+module.exports.addDesc = addDesc;

@@ -418,7 +418,7 @@ const Mutation = new GraphQLObjectType({
         categoryID: { type: GraphQLID },
       },
       async resolve(root, args) {
-        args.password = await bcrypt.hash(args.password, 10);
+        // args.password = await bcrypt.hash(args.password, 10);
         return await knex('User').where({ id: args.id }).update(args);
       },
     },

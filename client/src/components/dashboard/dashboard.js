@@ -84,11 +84,7 @@ class Dashboard extends React.Component {
               >
                 Provider Info
               </div>
-              <div
-                data-dashboard='.store-dash'
-              >
-                Store Dashboard
-              </div>
+              <div data-dashboard='.store-dash'>Store Dashboard</div>
             </div>
             <div className='dashboard-content'>
               <div className='ch-dash-main-dashboard'>
@@ -98,7 +94,9 @@ class Dashboard extends React.Component {
                 <DemoVideo />
               </div>
               <div className='dash-describe'>
-                <Description />
+                {this.state.provider && (
+                  <Description id={this.state.provider.id} />
+                )}
               </div>
               <div className='dash-facility'>
                 <Facility />
