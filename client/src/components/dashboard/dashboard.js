@@ -11,6 +11,7 @@ import DashProviderInfo from './dashProviderInfo';
 import MainDashboard from './mainDashboard';
 import Navbar from '../mainComp/navbar';
 import Constants from '../constants/Queries';
+import StoreDashboard from './storeDashboard';
 
 class Dashboard extends React.Component {
   state = {
@@ -83,6 +84,11 @@ class Dashboard extends React.Component {
               >
                 Provider Info
               </div>
+              <div
+                data-dashboard='.store-dash'
+              >
+                Store Dashboard
+              </div>
             </div>
             <div className='dashboard-content'>
               <div className='ch-dash-main-dashboard'>
@@ -105,6 +111,9 @@ class Dashboard extends React.Component {
               </div>
               <div className='dash-provider-information'>
                 <DashProviderInfo />
+              </div>
+              <div className='store-dash'>
+                <StoreDashboard />
               </div>
             </div>
           </Container>

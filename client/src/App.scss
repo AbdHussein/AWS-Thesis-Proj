@@ -128,6 +128,13 @@ nav {
           cursor: pointer;
           padding: 0 10px;
           color: #000;
+          a {
+            text-decoration: none;
+            color: #000;
+            width: 100%;
+            height: 100%;
+            display: block;
+          }
           &:hover {
             background-color: #eee;
           }
@@ -153,6 +160,17 @@ nav {
       input {
         width: 100%;
         height: 46px;
+        border-radius: 3px;
+        outline: none;
+        border: 1px solid #e5e7f2;
+        padding-left: 10px;
+        background-color: #f9f9f9;
+        color: #7d93b2;
+        margin-bottom: 20px;
+      }
+      select {
+        width: 100%;
+        height: 50px;
         border-radius: 3px;
         outline: none;
         border: 1px solid #e5e7f2;
@@ -284,6 +302,101 @@ nav {
         background-color: #ccc;
       }
       @include boxShadow(8px);
+    }
+  }
+  .popular-palces {
+    margin-bottom: 70px;
+    h2 {
+      text-align: center;
+      color: #697891;
+    }
+    .landing-hr {
+      height: 3px;
+      background-color: $mainHover;
+      width: 50px;
+    }
+    p {
+      color: #7d93b2;
+      text-align: center;
+      width: 600px;
+      margin: auto;
+      font-size: 14px;
+      margin-bottom: 70px;
+    }
+    .popular-slider {
+      overflow: hidden;
+      * {
+        box-sizing: border-box;
+      }
+      .single-popular {
+        float: $floatLeft;
+        width: ((100% - 4%) / 3);
+        overflow: hidden;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        height: 300px;
+        position: relative;
+        img {
+          width: 100%;
+          height: 300px;
+        }
+        &:not(:last-child) {
+          margin-right: 2%;
+        }
+        .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: $mainOverLayColor;
+          padding: 20px;
+          color: #fff;
+          span {
+            font-size: 13px;
+          }
+          svg:first-of-type {
+            color: $mainHover;
+            font-size: 15px;
+            margin-right: 7px;
+          }
+
+          div {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            h3 {
+              margin-bottom: 5px;
+            }
+            > hr {
+              background-color: #ccc;
+            }
+            p {
+              float: $floatLeft;
+              margin-bottom: 0;
+              > svg {
+                width: 30px;
+                height: 30px;
+                padding: 7px;
+                border-radius: 50%;
+                background-color: #f75c96;
+                color: #fff !important;
+                float: $floatLeft;
+              }
+              span {
+                float: $floatLeft;
+                margin-left: 10px;
+                margin-top: 3px;
+                font-size: 17px;
+                font-weight: 600;
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -829,6 +942,218 @@ hr {
         }
       }
       position: relative;
+    }
+  }
+  .reviews-head {
+    border: 1px solid #ccc;
+    border-radius: 5px 5px 0 0;
+    padding: 13px;
+    h2 {
+      margin: 0;
+      font-size: 20px;
+      color: #566985;
+      span {
+        color: $mainHover;
+      }
+    }
+    svg {
+      float: $floatRight;
+      color: $mainHover;
+      position: relative;
+      bottom: 18px;
+    }
+  }
+  .reviews-comments {
+    * {
+      box-sizing: border-box;
+    }
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    padding: 20px;
+    .comments {
+      overflow: hidden;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      .img-comment {
+        float: $floatLeft;
+        width: 20%;
+        .avatar {
+          width: 80px;
+          height: 80px;
+          font-size: 40px;
+          background-color: $mainColor;
+          left: 20px;
+        }
+      }
+      .text-comment {
+        float: $floatLeft;
+        width: 80%;
+        background-color: #f5f6fa;
+        border-radius: 5px;
+        padding: 15px;
+        position: relative;
+        &::before {
+          content: "";
+          display: block;
+          width: 0;
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+          border-right: 10px solid #f5f6fa;
+          position: absolute;
+          top: 30px;
+          left: -10px;
+        }
+        .reviews-img {
+          overflow: hidden;
+          img {
+            width: ((100% - 4%) / 3);
+            border-radius: 5px;
+            &:not(:last-child) {
+              margin-right: 2%;
+            }
+          }
+        }
+        .MuiRating-readOnly {
+          top: 15px;
+          position: absolute;
+          right: 20px;
+          svg {
+            color: #ffb400 !important;
+          }
+        }
+        h3 {
+          color: #566985;
+          margin-top: 0;
+        }
+        p {
+          color: #878c9f;
+        }
+        hr {
+          background-color: #e5e7f2;
+        }
+        span {
+          color: #878c9f;
+          svg {
+            color: $mainHover;
+          }
+        }
+      }
+    }
+  }
+  .add-reviews-head {
+    border: 1px solid #ccc;
+    margin-top: 100px;
+    padding: 20px;
+    border-radius: 5px 5px 0 0;
+    h3 {
+      margin: 0;
+      color: #566985;
+    }
+    svg {
+      float: $floatRight;
+      color: $mainHover;
+      position: relative;
+      bottom: 17px;
+    }
+  }
+  .reviews-rating {
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 20px;
+  }
+  .add-reviews {
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 20px;
+    border-radius: 0 0 5px 5px;
+    textarea {
+      box-sizing: border-box;
+      width: 100%;
+      height: 250px;
+      padding: 20px;
+      border: 1px solid #e5e7f2;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+
+    // Start ***********************
+    .inputfile {
+      display: none;
+      * {
+        box-sizing: border-box;
+      }
+    }
+    .js .inputfile {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+
+    .inputfile + label {
+      width: 94.3%;
+      font-size: 1.25rem;
+      /* 20px */
+      font-weight: 700;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      cursor: pointer;
+      display: inline-block;
+      overflow: hidden;
+      padding: 0.625rem 1.25rem;
+      border-radius: 5px;
+      background-color: #f9f9f9 !important;
+      border: 1px solid #e5e7f2;
+      text-align: center;
+      /* 10px 20px */
+    }
+
+    .no-js .inputfile + label {
+      display: none;
+    }
+
+    .inputfile:focus + label,
+    .inputfile.has-focus + label {
+      outline: 1px dotted #000;
+      outline: -webkit-focus-ring-color auto 5px;
+    }
+
+    .inputfile + label svg {
+      width: 1em;
+      height: 1em;
+      vertical-align: middle;
+      fill: currentColor;
+      margin-top: -0.25em;
+      /* 4px */
+      margin-right: 0.25em;
+      /* 4px */
+      color: $mainHover;
+      font-size: 20px !important;
+    }
+
+    .add-photos {
+      color: #7d93b2;
+      font-size: 10px;
+      display: block;
+    }
+
+    // End *************************
+
+    button {
+      background-color: $mainColor;
+      color: #fff;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      svg {
+        margin-left: 10px;
+        color: $mainHover;
+      }
     }
   }
 }
@@ -1650,8 +1975,8 @@ nav {
 
 /*dash-provider-info*/
 .dash-provider-info {
-  .your-profile{
-    h2{
+  .your-profile {
+    h2 {
       color: #566985;
     }
   }
@@ -1659,7 +1984,7 @@ nav {
     border: 1px solid #e5e7f2;
     padding: 30px;
   }
-  .upload-cover-img{
+  .upload-cover-img {
     overflow: hidden;
   }
 }
