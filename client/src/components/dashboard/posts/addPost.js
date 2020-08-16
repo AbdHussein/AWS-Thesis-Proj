@@ -4,7 +4,7 @@ import constants from '../../constants/Queries';
 const jwt = require('jsonwebtoken');
 
 class Add extends React.Component {
-   state = {
+  state = {
     text: "",
     imgUrl: null 
    };      
@@ -69,7 +69,7 @@ class Add extends React.Component {
                     </button>
                 </form>
             </div>
-        )
-    }
+    );
+  }
 }
 export default Add;
