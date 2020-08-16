@@ -224,6 +224,7 @@ CREATE TABLE `product` (
   `userID` int NOT NULL,
   `rating` int NOT NULL,
   `quantity` int NOT NULL,
+  `pic` varchar(3000) default NULL,
   PRIMARY KEY (`id`),
   KEY `userID` (`userID`),
   CONSTRAINT `product_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`id`)
@@ -238,6 +239,33 @@ LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+--
+-- Table structure for table `review`
+--
+
+DROP TABLE IF EXISTS `review`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `review` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userID` int NOT NULL,
+  `providerID` int NOT NULL,
+  `text` varchar(500) NOT NULL,
+  `rating` int NOT NULL,
+  `pics` varchar(5000) default null,
+  PRIMARY KEY (`id`),
+  KEY `userID` (`userID`),
+  KEY `providerID` (`providerID`),
+  CONSTRAINT `review_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`id`),
+  CONSTRAINT `review_ibfk_2` FOREIGN KEY (`providerID`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `review`
+--
 
 --
 -- Table structure for table `roles`
