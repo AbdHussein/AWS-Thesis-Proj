@@ -204,6 +204,15 @@ const getAllReviews = (providerID) => {
   return q;
 };
 
+const addReview = (providerID, userID, text, rating, pic) => {
+  const q = `mutation{
+    addReview(providerID:${providerID}, userID:${userID}, text:"${text}",rating:${rating}, date:"${getDate()}",pic:"${pic}"){
+      providerID
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -218,3 +227,4 @@ module.exports.addComment = addComment;
 module.exports.getAllCommentsByPostID = getAllCommentsByPostID;
 module.exports.getAllGalary = getAllGalary;
 module.exports.getAllReviews = getAllReviews;
+module.exports.addReview = addReview;

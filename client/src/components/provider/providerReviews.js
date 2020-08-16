@@ -10,42 +10,43 @@ import {
 import Avatar from '@material-ui/core/Avatar';
 import Rating from '@material-ui/lab/Rating';
 import Constants from '../constants/Queries';
+import ImageUpload from '../imageUpload/imageUpload';
 import { ProvidedRequiredArgumentsOnDirectivesRule } from 'graphql/validation/rules/ProvidedRequiredArgumentsRule';
 
 class ProviderReviews extends React.Component {
   state = {
     rating: '2.5',
     text: '',
-    pics: '',
+    pic: '',
     reviews: [],
   };
   async componentDidMount() {
-    var inputs = document.querySelectorAll('.inputfile');
-    Array.prototype.forEach.call(inputs, function (input) {
-      var label = input.nextElementSibling,
-        labelVal = label.innerHTML;
+    // var inputs = document.querySelectorAll('.inputfile');
+    // Array.prototype.forEach.call(inputs, function (input) {
+    //   var label = input.nextElementSibling,
+    //     labelVal = label.innerHTML;
 
-      input.addEventListener('change', function (e) {
-        var fileName = '';
-        if (this.files && this.files.length > 1)
-          fileName = (this.getAttribute('data-multiple-caption') || '').replace(
-            '{count}',
-            this.files.length
-          );
-        else fileName = e.target.value.split('\\').pop();
+    //   input.addEventListener('change', function (e) {
+    //     var fileName = '';
+    //     if (this.files && this.files.length > 1)
+    //       fileName = (this.getAttribute('data-multiple-caption') || '').replace(
+    //         '{count}',
+    //         this.files.length
+    //       );
+    //     else fileName = e.target.value.split('\\').pop();
 
-        if (fileName) label.querySelector('span').innerHTML = fileName;
-        else label.innerHTML = labelVal;
-      });
+    //     if (fileName) label.querySelector('span').innerHTML = fileName;
+    //     else label.innerHTML = labelVal;
+    //   });
 
-      // Firefox bug fix
-      input.addEventListener('focus', function () {
-        input.classList.add('has-focus');
-      });
-      input.addEventListener('blur', function () {
-        input.classList.remove('has-focus');
-      });
-    });
+    //   // Firefox bug fix
+    //   input.addEventListener('focus', function () {
+    //     input.classList.add('has-focus');
+    //   });
+    //   input.addEventListener('blur', function () {
+    //     input.classList.remove('has-focus');
+    //   });
+    // });
     await this.getAllReviews();
   }
 
@@ -57,13 +58,36 @@ class ProviderReviews extends React.Component {
     });
   }
 
+  updateImgUrl(url) {
+    this.setState({
+      pic: url,
+    });
+  }
+
   handelChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
     });
   }
 
-  addReview() {}
+  async addReview() {
+    if (localStorage.getItem('xTown')) {
+      const getUserByToken = Constants.getUserByToken(
+        localStorage.getItem('xTown')
+      );
+      const requestForUser = await Constants.request(getUserByToken);
+      var user = requestForUser.data.data.user;
+      const addReview = Constants.addReview(
+        this.props.id,
+        user.id,
+        this.state.text,
+        this.state.rating,
+        this.state.pic
+      );
+      const request = await Constants.request(addReview);
+      this.getAllReviews();
+    }
+  }
 
   render() {
     return (
@@ -115,20 +139,7 @@ class ProviderReviews extends React.Component {
               name='text'
               onChange={this.handelChange.bind(this)}
             ></textarea>
-            <div class='box'>
-              <input
-                type='file'
-                name='pics'
-                id='file-1'
-                class='inputfile inputfile-1'
-                data-multiple-caption='{count} files selected'
-                onChange={this.handelChange.bind(this)}
-              />
-              <label for='file-1'>
-                <FontAwesomeIcon icon={faImage} />{' '}
-                <span className='add-photos'>Add Photos</span>
-              </label>
-            </div>
+            <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} />
             <button onClick={this.addReview.bind(this)}>
               Submit Reviews <FontAwesomeIcon icon={faPaperPlane} />
             </button>
