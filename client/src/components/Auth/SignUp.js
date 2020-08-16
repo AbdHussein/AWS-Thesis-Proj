@@ -56,16 +56,12 @@ export default function SignUp(props) {
 
     console.log(query);
     Constants.request(query).then(response => {
-      // console.log('from then');
-      if(response.data.addUser) {
-        console.log(response.data.addUser);
+      if(response.data.data.addUser) {
         props.history.push('/signIn');
-      } else {
-        console.log(response);
+      } else if (response.data.errors){
         alert('Error in sign up');
       }
     }).catch(err => {
-      // console.log('from catch');
       console.log(err);
       alert('Error in sign up');
     });    

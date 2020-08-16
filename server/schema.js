@@ -345,17 +345,6 @@ const Mutation = new GraphQLObjectType({
         var crptPass = await bcrypt.hash(args.password, 10);
         args.password = crptPass;
         return await knex('User').insert(args);
-        //   return await knex('User').insert({
-        //     username: args.username,
-        //     email: args.email,
-        //     password: crptPass,
-        //     mobile: args.mobile,
-        //     address: args.address,
-        //     pay_service: '',
-        //     service_name: '',
-        //     location: '',
-        //   });
-        // },
       },
     },
     deleteUser: {
