@@ -399,6 +399,64 @@ nav {
       }
     }
   }
+  .landing-promo {
+    background-image: url("./images/11.jpg");
+    background-size: cover !important;
+    position: relative;
+    height: 55vh;
+    margin-bottom: 70px;
+    margin-top: 70px;
+    overflow: hidden;
+    .overlay {
+      @extend %overlay;
+      text-align: center;
+      padding: 20px;
+    }
+    h5 {
+      font-size: 14px;
+      color: #fff;
+      padding-bottom: 0px;
+    }
+    p {
+      color: #fff;
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      font-family: "Raleway", sans-serif;
+      margin-bottom: 10px !important;
+      width: 100%;
+    }
+    button {
+      background-color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 50px;
+      @include boxShadow(4px);
+      color: #7d93b2;
+      outline: none;
+      cursor: pointer;
+      margin-top: 60px;
+      svg {
+        background-color: $mainHover;
+        color: #fff;
+        padding: 15px;
+        border-radius: 50%;
+        margin-right: 10px;
+        @extend %transition;
+      }
+      span {
+        vertical-align: top;
+        margin-top: 15px;
+        font-weight: 600;
+        display: inline-block;
+      }
+      &:hover {
+        svg {
+          background-color: $mainColor;
+        }
+      }
+    }
+  }
 }
 
 /* =============================== End Landing Page =============================== */
@@ -1011,7 +1069,7 @@ hr {
             width: ((100% - 4%) / 3);
             border-radius: 5px;
             &:not(:last-child) {
-              margin-right: 2%;
+              margin-right: 1%;
             }
           }
         }
