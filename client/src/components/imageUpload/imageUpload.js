@@ -12,6 +12,7 @@ class ImageUpload extends React.Component {
   handleImageUpload = () => {
     // get the first input element with the type of file
     const { files } = document.querySelector('input[type="file"]');
+    console.log(document.querySelector('input[type="file"]').files);
     const formData = new FormData();
     formData.append('file', files[0]);
     // replace this with your upload preset name
@@ -61,7 +62,7 @@ class ImageUpload extends React.Component {
         <section className='left-side'>
           <form>
             <div className='form-group'>
-              <input type='file' multiple/>
+              <input type='file' multiple />
             </div>
             <button
               type='button'
