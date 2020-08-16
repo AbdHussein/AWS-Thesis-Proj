@@ -1,6 +1,8 @@
 import React from 'react';
 import constants from '../constants/Queries';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
 const jwt = require('jsonwebtoken');
 
 class ImageUpload extends React.Component {
@@ -11,6 +13,34 @@ class ImageUpload extends React.Component {
     selectedFile: null,
   };
 
+  componentDidMount() {
+    var inputs = document.querySelectorAll('.inputfile');
+    Array.prototype.forEach.call(inputs, function (input) {
+      var label = input.nextElementSibling,
+        labelVal = label.innerHTML;
+
+      input.addEventListener('change', function (e) {
+        var fileName = '';
+        if (this.files && this.files.length > 1)
+          fileName = (this.getAttribute('data-multiple-caption') || '').replace(
+            '{count}',
+            this.files.length
+          );
+        else fileName = e.target.value.split('\\').pop();
+
+        if (fileName) label.querySelector('span').innerHTML = fileName;
+        else label.innerHTML = labelVal;
+      });
+
+      // Firefox bug fix
+      input.addEventListener('focus', function () {
+        input.classList.add('has-focus');
+      });
+      input.addEventListener('blur', function () {
+        input.classList.remove('has-focus');
+      });
+    });
+  }
   onFileChange = (event) => {
     // Update the state
     this.setState({ selectedFile: event.target.files[0] }, async () => {
@@ -49,11 +79,25 @@ class ImageUpload extends React.Component {
       <main className='App'>
         <section className='left-side'>
           <form>
-            <div className='form-group'>
+            {/* <div className='form-group'>
               <input type='file' onChange={this.onFileChange} />
               <br></br>
             </div>
-            <span>{}</span>
+            <span>{}</span> */}
+            <div class='box'>
+              <input
+                type='file'
+                name='pics'
+                id='file-1'
+                class='inputfile inputfile-1'
+                data-multiple-caption='{count} files selected'
+                onChange={this.onFileChange.bind(this)}
+              />
+              <label for='file-1'>
+                <FontAwesomeIcon icon={faImage} />{' '}
+                <span className='add-photos'>Add Photos</span>
+              </label>
+            </div>
           </form>
         </section>
       </main>
