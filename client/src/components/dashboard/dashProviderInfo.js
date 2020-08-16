@@ -2,9 +2,10 @@ import React from "react";
 import ImageUpload from "../imageUpload/imageUpload";
 class DashProviderInfo extends React.Component {
   state = {
+    serviceName:"",
     email: "",
-    phone: "",
-    adress: "",
+    mobile: "",
+    address: "",
     facebook: "",
     instgram: "",
     twitter: "",
@@ -15,23 +16,22 @@ class DashProviderInfo extends React.Component {
       [e.target.name]: e.target.value,
     });
   }
-  handleSubmit(event) {
+  handleClick(event) {
     event.preventDefault();
   }
   render() {
     return (
       <div className="dash-provider-info">
         <div className="your-profile">
-          <h2>Your Profile</h2>
+          <h1>Your Profile</h1>
           <div className="your-profile-div">
-            <form onSubmit={this.handleSubmit}>
-              <label for="service-name">Service name: </label>
+            <form>
+              <label for="serviceName">Service name: </label>
               <input
                 type="text"
-                id="service-name"
-                name="service-name"
+                id="serviceName"
+                name="serviceName"
                 placeholder="Nadera Mobile"
-                disabled
               ></input>
               <br />
               <br />
@@ -46,11 +46,11 @@ class DashProviderInfo extends React.Component {
               ></input>
               <br />
               <br />
-              <label for="phone">Phone: </label>
+              <label for="mobile">Mobile: </label>
               <input
                 type="text"
-                id="phone"
-                name="phone"
+                id="mobile"
+                name="mobile"
                 placeholder="059994415"
                 value={this.state.phone}
                 onChange={this.handelChange.bind(this)}
@@ -60,28 +60,33 @@ class DashProviderInfo extends React.Component {
               <label for="adress">Adress: </label>
               <input
                 type="text"
-                id="adress"
-                name="adress"
+                id="address"
+                name="address"
                 placeholder="Palestine Gaza"
                 value={this.state.adress}
                 onChange={this.handelChange.bind(this)}
               ></input>
               <br />
               <br />
-              <input type="submit" value="Edit"></input>
+              <button class="button-edit" onClick={this.handleClick}>
+                Edit
+              </button>
             </form>
-          </div>
+          
           <div className="upload-cover-img">
             <label for="Change-cover">Change your cover photo : </label>
             <br />
             <br />
-                    <ImageUpload ButtonText={"Upload Image"} />
-                    <br />
+            <ImageUpload ButtonText={"Upload Image"} />
             <br />
+            <br />
+            </div>
           </div>
         </div>
 
         <div className="your-socials">
+          <h1>Your Socials</h1>
+          <div className="your-socials-div">
           <form onSubmit={this.handleSubmit}>
             <label for="facebook">Facebook: </label>
             <input
@@ -117,9 +122,12 @@ class DashProviderInfo extends React.Component {
             <br />
             <br />
             <br />
-            <input type="submit" value="change"></input>
+            <button class="button-change" onClick={this.handleClick}>
+                Change
+              </button>
           </form>
-        </div>
+          </div>
+          </div>
       </div>
     );
   }

@@ -3,7 +3,7 @@ import ImageUpload from "../../imageUpload/imageUpload";
 import PermMediaIcon from "@material-ui/icons/PermMedia";
 class Description extends React.Component {
   state = {
-    text: "",
+    description: "",
   };
 
   handelChange(e) {
@@ -13,24 +13,26 @@ class Description extends React.Component {
   }
   render() {
     return (
-      <div className="description">
+      <div className="description-dash">
         {/* <div className="add-gallery">
                     <h3>Add Photes To Your Gallery</h3>
                    <ImageUpload ButtonText = {"Add image"}/>
                 </div> */}
         <div className="description-div">
           <h2>Add your Description</h2>
+          <div className="description-div-inner">
           <form>
             <textarea
               className="post-area"
-              name="text"
-              cols="80"
-              rows="20"
+              name="description"
+              cols="60"
+              rows="10"
               value={this.state.text}
               onChange={this.handelChange.bind(this)}
             ></textarea>
             <button className="description-btn">Add Description</button>
           </form>
+      </div>
         </div>
 
         <div className="gallrey">

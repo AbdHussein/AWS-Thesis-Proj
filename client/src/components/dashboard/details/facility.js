@@ -41,7 +41,7 @@ class Facility extends React.Component {
     return (
       <div className="facility">
         <h2>What are facilities your shop have? </h2>
-
+        <div className="facility-div">
         <form onSubmit={this.handleSubmit}>
           {this.state.facility.map((item) => (
             <li>
@@ -59,7 +59,8 @@ class Facility extends React.Component {
           <br />
           <input type="submit" value="Submit" />
         </form>
-      </div>
+        </div>
+        </div>
     );
   }
 }
