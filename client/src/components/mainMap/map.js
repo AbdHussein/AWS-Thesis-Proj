@@ -55,7 +55,7 @@ function MyComponent(props) {
 
   const locationData = (stringObj) => {
     return JSON.parse(stringObj);
-  }
+  };
 
   const mapRef = React.useRef();
   const onMapload = React.useCallback((map) => {
@@ -106,7 +106,7 @@ function MyComponent(props) {
       >
         {allProviders &&
           allProviders.map((provider, index) => {
-            var loc = locationData(provider.location)
+            var loc = locationData(provider.location);
             return (
               <Marker
                 key={index}
@@ -117,11 +117,23 @@ function MyComponent(props) {
                 onClick={() => {
                   setSelectedProvider(provider);
                   console.log(selectedProvider);
-                  // console.log(JSON.parse(selectedProvider.location).lat);      
+                  // console.log(JSON.parse(selectedProvider.location).lat);
                 }}
               />
             );
           })}
+        <Marker
+          position={{
+            lat: lat,
+            lng: lng,
+          }}
+          icon={{
+            url: './currLoc.png',
+            scaledSize: new window.google.maps.Size(40, 40),
+            origin: new window.google.maps.Point(0, 0),
+            anchor: new window.google.maps.Point(15, 15),
+          }}
+        />
         {selectedProvider && (
           <InfoWindow
             position={{
@@ -237,11 +249,13 @@ class Map extends React.Component {
     this.setState({
       category,
     });
+
     const USERS = Constants.userByCategory(category);
     const request = await Constants.request(USERS);
     this.setState({
       providers: request.data.data.usersByCategory,
     });
+
     if (localStorage.getItem('xTown')) {
       const query = Constants.getUserByToken(localStorage.getItem('xTown'));
       const request = await Constants.request(query);
@@ -251,6 +265,7 @@ class Map extends React.Component {
       });
     }
   }
+
   render() {
     return (
       <div className='map'>

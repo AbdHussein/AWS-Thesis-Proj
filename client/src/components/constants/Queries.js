@@ -58,7 +58,7 @@ const deletePost = (id) => {
     }
   }`;
   return mutation;
-}
+};
 const addComment = (userID, postID, text) => {
   const q = `mutation {
     addComment(userID:${userID}, postID:${postID}, text:"${text}", date:"${getDate()}"){
@@ -69,13 +69,13 @@ const addComment = (userID, postID, text) => {
 };
 
 const login = (email, password) => {
-  const query = `query {
+  const mutation = `mutation {
     login(email: "${email}", password: "${password}"){
       token
       RoleID
     }
   }`;
-  return query;
+  return mutation;
 };
 
 const request = async (query) => {
@@ -90,8 +90,9 @@ const request = async (query) => {
 
 const signUp = (username, email, password, mobile) => {
   const q = `mutation{
-    addUser(username:"${username}", email:"${email}", password:"${password}",RoleID:"3", mobile:${mobile},avatar:"${username[0]}",serviceName:"",address:"", cover:"", video:"",description:""){
-      token
+    addUser(username:"${username}", email:"${email}", password:"${password}",RoleID:"3", mobile: ${Number(mobile)},avatar:"${username[0]}",
+    serviceName:"", address:"", cover:"", video:"", description:""){
+      id
     }
   }`;
   return q;
@@ -165,6 +166,21 @@ const getAllCommentsByPostID = (postID) => {
       postID
       text
       date
+      user {
+        username
+        avatar
+      }
+    }
+  }`;
+  return q;
+};
+
+const getAllGalary = (userID) => {
+  const q = `query{
+    gallery(userID: ${userID}){
+      id 
+      userID
+      image
     }
   }`;
   return q;
@@ -182,3 +198,4 @@ module.exports.deletePost = deletePost;
 module.exports.getProviderById = getProviderById;
 module.exports.addComment = addComment;
 module.exports.getAllCommentsByPostID = getAllCommentsByPostID;
+module.exports.getAllGalary = getAllGalary;

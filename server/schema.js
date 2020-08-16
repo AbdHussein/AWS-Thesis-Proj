@@ -40,7 +40,7 @@ const facilityType = new GraphQLObjectType({
   name: 'facility',
   fields: () => ({
     id: { type: GraphQLID, unique: true },
-    name: { type: GraphQLString }
+    name: { type: GraphQLString },
   }),
 });
 
@@ -89,6 +89,12 @@ const CommentType = new GraphQLObjectType({
     postID: { type: GraphQLID },
     text: { type: GraphQLString },
     date: { type: GraphQLString },
+    user: {
+      type: UserType,
+      async resolve(root, args) {
+        return await knex('User').select().where({ id: root.userID }).first();
+      },
+    },
   }),
 });
 
@@ -236,15 +242,12 @@ const RootQuery = new GraphQLObjectType({
       },
     },
     gallery: {
-      type: GalleryType,
+      type: new GraphQLList(GalleryType),
       args: {
         userID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Gallery')
-          .select()
-          .where({ userID: args.userID })
-          .first();
+        return await knex('Gallery').select().where({ userID: args.userID });
       },
     },
     getRoles: {
@@ -274,25 +277,6 @@ const RootQuery = new GraphQLObjectType({
         return await knex('Roles').select().where({ id: args.id }).first();
       },
     },
-    login: {
-      type: UserType,
-      args: {
-        email: { type: new GraphQLNonNull(GraphQLString) },
-        password: { type: new GraphQLNonNull(GraphQLString) },
-      },
-      async resolve(root, args) {
-        //login
-        const data = await knex('user').select('*').where({ email: args.email }).first();
-        if (await bcrypt.compare(args.password, data.password)) {
-          const token = jwt.sign({ id: data.id, username: data.username, email: data.email }, process.env.SECRET, {
-            algorithm: "HS256",
-            expiresIn: "2 days"
-          });
-          await knex('user').update({ token: token }).where({ id: data.id });
-        }
-        return await knex('user').select('*').where({ email: args.email }).first();
-      },
-    },
     getCategoryByID: {
       type: CategoryType,
       args: {
@@ -305,7 +289,6 @@ const RootQuery = new GraphQLObjectType({
           .first();
       },
     },
-    
   },
 });
 
@@ -313,6 +296,35 @@ const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
     // for user table
+    login:{
+      type: UserType,
+      args: {
+        email: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(root, args) {
+        //login
+       try{
+          const data = await knex('user').select('*').where({ email: args.email }).first();
+          // console.log(data.password);
+          if(data.password) {
+            if(await bcrypt.compare(args.password, data.password)) {
+              const token = jwt.sign({ id: data.id, username: data.username, email: data.email }, 
+                process.env.SECRET, {
+                algorithm: "HS256",
+                expiresIn: "2 days"
+              });
+              await knex('user').update({ token: token }).where({ email: args.email });              
+              return await knex('user').select('*').where({ email: args.email }).first();
+            }
+          } else {
+            console.log('invalid username or password');
+          }
+       } catch(err) {
+         console.log(err);
+       }
+      },
+    },
     addUser: {
       type: UserType,
       args: {

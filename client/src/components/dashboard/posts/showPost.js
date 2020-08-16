@@ -15,7 +15,7 @@ class Show extends React.Component {
     const query = Constants.getUserByToken(localStorage.getItem('xTown'));
     const requestForProviderID = await Constants.request(query);
     const provider = requestForProviderID.data.data.user;
-    const allPostsQuery = Constants.getPostByProviderID(provider.id);
+    const allPostsQuery = await Constants.getPostByProviderID(provider.id);
     const requestForPosts = await Constants.request(allPostsQuery);
     this.setState({
       posts: requestForPosts.data.data.posts,
@@ -47,7 +47,6 @@ class Show extends React.Component {
   }
 
   render() {
-
     return (
       <div className='dash-show'>
         {this.state.posts.map((post, index) => {

@@ -19,8 +19,11 @@ class Landing extends React.Component {
 
   async componentDidMount() {
     if (localStorage.getItem('xTown')) {
+
       const query = Constants.getUserByToken(localStorage.getItem('xTown'));
+      console.log(query);
       const request = await Constants.request(query);
+      console.log(request);
       const { user } = request.data.data;
       this.setState({
         user,
@@ -120,7 +123,7 @@ class Landing extends React.Component {
         <div className="popular-palces">
           <Container>
             <h2>Popular Palces</h2>
-            <hr />
+            <hr className="landing-hr" />
             <p>Mauris ac maximus neque. Nam in mauris quis libero sodales eleifend. Morbi varius, nulla sit amet rutrum elementum.</p>
             <div className="popular-slider">
               <div className="single-popular">
@@ -130,7 +133,7 @@ class Landing extends React.Component {
                     <h3>Gym in the center</h3>
                     <span><FontAwesomeIcon icon={faMapMarkerAlt} />  70 Bright St New York, USA</span>
                     <hr />
-                    <p><FontAwesomeIcon icon={faMobileAlt} /> <span>Phones</span></p>
+                    <p><FontAwesomeIcon icon={faMobileAlt} /> <span className="categories">Phones</span></p>
                   </div>
                 </div>
               </div>
