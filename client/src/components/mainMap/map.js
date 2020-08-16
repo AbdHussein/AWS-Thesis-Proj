@@ -114,6 +114,10 @@ function MyComponent(props) {
                   lat: Number(loc.lat),
                   lng: Number(loc.lng),
                 }}
+                icon={{
+                  url: './mapIcon.svg',
+                  scaledSize: new window.google.maps.Size(40, 40),
+                }}
                 onClick={() => {
                   setSelectedProvider(provider);
                   console.log(selectedProvider);
