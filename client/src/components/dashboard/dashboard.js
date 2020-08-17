@@ -29,7 +29,6 @@ class Dashboard extends React.Component {
     $('.dashboard-sidebar div').on('click', function () {
       let dashboard = $(this).data('dashboard');
       $(dashboard).show().siblings().hide();
-      console.log($(this).data('dashboard'));
     });
 
     const query = Constants.getUserByToken(localStorage.getItem('xTown'));

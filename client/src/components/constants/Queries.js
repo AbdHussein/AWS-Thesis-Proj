@@ -231,6 +231,15 @@ const addDesc = (id, desc) => {
   return q;
 };
 
+const addVideo = (id, videoUrl) => {
+  const q = `mutation{
+    editUser(id:${id}, video:"${videoUrl}"){
+      id
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -248,3 +257,4 @@ module.exports.getAllReviews = getAllReviews;
 module.exports.addReview = addReview;
 module.exports.addPhoto = addPhoto;
 module.exports.addDesc = addDesc;
+module.exports.addVideo = addVideo;
