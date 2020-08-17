@@ -70,7 +70,7 @@ const addComment = (userID, postID, text) => {
 
 const addProduct = (name, userID, category, price, pic) => {
   const mutation = `mutation {
-    addProduct(name:"${name}", userID: ${userID}, category:"${category}", price:${price}, pic:"${pic}"){
+    addProduct(name:"${name}", userID: ${userID}, category:"${category}", price:${price}, pic:"${pic}", rating:0, quantity:0){
       id
     }
   }`;
