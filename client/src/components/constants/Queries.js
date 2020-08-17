@@ -240,6 +240,24 @@ const addVideo = (id, videoUrl) => {
   return q;
 };
 
+const addFacilities = (id, arrOfFac) => {
+  const q = `mutation{
+    editUser(id:${id}, facilities:"${arrOfFac}"){
+      id
+    }
+  }`;
+  return q;
+};
+
+const getFacilities = (userID) => {
+  const q = `query {
+    user(id:${userID}){
+      facilities
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -258,3 +276,5 @@ module.exports.addReview = addReview;
 module.exports.addPhoto = addPhoto;
 module.exports.addDesc = addDesc;
 module.exports.addVideo = addVideo;
+module.exports.addFacilities = addFacilities;
+module.exports.getFacilities = getFacilities;
