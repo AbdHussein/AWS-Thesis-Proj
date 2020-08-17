@@ -89,7 +89,7 @@ class ProviderDetails extends React.Component {
                 {this.state.allFs &&
                   this.state.allFs.map((fac, i) => {
                     return (
-                      <li>
+                      <li key={i}>
                         <FontAwesomeIcon
                           icon={
                             this.state.facility[fac.id] &&
