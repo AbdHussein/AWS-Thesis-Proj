@@ -1,5 +1,8 @@
 import React from 'react';
 import constants from '../constants/Queries';
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
 const jwt = require('jsonwebtoken');
 
 class ImageUpload extends React.Component {
@@ -7,51 +10,67 @@ class ImageUpload extends React.Component {
     imageUrl: null,
     imageAlt: null,
     postStatus: '',
+    selectedFile: null,
+  };
+
+  componentDidMount() {
+    var inputs = document.querySelectorAll('.inputfile');
+    Array.prototype.forEach.call(inputs, function (input) {
+      var label = input.nextElementSibling,
+        labelVal = label.innerHTML;
+
+      input.addEventListener('change', function (e) {
+        var fileName = '';
+        if (this.files && this.files.length > 1)
+          fileName = (this.getAttribute('data-multiple-caption') || '').replace(
+            '{count}',
+            this.files.length
+          );
+        else fileName = e.target.value.split('\\').pop();
+
+        if (fileName) label.querySelector('span').innerHTML = fileName;
+        else label.innerHTML = labelVal;
+      });
+
+      // Firefox bug fix
+      input.addEventListener('focus', function () {
+        input.classList.add('has-focus');
+      });
+      input.addEventListener('blur', function () {
+        input.classList.remove('has-focus');
+      });
+    });
+  }
+  onFileChange = (event) => {
+    // Update the state
+    this.setState({ selectedFile: event.target.files[0] }, async () => {
+      this.handleImageUpload();
+    });
   };
 
   handleImageUpload = () => {
-    // get the first input element with the type of file
-    const { files } = document.querySelector('input[type="file"]');
     const formData = new FormData();
-    formData.append('file', files[0]);
-    // replace this with your upload preset name
+    formData.append('file', this.state.selectedFile);
     formData.append('upload_preset', 'pm0oht2i');
-    const options = {
-      method: 'POST',
-      body: formData,
-    };
-    // replace cloudname with your Cloudinary cloud_name
-    return fetch('https://api.Cloudinary.com/v1_1/xtown/image/upload', options)
-      .then((res) => res.json())
-      .then((res) => {
+    console.log(this.state.selectedFile);
+    axios
+      .post('https://api.cloudinary.com/v1_1/xtown/image/upload', formData)
+      .then((response) => {
+        console.log(response);
         this.setState(
           {
-            imageUrl: res.secure_url,
-            imageAlt: `An image of ${res.original_filename}`,
+            imageUrl: response.data.secure_url,
+            imageAlt: `An image of ${response.data.original_filename}`,
           },
           async () => {
-            try {
-              const data = jwt.verify(
-                localStorage.getItem('xTown'),
-                'somesuperdupersecret',
-                {
-                  algorithm: 'HS256',
-                }
-              );
-
-              const addPost = await constants.addPost(
-                data.id,
-                this.state.imageUrl,
-                this.props.text
-              );
-              const request = await constants.request(addPost);
-            } catch (err) {
-              console.log(err);
-            }
+            await this.props.getImgUrl(response.data.secure_url);
           }
         );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert('Failed to upload file');
+      });
   };
 
   render() {
@@ -60,17 +79,25 @@ class ImageUpload extends React.Component {
       <main className='App'>
         <section className='left-side'>
           <form>
-            <div className='form-group'>
-              <input type='file' multiple/>
+            {/* <div className='form-group'>
+              <input type='file' onChange={this.onFileChange} />
+              <br></br>
             </div>
-            <button
-              type='button'
-              className='btn'
-              onClick={this.handleImageUpload}
-            >
-              {this.props.ButtonText}
-            </button>
-            <span>{}</span>
+            <span>{}</span> */}
+            <div class='box'>
+              <input
+                type='file'
+                name='pics'
+                id='file-1'
+                class='inputfile inputfile-1'
+                data-multiple-caption='{count} files selected'
+                onChange={this.onFileChange.bind(this)}
+              />
+              <label for='file-1'>
+                <FontAwesomeIcon icon={faImage} />{' '}
+                <span className='add-photos'>Add Photos</span>
+              </label>
+            </div>
           </form>
         </section>
       </main>

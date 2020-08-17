@@ -3,11 +3,13 @@ import { Container } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import Navbar from '../mainComp/navbar';
 
 class Feeds extends React.Component {
     render() {
         return (
             <div className="feeds">
+                {/* <Navbar /> */}
                 <header>
                     <div className="overlay">
                         <Container>
