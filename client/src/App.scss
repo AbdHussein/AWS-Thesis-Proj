@@ -2212,6 +2212,27 @@ nav {
 }
 
 /* End Feeds Page */
+/* Start FavProvider's Page */
+
+.fav-provider {
+  margin: 70px auto;
+  * {
+    box-sizing: border-box;
+  }
+  overflow: hidden;
+  .fav-content {
+    float: $floatLeft;
+    width: 69%;
+    background-color: #ddd;
+  }
+  .fav-sidebar {
+    float: $floatRight;
+    width: 29%;
+    background-color: #ccc;
+  }
+}
+
+/* End FavProvider's Page */
 ///////////////////////////////////////////////////
 /*Store Dashboard*/
 .product-data {

@@ -10,6 +10,7 @@ import signIn from './components/Auth/SignIn';
 import signUp from './components/Auth/SignUp';
 import MyCart from './components/provider/myCart';
 import Feeds from './components/landing/feeds';
+import FavProviders from './components/provider/favProvider';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/signUp' component={signUp} />
           <Route path='/mycart' component={MyCart} />
           <Route path='/feeds' component={Feeds} />
+          <Route path='/favprovider' component={FavProviders} />
         </Switch>
       </div>
     </Router>
