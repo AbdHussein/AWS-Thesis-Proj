@@ -1,6 +1,6 @@
 /* Start Main Var */
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Montserrat&family=Open+Sans&family=Oswald&family=Roboto&display=swap');
-$fontFamily: 'Lobster', cursive;
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Montserrat&family=Open+Sans&family=Oswald&family=Roboto&display=swap");
+$fontFamily: "Lobster", cursive;
 $floatLeft: left;
 $floatRight: right;
 $mainColor: #2e3f6e;
@@ -225,7 +225,7 @@ nav {
 .landing {
   header {
     height: 90vh;
-    background-image: url('../src/images/1.jpg');
+    background-image: url("../src/images/1.jpg");
     position: relative;
     @extend %cover;
     .overlay {
@@ -416,7 +416,7 @@ nav {
 
 .provider-header {
   height: 80vh;
-  background-image: url('./images/6.jpg');
+  background-image: url("./images/6.jpg");
   position: relative;
   @extend %cover;
   .overlay {
@@ -995,7 +995,7 @@ hr {
         padding: 15px;
         position: relative;
         &::before {
-          content: '';
+          content: "";
           display: block;
           width: 0;
           border-top: 10px solid transparent;
@@ -1171,7 +1171,7 @@ hr {
         font-size: 15px;
         font-weight: 600;
         color: #566985;
-        font-family: 'Nunito', sans-serif;
+        font-family: "Nunito", sans-serif;
         margin: 0;
       }
       svg {
@@ -1346,7 +1346,7 @@ hr {
             color: #878c9f;
           }
           &::before {
-            content: '';
+            content: "";
             display: block;
             width: 0;
             border-top: 15px solid transparent;
@@ -1577,7 +1577,7 @@ p {
   background: #b5b5b56b;
 }
 .footer-news .last-news h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1619,7 +1619,7 @@ p {
   padding-bottom: 25px;
 }
 .footer-news .twitter h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1643,7 +1643,7 @@ p {
   position: relative;
 }
 .footer-news .twitter ul li::after {
-  content: '';
+  content: "";
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(255, 255, 255, 0.11);
   border-bottom: 10px solid transparent;
@@ -1693,7 +1693,7 @@ h1 {
   padding: 30px;
 }
 .dash-show {
-  h1{
+  h1 {
     color: #566985;
   }
 }
@@ -1935,17 +1935,19 @@ nav {
     color: #566985;
     margin-bottom: 30px;
   }
-  .post-area{
+  .post-area {
     width: 60%;
   }
 }
-.description-div-inner,.upload-gallrey-img{
+.description-div-inner,
+.upload-gallrey-img {
   border: 1px solid #4db7fe;
   border-radius: 10px;
   padding: 30px;
   overflow: hidden;
 }
-.description-btn , .upload-gallery{
+.description-btn,
+.upload-gallery {
   background: #384f95;
   position: relative;
   padding: 10px 30px;
@@ -1962,11 +1964,10 @@ nav {
 .description-div {
   overflow: hidden;
 }
-.gallrey{
-  h2{
-    margin-top:40px;
+.gallrey {
+  h2 {
+    margin-top: 40px;
   }
-  
 }
 /*Demo && Thumbnail*/
 .upload-Thumbnail {
@@ -1985,7 +1986,7 @@ nav {
   h2 {
     color: #566985;
   }
-  input[type='submit'] {
+  input[type="submit"] {
     background: #384f95;
     float: left;
     position: relative;
@@ -2024,7 +2025,8 @@ nav {
   border-radius: 20px;
   padding: 30px;
 }
-.upload-cover-img ,.upload-avatar-img{
+.upload-cover-img,
+.upload-avatar-img {
   overflow: hidden;
 }
 
@@ -2062,12 +2064,10 @@ nav {
   border: 1px solid #4db7fe;
   border-radius: 20px;
   padding: 30px;
-
 }
-.store-dashboard{
-
-  h2{
-    color:#566985;
+.store-dashboard {
+  h2 {
+    color: #566985;
   }
 }
 .product-data input[type="text"] {
@@ -2087,7 +2087,7 @@ nav {
   display: block;
   margin-top: 25px;
 }
-.add-product{
+.add-product {
   background: #384f95;
   position: relative;
   padding: 10px 30px;
@@ -2101,4 +2101,91 @@ nav {
   font-size: 12px;
   font-weight: 500;
   margin-top: 20px;
+}
+////////////////////////////////////////////////////////////////////////
+/*Working-hours-dash*/
+.dash-working-hours {
+  h1 {
+    color: #566985;
+    margin-top: 57px;
+  }
+}
+.Working-hours-dash {
+  border: 1px solid #4db7fe;
+  border-radius: 20px;
+  padding: 30px;
+  padding-top: 10px;
+}
+.header-working-hour {
+  display: inline-flex;
+  width: 100%;
+}
+.day-div {
+  width: 33.333%;
+  float: left;
+  color: $mainColor;
+}
+.from-div {
+  ul {
+    padding-left: 0px;
+    list-style: none;
+  }
+  input[type="time"] {
+    border: 1px solid #e5e7f2;
+    background: #f9f9f9;
+    outline-color: $mainHover;
+    outline-style: $mainHover;
+  }
+  width: 33.333%;
+  color: $mainColor;
+}
+.to-div {
+  ul {
+    padding-left: 0px;
+    list-style: none;
+  }
+  input[type="time"] {
+    border: 1px solid #e5e7f2;
+    background: #f9f9f9;
+    outline-color: $mainHover;
+    outline-style: $mainHover;
+  }
+  width: 33.333%;
+  float: right;
+  color: $mainColor;
+}
+// .main-enter-workHours{
+//   width: 100%;
+//   li{
+//   display: inline-flex;
+//   float: left;
+//   }
+// }
+.main-enter-workHours label {
+  display: inline;
+  margin-right: 10px;
+  color: $mainColor;
+}
+.main-enter-workHours span {
+  color: $mainColor;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.main-enter-workHours select {
+  border: 1px solid #e5e7f2;
+  background: #f9f9f9;
+  outline-color: $mainHover;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.main-enter-workHours ul {
+  padding-left: 0px;
+  list-style: none;
+}
+.main-enter-workHours li {
+  margin-bottom: 10px;
+}
+.main-enter-workHours li span {
+  width: (100% / 5);
+  display: inline-block;
 }
