@@ -192,7 +192,9 @@ class Provider extends React.Component {
             )}
           </div>
           <div className='provider-store'>
-            <ProviderStore />
+            {this.state.provider && (
+              <ProviderStore id={this.state.provider.id} />
+            )}
           </div>
           <div className='provider-reviews'>
             {this.state.provider && (
