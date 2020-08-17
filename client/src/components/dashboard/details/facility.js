@@ -1,4 +1,5 @@
 import React from 'react';
+import Constants from '../../constants/Queries';
 
 class Facility extends React.Component {
   state = {
@@ -10,9 +11,8 @@ class Facility extends React.Component {
       { id: 4, value: 'Pet Friendly' },
       { id: 5, value: 'Free Parking' },
       { id: 6, value: 'Smoking Room' },
-      { id: 7, value: 'Self Service' },
-      { id: 8, value: 'Discounts' },
-      { id: 9, value: 'Booking' },
+      { id: 7, value: 'Discounts' },
+      { id: 8, value: 'Booking' },
     ],
     checkedItems: new Map(),
     chosenFac: [],
@@ -27,17 +27,26 @@ class Facility extends React.Component {
     }));
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
     this.state.checkedItems.forEach((item, i) => {
       if (item[1]) {
         this.state.chosenFac.push(this.state.facility[item[0]]);
       }
     });
-    console.log(this.state.chosenFac);
     this.setState({
       chosenFac: [],
     });
+    var facilities = JSON.stringify(this.state.chosenFac);
+    var arrOfFac = facilities.split('');
+    for (let i = 0; i < arrOfFac.length; i++) {
+      if (arrOfFac[i] == '"') {
+        arrOfFac.splice(i, 1, '\\"');
+      }
+    }
+    facilities = arrOfFac.join('');
+    const addFs = Constants.addFacilities(this.props.id, facilities);
+    const request = await Constants.request(addFs);
   }
 
   render() {

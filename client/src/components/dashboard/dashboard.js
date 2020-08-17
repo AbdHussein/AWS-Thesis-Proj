@@ -90,18 +90,19 @@ class Dashboard extends React.Component {
                 <MainDashboard />
               </div>
               <div className='dash-demo'>
-              {this.state.provider && (
-                 <DemoVideo id={this.state.provider.id} />
+                {this.state.provider && (
+                  <DemoVideo id={this.state.provider.id} />
                 )}
               </div>
               <div className='dash-describe'>
                 {this.state.provider && (
                   <Description id={this.state.provider.id} />
                 )}
-                 
               </div>
               <div className='dash-facility'>
-                <Facility />
+                {this.state.provider && (
+                  <Facility id={this.state.provider.id} />
+                )}
               </div>
               <div className='dash-add-post'>
                 <Add />
