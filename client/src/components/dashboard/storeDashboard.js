@@ -1,24 +1,69 @@
 import React from 'react';
 import ImageUpload from '../imageUpload/imageUpload';
+import constants from '../constants/Queries';
 
 class StoreDashboard extends React.Component {
   state = {
     name: '',
     price: '',
-    pic: '',
+    pic: null,
   };
-  handelChange(e) {
+
+  handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
     });
   }
-  handleClick(event) {
-    event.preventDefault();
+
+  updateImgUrl(url) {
+    this.setState({
+      pic: url,
+    });
   }
+
+  clear(){
+    this.setState({
+      name: '',
+      price: '',
+      pic: null,
+    });
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    console.log(this.props.provider);
+    //Get Category name from the category ID in provider data
+    const categoryQuery = constants.categoryNameByID(this.props.provider.categoryID);
+    constants.request(categoryQuery).then(res => {
+      console.log(res.data);
+      if(res.data.errors){
+        console.log('Error');
+      } else {
+        //Add Product
+        const addProductMutation = constants.addProduct(this.state.name, this.props.provider.id,
+           res.data.data.getCategoryByID.category, this.state.price, this.state.pic);
+           console.log(addProductMutation);
+           constants.request(addProductMutation)
+           .then( result => {
+            if(result.data.errors){
+              alert('Error in saving product');
+            } else {
+              alert('product saved successfully');
+              this.clear();
+            }
+           }).catch(err =>{
+            alert('Error in saving product');
+           })
+      }
+    }).catch(err => {
+      console.log(err);
+    })    
+  }
+  
   render() {
     return (
       <div className='store-dashboard'>
-        <h2>Add Your Product</h2>
+        <h2>Add New Product</h2>
         <div className='product-data'>
           <form>
             <label htmlFor='name'>Product Name: </label>
@@ -28,7 +73,7 @@ class StoreDashboard extends React.Component {
               name='name'
               placeholder='Product Name'
               value={this.state.name}
-              onChange={this.handelChange.bind(this)}
+              onChange={this.handleChange.bind(this)}
             ></input>
             <br />
             <br />
@@ -39,20 +84,12 @@ class StoreDashboard extends React.Component {
               name='price'
               placeholder='Product Price'
               value={this.state.price}
-              onChange={this.handelChange.bind(this)}
+              onChange={this.handleChange.bind(this)}
             ></input>
             <br />
             <br />
-            <label htmlFor='pic'>Product Picture: </label>
-            <input
-              type='text'
-              id='pic'
-              name='pic'
-              placeholder='Product Picture'
-              value={this.state.pic}
-              onChange={this.handelChange.bind(this)}
-            ></input>
-            {/* <ImageUpload /> */}
+            <label htmlFor='pic'>Product Picture: </label>            
+             <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} />
             <br />
             <br />
             <button

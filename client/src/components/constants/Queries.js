@@ -68,6 +68,15 @@ const addComment = (userID, postID, text) => {
   return q;
 };
 
+const addProduct = (name, userID, category, price, pic) => {
+  const mutation = `mutation {
+    addProduct(name:"${name}", userID: ${userID}, category:"${category}", price:${price}, pic:"${pic}"){
+      id
+    }
+  }`;
+  return mutation;
+};
+
 const login = (email, password) => {
   const mutation = `mutation {
     login(email: "${email}", password: "${password}"){
@@ -120,6 +129,7 @@ const getUserByToken = (token) => {
       video
       description
       workingHours
+      categoryID
     }
   }`;
   return q;
@@ -258,3 +268,4 @@ module.exports.addReview = addReview;
 module.exports.addPhoto = addPhoto;
 module.exports.addDesc = addDesc;
 module.exports.addVideo = addVideo;
+module.exports.addProduct = addProduct;

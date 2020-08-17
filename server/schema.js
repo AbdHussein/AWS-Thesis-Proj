@@ -78,6 +78,7 @@ const ProductType = new GraphQLObjectType({
     userID: { type: GraphQLID },
     rating: { type: GraphQLInt },
     quantity: { type: GraphQLInt },
+    pic : {type: GraphQLString}
   }),
 });
 
@@ -430,8 +431,9 @@ const Mutation = new GraphQLObjectType({
         category: { type: new GraphQLNonNull(GraphQLString) },
         price: { type: new GraphQLNonNull(GraphQLInt) },
         userID: { type: new GraphQLNonNull(GraphQLID) },
-        rating: { type: new GraphQLNonNull(GraphQLInt) },
-        quantity: { type: new GraphQLNonNull(GraphQLInt) },
+        rating: { type: GraphQLInt },
+        quantity: { type: GraphQLInt },
+        pic: {type: GraphQLString }
       },
       async resolve(root, args) {
         return await knex('Product').insert(args);
@@ -456,6 +458,7 @@ const Mutation = new GraphQLObjectType({
         userID: { type: GraphQLID },
         rating: { type: GraphQLInt },
         quantity: { type: GraphQLInt },
+        pic: {type: GraphQLString }
       },
       async resolve(root, args) {
         return await knex('Product').where({ id: args.id }).update(args);
