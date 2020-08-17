@@ -3,16 +3,16 @@ import React from 'react';
 class Facility extends React.Component {
   state = {
     facility: [
-      { id: 1, value: 'Free Wi Fi' },
-      { id: 2, value: 'Online Ordering' },
-      { id: 3, value: 'Elevator In Buliding' },
-      { id: 4, value: ' Air Conditioned' },
-      { id: 5, value: ' Pet Friendly' },
-      { id: 6, value: ' Free Parking' },
-      { id: 7, value: ' Smoking Room' },
-      { id: 8, value: ' Self Service' },
-      { id: 9, value: ' Discounts' },
-      { id: 10, value: ' Booking' },
+      { id: 0, value: 'Free Wi Fi' },
+      { id: 1, value: 'Online Ordering' },
+      { id: 2, value: 'Elevator In Buliding' },
+      { id: 3, value: 'Air Conditioned' },
+      { id: 4, value: 'Pet Friendly' },
+      { id: 5, value: 'Free Parking' },
+      { id: 6, value: 'Smoking Room' },
+      { id: 7, value: 'Self Service' },
+      { id: 8, value: 'Discounts' },
+      { id: 9, value: 'Booking' },
     ],
     checkedItems: new Map(),
     chosenFac: [],
@@ -29,11 +29,15 @@ class Facility extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state.checkedItems);
-    // this.state.checkedItems.forEach((item, i) => {
-    //   this.state.chosenFac.push(this.state.facility[item]);
-    // });
-    // console.log(this.state.chosenFac);
+    this.state.checkedItems.forEach((item, i) => {
+      if (item[1]) {
+        this.state.chosenFac.push(this.state.facility[item[0]]);
+      }
+    });
+    console.log(this.state.chosenFac);
+    this.setState({
+      chosenFac: [],
+    });
   }
 
   render() {
