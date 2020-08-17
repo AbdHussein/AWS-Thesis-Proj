@@ -50,7 +50,7 @@ class ProviderDetails extends React.Component {
       { id: 7, value: faMoneyBillAlt },
       { id: 8, value: faBookmark },
     ],
-    allFs: [],
+    allFs: null,
   };
 
   async componentDidMount() {
@@ -86,19 +86,20 @@ class ProviderDetails extends React.Component {
             </div>
             <div>
               <ul>
-                {this.state.allFs.map((fac, i) => {
-                  return (
-                    <li>
-                      <FontAwesomeIcon
-                        icon={
-                          this.state.facility[fac.id] &&
-                          this.state.facility[fac.id].value
-                        }
-                      />{' '}
-                      {fac.value}
-                    </li>
-                  );
-                })}
+                {this.state.allFs &&
+                  this.state.allFs.map((fac, i) => {
+                    return (
+                      <li>
+                        <FontAwesomeIcon
+                          icon={
+                            this.state.facility[fac.id] &&
+                            this.state.facility[fac.id].value
+                          }
+                        />{' '}
+                        {fac.value}
+                      </li>
+                    );
+                  })}
                 {/* <li>
                   <FontAwesomeIcon icon={this.state.facility[2].value} />{' '}
                   Elevator Building
