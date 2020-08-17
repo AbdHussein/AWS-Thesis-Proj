@@ -29,7 +29,7 @@ import Constants from '../constants/Queries';
 const libraries = ['places'];
 const mapContainerStyle = {
   width: '100%',
-  height: '100vh',
+  height: '70vh',
 };
 const options = {
   styles: mapStyles,

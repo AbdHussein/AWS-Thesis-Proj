@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKeyboard } from '@fortawesome/free-regular-svg-icons';
-import { faSearch, faMapMarkerAlt, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faMapMarkerAlt, faBars, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
 import Navbar from '../mainComp/navbar';
 import Footer from '../footer/footer';
@@ -18,8 +18,7 @@ class Landing extends React.Component {
   };
 
   async componentDidMount() {
-    if (localStorage.getItem('xTown')) {
-      
+    if (localStorage.getItem('xTown')) {      
       const query = Constants.getUserByToken(localStorage.getItem('xTown'));
       console.log(query);
       const request = await Constants.request(query);
@@ -119,6 +118,28 @@ class Landing extends React.Component {
           </div>
         </header>
         {/* End Header */}
+
+        <div className="popular-palces">
+          <Container>
+            <h2>Popular Palces</h2>
+            <hr className="landing-hr" />
+            <p>Mauris ac maximus neque. Nam in mauris quis libero sodales eleifend. Morbi varius, nulla sit amet rutrum elementum.</p>
+            <div className="popular-slider">
+              <div className="single-popular">
+                <img src={require(`../../images/29.jpg`)} alt="Silder Image" />
+                <div className="overlay">
+                  <div>
+                    <h3>Gym in the center</h3>
+                    <span><FontAwesomeIcon icon={faMapMarkerAlt} />  70 Bright St New York, USA</span>
+                    <hr />
+                    <p><FontAwesomeIcon icon={faMobileAlt} /> <span className="categories">Phones</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Container>
+        </div>
+
         <Footer />
       </div>
     );

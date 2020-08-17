@@ -68,6 +68,15 @@ const addComment = (userID, postID, text) => {
   return q;
 };
 
+const addProduct = (name, userID, category, price, pic) => {
+  const mutation = `mutation {
+    addProduct(name:"${name}", userID: ${userID}, category:"${category}", price:${price}, pic:"${pic}"){
+      id
+    }
+  }`;
+  return mutation;
+};
+
 const login = (email, password) => {
   const mutation = `mutation {
     login(email: "${email}", password: "${password}"){
@@ -90,7 +99,9 @@ const request = async (query) => {
 
 const signUp = (username, email, password, mobile) => {
   const q = `mutation{
-    addUser(username:"${username}", email:"${email}", password:"${password}",RoleID:"3", mobile: ${Number(mobile)},avatar:"${username[0]}",
+    addUser(username:"${username}", email:"${email}", password:"${password}",RoleID:"3", mobile: ${Number(
+    mobile
+  )},avatar:"${username[0]}",
     serviceName:"", address:"", cover:"", video:"", description:""){
       id
     }
@@ -118,6 +129,7 @@ const getUserByToken = (token) => {
       video
       description
       workingHours
+      categoryID
     }
   }`;
   return q;
@@ -186,6 +198,76 @@ const getAllGalary = (userID) => {
   return q;
 };
 
+const getAllReviews = (providerID) => {
+  const q = `query {
+    getReviews(providerID:${providerID}){
+      text
+      rating
+      pic
+      date
+      user{
+        username
+        avatar
+      }
+    }
+  }`;
+  return q;
+};
+
+const addReview = (providerID, userID, text, rating, pic) => {
+  const q = `mutation{
+    addReview(providerID:${providerID}, userID:${userID}, text:"${text}",rating:${rating}, date:"${getDate()}",pic:"${pic}"){
+      providerID
+    }
+  }`;
+  return q;
+};
+
+const addPhoto = (userID, image) => {
+  const q = `mutation {
+    addGallery(userID:${userID}, image:"${image}"){
+      id
+    }
+  }`;
+  return q;
+};
+
+const addDesc = (id, desc) => {
+  const q = `mutation{
+    editUser(id:${id}, description:"${desc}"){
+      id
+    }
+  }`;
+  return q;
+};
+
+const addVideo = (id, videoUrl) => {
+  const q = `mutation{
+    editUser(id:${id}, video:"${videoUrl}"){
+      id
+    }
+  }`;
+  return q;
+};
+
+const addFacilities = (id, arrOfFac) => {
+  const q = `mutation{
+    editUser(id:${id}, facilities:"${arrOfFac}"){
+      id
+    }
+  }`;
+  return q;
+};
+
+const getFacilities = (userID) => {
+  const q = `query {
+    user(id:${userID}){
+      facilities
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -199,3 +281,11 @@ module.exports.getProviderById = getProviderById;
 module.exports.addComment = addComment;
 module.exports.getAllCommentsByPostID = getAllCommentsByPostID;
 module.exports.getAllGalary = getAllGalary;
+module.exports.getAllReviews = getAllReviews;
+module.exports.addReview = addReview;
+module.exports.addPhoto = addPhoto;
+module.exports.addDesc = addDesc;
+module.exports.addVideo = addVideo;
+module.exports.addProduct = addProduct;
+module.exports.addFacilities = addFacilities;
+module.exports.getFacilities = getFacilities;

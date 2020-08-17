@@ -177,7 +177,9 @@ class Provider extends React.Component {
         </div>
         <div className='provider-content'>
           <div className='provider-details'>
-            <ProviderDetails />
+            {this.state.provider && (
+              <ProviderDetails provider={this.state.provider} />
+            )}
           </div>
           <div className='provider-posts'>
             {this.state.provider && (
@@ -193,7 +195,9 @@ class Provider extends React.Component {
             <ProviderStore />
           </div>
           <div className='provider-reviews'>
-            <ProviderReviews />
+            {this.state.provider && (
+              <ProviderReviews id={this.state.provider.id} />
+            )}
           </div>
         </div>
         <div className='provider-sidebar'>

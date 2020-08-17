@@ -31,6 +31,7 @@ const UserType = new GraphQLObjectType({
     video: { type: GraphQLString },
     description: { type: GraphQLString },
     workingHours: { type: GraphQLString },
+    facilities: { type: GraphQLString },
     categoryID: { type: GraphQLID },
     token: { type: GraphQLString },
   }),
@@ -78,6 +79,7 @@ const ProductType = new GraphQLObjectType({
     userID: { type: GraphQLID },
     rating: { type: GraphQLInt },
     quantity: { type: GraphQLInt },
+    pic : {type: GraphQLString}
   }),
 });
 
@@ -133,6 +135,25 @@ const RolesType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID, unique: true },
     Role: { type: GraphQLString },
+  }),
+});
+
+const ReviewType = new GraphQLObjectType({
+  name: 'review',
+  fields: () => ({
+    id: { type: GraphQLID, unique: true },
+    userID: { type: GraphQLID },
+    providerID: { type: GraphQLID },
+    text: { type: GraphQLString },
+    rating: { type: GraphQLInt },
+    pic: { type: GraphQLString },
+    date: { type: GraphQLString },
+    user: {
+      type: UserType,
+      async resolve(root, args) {
+        return await knex('User').select().where({ id: root.userID }).first();
+      },
+    },
   }),
 });
 
@@ -289,6 +310,17 @@ const RootQuery = new GraphQLObjectType({
           .first();
       },
     },
+    getReviews: {
+      type: new GraphQLList(ReviewType),
+      args: {
+        providerID: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(root, args) {
+        return await knex('Review')
+          .select()
+          .where({ providerID: args.providerID });
+      },
+    },
   },
 });
 
@@ -296,7 +328,7 @@ const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
     // for user table
-    login:{
+    login: {
       type: UserType,
       args: {
         email: { type: new GraphQLNonNull(GraphQLString) },
@@ -304,25 +336,36 @@ const Mutation = new GraphQLObjectType({
       },
       async resolve(root, args) {
         //login
-       try{
-          const data = await knex('user').select('*').where({ email: args.email }).first();
+        try {
+          const data = await knex('user')
+            .select('*')
+            .where({ email: args.email })
+            .first();
           // console.log(data.password);
-          if(data.password) {
-            if(await bcrypt.compare(args.password, data.password)) {
-              const token = jwt.sign({ id: data.id, username: data.username, email: data.email }, 
-                process.env.SECRET, {
-                algorithm: "HS256",
-                expiresIn: "2 days"
-              });
-              await knex('user').update({ token: token }).where({ email: args.email });              
-              return await knex('user').select('*').where({ email: args.email }).first();
+          if (data.password) {
+            if (await bcrypt.compare(args.password, data.password)) {
+              const token = jwt.sign(
+                { id: data.id, username: data.username, email: data.email },
+                process.env.SECRET,
+                {
+                  algorithm: 'HS256',
+                  expiresIn: '2 days',
+                }
+              );
+              await knex('user')
+                .update({ token: token })
+                .where({ email: args.email });
+              return await knex('user')
+                .select('*')
+                .where({ email: args.email })
+                .first();
             }
           } else {
             console.log('invalid username or password');
           }
-       } catch(err) {
-         console.log(err);
-       }
+        } catch (err) {
+          console.log(err);
+        }
       },
     },
     addUser: {
@@ -339,23 +382,13 @@ const Mutation = new GraphQLObjectType({
         cover: { type: new GraphQLNonNull(GraphQLString) },
         video: { type: new GraphQLNonNull(GraphQLString) },
         description: { type: new GraphQLNonNull(GraphQLString) },
+        facilities: { type: GraphQLString },
       },
       async resolve(root, args) {
         // add User with crpted password to database
         var crptPass = await bcrypt.hash(args.password, 10);
         args.password = crptPass;
         return await knex('User').insert(args);
-        //   return await knex('User').insert({
-        //     username: args.username,
-        //     email: args.email,
-        //     password: crptPass,
-        //     mobile: args.mobile,
-        //     address: args.address,
-        //     pay_service: '',
-        //     service_name: '',
-        //     location: '',
-        //   });
-        // },
       },
     },
     deleteUser: {
@@ -386,9 +419,10 @@ const Mutation = new GraphQLObjectType({
         description: { type: GraphQLString },
         workingHours: { type: GraphQLString },
         categoryID: { type: GraphQLID },
+        facilities: { type: GraphQLString },
       },
       async resolve(root, args) {
-        args.password = await bcrypt.hash(args.password, 10);
+        // args.password = await bcrypt.hash(args.password, 10);
         return await knex('User').where({ id: args.id }).update(args);
       },
     },
@@ -400,8 +434,9 @@ const Mutation = new GraphQLObjectType({
         category: { type: new GraphQLNonNull(GraphQLString) },
         price: { type: new GraphQLNonNull(GraphQLInt) },
         userID: { type: new GraphQLNonNull(GraphQLID) },
-        rating: { type: new GraphQLNonNull(GraphQLInt) },
-        quantity: { type: new GraphQLNonNull(GraphQLInt) },
+        rating: { type: GraphQLInt },
+        quantity: { type: GraphQLInt },
+        pic: {type: GraphQLString }
       },
       async resolve(root, args) {
         return await knex('Product').insert(args);
@@ -426,6 +461,7 @@ const Mutation = new GraphQLObjectType({
         userID: { type: GraphQLID },
         rating: { type: GraphQLInt },
         quantity: { type: GraphQLInt },
+        pic: {type: GraphQLString }
       },
       async resolve(root, args) {
         return await knex('Product').where({ id: args.id }).update(args);
@@ -638,6 +674,20 @@ const Mutation = new GraphQLObjectType({
       },
       async resolve(root, args) {
         return await knex('Roles').where({ id: args.id }).update(args);
+      },
+    },
+    addReview: {
+      type: ReviewType,
+      args: {
+        providerID: { type: new GraphQLNonNull(GraphQLID) },
+        userID: { type: new GraphQLNonNull(GraphQLID) },
+        text: { type: new GraphQLNonNull(GraphQLString) },
+        date: { type: new GraphQLNonNull(GraphQLString) },
+        rating: { type: new GraphQLNonNull(GraphQLInt) },
+        pic: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(root, args) {
+        return await knex('Review').insert(args);
       },
     },
   },
