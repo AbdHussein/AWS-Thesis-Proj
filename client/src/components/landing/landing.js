@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKeyboard } from '@fortawesome/free-regular-svg-icons';
-import { faSearch, faMapMarkerAlt, faBars, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faMapMarkerAlt, faBars, faMobileAlt, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
 import Navbar from '../mainComp/navbar';
 import Footer from '../footer/footer';
@@ -138,6 +138,14 @@ class Landing extends React.Component {
               </div>
             </div>
           </Container>
+          <div className="landing-promo">
+            <div className="overlay">
+              <h5>Aliquam erat volutpat interdum</h5>
+              <p>Get ready to start your exciting journey.</p>
+              <p>Our agency will lead you through the amazing digital world</p>
+              <button><FontAwesomeIcon icon={faPlay} /> <span>Promo Video</span> </button>
+            </div>
+          </div>
         </div>
 
         <Footer />

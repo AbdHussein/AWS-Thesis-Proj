@@ -18,7 +18,7 @@ class ProviderReviews extends React.Component {
     rating: '2.5',
     text: '',
     pic: '',
-    reviews: [],
+    reviews: null,
   };
   async componentDidMount() {
     // var inputs = document.querySelectorAll('.inputfile');
@@ -99,7 +99,7 @@ class ProviderReviews extends React.Component {
           </div>
           <div className='reviews-comments'>
             {/* <Rating value={2} readOnly /> */}
-            {this.state.reviews.map((review, i) => {
+            {this.state.reviews && this.state.reviews.map((review, i) => {
               return (
                 <div className='comments' key={i}>
                   <div className='img-comment'>
