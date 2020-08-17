@@ -2,6 +2,7 @@ import React from "react";
 import ImageUpload from "../imageUpload/imageUpload";
 class DashProviderInfo extends React.Component {
   state = {
+    username:"",
     serviceName: "",
     email: "",
     mobile: "",
@@ -33,6 +34,28 @@ class DashProviderInfo extends React.Component {
           <h1>Your Profile</h1>
           <div className="your-profile-div">
             <form>
+            <label htmlFor="username">User name: </label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="username"
+                value={this.state.username}
+                onChange={this.handelChange.bind(this)}
+              ></input>
+              <br />
+              <br />
+              <label htmlFor="password">Change your password: </label>
+              <input
+                type="text"
+                id="password"
+                name="password"
+                placeholder="password"
+                value={this.state.password}
+                onChange={this.handelChange.bind(this)}
+              ></input>
+              <br />
+              <br />
               <label htmlFor="serviceName">Service name: </label>
               <input
                 type="text"
@@ -91,6 +114,15 @@ class DashProviderInfo extends React.Component {
               </div>
               <br />
               <br />
+              {/* <div className="upload-avatar-img">
+              <label htmlFor="Change-avatar">Change your avatar photo : </label>
+              <br />
+              <br />
+              <div className="upload-avatar">
+                <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} />
+              </div>
+              <br />
+              <br /> */}
             </div>
           </div>
         </div>
@@ -139,7 +171,8 @@ class DashProviderInfo extends React.Component {
             </form>
           </div>
         </div>
-      </div>
+        </div>
+       // </div>
     );
   }
 }
