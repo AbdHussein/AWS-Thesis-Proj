@@ -9,7 +9,7 @@ class MyCart extends React.Component {
     render() {
         return (
             <div className="my-cart">
-                <Navbar />
+                {/* <Navbar /> */}
                 <Container>
                 </Container>
             </div>

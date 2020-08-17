@@ -268,13 +268,14 @@ const getFacilities = (userID) => {
   return q;
 };
 
-const getRatings = (userID) => {
+const getProducts = (userID) => {
   const q = `query {
-    getReviews(providerID:${userID}){
-      rating
+    productsByUserID(userID:${userID}){
+      name
+      price
+      pic
     }
-  }`;
-  return q;
+  }`
 };
 
 module.exports.userByCategory = userByCategory;
@@ -298,4 +299,4 @@ module.exports.addVideo = addVideo;
 module.exports.addProduct = addProduct;
 module.exports.addFacilities = addFacilities;
 module.exports.getFacilities = getFacilities;
-module.exports.getRatings = getRatings;
+module.exports.getProducts = getProducts;

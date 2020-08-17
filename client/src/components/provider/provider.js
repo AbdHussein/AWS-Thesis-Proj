@@ -45,30 +45,14 @@ import ProviderReviews from './providerReviews';
 import Footer from '../footer/footer';
 import waterMelon from '../../main';
 import Constants from '../constants/Queries';
-import { response } from 'express';
 
 class Provider extends React.Component {
   state = {
     provider: null,
     categoryName: '',
-    user: null,
-    numOfReviews : 0,
-    rating : 0
+    user: null
   };
   
-  getNumOfReviewsAndRating(){
-    const allRatingsQuery = Constants.getAllReviews(this.state.provider.id);
-    Constants.request(allRatingsQuery).then((response) => {
-      if(response.data.errors){
-        console.log(response.data.errors);
-      } else {
-        console.log(response.data.data.getReviews);
-      }
-    }).catch(err => {
-      console.log(err);
-    })
-  }
-
   async componentDidMount() {
     waterMelon();
     const { provider } = this.props.location.state;
@@ -209,7 +193,9 @@ class Provider extends React.Component {
             )}
           </div>
           <div className='provider-store'>
-            <ProviderStore />
+            {this.state.provider && (
+              <ProviderStore id={this.state.provider.id} />
+            )}
           </div>
           <div className='provider-reviews'>
             {this.state.provider && (
