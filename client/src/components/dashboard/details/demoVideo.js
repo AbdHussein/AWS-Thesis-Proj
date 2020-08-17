@@ -31,16 +31,13 @@ class DemoVideo extends React.Component {
   }
 
   onSubmit(){
-    const addVidQuery = Constatnts.addDesc(
+    const addVidQuery = Constatnts.addVideo(
       this.props.id,
       this.state.vidUrl
     );
+    console.log(addVidQuery);
     Constatnts.request(addVidQuery).then(response => {
-      if(response.data.errors){
-        console.log(response.data.errors[0]);
-      } else {
-        alert('Video saved successfully');
-      }
+      console.log(response);
     }).catch(err => {
       console.log(err);
     })
