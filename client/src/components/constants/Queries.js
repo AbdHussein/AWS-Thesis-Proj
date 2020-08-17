@@ -268,6 +268,15 @@ const getFacilities = (userID) => {
   return q;
 };
 
+const getRatings = (userID) => {
+  const q = `query {
+    getReviews(providerID:${userID}){
+      rating
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -289,3 +298,4 @@ module.exports.addVideo = addVideo;
 module.exports.addProduct = addProduct;
 module.exports.addFacilities = addFacilities;
 module.exports.getFacilities = getFacilities;
+module.exports.getRatings = getRatings;
