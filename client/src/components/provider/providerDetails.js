@@ -23,6 +23,8 @@ import {
   faUsers,
   faAward,
   faMobileAlt,
+  faSmoking,
+  faBookmark,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faEnvelope,
@@ -30,10 +32,36 @@ import {
   faEye,
   faImages,
   faImage,
+  faMoneyBillAlt,
 } from '@fortawesome/free-regular-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import Constants from '../constants/Queries';
 
 class ProviderDetails extends React.Component {
+  state = {
+    facility: [
+      { id: 0, value: faWifi },
+      { id: 1, value: faShoppingCart },
+      { id: 2, value: faRocket },
+      { id: 3, value: faCloud },
+      { id: 4, value: faPaw },
+      { id: 5, value: faBicycle },
+      { id: 6, value: faSmoking },
+      { id: 7, value: faMoneyBillAlt },
+      { id: 8, value: faBookmark },
+    ],
+    allFs: null,
+  };
+
+  async componentDidMount() {
+    const getAllFsQuery = Constants.getFacilities(this.props.provider.id);
+    const request = await Constants.request(getAllFsQuery);
+    // console.log();
+    this.setState({
+      allFs: JSON.parse(request.data.data.user.facilities),
+    });
+  }
+
   render() {
     const { provider } = this.props;
     return (
@@ -58,24 +86,24 @@ class ProviderDetails extends React.Component {
             </div>
             <div>
               <ul>
-                <li>
-                  <FontAwesomeIcon icon={faRocket} /> Elevator Building
-                </li>
-                <li>
-                  <FontAwesomeIcon icon={faWifi} /> Free Wi-Fi
-                </li>
-                <li>
-                  <FontAwesomeIcon icon={faBicycle} /> Free Parking
-                </li>
-                <li>
-                  <FontAwesomeIcon icon={faCloud} /> Air Condition
-                </li>
-                <li>
-                  <FontAwesomeIcon icon={faShoppingCart} /> Online Ordering
-                </li>
-                <li>
-                  <FontAwesomeIcon icon={faPaw} /> Pet Friendly
-                </li>
+                {this.state.allFs &&
+                  this.state.allFs.map((fac, i) => {
+                    return (
+                      <li key={i}>
+                        <FontAwesomeIcon
+                          icon={
+                            this.state.facility[fac.id] &&
+                            this.state.facility[fac.id].value
+                          }
+                        />{' '}
+                        {fac.value}
+                      </li>
+                    );
+                  })}
+                {/* <li>
+                  <FontAwesomeIcon icon={this.state.facility[2].value} />{' '}
+                  Elevator Building
+                </li> */}
               </ul>
             </div>
           </div>

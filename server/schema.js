@@ -31,6 +31,7 @@ const UserType = new GraphQLObjectType({
     video: { type: GraphQLString },
     description: { type: GraphQLString },
     workingHours: { type: GraphQLString },
+    facilities: { type: GraphQLString },
     categoryID: { type: GraphQLID },
     token: { type: GraphQLString },
   }),
@@ -78,6 +79,7 @@ const ProductType = new GraphQLObjectType({
     userID: { type: GraphQLID },
     rating: { type: GraphQLInt },
     quantity: { type: GraphQLInt },
+    pic: { type: GraphQLString },
   }),
 });
 
@@ -380,6 +382,7 @@ const Mutation = new GraphQLObjectType({
         cover: { type: new GraphQLNonNull(GraphQLString) },
         video: { type: new GraphQLNonNull(GraphQLString) },
         description: { type: new GraphQLNonNull(GraphQLString) },
+        facilities: { type: GraphQLString },
       },
       async resolve(root, args) {
         // add User with crpted password to database
@@ -416,6 +419,7 @@ const Mutation = new GraphQLObjectType({
         description: { type: GraphQLString },
         workingHours: { type: GraphQLString },
         categoryID: { type: GraphQLID },
+        facilities: { type: GraphQLString },
       },
       async resolve(root, args) {
         // args.password = await bcrypt.hash(args.password, 10);
@@ -430,8 +434,9 @@ const Mutation = new GraphQLObjectType({
         category: { type: new GraphQLNonNull(GraphQLString) },
         price: { type: new GraphQLNonNull(GraphQLInt) },
         userID: { type: new GraphQLNonNull(GraphQLID) },
-        rating: { type: new GraphQLNonNull(GraphQLInt) },
-        quantity: { type: new GraphQLNonNull(GraphQLInt) },
+        rating: { type: GraphQLInt },
+        quantity: { type: GraphQLInt },
+        pic: { type: GraphQLString },
       },
       async resolve(root, args) {
         return await knex('Product').insert(args);
@@ -456,6 +461,7 @@ const Mutation = new GraphQLObjectType({
         userID: { type: GraphQLID },
         rating: { type: GraphQLInt },
         quantity: { type: GraphQLInt },
+        pic: { type: GraphQLString },
       },
       async resolve(root, args) {
         return await knex('Product').where({ id: args.id }).update(args);

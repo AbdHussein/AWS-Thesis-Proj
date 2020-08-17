@@ -68,6 +68,15 @@ const addComment = (userID, postID, text) => {
   return q;
 };
 
+const addProduct = (name, userID, category, price, pic) => {
+  const mutation = `mutation {
+    addProduct(name:"${name}", userID: ${userID}, category:"${category}", price:${price}, pic:"${pic}", rating:0, quantity:0){
+      id
+    }
+  }`;
+  return mutation;
+};
+
 const login = (email, password) => {
   const mutation = `mutation {
     login(email: "${email}", password: "${password}"){
@@ -120,6 +129,7 @@ const getUserByToken = (token) => {
       video
       description
       workingHours
+      categoryID
     }
   }`;
   return q;
@@ -231,6 +241,44 @@ const addDesc = (id, desc) => {
   return q;
 };
 
+const addVideo = (id, videoUrl) => {
+  const q = `mutation{
+    editUser(id:${id}, video:"${videoUrl}"){
+      id
+    }
+  }`;
+  return q;
+};
+
+const addFacilities = (id, arrOfFac) => {
+  const q = `mutation{
+    editUser(id:${id}, facilities:"${arrOfFac}"){
+      id
+    }
+  }`;
+  return q;
+};
+
+const getFacilities = (userID) => {
+  const q = `query {
+    user(id:${userID}){
+      facilities
+    }
+  }`;
+  return q;
+};
+
+const getProducts = (userID) => {
+  const q = `query {
+    productsByUserID(userID:${userID}){
+      name
+      price
+      pic
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -248,3 +296,8 @@ module.exports.getAllReviews = getAllReviews;
 module.exports.addReview = addReview;
 module.exports.addPhoto = addPhoto;
 module.exports.addDesc = addDesc;
+module.exports.addVideo = addVideo;
+module.exports.addProduct = addProduct;
+module.exports.addFacilities = addFacilities;
+module.exports.getFacilities = getFacilities;
+module.exports.getProducts = getProducts;

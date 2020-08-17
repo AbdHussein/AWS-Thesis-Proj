@@ -29,7 +29,6 @@ class Dashboard extends React.Component {
     $('.dashboard-sidebar div').on('click', function () {
       let dashboard = $(this).data('dashboard');
       $(dashboard).show().siblings().hide();
-      console.log($(this).data('dashboard'));
     });
 
     const query = Constants.getUserByToken(localStorage.getItem('xTown'));
@@ -91,7 +90,9 @@ class Dashboard extends React.Component {
                 <MainDashboard />
               </div>
               <div className='dash-demo'>
-                <DemoVideo />
+                {this.state.provider && (
+                  <DemoVideo id={this.state.provider.id} />
+                )}
               </div>
               <div className='dash-describe'>
                 {this.state.provider && (
@@ -99,7 +100,9 @@ class Dashboard extends React.Component {
                 )}
               </div>
               <div className='dash-facility'>
-                <Facility />
+                {this.state.provider && (
+                  <Facility id={this.state.provider.id} />
+                )}
               </div>
               <div className='dash-add-post'>
                 <Add />
@@ -111,7 +114,9 @@ class Dashboard extends React.Component {
                 <DashProviderInfo />
               </div>
               <div className='store-dash'>
-                <StoreDashboard />
+              {this.state.provider && (
+                  <StoreDashboard provider = {this.state.provider} />
+                )}
               </div>
             </div>
           </Container>
