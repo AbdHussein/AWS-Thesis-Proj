@@ -113,7 +113,7 @@ class ProviderReviews extends React.Component {
                       <img src={review.pic} />
                     </div>
                     <hr />
-                    <span>
+                    <span className="calender">
                       <FontAwesomeIcon icon={faCalendarAlt} /> {review.date}
                     </span>
                   </div>
