@@ -82,7 +82,7 @@ class ProviderReviews extends React.Component {
                   </div>
                   <div className='text-comment'>
                     <h3>{review.user.username}</h3>
-                    <Rating value={review.rating} readOnly />
+                    <Rating precision={0.5} value={review.rating} readOnly />
                     <p>{review.text}</p>
                     <div className='reviews-img'>
                       <img src={review.pic} />
@@ -102,7 +102,7 @@ class ProviderReviews extends React.Component {
           </div>
           <div className='reviews-rating'>
             <Rating
-              defaultValue={Number(this.state.rating)}
+              defaultValue={2.5}
               precision={0.5}
               name='rating'
               onChange={this.handelChange.bind(this)}

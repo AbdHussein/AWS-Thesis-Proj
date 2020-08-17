@@ -37,14 +37,6 @@ const UserType = new GraphQLObjectType({
   }),
 });
 
-const facilityType = new GraphQLObjectType({
-  name: 'facility',
-  fields: () => ({
-    id: { type: GraphQLID, unique: true },
-    name: { type: GraphQLString },
-  }),
-});
-
 const CartType = new GraphQLObjectType({
   name: 'cart',
   fields: () => ({
@@ -77,7 +69,7 @@ const ProductType = new GraphQLObjectType({
     category: { type: GraphQLString },
     price: { type: GraphQLInt },
     userID: { type: GraphQLID },
-    rating: { type: GraphQLInt },
+    rating: { type: GraphQLString },
     quantity: { type: GraphQLInt },
     pic: { type: GraphQLString },
   }),
@@ -145,7 +137,7 @@ const ReviewType = new GraphQLObjectType({
     userID: { type: GraphQLID },
     providerID: { type: GraphQLID },
     text: { type: GraphQLString },
-    rating: { type: GraphQLInt },
+    rating: { type: GraphQLString },
     pic: { type: GraphQLString },
     date: { type: GraphQLString },
     user: {
@@ -434,7 +426,7 @@ const Mutation = new GraphQLObjectType({
         category: { type: new GraphQLNonNull(GraphQLString) },
         price: { type: new GraphQLNonNull(GraphQLInt) },
         userID: { type: new GraphQLNonNull(GraphQLID) },
-        rating: { type: GraphQLInt },
+        rating: { type: GraphQLString },
         quantity: { type: GraphQLInt },
         pic: { type: GraphQLString },
       },
@@ -459,7 +451,7 @@ const Mutation = new GraphQLObjectType({
         category: { type: GraphQLString },
         price: { type: GraphQLInt },
         userID: { type: GraphQLID },
-        rating: { type: GraphQLInt },
+        rating: { type: GraphQLString },
         quantity: { type: GraphQLInt },
         pic: { type: GraphQLString },
       },
@@ -683,7 +675,7 @@ const Mutation = new GraphQLObjectType({
         userID: { type: new GraphQLNonNull(GraphQLID) },
         text: { type: new GraphQLNonNull(GraphQLString) },
         date: { type: new GraphQLNonNull(GraphQLString) },
-        rating: { type: new GraphQLNonNull(GraphQLInt) },
+        rating: { type: new GraphQLNonNull(GraphQLString) },
         pic: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {

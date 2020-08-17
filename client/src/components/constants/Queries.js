@@ -216,7 +216,7 @@ const getAllReviews = (providerID) => {
 
 const addReview = (providerID, userID, text, rating, pic) => {
   const q = `mutation{
-    addReview(providerID:${providerID}, userID:${userID}, text:"${text}",rating:${rating}, date:"${getDate()}",pic:"${pic}"){
+    addReview(providerID:${providerID}, userID:${userID}, text:"${text}",rating:"${rating}", date:"${getDate()}",pic:"${pic}"){
       providerID
     }
   }`;
