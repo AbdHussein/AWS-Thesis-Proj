@@ -276,6 +276,7 @@ const getProducts = (userID) => {
       pic
     }
   }`
+  return q;
 };
 
 module.exports.userByCategory = userByCategory;
