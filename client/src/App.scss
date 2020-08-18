@@ -489,7 +489,10 @@ nav {
 
 .provider-header {
   height: 80vh;
+<<<<<<< HEAD
+=======
   background-image: url('./images/6.jpg');
+>>>>>>> 59ddb5824604df360288891915a8613524f9f997
   position: relative;
   @extend %cover;
   .overlay {
@@ -681,7 +684,6 @@ hr {
   .provider-promo {
     width: 100%;
     border-radius: 10px;
-    background-image: url(./images/48.jpg);
     background-size: cover;
     height: 80vh;
     position: relative;

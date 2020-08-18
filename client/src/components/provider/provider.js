@@ -88,7 +88,7 @@ class Provider extends React.Component {
     return (
       <div className='provider'>
         <Navbar provider={this.state.user} />
-        <div className='provider-header'>
+        <div style={{ backgroundImage: `url(${this.state.provider && this.state.provider.cover})` }} className='provider-header'>
           <div className='overlay'>
             <Container>
               <div className='provider-ui'>
@@ -132,11 +132,11 @@ class Provider extends React.Component {
               <div className='provider-bottom-header'>
                 <p>
                   {this.state.provider !== null &&
-                  this.state.categoryName === 'phones' ? (
-                    <FontAwesomeIcon icon={faMobileAlt} />
-                  ) : (
-                    <FontAwesomeIcon icon={faUtensils} />
-                  )}
+                    this.state.categoryName === 'phones' ? (
+                      <FontAwesomeIcon icon={faMobileAlt} />
+                    ) : (
+                      <FontAwesomeIcon icon={faUtensils} />
+                    )}
                   <span>
                     {this.state.provider !== null
                       ? this.state.categoryName
@@ -249,7 +249,7 @@ class Provider extends React.Component {
           </Container>
           <MiniMap providerL={this.state.provider} />
         </div>
-      </div>
+      </div >
     );
   }
 }
