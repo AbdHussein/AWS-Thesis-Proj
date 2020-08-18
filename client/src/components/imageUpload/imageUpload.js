@@ -45,7 +45,7 @@ class ImageUpload extends React.Component {
 
     console.log('heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
     // Update the state
-    this.setState({ selectedFile: event.target.files[0] }, async () => {      
+    this.setState({ selectedFile: event.target.files[0] }, async () => {
       this.props.uploadStarted();
       this.handleImageUpload();
     });
@@ -86,7 +86,7 @@ class ImageUpload extends React.Component {
               <br></br>
             </div>
             <span>{}</span> */}
-            
+
           <div className='box'>
             <input
               type='file'
