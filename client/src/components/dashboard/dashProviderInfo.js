@@ -1,4 +1,6 @@
 import React from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import $ from 'jquery';
 import ImageUpload from '../imageUpload/imageUpload';
 import Constants from '../constants/Queries';
 class DashProviderInfo extends React.Component {
@@ -13,9 +15,21 @@ class DashProviderInfo extends React.Component {
     twitter: '',
   };
 
+  componentDidMount() {  
+    $('.MuiCircularProgress-svg').hide();
+  }
+
+  uploadStarted(){
+    $('.MuiCircularProgress-svg').show();
+    $('#btn').hide();
+  }
+
   updateImgUrl(url) {
     this.setState({
       imgUrl: url,
+    },() => {
+      $('.MuiCircularProgress-svg').hide();
+      $('#btn').show();
     });
   }
 
@@ -93,13 +107,16 @@ class DashProviderInfo extends React.Component {
                 <br />
                 <br />
                 <div className='upload'>
-                  <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} />
+                  <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} uploadStarted={this.uploadStarted.bind(this)}/>
+                </div>                
+                <div id="CircularProgress">
+                  <CircularProgress />
                 </div>
-                <br />
                 <br />
               </div>
               <button
                 className='button-edit'
+                id="btn"
                 onClick={this.handleClick.bind(this)}
               >
                 Edit
