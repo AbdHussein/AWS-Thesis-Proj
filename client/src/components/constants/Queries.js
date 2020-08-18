@@ -304,6 +304,27 @@ const getProvidersByBookmarks = (userID) => {
   return q;
 };
 
+const getPostByFavProv = (userID) => {
+  const q = `query {
+    bookmark(userID:${userID}){
+      provider{
+        email
+        posts {
+          likes
+          date
+          text
+          image
+          user{
+            avatar
+            serviceName
+          }
+        }
+      }
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -328,3 +349,4 @@ module.exports.getFacilities = getFacilities;
 module.exports.getProducts = getProducts;
 module.exports.editProviderInfo = editProviderInfo;
 module.exports.getProvidersByBookmarks = getProvidersByBookmarks;
+module.exports.getPostByFavProv = getPostByFavProv;

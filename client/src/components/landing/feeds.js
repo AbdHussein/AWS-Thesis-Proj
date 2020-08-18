@@ -10,6 +10,8 @@ import { Redirect } from 'react-router-dom';
 class Feeds extends React.Component {
   state = {
     user: null,
+    allPosts: [],
+    viewPost: false,
   };
 
   async componentDidMount() {
@@ -17,9 +19,23 @@ class Feeds extends React.Component {
       const query = Constants.getUserByToken(localStorage.getItem('xTown'));
       const request = await Constants.request(query);
       const { user } = request.data.data;
+      const postsQuery = Constants.getPostByFavProv(user.id);
+      const postsRequest = await Constants.request(postsQuery);
+      const providers = [];
+      postsRequest.data.data.bookmark.map((bookmark) => {
+        providers.push(bookmark.provider);
+      });
+      const ps = [];
+      providers.map((prov) => {
+        ps.push(prov.posts);
+      });
+
       this.setState({
         user,
+        allPosts: this.state.allPosts.concat(...ps),
       });
+    } else {
+      this.props.history.push('/');
     }
   }
 
@@ -33,6 +49,19 @@ class Feeds extends React.Component {
         />
       );
     }
+    ///////////////////////////*needs work for ibrahim*///////////////////////////////////
+    // if (this.state.viewPost) {
+    //   return (
+    //     <Redirect
+    //       to={{
+    //         pathname: `/post`,
+    //         state: {
+    //           post: this.state.post,
+    //         },
+    //       }}
+    //     />
+    //   );
+    // }
     return (
       <div className='feeds'>
         <Navbar provider={this.state.user} />
@@ -51,28 +80,32 @@ class Feeds extends React.Component {
         <Container>
           <div className='feeds-content'>
             {/* Start Post */}
-            <div className='feeds-post'>
-              <div className='feeds-img'>
-                <img
-                  src={require(`../../images/unnamed.jpg`)}
-                  alt='Feeds Image'
-                />
-              </div>
-              <div className='feeds-post-content'>
-                <p>
-                  Ut euismod ultricies sollicitudin. Curabitur sed dapibus
-                  nulla. Nulla eget iaculis lectus. Mauris ac maximus neque. Nam
-                  in mauris quis libero sodales eleifend. Morbi varius, nulla
-                  sit amet rutrum elementum, est elit finibus tellus, ut
-                  tristique elit risus at metus.
-                </p>
-                <hr />
-                <FontAwesomeIcon icon={faCalendar} /> <span>25 April 2018</span>{' '}
-                <button>
-                  Read More <FontAwesomeIcon icon={faChevronRight} />
-                </button>
-              </div>
-            </div>
+            {this.state.allPosts &&
+              this.state.allPosts.map((post, i) => {
+                return (
+                  <div className='feeds-post' key={i}>
+                    <div className='feeds-img'>
+                      <img src={post.image} alt='Feeds Image' />
+                    </div>
+                    <div className='feeds-post-content'>
+                      <p>{post.text}</p>
+                      <hr />
+                      <FontAwesomeIcon icon={faCalendar} />{' '}
+                      <span>{post.date}</span>{' '}
+                      <button
+                        onClick={() => {
+                          this.setState({
+                            viewPost: true,
+                            post,
+                          });
+                        }}
+                      >
+                        Read More <FontAwesomeIcon icon={faChevronRight} />
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
             {/* End Post */}
           </div>
           <div className='feeds-sidebar'>Test From Sidebar</div>
