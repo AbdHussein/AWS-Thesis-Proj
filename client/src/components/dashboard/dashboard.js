@@ -32,12 +32,16 @@ class Dashboard extends React.Component {
       $(dashboard).show().siblings().hide();
     });
 
-    const query = Constants.getUserByToken(localStorage.getItem('xTown'));
-    const request = await Constants.request(query);
-    const provider = request.data.data.user;
-    this.setState({
-      provider,
-    });
+    if (localStorage.getItem('xTown')) {
+      const query = Constants.getUserByToken(localStorage.getItem('xTown'));
+      const request = await Constants.request(query);
+      const provider = request.data.data.user;
+      this.setState({
+        provider,
+      });
+    } else {
+      this.props.history.push('/');
+    }
   }
 
   render() {
