@@ -185,10 +185,7 @@ function Locate({ panTo }) {
         );
       }}
     >
-      <img
-        src={require('../../images/compass.png')}
-        alt='compass - locate me'
-      />
+      <img src={require('../../images/geo.png')} alt='compass - locate me' />
     </button>
   );
 }

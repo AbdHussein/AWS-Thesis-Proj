@@ -1,6 +1,6 @@
 /* Start Main Var */
-@import url("https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Montserrat&family=Open+Sans&family=Oswald&family=Roboto&display=swap");
-$fontFamily: "Lobster", cursive;
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Montserrat&family=Open+Sans&family=Oswald&family=Roboto&display=swap');
+$fontFamily: 'Lobster', cursive;
 $floatLeft: left;
 $floatRight: right;
 $mainColor: #2e3f6e;
@@ -240,7 +240,7 @@ nav {
 .landing {
   header {
     height: 90vh;
-    background-image: url("../src/images/1.jpg");
+    background-image: url('../src/images/1.jpg');
     position: relative;
     @extend %cover;
     .overlay {
@@ -415,7 +415,7 @@ nav {
     }
   }
   .landing-promo {
-    background-image: url("./images/11.jpg");
+    background-image: url('./images/11.jpg');
     background-size: cover !important;
     position: relative;
     height: 55vh;
@@ -437,7 +437,7 @@ nav {
       font-size: 32px;
       font-weight: 800;
       color: #fff;
-      font-family: "Raleway", sans-serif;
+      font-family: 'Raleway', sans-serif;
       margin-bottom: 10px !important;
       width: 100%;
     }
@@ -489,7 +489,7 @@ nav {
 
 .provider-header {
   height: 80vh;
-  background-image: url("./images/6.jpg");
+  background-image: url('./images/6.jpg');
   position: relative;
   @extend %cover;
   .overlay {
@@ -1068,7 +1068,7 @@ hr {
         padding: 15px;
         position: relative;
         &::before {
-          content: "";
+          content: '';
           display: block;
           width: 0;
           border-top: 10px solid transparent;
@@ -1175,7 +1175,7 @@ hr {
         font-size: 15px;
         font-weight: 600;
         color: #566985;
-        font-family: "Nunito", sans-serif;
+        font-family: 'Nunito', sans-serif;
         margin: 0;
       }
       svg {
@@ -1350,7 +1350,7 @@ hr {
             color: #878c9f;
           }
           &::before {
-            content: "";
+            content: '';
             display: block;
             width: 0;
             border-top: 15px solid transparent;
@@ -1580,7 +1580,7 @@ p {
   background: #b5b5b56b;
 }
 .footer-news .last-news h3::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1622,7 +1622,7 @@ p {
   padding-bottom: 25px;
 }
 .footer-news .twitter h3::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1646,7 +1646,7 @@ p {
   position: relative;
 }
 .footer-news .twitter ul li::after {
-  content: "";
+  content: '';
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(255, 255, 255, 0.11);
   border-bottom: 10px solid transparent;
@@ -1775,15 +1775,15 @@ h1 {
 /*cooper style*/
 .locate {
   position: absolute;
-  top: 100px;
-  right: 10px;
+  bottom: 240px;
+  right: 0px;
   background: none;
   border: none;
   z-index: 10;
   outline: none;
   img {
-    height: 100px;
-    width: 100px;
+    height: 50px;
+    width: 50px;
     cursor: pointer;
   }
 }
@@ -1989,7 +1989,7 @@ nav {
   h2 {
     color: #566985;
   }
-  input[type="submit"] {
+  input[type='submit'] {
     background: #384f95;
     float: left;
     position: relative;
@@ -2032,7 +2032,7 @@ nav {
   // overflow: hidden;
 }
 
-.dash-provider-info input[type="text"] {
+.dash-provider-info input[type='text'] {
   float: left;
   border: 1px solid #e5e7f2;
   background: #f9f9f9;
@@ -2068,7 +2068,7 @@ nav {
     box-sizing: border-box;
   }
   header {
-    background-image: url("./images/5.jpg");
+    background-image: url('./images/5.jpg');
     background-size: cover;
     position: relative;
     height: 60vh;
@@ -2259,7 +2259,7 @@ nav {
           color: #566985;
         }
         span {
-          font-family: "Lobster", cursive;
+          font-family: 'Lobster', cursive;
           color: #878c9f;
           margin-top: 10%;
         }
@@ -2305,7 +2305,7 @@ nav {
     color: #566985;
   }
 }
-.product-data input[type="text"] {
+.product-data input[type='text'] {
   float: left;
   border: 1px solid #e5e7f2;
   background: #f9f9f9;
