@@ -3,6 +3,8 @@ import Navbar from '../mainComp/navbar';
 import { Container } from '@material-ui/core';
 import Constants from '../constants/Queries';
 import Footer from '../footer/footer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarkedAlt, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 class FavProviders extends React.Component {
     state = {
@@ -29,7 +31,19 @@ class FavProviders extends React.Component {
                 <div className="fav-provider">
                     <Container>
                         <div className="fav-content">
-                            Test From Content
+                            <div className="fav">
+                                <div className="fav-cover">
+                                    <img src={require(`../../images/29.jpg`)} alt="Fav Provider Image" />
+                                </div>
+                                <div className="fav-info">
+                                    <h4>Header Test</h4>
+                                    <span><FontAwesomeIcon icon={faMapMarkedAlt} />  75 Prince St, NY, USA</span>
+                                </div>
+                                <div className="fav-options">
+                                    <button>unsaved</button>
+                                    <button>Visit <FontAwesomeIcon icon={faChevronRight} /></button>
+                                </div>
+                            </div>
                         </div>
                         <div className="fav-sidebar">
                             Test From SideBar
