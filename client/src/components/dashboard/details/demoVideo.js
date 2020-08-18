@@ -12,11 +12,11 @@ class DemoVideo extends React.Component {
     vidUrl: null
   }
   componentDidMount(){
-    $('.MuiCircularProgress-svg').hide();
+    $('#videoProgress').hide();
   }
 
   uploadStarted(){
-    $('.MuiCircularProgress-svg').show();
+    $('#videoProgress').show();
     $('.btn').hide();
   }
 
@@ -25,7 +25,7 @@ class DemoVideo extends React.Component {
       vidUrl: url
     }, () =>{
       //TODO Enable button
-      $('.MuiCircularProgress-svg').hide();
+      $('#videoProgress').hide();
       $('.btn').show();
     })
   }
@@ -57,7 +57,7 @@ class DemoVideo extends React.Component {
             <VideoUpload getVidUrl={this.getVidUrl.bind(this)} uploadStarted={this.uploadStarted.bind(this)}/>
           </div>
           <br></br>
-          <div>
+          <div id="videoProgress">
           <CircularProgress />
           </div>
           <br></br>
