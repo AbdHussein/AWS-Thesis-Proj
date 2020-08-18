@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 
 class ProviderPosts extends React.Component {
   state = {
-    posts: [],
+    posts: null,
     viewPost: false,
     post: null,
   };
@@ -36,7 +36,7 @@ class ProviderPosts extends React.Component {
     return (
       <div>
         <Container>
-          {this.state.posts.map((post, i) => {
+          {this.state.posts && this.state.posts.map((post, i) => {
             return (
               <div className='posts' key={i}>
                 <div className='post-img'>

@@ -49,11 +49,14 @@ nav {
   }
   .brand {
     float: $floatLeft;
-    color: $mainHover;
     font-size: 40px;
     font-weight: 700;
     font-family: $fontFamily;
     margin-bottom: 5px;
+    a {
+      text-decoration: none;
+      color: $mainHover;
+    }
     span {
       color: #fff;
     }
@@ -62,6 +65,15 @@ nav {
       margin-right: -8px;
       margin-bottom: -15px;
       font-size: 60px;
+    }
+  }
+  ul {
+    float: $floatLeft !important;
+    line-height: 30px !important;
+    li {
+      &:hover {
+        color: $mainHover;
+      }
     }
   }
   .auth {
@@ -395,6 +407,64 @@ nav {
               }
             }
           }
+        }
+      }
+    }
+  }
+  .landing-promo {
+    background-image: url("./images/11.jpg");
+    background-size: cover !important;
+    position: relative;
+    height: 55vh;
+    margin-bottom: 70px;
+    margin-top: 70px;
+    overflow: hidden;
+    .overlay {
+      @extend %overlay;
+      text-align: center;
+      padding: 20px;
+    }
+    h5 {
+      font-size: 14px;
+      color: #fff;
+      padding-bottom: 0px;
+    }
+    p {
+      color: #fff;
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      font-family: "Raleway", sans-serif;
+      margin-bottom: 10px !important;
+      width: 100%;
+    }
+    button {
+      background-color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 50px;
+      @include boxShadow(4px);
+      color: #7d93b2;
+      outline: none;
+      cursor: pointer;
+      margin-top: 60px;
+      svg {
+        background-color: $mainHover;
+        color: #fff;
+        padding: 15px;
+        border-radius: 50%;
+        margin-right: 10px;
+        @extend %transition;
+      }
+      span {
+        vertical-align: top;
+        margin-top: 15px;
+        font-weight: 600;
+        display: inline-block;
+      }
+      &:hover {
+        svg {
+          background-color: $mainColor;
         }
       }
     }
@@ -1011,7 +1081,7 @@ hr {
             width: 100%;
             border-radius: 5px;
             &:not(:last-child) {
-              margin-right: 2%;
+              margin-right: 1%;
             }
           }
         }
@@ -1019,9 +1089,6 @@ hr {
           top: 15px;
           position: absolute;
           right: 20px;
-          svg {
-            color: #ffb400 !important;
-          }
         }
         h3 {
           color: #566985;
@@ -1033,7 +1100,7 @@ hr {
         hr {
           background-color: #e5e7f2;
         }
-        span {
+        .calender {
           color: #878c9f;
           svg {
             color: $mainHover;
@@ -2058,6 +2125,166 @@ nav {
   cursor: pointer;
 }
 /*End dash-provider-info*/
+
+/* Start Feeds Page */
+
+.feeds {
+  * {
+    box-sizing: border-box;
+  }
+  header {
+    background-image: url("./images/5.jpg");
+    background-size: cover;
+    position: relative;
+    height: 60vh;
+    margin-bottom: 70px;
+    .overlay {
+      @extend %overlay;
+      background: rgba($color: #000, $alpha: 0.4);
+      position: static;
+      text-align: center;
+      padding-top: 20vh;
+      h2 {
+        color: #fff;
+        margin-top: 0;
+      }
+      hr {
+        width: 70px;
+        background-color: $mainHover;
+        height: 3px;
+      }
+    }
+  }
+
+  .feeds-content {
+    float: $floatLeft;
+    width: 69%;
+    .feeds-post {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 150px;
+      .feeds-img {
+        height: 500px;
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 500px;
+        }
+      }
+      .feeds-post-content {
+        padding: 20px;
+        p {
+          color: #878c9f;
+        }
+        hr {
+          background-color: #ccc;
+        }
+        svg {
+          color: $mainHover;
+        }
+        span {
+          color: #878c9f;
+        }
+        button {
+          float: $floatRight;
+          background-color: $mainColor;
+          border: none;
+          padding: 15px 30px;
+          color: #fff;
+          border-radius: 4px;
+          margin-bottom: 10px;
+          cursor: pointer;
+          svg {
+            margin-left: 15px;
+          }
+        }
+      }
+    }
+  }
+  .feeds-sidebar {
+    float: $floatRight;
+    background-color: #eee;
+    width: 29%;
+  }
+}
+
+/* End Feeds Page */
+/* Start FavProviders Page */
+
+.fav-provider {
+  margin: 70px auto;
+  * {
+    box-sizing: border-box;
+  }
+  overflow: hidden;
+  .fav-content {
+    float: $floatLeft;
+    width: 69%;
+    .fav {
+      float: $floatLeft;
+      width: (100% / 2.05);
+      margin-right: 1%;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      .fav-cover {
+        overflow: hidden;
+        height: 200px;
+        img {
+          width: 100%;
+          height: 200px;
+        }
+      }
+      .fav-info {
+        padding: 15px;
+        border-bottom: 1px solid #ccc;
+        h4 {
+          margin: 0 0 10px;
+          color: #566985;
+        }
+        span {
+          color: #7d93b2;
+          svg {
+            color: $mainHover;
+          }
+        }
+      }
+      .fav-options {
+        padding: 15px;
+        button {
+          background-color: $mainColor;
+          border: none;
+          padding: 10px 20px;
+          color: #fff;
+          cursor: pointer;
+          border-radius: 5px;
+          @extend %transition;
+          &:last-child {
+            float: $floatRight;
+          }
+          svg {
+            margin-left: 5px;
+            color: $mainHover;
+          }
+          &:hover {
+            background-color: $mainHover;
+            svg {
+              color: $mainColor;
+            }
+          }
+        }
+      }
+    }
+  }
+  .fav-sidebar {
+    float: $floatRight;
+    width: 29%;
+    background-color: #ccc;
+  }
+}
+
+/* End FavProviders Page */
 ///////////////////////////////////////////////////
 /*Store Dashboard*/
 .product-data {
@@ -2120,40 +2347,40 @@ nav {
   display: inline-flex;
   width: 100%;
 }
-.day-div {
-  width: 33.333%;
-  float: left;
-  color: $mainColor;
-}
-.from-div {
-  ul {
-    padding-left: 0px;
-    list-style: none;
-  }
-  input[type="time"] {
-    border: 1px solid #e5e7f2;
-    background: #f9f9f9;
-    outline-color: $mainHover;
-    outline-style: $mainHover;
-  }
-  width: 33.333%;
-  color: $mainColor;
-}
-.to-div {
-  ul {
-    padding-left: 0px;
-    list-style: none;
-  }
-  input[type="time"] {
-    border: 1px solid #e5e7f2;
-    background: #f9f9f9;
-    outline-color: $mainHover;
-    outline-style: $mainHover;
-  }
-  width: 33.333%;
-  float: right;
-  color: $mainColor;
-}
+// .day-div {
+//   width: 33.333%;
+//   float: left;
+//   color: $mainColor;
+// }
+// .from-div {
+//   ul {
+//     padding-left: 0px;
+//     list-style: none;
+//   }
+//   input[type="time"] {
+//     border: 1px solid #e5e7f2;
+//     background: #f9f9f9;
+//     outline-color: $mainHover;
+//     outline-style: $mainHover;
+//   }
+//   width: 33.333%;
+//   color: $mainColor;
+// }
+// .to-div {
+//   ul {
+//     padding-left: 0px;
+//     list-style: none;
+//   }
+//   input[type="time"] {
+//     border: 1px solid #e5e7f2;
+//     background: #f9f9f9;
+//     outline-color: $mainHover;
+//     outline-style: $mainHover;
+//   }
+//   width: 33.333%;
+//   float: right;
+//   color: $mainColor;
+// }
 // .main-enter-workHours{
 //   width: 100%;
 //   li{
@@ -2189,3 +2416,28 @@ nav {
   width: (100% / 5);
   display: inline-block;
 }
+
+.delete-waring {
+  p {
+    color: #000;
+  }
+  border: 1px solid #4db7fe;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+// .popup-delete {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background: rgba(0, 0, 0, 0.5);
+//   display: none;
+//   .popup-content {
+//     width: 500px;
+//     background: #ccc;
+//     height: 300px;
+//     margin: 30vh auto;
+//   }
+// }

@@ -1,15 +1,12 @@
 import React from 'react';
-import constants from '../constants/Queries';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
-const jwt = require('jsonwebtoken');
 
-class ImageUpload extends React.Component {
+class VideoUpload extends React.Component {
   state = {
-    imageUrl: null,
-    imageAlt: null,
-    postStatus: '',
+    videoUrl: null,
+    videoAlt: null,
     selectedFile: null,
   };
 
@@ -44,26 +41,27 @@ class ImageUpload extends React.Component {
   onFileChange = (event) => {
     // Update the state
     this.setState({ selectedFile: event.target.files[0] }, async () => {
-      this.handleImageUpload();
+      this.props.uploadStarted();
+      this.handleVideoUpload();
     });
   };
 
-  handleImageUpload = () => {
+  handleVideoUpload = () => {
     const formData = new FormData();
     formData.append('file', this.state.selectedFile);
     formData.append('upload_preset', 'pm0oht2i');
     console.log(this.state.selectedFile);
     axios
-      .post('https://api.cloudinary.com/v1_1/xtown/image/upload', formData)
+      .post('https://api.cloudinary.com/v1_1/xtown/video/upload', formData)
       .then((response) => {
         console.log(response);
         this.setState(
           {
-            imageUrl: response.data.secure_url,
-            imageAlt: `An image of ${response.data.original_filename}`,
+            videoUrl: response.data.secure_url,
+            videoAlt: `A video of ${response.data.original_filename}`,
           },
           async () => {
-            await this.props.getImgUrl(response.data.secure_url);
+            this.props.getVidUrl(response.data.secure_url);
           }
         );
       })
@@ -74,15 +72,15 @@ class ImageUpload extends React.Component {
   };
 
   render() {
-    const { imageUrl, imageAlt } = this.state;
+    const { videoUrl, videoAlt } = this.state;
     return (
       <main className='App'>
         <section className='left-side'>
           {/* <div className='form-group'>
-              <input type='file' onChange={this.onFileChange} />
-              <br></br>
-            </div>
-            <span>{}</span> */}
+                <input type='file' onChange={this.onFileChange} />
+                <br></br>
+              </div>
+              <span>{}</span> */}
           <div className='box'>
             <input
               type='file'
@@ -94,7 +92,7 @@ class ImageUpload extends React.Component {
             />
             <label htmlFor='file-1'>
               <FontAwesomeIcon icon={faImage} />{' '}
-              <span className='add-photos'>Add Photos</span>
+              <span className='add-photos'>Add Video</span>
             </label>
           </div>
         </section>
@@ -103,4 +101,4 @@ class ImageUpload extends React.Component {
   }
 }
 
-export default ImageUpload;
+export default VideoUpload;

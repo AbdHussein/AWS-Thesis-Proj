@@ -8,7 +8,9 @@ import Dashboard from './components/dashboard/dashboard';
 import ViewPost from './components/dashboard/posts/viewPost';
 import signIn from './components/Auth/SignIn';
 import signUp from './components/Auth/SignUp';
-import MyCart from './components/provider/myCart';
+import Feeds from './components/landing/feeds';
+import FavProviders from './components/provider/favProvider';
+import WishList from './components/provider/wishList';
 
 function App() {
   return (
@@ -22,7 +24,9 @@ function App() {
           <Route path='/post' component={ViewPost} />
           <Route path='/signIn' component={signIn} />
           <Route path='/signUp' component={signUp} />
-          <Route path='/mycart' component={MyCart} />
+          <Route path='/wishlist' component={WishList} />
+          <Route path='/feeds' component={Feeds} />
+          <Route path='/favprovider' component={FavProviders} />
         </Switch>
       </div>
     </Router>
