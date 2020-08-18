@@ -16,11 +16,11 @@ class DashProviderInfo extends React.Component {
   };
 
   componentDidMount() {  
-    $('.MuiCircularProgress-svg').hide();
+    $('#providerInfoProgress').hide();
   }
 
   uploadStarted(){
-    $('.MuiCircularProgress-svg').show();
+    $('#providerInfoProgress').show();
     $('#btn').hide();
   }
 
@@ -28,7 +28,7 @@ class DashProviderInfo extends React.Component {
     this.setState({
       imgUrl: url,
     },() => {
-      $('.MuiCircularProgress-svg').hide();
+      $('#providerInfoProgress').hide();
       $('#btn').show();
     });
   }
@@ -109,7 +109,7 @@ class DashProviderInfo extends React.Component {
                 <div className='upload'>
                   <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} uploadStarted={this.uploadStarted.bind(this)}/>
                 </div>                
-                <div id="CircularProgress">
+                <div id="providerInfoProgress">
                   <CircularProgress />
                 </div>
                 <br />
@@ -168,7 +168,286 @@ class DashProviderInfo extends React.Component {
               </button>
             </form>
           </div>
-        </div> */}
+        </div>
+
+        {/* <label htmlFor="from">From:</label>
+            <input type="time" id="from" name="from" /> */}
+
+        <div className="dash-working-hours">
+          <h1>Add Your Working Hours</h1>
+          <div className="Working-hours-dash">
+            <div className="main-enter-workHours">
+              <ul>
+                <li>
+                  <span>
+                    <label>Saturday:</label>
+                  </span>
+                  <span>
+                    <select>
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 AM</option>
+                    </select>
+                  </span>
+                  <span>To</span>
+                  <span>
+                    <select>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
+                    </select>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <label>Sunday:</label>
+                  </span>
+                  <span>
+                    <select>
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 AM</option>
+                    </select>
+                  </span>
+                  <span>To</span>
+                  <span>
+                    <select>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
+                    </select>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <label>Monday:</label>
+                  </span>
+                  <span>
+                    <select>
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 AM</option>
+                    </select>
+                  </span>
+                  <span>To</span>
+                  <span>
+                    <select>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
+                    </select>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <label>Tuesday:</label>
+                  </span>
+                  <span>
+                    <select>
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 AM</option>
+                    </select>
+                  </span>
+                  <span>To</span>
+                  <span>
+                    <select>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
+                    </select>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <label>Wednesday:</label>
+                  </span>
+                  <span>
+                    <select>
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 AM</option>
+                    </select>
+                  </span>
+                  <span>To</span>
+                  <span>
+                    <select>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
+                    </select>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <label>Thursday:</label>
+                  </span>
+                  <span>
+                    <select>
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 AM</option>
+                    </select>
+                  </span>
+                  <span>To</span>
+                  <span>
+                    <select>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
+                    </select>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <label>Friday:</label>
+                  </span>
+                  <span>
+                    <select>
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 AM</option>
+                    </select>
+                  </span>
+                  <span>To</span>
+                  <span>
+                    <select>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
+                    </select>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

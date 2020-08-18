@@ -70,12 +70,21 @@ const addComment = (userID, postID, text) => {
 
 const addProduct = (name, userID, category, price, pic) => {
   const mutation = `mutation {
-    addProduct(name:"${name}", userID: ${userID}, category:"${category}", price:${price}, pic:"${pic}", rating:0, quantity:0){
+    addProduct(name:"${name}", userID: ${userID}, category:"${category}", price:${price}, pic:"${pic}", rating:"0", quantity:0){
       id
     }
   }`;
   return mutation;
 };
+
+const addToCart = (productID, userID) => {
+  const mutation = `mutation{
+    addCart(userID: ${userID}, productID:${productID}, sold: false){
+      id
+    }
+  }`;
+  return mutation;
+}
 
 const login = (email, password) => {
   const mutation = `mutation {
@@ -151,7 +160,7 @@ const getPostByProviderID = (userID) => {
 
 const getProviderById = (userID) => {
   const q = `query {
-    user(id:${userID}){
+    user(id:${userID}) {
       username
       avatar
       id
@@ -271,6 +280,7 @@ const getFacilities = (userID) => {
 const getProducts = (userID) => {
   const q = `query {
     productsByUserID(userID:${userID}){
+      id
       name
       price
       pic
@@ -327,4 +337,5 @@ module.exports.addFacilities = addFacilities;
 module.exports.getFacilities = getFacilities;
 module.exports.getProducts = getProducts;
 module.exports.editProviderInfo = editProviderInfo;
+module.exports.addToCart = addToCart;
 module.exports.getProvidersByBookmarks = getProvidersByBookmarks;

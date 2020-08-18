@@ -12,12 +12,12 @@ class Add extends React.Component {
   };
 
   componentDidMount(){
-    $('.MuiCircularProgress-svg').hide();
+    $('#addPostProgress').hide();
   }
 
   uploadStarted(){
-    $('.MuiCircularProgress-svg').show();
-    $('.btn').hide();
+    $('#addPostProgress').show();
+    $('#addPost').hide();
   }
 
   handleChange(e) {
@@ -30,8 +30,8 @@ class Add extends React.Component {
     this.setState({
       imgUrl: url,
     }, () => {
-      $('.MuiCircularProgress-svg').hide();
-      $('.btn').show();
+      $('#addPostProgress').hide();
+      $('#addPost').show();
     });
   }
 
@@ -71,8 +71,8 @@ class Add extends React.Component {
     return (
       <div className='dash-add'>
         <h2>Add your Post</h2>
-        <h4>What Is New?!</h4>
         <form>
+          <h4>What Is New?!</h4>
           <textarea
             className='post-area'
             name='text'
@@ -87,13 +87,14 @@ class Add extends React.Component {
             <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} uploadStarted={this.uploadStarted.bind(this)}/>
           </div>
           <br></br>
-            <div>
+            <div id="addPostProgress">
               <CircularProgress />
             </div>
           <br></br>
           <button
             type='button'
             className='btn'
+            id="addPost"
             onClick={this.onSubmit.bind(this)}
           >
             Add Post

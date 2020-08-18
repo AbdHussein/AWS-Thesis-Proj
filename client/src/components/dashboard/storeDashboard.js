@@ -1,4 +1,6 @@
 import React from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import $ from 'jquery';
 import ImageUpload from '../imageUpload/imageUpload';
 import constants from '../constants/Queries';
 
@@ -9,6 +11,15 @@ class StoreDashboard extends React.Component {
     pic: null,
   };
 
+  componentDidMount(){
+    $('#storeProgress').hide();
+  }
+
+  uploadStarted(){
+    $('#Progress').show();    
+    $('#addProduct').hide();
+  }
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
@@ -18,6 +29,9 @@ class StoreDashboard extends React.Component {
   updateImgUrl(url) {
     this.setState({
       pic: url,
+    }, () => {
+      $('#Progress').hide();
+      $('#addProduct').show();
     });
   }
 
@@ -89,11 +103,15 @@ class StoreDashboard extends React.Component {
             <br />
             <br />
             <label htmlFor='pic'>Product Picture: </label>            
-             <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} />
+             <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} uploadStarted={this.uploadStarted.bind(this)}/>
             <br />
+            <div id="storeProgress">
+              <CircularProgress />
+            </div>
             <br />
             <button
               className='add-product'
+              id="addProduct"
               onClick={this.handleClick.bind(this)}
             >
               Add Product
