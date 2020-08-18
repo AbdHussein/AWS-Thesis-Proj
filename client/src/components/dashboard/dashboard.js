@@ -12,6 +12,7 @@ import MainDashboard from './mainDashboard';
 import Navbar from '../mainComp/navbar';
 import Constants from '../constants/Queries';
 import StoreDashboard from './storeDashboard';
+import { Redirect } from 'react-router-dom';
 
 class Dashboard extends React.Component {
   state = {
@@ -40,6 +41,15 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    if (this.state.provider && this.state.provider.RoleID == 3) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/',
+          }}
+        />
+      );
+    }
     return (
       <div className='dashboard'>
         <Navbar provider={this.state.provider} />
@@ -111,11 +121,13 @@ class Dashboard extends React.Component {
                 <Show />
               </div>
               <div className='dash-provider-information'>
-                <DashProviderInfo />
+                {this.state.provider && (
+                  <DashProviderInfo id={this.state.provider.id} />
+                )}
               </div>
               <div className='store-dash'>
-              {this.state.provider && (
-                  <StoreDashboard provider = {this.state.provider} />
+                {this.state.provider && (
+                  <StoreDashboard provider={this.state.provider} />
                 )}
               </div>
             </div>

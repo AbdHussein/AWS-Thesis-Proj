@@ -66,9 +66,6 @@ class Landing extends React.Component {
         <Redirect
           to={{
             pathname: '/dashboard',
-            state: {
-              category: this.state.category,
-            },
           }}
         />
       );

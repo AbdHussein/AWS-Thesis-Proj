@@ -275,7 +275,16 @@ const getProducts = (userID) => {
       price
       pic
     }
-  }`
+  }`;
+  return q;
+};
+
+const editProviderInfo = (id, serviceName, email, mobile, address, cover) => {
+  const q = `mutation {
+    editUser(id:${id}, serviceName:"${serviceName}",email:"${email}",mobile:${mobile},address:"${address}",cover:"${cover}"){
+      id
+    }
+  }`;
   return q;
 };
 
@@ -301,3 +310,4 @@ module.exports.addProduct = addProduct;
 module.exports.addFacilities = addFacilities;
 module.exports.getFacilities = getFacilities;
 module.exports.getProducts = getProducts;
+module.exports.editProviderInfo = editProviderInfo;
