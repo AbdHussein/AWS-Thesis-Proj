@@ -1,4 +1,6 @@
 import React from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import $ from 'jquery';
 import ImageUpload from '../../imageUpload/imageUpload';
 import constants from '../../constants/Queries';
 const jwt = require('jsonwebtoken');
@@ -9,6 +11,15 @@ class Add extends React.Component {
     imgUrl: null,
   };
 
+  componentDidMount(){
+    $('.MuiCircularProgress-svg').hide();
+  }
+
+  uploadStarted(){
+    $('.MuiCircularProgress-svg').show();
+    $('.btn').hide();
+  }
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
@@ -18,6 +29,9 @@ class Add extends React.Component {
   updateImgUrl(url) {
     this.setState({
       imgUrl: url,
+    }, () => {
+      $('.MuiCircularProgress-svg').hide();
+      $('.btn').show();
     });
   }
 
@@ -41,6 +55,8 @@ class Add extends React.Component {
         .then((result) => {
           if (result.data.errors) {
             alert('Failed add Photo');
+          }else{
+            alert('Post Added');
           }
         })
         .catch((err) => {
@@ -68,8 +84,13 @@ class Add extends React.Component {
           {/* <input type="file" name="image"  value={this.state.image} onChange={this.handelChange.bind(this)}/> */}
           <h4>Choose Post's Image</h4>
           <div className='upload'>
-            <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} />
+            <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} uploadStarted={this.uploadStarted.bind(this)}/>
           </div>
+          <br></br>
+            <div>
+              <CircularProgress />
+            </div>
+            <br></br>
           <button
             type='button'
             className='btn'
