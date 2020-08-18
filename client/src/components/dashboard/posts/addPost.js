@@ -71,8 +71,8 @@ class Add extends React.Component {
     return (
       <div className='dash-add'>
         <h2>Add your Post</h2>
-        <h4>What Is New?!</h4>
         <form>
+          <h4>What Is New?!</h4>
           <textarea
             className='post-area'
             name='text'
