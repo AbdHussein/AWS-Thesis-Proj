@@ -1,5 +1,6 @@
 import React from 'react';
 import ImageUpload from '../imageUpload/imageUpload';
+import Constants from '../constants/Queries';
 class DashProviderInfo extends React.Component {
   state = {
     serviceName: '',
@@ -23,8 +24,18 @@ class DashProviderInfo extends React.Component {
       [e.target.name]: e.target.value,
     });
   }
-  handleClick(event) {
+  async handleClick(event) {
     event.preventDefault();
+    const { serviceName, email, mobile, address } = this.state;
+    const editProviderInfoQuery = Constants.editProviderInfo(
+      this.props.id,
+      serviceName,
+      email,
+      mobile,
+      address,
+      this.state.imgUrl
+    );
+    const request = await Constants.request(editProviderInfoQuery);
   }
   render() {
     return (
@@ -93,7 +104,6 @@ class DashProviderInfo extends React.Component {
               >
                 Edit
               </button>
-
             </form>
           </div>
         </div>
