@@ -10,27 +10,44 @@ class DashProviderInfo extends React.Component {
     mobile: '',
     address: '',
     imgUrl: '',
-    facebook: '',
-    instgram: '',
-    twitter: '',
+    // facebook: '',
+    // instgram: '',
+    // twitter: '',
+    SatOp: '',
+    SunOp: '',
+    MonOp: '',
+    TuesOp: '',
+    WenOp: '',
+    ThurOp: '',
+    FrOp: '',
+    SatC: '',
+    SunC: '',
+    MonC: '',
+    TuesC: '',
+    WenC: '',
+    ThurC: '',
+    FrC: '',
   };
 
-  componentDidMount() {  
+  componentDidMount() {
     $('.MuiCircularProgress-svg').hide();
   }
 
-  uploadStarted(){
+  uploadStarted() {
     $('.MuiCircularProgress-svg').show();
     $('#btn').hide();
   }
 
   updateImgUrl(url) {
-    this.setState({
-      imgUrl: url,
-    },() => {
-      $('.MuiCircularProgress-svg').hide();
-      $('#btn').show();
-    });
+    this.setState(
+      {
+        imgUrl: url,
+      },
+      () => {
+        $('.MuiCircularProgress-svg').hide();
+        $('#btn').show();
+      }
+    );
   }
 
   handelChange(e) {
@@ -107,16 +124,19 @@ class DashProviderInfo extends React.Component {
                 <br />
                 <br />
                 <div className='upload'>
-                  <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} uploadStarted={this.uploadStarted.bind(this)}/>
-                </div>                
-                <div id="CircularProgress">
+                  <ImageUpload
+                    getImgUrl={this.updateImgUrl.bind(this)}
+                    uploadStarted={this.uploadStarted.bind(this)}
+                  />
+                </div>
+                <div id='CircularProgress'>
                   <CircularProgress />
                 </div>
                 <br />
               </div>
               <button
                 className='button-edit'
-                id="btn"
+                id='btn'
                 onClick={this.handleClick.bind(this)}
               >
                 Edit
@@ -173,17 +193,20 @@ class DashProviderInfo extends React.Component {
         {/* <label htmlFor="from">From:</label>
             <input type="time" id="from" name="from" /> */}
 
-        <div className="dash-working-hours">
+        <div className='dash-working-hours'>
           <h1>Add Your Working Hours</h1>
-          <div className="Working-hours-dash">
-            <div className="main-enter-workHours">
+          <div className='Working-hours-dash'>
+            <div className='main-enter-workHours'>
               <ul>
                 <li>
                   <span>
                     <label>Saturday:</label>
                   </span>
                   <span>
-                    <select>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='SatOp'
+                    >
                       <option>1:00 AM</option>
                       <option>2:00 AM</option>
                       <option>3:00 AM</option>
@@ -200,7 +223,7 @@ class DashProviderInfo extends React.Component {
                   </span>
                   <span>To</span>
                   <span>
-                    <select>
+                    <select onChange={this.handelChange.bind(this)} name='SatC'>
                       <option>1:00 PM</option>
                       <option>2:00 PM</option>
                       <option>3:00 PM</option>
@@ -221,7 +244,10 @@ class DashProviderInfo extends React.Component {
                     <label>Sunday:</label>
                   </span>
                   <span>
-                    <select>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='SunOp'
+                    >
                       <option>1:00 AM</option>
                       <option>2:00 AM</option>
                       <option>3:00 AM</option>
@@ -238,7 +264,7 @@ class DashProviderInfo extends React.Component {
                   </span>
                   <span>To</span>
                   <span>
-                    <select>
+                    <select onChange={this.handelChange.bind(this)} name='SunC'>
                       <option>1:00 PM</option>
                       <option>2:00 PM</option>
                       <option>3:00 PM</option>
@@ -259,7 +285,10 @@ class DashProviderInfo extends React.Component {
                     <label>Monday:</label>
                   </span>
                   <span>
-                    <select>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='MonOp'
+                    >
                       <option>1:00 AM</option>
                       <option>2:00 AM</option>
                       <option>3:00 AM</option>
@@ -276,7 +305,7 @@ class DashProviderInfo extends React.Component {
                   </span>
                   <span>To</span>
                   <span>
-                    <select>
+                    <select onChange={this.handelChange.bind(this)} name='MonC'>
                       <option>1:00 PM</option>
                       <option>2:00 PM</option>
                       <option>3:00 PM</option>
@@ -297,7 +326,10 @@ class DashProviderInfo extends React.Component {
                     <label>Tuesday:</label>
                   </span>
                   <span>
-                    <select>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='TuesOp'
+                    >
                       <option>1:00 AM</option>
                       <option>2:00 AM</option>
                       <option>3:00 AM</option>
@@ -314,7 +346,10 @@ class DashProviderInfo extends React.Component {
                   </span>
                   <span>To</span>
                   <span>
-                    <select>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='TuesC'
+                    >
                       <option>1:00 PM</option>
                       <option>2:00 PM</option>
                       <option>3:00 PM</option>
@@ -335,7 +370,10 @@ class DashProviderInfo extends React.Component {
                     <label>Wednesday:</label>
                   </span>
                   <span>
-                    <select>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='WenOp'
+                    >
                       <option>1:00 AM</option>
                       <option>2:00 AM</option>
                       <option>3:00 AM</option>
@@ -352,7 +390,7 @@ class DashProviderInfo extends React.Component {
                   </span>
                   <span>To</span>
                   <span>
-                    <select>
+                    <select onChange={this.handelChange.bind(this)} name='WenC'>
                       <option>1:00 PM</option>
                       <option>2:00 PM</option>
                       <option>3:00 PM</option>
@@ -373,7 +411,10 @@ class DashProviderInfo extends React.Component {
                     <label>Thursday:</label>
                   </span>
                   <span>
-                    <select>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='ThurOp'
+                    >
                       <option>1:00 AM</option>
                       <option>2:00 AM</option>
                       <option>3:00 AM</option>
@@ -390,7 +431,10 @@ class DashProviderInfo extends React.Component {
                   </span>
                   <span>To</span>
                   <span>
-                    <select>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='ThurC'
+                    >
                       <option>1:00 PM</option>
                       <option>2:00 PM</option>
                       <option>3:00 PM</option>
@@ -411,7 +455,7 @@ class DashProviderInfo extends React.Component {
                     <label>Friday:</label>
                   </span>
                   <span>
-                    <select>
+                    <select onChange={this.handelChange.bind(this)} name='FrOp'>
                       <option>1:00 AM</option>
                       <option>2:00 AM</option>
                       <option>3:00 AM</option>
@@ -428,7 +472,7 @@ class DashProviderInfo extends React.Component {
                   </span>
                   <span>To</span>
                   <span>
-                    <select>
+                    <select onChange={this.handelChange.bind(this)} name='FrC'>
                       <option>1:00 PM</option>
                       <option>2:00 PM</option>
                       <option>3:00 PM</option>
@@ -446,6 +490,10 @@ class DashProviderInfo extends React.Component {
                 </li>
               </ul>
             </div>
+            {/* add Button to commit the working hours */}
+            {/* <button className='button-change' onClick={this.handleClick.bind(this)}>
+              Change
+            </button> */}
           </div>
         </div>
       </div>
