@@ -12,6 +12,7 @@ class Feeds extends React.Component {
     user: null,
     allPosts: [],
     viewPost: false,
+    post: null,
   };
 
   async componentDidMount() {
@@ -50,18 +51,18 @@ class Feeds extends React.Component {
       );
     }
     ///////////////////////////*needs work for ibrahim*///////////////////////////////////
-    // if (this.state.viewPost) {
-    //   return (
-    //     <Redirect
-    //       to={{
-    //         pathname: `/post`,
-    //         state: {
-    //           post: this.state.post,
-    //         },
-    //       }}
-    //     />
-    //   );
-    // }
+    if (this.state.viewPost) {
+      return (
+        <Redirect
+          to={{
+            pathname: `/post`,
+            state: {
+              post: this.state.post,
+            },
+          }}
+        />
+      );
+    }
     return (
       <div className='feeds'>
         <Navbar provider={this.state.user} />

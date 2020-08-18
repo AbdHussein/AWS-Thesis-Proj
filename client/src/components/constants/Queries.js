@@ -310,6 +310,8 @@ const getPostByFavProv = (userID) => {
       provider{
         email
         posts {
+          id
+          userID
           likes
           date
           text
