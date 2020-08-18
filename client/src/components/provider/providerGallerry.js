@@ -11,12 +11,12 @@ class ProviderGallery extends React.Component {
     photos: [],
   };
   async componentDidMount() {
-    watermelon();
     const allPhotosQuery = Constants.getAllGalary(this.props.id);
     const requestForPhotos = await Constants.request(allPhotosQuery);
     this.setState({
       photos: requestForPhotos.data.data.gallery,
     });
+    watermelon();
   }
   render() {
     return (

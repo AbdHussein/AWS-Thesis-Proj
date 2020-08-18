@@ -8,7 +8,7 @@ function waterMelon() {
   });
 
   $('.gallery-img').hover(function () {
-    $(this).children('.img-overlay').toggle(500);
+    $(this).children('.img-overlay').toggle(300);
   });
 
   $('.gallery > div .img-overlay').click(function () {

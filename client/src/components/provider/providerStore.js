@@ -12,13 +12,13 @@ class ProviderStore extends React.Component {
   };
 
   async componentDidMount() {
-    $('.main-store').hover(function () {
-      $(this).children('.store-overlay').fadeToggle();
-    });
     const productsQuery = Constants.getProducts(this.props.id);
     const request = await Constants.request(productsQuery);
     this.setState({
       allProducts: request.data.data.productsByUserID,
+    });
+    $('.main-store').hover(function () {
+      $(this).children('.store-overlay').fadeToggle();
     });
   }
 

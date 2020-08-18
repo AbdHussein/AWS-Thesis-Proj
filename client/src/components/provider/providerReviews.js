@@ -18,35 +18,9 @@ class ProviderReviews extends React.Component {
     rating: '2.5',
     text: '',
     pic: '',
-    reviews: [],
+    reviews: null,
   };
   async componentDidMount() {
-    // var inputs = document.querySelectorAll('.inputfile');
-    // Array.prototype.forEach.call(inputs, function (input) {
-    //   var label = input.nextElementSibling,
-    //     labelVal = label.innerHTML;
-
-    //   input.addEventListener('change', function (e) {
-    //     var fileName = '';
-    //     if (this.files && this.files.length > 1)
-    //       fileName = (this.getAttribute('data-multiple-caption') || '').replace(
-    //         '{count}',
-    //         this.files.length
-    //       );
-    //     else fileName = e.target.value.split('\\').pop();
-
-    //     if (fileName) label.querySelector('span').innerHTML = fileName;
-    //     else label.innerHTML = labelVal;
-    //   });
-
-    //   // Firefox bug fix
-    //   input.addEventListener('focus', function () {
-    //     input.classList.add('has-focus');
-    //   });
-    //   input.addEventListener('blur', function () {
-    //     input.classList.remove('has-focus');
-    //   });
-    // });
     await this.getAllReviews();
   }
 
@@ -99,7 +73,8 @@ class ProviderReviews extends React.Component {
           </div>
           <div className='reviews-comments'>
             {/* <Rating value={2} readOnly /> */}
-            {this.state.reviews.map((review, i) => {
+            {this.state.reviews && this.state.reviews.map((review, i) => {
+
               return (
                 <div className='comments' key={i}>
                   <div className='img-comment'>
@@ -107,13 +82,13 @@ class ProviderReviews extends React.Component {
                   </div>
                   <div className='text-comment'>
                     <h3>{review.user.username}</h3>
-                    <Rating value={review.rating} readOnly />
+                    <Rating precision={0.5} value={review.rating} readOnly />
                     <p>{review.text}</p>
                     <div className='reviews-img'>
                       <img src={review.pic} />
                     </div>
                     <hr />
-                    <span>
+                    <span className="calender">
                       <FontAwesomeIcon icon={faCalendarAlt} /> {review.date}
                     </span>
                   </div>
@@ -127,7 +102,7 @@ class ProviderReviews extends React.Component {
           </div>
           <div className='reviews-rating'>
             <Rating
-              defaultValue={Number(this.state.rating)}
+              defaultValue={2.5}
               precision={0.5}
               name='rating'
               onChange={this.handelChange.bind(this)}

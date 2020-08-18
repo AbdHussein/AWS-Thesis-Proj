@@ -6,19 +6,23 @@ import LoggedInNavbar from './loggedInNav';
 import { Redirect } from 'react-router-dom';
 
 class Navbar extends React.Component {
-    
+
   render() {
     return (
       <nav>
         <Container>
           <div className='brand'>
-            <EmojiTransportationIcon /> x<span>-town</span>
+            <a href="/"><EmojiTransportationIcon /> x<span>-town</span></a>
           </div>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/feeds">Feeds</a></li>
+          </ul>
           {localStorage.getItem('xTown') ? (
             <LoggedInNavbar provider={this.props.provider} />
           ) : (
-            <LoggedOutNavbar />
-          )}
+              <LoggedOutNavbar />
+            )}
         </Container>
       </nav>
     );

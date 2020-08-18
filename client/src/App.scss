@@ -1,6 +1,6 @@
 /* Start Main Var */
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Montserrat&family=Open+Sans&family=Oswald&family=Roboto&display=swap');
-$fontFamily: 'Lobster', cursive;
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Montserrat&family=Open+Sans&family=Oswald&family=Roboto&display=swap");
+$fontFamily: "Lobster", cursive;
 $floatLeft: left;
 $floatRight: right;
 $mainColor: #2e3f6e;
@@ -49,11 +49,14 @@ nav {
   }
   .brand {
     float: $floatLeft;
-    color: $mainHover;
     font-size: 40px;
     font-weight: 700;
     font-family: $fontFamily;
     margin-bottom: 5px;
+    a {
+      text-decoration: none;
+      color: $mainHover;
+    }
     span {
       color: #fff;
     }
@@ -62,6 +65,15 @@ nav {
       margin-right: -8px;
       margin-bottom: -15px;
       font-size: 60px;
+    }
+  }
+  ul {
+    float: $floatLeft !important;
+    line-height: 30px !important;
+    li {
+      &:hover {
+        color: $mainHover;
+      }
     }
   }
   .auth {
@@ -225,7 +237,7 @@ nav {
 .landing {
   header {
     height: 90vh;
-    background-image: url('../src/images/1.jpg');
+    background-image: url("../src/images/1.jpg");
     position: relative;
     @extend %cover;
     .overlay {
@@ -399,6 +411,64 @@ nav {
       }
     }
   }
+  .landing-promo {
+    background-image: url("./images/11.jpg");
+    background-size: cover !important;
+    position: relative;
+    height: 55vh;
+    margin-bottom: 70px;
+    margin-top: 70px;
+    overflow: hidden;
+    .overlay {
+      @extend %overlay;
+      text-align: center;
+      padding: 20px;
+    }
+    h5 {
+      font-size: 14px;
+      color: #fff;
+      padding-bottom: 0px;
+    }
+    p {
+      color: #fff;
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      font-family: "Raleway", sans-serif;
+      margin-bottom: 10px !important;
+      width: 100%;
+    }
+    button {
+      background-color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 50px;
+      @include boxShadow(4px);
+      color: #7d93b2;
+      outline: none;
+      cursor: pointer;
+      margin-top: 60px;
+      svg {
+        background-color: $mainHover;
+        color: #fff;
+        padding: 15px;
+        border-radius: 50%;
+        margin-right: 10px;
+        @extend %transition;
+      }
+      span {
+        vertical-align: top;
+        margin-top: 15px;
+        font-weight: 600;
+        display: inline-block;
+      }
+      &:hover {
+        svg {
+          background-color: $mainColor;
+        }
+      }
+    }
+  }
 }
 
 /* =============================== End Landing Page =============================== */
@@ -416,7 +486,7 @@ nav {
 
 .provider-header {
   height: 80vh;
-  background-image: url('./images/6.jpg');
+  background-image: url("./images/6.jpg");
   position: relative;
   @extend %cover;
   .overlay {
@@ -995,7 +1065,7 @@ hr {
         padding: 15px;
         position: relative;
         &::before {
-          content: '';
+          content: "";
           display: block;
           width: 0;
           border-top: 10px solid transparent;
@@ -1011,7 +1081,7 @@ hr {
             width: 100%;
             border-radius: 5px;
             &:not(:last-child) {
-              margin-right: 2%;
+              margin-right: 1%;
             }
           }
         }
@@ -1019,9 +1089,6 @@ hr {
           top: 15px;
           position: absolute;
           right: 20px;
-          svg {
-            color: #ffb400 !important;
-          }
         }
         h3 {
           color: #566985;
@@ -1033,7 +1100,7 @@ hr {
         hr {
           background-color: #e5e7f2;
         }
-        span {
+        .calender {
           color: #878c9f;
           svg {
             color: $mainHover;
@@ -1171,7 +1238,7 @@ hr {
         font-size: 15px;
         font-weight: 600;
         color: #566985;
-        font-family: 'Nunito', sans-serif;
+        font-family: "Nunito", sans-serif;
         margin: 0;
       }
       svg {
@@ -1346,7 +1413,7 @@ hr {
             color: #878c9f;
           }
           &::before {
-            content: '';
+            content: "";
             display: block;
             width: 0;
             border-top: 15px solid transparent;
@@ -1577,7 +1644,7 @@ p {
   background: #b5b5b56b;
 }
 .footer-news .last-news h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1619,7 +1686,7 @@ p {
   padding-bottom: 25px;
 }
 .footer-news .twitter h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -1643,7 +1710,7 @@ p {
   position: relative;
 }
 .footer-news .twitter ul li::after {
-  content: '';
+  content: "";
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(255, 255, 255, 0.11);
   border-bottom: 10px solid transparent;
@@ -1693,7 +1760,7 @@ h1 {
   padding: 30px;
 }
 .dash-show {
-  h1{
+  h1 {
     color: #566985;
   }
 }
@@ -1935,17 +2002,19 @@ nav {
     color: #566985;
     margin-bottom: 30px;
   }
-  .post-area{
+  .post-area {
     width: 60%;
   }
 }
-.description-div-inner,.upload-gallrey-img{
+.description-div-inner,
+.upload-gallrey-img {
   border: 1px solid #4db7fe;
   border-radius: 10px;
   padding: 30px;
   overflow: hidden;
 }
-.description-btn , .upload-gallery{
+.description-btn,
+.upload-gallery {
   background: #384f95;
   position: relative;
   padding: 10px 30px;
@@ -1962,11 +2031,10 @@ nav {
 .description-div {
   overflow: hidden;
 }
-.gallrey{
-  h2{
-    margin-top:40px;
+.gallrey {
+  h2 {
+    margin-top: 40px;
   }
-  
 }
 /*Demo && Thumbnail*/
 .upload-Thumbnail {
@@ -1985,7 +2053,7 @@ nav {
   h2 {
     color: #566985;
   }
-  input[type='submit'] {
+  input[type="submit"] {
     background: #384f95;
     float: left;
     position: relative;
@@ -2056,18 +2124,176 @@ nav {
   cursor: pointer;
 }
 /*End dash-provider-info*/
+
+/* Start Feeds Page */
+
+.feeds {
+  * {
+    box-sizing: border-box;
+  }
+  header {
+    background-image: url("./images/5.jpg");
+    background-size: cover;
+    position: relative;
+    height: 60vh;
+    margin-bottom: 70px;
+    .overlay {
+      @extend %overlay;
+      background: rgba($color: #000, $alpha: 0.4);
+      position: static;
+      text-align: center;
+      padding-top: 20vh;
+      h2 {
+        color: #fff;
+        margin-top: 0;
+      }
+      hr {
+        width: 70px;
+        background-color: $mainHover;
+        height: 3px;
+      }
+    }
+  }
+
+  .feeds-content {
+    float: $floatLeft;
+    width: 69%;
+    .feeds-post {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 150px;
+      .feeds-img {
+        height: 500px;
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 500px;
+        }
+      }
+      .feeds-post-content {
+        padding: 20px;
+        p {
+          color: #878c9f;
+        }
+        hr {
+          background-color: #ccc;
+        }
+        svg {
+          color: $mainHover;
+        }
+        span {
+          color: #878c9f;
+        }
+        button {
+          float: $floatRight;
+          background-color: $mainColor;
+          border: none;
+          padding: 15px 30px;
+          color: #fff;
+          border-radius: 4px;
+          margin-bottom: 10px;
+          cursor: pointer;
+          svg {
+            margin-left: 15px;
+          }
+        }
+      }
+    }
+  }
+  .feeds-sidebar {
+    float: $floatRight;
+    background-color: #eee;
+    width: 29%;
+  }
+}
+
+/* End Feeds Page */
+/* Start FavProviders Page */
+
+.fav-provider {
+  margin: 70px auto;
+  * {
+    box-sizing: border-box;
+  }
+  overflow: hidden;
+  .fav-content {
+    float: $floatLeft;
+    width: 69%;
+    .fav {
+      float: $floatLeft;
+      width: (100% / 2.05);
+      margin-right: 1%;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      .fav-cover {
+        overflow: hidden;
+        height: 200px;
+        img {
+          width: 100%;
+          height: 200px;
+        }
+      }
+      .fav-info {
+        padding: 15px;
+        border-bottom: 1px solid #ccc;
+        h4 {
+          margin: 0 0 10px;
+          color: #566985;
+        }
+        span {
+          color: #7d93b2;
+          svg {
+            color: $mainHover;
+          }
+        }
+      }
+      .fav-options {
+        padding: 15px;
+        button {
+          background-color: $mainColor;
+          border: none;
+          padding: 10px 20px;
+          color: #fff;
+          cursor: pointer;
+          border-radius: 5px;
+          @extend %transition;
+          &:last-child {
+            float: $floatRight;
+          }
+          svg {
+            margin-left: 5px;
+            color: $mainHover;
+          }
+          &:hover {
+            background-color: $mainHover;
+            svg {
+              color: $mainColor;
+            }
+          }
+        }
+      }
+    }
+  }
+  .fav-sidebar {
+    float: $floatRight;
+    width: 29%;
+    background-color: #ccc;
+  }
+}
+
+/* End FavProviders Page */
 ///////////////////////////////////////////////////
 /*Store Dashboard*/
 .product-data {
   border: 1px solid #4db7fe;
   border-radius: 20px;
   padding: 30px;
-
 }
-.store-dashboard{
-
-  h2{
-    color:#566985;
+.store-dashboard {
+  h2 {
+    color: #566985;
   }
 }
 .product-data input[type="text"] {
@@ -2087,7 +2313,7 @@ nav {
   display: block;
   margin-top: 25px;
 }
-.add-product{
+.add-product {
   background: #384f95;
   position: relative;
   padding: 10px 30px;
