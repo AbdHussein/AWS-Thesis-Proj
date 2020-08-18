@@ -1,4 +1,6 @@
 import React from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import $ from 'jquery';
 import { Container } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -21,7 +23,13 @@ class ProviderReviews extends React.Component {
     reviews: null,
   };
   async componentDidMount() {
-    await this.getAllReviews();
+    await this.getAllReviews();    
+    $('.MuiCircularProgress-svg').hide();
+  }
+
+  uploadStarted(){
+    $('.MuiCircularProgress-svg').show();
+    $('#btn').hide();
   }
 
   async getAllReviews() {
@@ -35,6 +43,9 @@ class ProviderReviews extends React.Component {
   updateImgUrl(url) {
     this.setState({
       pic: url,
+    },() => {
+      $('.MuiCircularProgress-svg').hide();
+      $('#btn').show();
     });
   }
 
@@ -60,6 +71,11 @@ class ProviderReviews extends React.Component {
       );
       const request = await Constants.request(addReview);
       this.getAllReviews();
+      this.setState({
+        rating: '2.5',
+        text: '',
+        pic: '',
+      })
     }
   }
 
@@ -114,8 +130,13 @@ class ProviderReviews extends React.Component {
               name='text'
               onChange={this.handelChange.bind(this)}
             ></textarea>
-            <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} />
-            <button onClick={this.addReview.bind(this)}>
+            <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} uploadStarted={this.uploadStarted.bind(this)}/>
+            <br></br>
+            <div>
+              <CircularProgress />
+            </div>
+            <br></br>
+            <button id='btn' onClick={this.addReview.bind(this)}>
               Submit Reviews <FontAwesomeIcon icon={faPaperPlane} />
             </button>
           </div>

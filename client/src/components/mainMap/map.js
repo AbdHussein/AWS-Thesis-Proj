@@ -249,17 +249,21 @@ class Map extends React.Component {
   };
 
   async componentDidMount() {
+    if (this.props.location.state === undefined) {
+      this.props.history.push('/');
+      return;
+    }
     const { category } = this.props.location.state;
     this.setState({
       category,
     });
 
-    const USERS = Constants.userByCategory(category);
-    const request = await Constants.request(USERS);
-    this.setState({
-      providers: request.data.data.usersByCategory,
-    });
-
+    // const USERS = Constants.userByCategory(category);
+    // const request = await Constants.request(USERS);
+    // this.setState({
+    //   providers: request.data.data.usersByCategory,
+    // });
+    await this.getUsers(category);
     if (localStorage.getItem('xTown')) {
       const query = Constants.getUserByToken(localStorage.getItem('xTown'));
       const request = await Constants.request(query);
@@ -270,12 +274,27 @@ class Map extends React.Component {
     }
   }
 
+  async getUsers(category) {
+    const USERS = Constants.userByCategory(category);
+    const request = await Constants.request(USERS);
+    this.setState({
+      providers: request.data.data.usersByCategory,
+    });
+  }
+
+  async setCategory(category) {
+    this.setState({
+      category,
+    });
+    await this.getUsers(category);
+  }
+
   render() {
     return (
       <div className='map'>
         <Navbar provider={this.state.user} />
         <MyComponent providers={this.state.providers} />
-        <Filter />
+        <Filter setCategory={this.setCategory.bind(this)} />
       </div>
     );
   }

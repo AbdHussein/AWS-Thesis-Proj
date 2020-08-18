@@ -50,9 +50,9 @@ class Provider extends React.Component {
   state = {
     provider: null,
     categoryName: '',
-    user: null
+    user: null,
   };
-  
+
   async componentDidMount() {
     waterMelon();
     const { provider } = this.props.location.state;

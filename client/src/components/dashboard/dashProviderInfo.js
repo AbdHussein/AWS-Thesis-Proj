@@ -1,16 +1,16 @@
-import React from "react";
-import ImageUpload from "../imageUpload/imageUpload";
+import React from 'react';
+import ImageUpload from '../imageUpload/imageUpload';
+import Constants from '../constants/Queries';
 class DashProviderInfo extends React.Component {
   state = {
-    username: "",
-    serviceName: "",
-    email: "",
-    mobile: "",
-    address: "",
-    imgUrl: "",
-    facebook: "",
-    instgram: "",
-    twitter: "",
+    serviceName: '',
+    email: '',
+    mobile: '',
+    address: '',
+    imgUrl: '',
+    facebook: '',
+    instgram: '',
+    twitter: '',
   };
 
   updateImgUrl(url) {
@@ -24,110 +24,91 @@ class DashProviderInfo extends React.Component {
       [e.target.name]: e.target.value,
     });
   }
-  handleClick(event) {
+  async handleClick(event) {
     event.preventDefault();
+    const { serviceName, email, mobile, address } = this.state;
+    const editProviderInfoQuery = Constants.editProviderInfo(
+      this.props.id,
+      serviceName,
+      email,
+      mobile,
+      address,
+      this.state.imgUrl
+    );
+    const request = await Constants.request(editProviderInfoQuery);
   }
   render() {
     return (
-      <div className="dash-provider-info">
-        <div className="your-profile">
+      <div className='dash-provider-info'>
+        <div className='your-profile'>
           <h1>Your Profile</h1>
-          <div className="your-profile-div">
+          <div className='your-profile-div'>
             <form>
-              <label htmlFor="username">User name: </label>
+              <label htmlFor='serviceName'>Service name: </label>
               <input
-                type="text"
-                id="username"
-                name="username"
-                placeholder="username"
-                value={this.state.username}
-                onChange={this.handelChange.bind(this)}
-              ></input>
-              <br />
-              <br />
-              <label htmlFor="password">Change your password: </label>
-              <input
-                type="text"
-                id="password"
-                name="password"
-                placeholder="password"
-                value={this.state.password}
-                onChange={this.handelChange.bind(this)}
-              ></input>
-              <br />
-              <br />
-              <label htmlFor="serviceName">Service name: </label>
-              <input
-                type="text"
-                id="serviceName"
-                name="serviceName"
-                placeholder="Nadera Mobile"
+                type='text'
+                id='serviceName'
+                name='serviceName'
+                placeholder='Nadera Mobile'
                 value={this.state.serviceName}
                 onChange={this.handelChange.bind(this)}
               ></input>
               <br />
               <br />
-              <label htmlFor="email">Email: </label>
+              <label htmlFor='email'>Email: </label>
               <input
-                type="text"
-                id="email"
-                name="email"
-                placeholder="naderamobile@gmail.com"
+                type='text'
+                id='email'
+                name='email'
+                placeholder='naderamobile@gmail.com'
                 value={this.state.email}
                 onChange={this.handelChange.bind(this)}
               ></input>
               <br />
               <br />
-              <label htmlFor="mobile">Mobile: </label>
+              <label htmlFor='mobile'>Mobile: </label>
               <input
-                type="text"
-                id="mobile"
-                name="mobile"
-                placeholder="059994415"
+                type='text'
+                id='mobile'
+                name='mobile'
+                placeholder='059994415'
                 value={this.state.phone}
                 onChange={this.handelChange.bind(this)}
               ></input>
               <br />
               <br />
-              <label htmlFor="adress">Adress: </label>
+              <label htmlFor='adress'>Adress: </label>
               <input
-                type="text"
-                id="address"
-                name="address"
-                placeholder="Palestine Gaza"
+                type='text'
+                id='address'
+                name='address'
+                placeholder='Palestine Gaza'
                 value={this.state.adress}
                 onChange={this.handelChange.bind(this)}
               ></input>
               <br />
               <br />
-              <button className="button-edit" onClick={this.handleClick}>
+              <div className='upload-cover-img'>
+                <label htmlFor='Change-cover'>Change your cover photo : </label>
+                <br />
+                <br />
+                <div className='upload'>
+                  <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} />
+                </div>
+                <br />
+                <br />
+              </div>
+              <button
+                className='button-edit'
+                onClick={this.handleClick.bind(this)}
+              >
                 Edit
               </button>
             </form>
-
-            <div className="upload-cover-img">
-              <label htmlFor="Change-cover">Change your cover photo : </label>
-              <br />
-              <br />
-              <div className="upload">
-                <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} />
-              </div>
-              <br />
-              <br />
-              {/* <div className="upload-avatar-img">
-              <label htmlFor="Change-avatar">Change your avatar photo : </label>
-              <br />
-              <br />
-              <div className="upload-avatar">
-                <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} />
-              </div>
-              <br />
-              <br /> */}
-            </div>
           </div>
         </div>
 
-        <div className="your-socials">
+        {/* <div className="your-socials">
           <h1>Your Socials</h1>
           <div className="your-socials-div">
             <form onSubmit={this.handleSubmit}>
