@@ -428,7 +428,7 @@ const Mutation = new GraphQLObjectType({
         userID: { type: new GraphQLNonNull(GraphQLID) },
         rating: { type: GraphQLString },
         quantity: { type: GraphQLInt },
-        pic: { type: GraphQLString },
+        pic: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
         return await knex('Product').insert(args);
