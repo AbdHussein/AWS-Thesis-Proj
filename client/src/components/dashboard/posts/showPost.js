@@ -10,16 +10,16 @@ class Show extends React.Component {
   };
 
   async componentDidMount() {
-
-
-    const query = Constants.getUserByToken(localStorage.getItem('xTown'));
-    const requestForProviderID = await Constants.request(query);
-    const provider = requestForProviderID.data.data.user;
-    const allPostsQuery = await Constants.getPostByProviderID(provider.id);
-    const requestForPosts = await Constants.request(allPostsQuery);
-    this.setState({
-      posts: requestForPosts.data.data.posts,
-    });
+    if (localStorage.getItem('xTown')) {
+      const query = Constants.getUserByToken(localStorage.getItem('xTown'));
+      const requestForProviderID = await Constants.request(query);
+      const provider = requestForProviderID.data.data.user;
+      const allPostsQuery = await Constants.getPostByProviderID(provider.id);
+      const requestForPosts = await Constants.request(allPostsQuery);
+      this.setState({
+        posts: requestForPosts.data.data.posts,
+      });
+    }
 
     $('.edit-icon').hover(function () {
       $(this).siblings('.edit-hover').toggle();
@@ -65,14 +65,22 @@ class Show extends React.Component {
                 <p>{post.date}</p>
               </div>
               <div className='post-edit-delete'>
-                <FontAwesomeIcon icon={faEdit} className='edit-icon' onClick={() => {
-                  this.handleEdit(post.id)
-                }} />
-                <p className="edit-hover">Edit</p>
-                <FontAwesomeIcon icon={faTrash} className='delete-icon' onClick={() => {
-                  this.handleDelete(post.id)
-                }} />
-                <p className="delete-hover">Delete</p>
+                <FontAwesomeIcon
+                  icon={faEdit}
+                  className='edit-icon'
+                  onClick={() => {
+                    this.handleEdit(post.id);
+                  }}
+                />
+                <p className='edit-hover'>Edit</p>
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  className='delete-icon'
+                  onClick={() => {
+                    this.handleDelete(post.id);
+                  }}
+                />
+                <p className='delete-hover'>Delete</p>
               </div>
             </div>
           );

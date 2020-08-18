@@ -249,6 +249,10 @@ class Map extends React.Component {
   };
 
   async componentDidMount() {
+    if (this.props.location.state === undefined) {
+      this.props.history.push('/');
+      return;
+    }
     const { category } = this.props.location.state;
     this.setState({
       category,
