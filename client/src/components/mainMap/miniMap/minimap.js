@@ -66,7 +66,13 @@ function MinMap(props) {
         options={options}
         onLoad={onMapload}
       >
-        <Marker position={position} />
+        <Marker
+          position={position}
+          icon={{
+            url: './mapIcon.svg',
+            scaledSize: new window.google.maps.Size(30, 30),
+          }}
+        />
         <Marker
           position={{
             lat: lat,
