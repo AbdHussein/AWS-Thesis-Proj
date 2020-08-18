@@ -2,7 +2,13 @@ import React from 'react';
 import { Container } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKeyboard } from '@fortawesome/free-regular-svg-icons';
-import { faSearch, faMapMarkerAlt, faBars, faMobileAlt, faPlay } from '@fortawesome/free-solid-svg-icons';
+import {
+  faSearch,
+  faMapMarkerAlt,
+  faBars,
+  faMobileAlt,
+  faPlay,
+} from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
 import Navbar from '../mainComp/navbar';
 import Footer from '../footer/footer';
@@ -18,11 +24,9 @@ class Landing extends React.Component {
   };
 
   async componentDidMount() {
-    if (localStorage.getItem('xTown')) {      
+    if (localStorage.getItem('xTown')) {
       const query = Constants.getUserByToken(localStorage.getItem('xTown'));
-      console.log(query);
       const request = await Constants.request(query);
-      console.log(request);
       const { user } = request.data.data;
       this.setState({
         user,
@@ -50,6 +54,18 @@ class Landing extends React.Component {
         <Redirect
           to={{
             pathname: '/map',
+            state: {
+              category: this.state.category,
+            },
+          }}
+        />
+      );
+    }
+    if (this.state.user && this.state.user.RoleID == 2) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/dashboard',
             state: {
               category: this.state.category,
             },
@@ -119,31 +135,42 @@ class Landing extends React.Component {
         </header>
         {/* End Header */}
 
-        <div className="popular-palces">
+        <div className='popular-palces'>
           <Container>
             <h2>Popular Palces</h2>
-            <hr className="landing-hr" />
-            <p>Mauris ac maximus neque. Nam in mauris quis libero sodales eleifend. Morbi varius, nulla sit amet rutrum elementum.</p>
-            <div className="popular-slider">
-              <div className="single-popular">
-                <img src={require(`../../images/29.jpg`)} alt="Silder Image" />
-                <div className="overlay">
+            <hr className='landing-hr' />
+            <p>
+              Mauris ac maximus neque. Nam in mauris quis libero sodales
+              eleifend. Morbi varius, nulla sit amet rutrum elementum.
+            </p>
+            <div className='popular-slider'>
+              <div className='single-popular'>
+                <img src={require(`../../images/29.jpg`)} alt='Silder Image' />
+                <div className='overlay'>
                   <div>
                     <h3>Gym in the center</h3>
-                    <span><FontAwesomeIcon icon={faMapMarkerAlt} />  70 Bright St New York, USA</span>
+                    <span>
+                      <FontAwesomeIcon icon={faMapMarkerAlt} /> 70 Bright St New
+                      York, USA
+                    </span>
                     <hr />
-                    <p><FontAwesomeIcon icon={faMobileAlt} /> <span className="categories">Phones</span></p>
+                    <p>
+                      <FontAwesomeIcon icon={faMobileAlt} />{' '}
+                      <span className='categories'>Phones</span>
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
           </Container>
-          <div className="landing-promo">
-            <div className="overlay">
+          <div className='landing-promo'>
+            <div className='overlay'>
               <h5>Aliquam erat volutpat interdum</h5>
               <p>Get ready to start your exciting journey.</p>
               <p>Our agency will lead you through the amazing digital world</p>
-              <button><FontAwesomeIcon icon={faPlay} /> <span>Promo Video</span> </button>
+              <button>
+                <FontAwesomeIcon icon={faPlay} /> <span>Promo Video</span>{' '}
+              </button>
             </div>
           </div>
         </div>

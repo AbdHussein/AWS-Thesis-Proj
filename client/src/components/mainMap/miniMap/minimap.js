@@ -104,23 +104,31 @@ class MiniMap extends React.Component {
               <li>
                 <LocationOnIcon />
                 <span>Adress:</span>
-                <span> Palestine Gaza </span>
+                <span>
+                  {' '}
+                  {this.props.providerL && this.props.providerL.address}{' '}
+                </span>
               </li>
               <li>
                 <PhoneEnabledIcon />
                 <span>Phone:</span>
-                <span>+970 0000000 </span>
+                <span>
+                  {this.props.providerL && this.props.providerL.mobile}{' '}
+                </span>
               </li>
               <li>
                 <MailOutlineIcon />
                 <span>Mail:</span>
-                <span> email@gmail.com </span>
+                <span>
+                  {' '}
+                  {this.props.providerL && this.props.providerL.email}{' '}
+                </span>
               </li>
             </ul>
           </div>
-          <div className='map-media'>
+          {/* <div className='map-media'>
             <FacebookIcon /> <TwitterIcon /> <InstagramIcon />
-          </div>
+          </div> */}
         </div>
       </Container>
     );
