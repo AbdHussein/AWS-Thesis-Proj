@@ -472,6 +472,132 @@ nav {
       }
     }
   }
+  .how-it-work {
+    * {
+      box-sizing: border-box;
+    }
+    margin-bottom: 90px;
+    h2 {
+      text-align: center;
+      color: #697891;
+    }
+    hr {
+      height: 3px;
+      background-color: #4db7fe;
+      width: 50px;
+    }
+    p {
+      color: #7d93b2;
+      text-align: center;
+      width: 600px;
+      margin: auto;
+      font-size: 14px;
+      margin-bottom: 70px;
+    }
+    .content {
+      float: $floatLeft;
+      width: (100%/3.1);
+      background-color: #f9f9f9;
+      border: 1px solid #eee;
+      border-radius: 5px;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      margin-bottom: 90px;
+      &:not(:last-child) {
+        margin-right: 1%;
+      }
+      svg {
+        margin: 20px auto 0;
+        font-size: 59px;
+        color: $mainHover;
+      }
+      h4 {
+        float: left;
+        width: 100%;
+        margin-bottom: 20px;
+        font-weight: 600;
+        font-size: 18px;
+        color: #566985;
+      }
+      p {
+        color: #7d93b2;
+        font-size: 13px;
+        line-height: 22px;
+        width: 100%;
+        margin-bottom: 30px;
+      }
+      span {
+        position: absolute;
+        z-index: 10;
+        font-size: 14px;
+        font-weight: bold;
+        left: 50%;
+        margin-left: -25px;
+        bottom: -25px;
+        background: #fff;
+        border-radius: 100%;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        color: #666;
+        border: 1px solid #eee;
+        box-shadow: 0 9px 16px rgba(58, 87, 135, 0.15);
+      }
+    }
+  }
+  .mobile-app {
+    * {
+      box-sizing: border-box;
+    }
+    background-color: $mainHover;
+    margin-bottom: 90px;
+    overflow: hidden;
+    padding: 40px 0 0 40px;
+    .info {
+      float: $floatLeft;
+      width: 40%;
+      h4 {
+        text-align: left;
+        font-size: 30px;
+        color: #fff;
+        font-weight: 900;
+        padding-bottom: 25px;
+        font-family: "Raleway", sans-serif;
+      }
+      p {
+        text-align: left;
+        color: #fff;
+      }
+      button {
+        padding: 16px 55px 16px 70px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 500;
+        z-index: 10;
+        float: left;
+        position: relative;
+        margin: 35px 10px 0 0;
+        outline: none;
+        cursor: pointer;
+        color: #7d93b2;
+        @extend %transition;
+        @include boxShadow(4px);
+        svg {
+          color: #fff;
+          background-color: $mainHover;
+          padding: 4px;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+        }
+      }
+    }
+    .app-img {
+      float: $floatRight;
+      width: 50%;
+    }
+  }
 }
 
 /* =============================== End Landing Page =============================== */

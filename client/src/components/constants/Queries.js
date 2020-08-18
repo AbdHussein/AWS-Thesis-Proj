@@ -288,6 +288,22 @@ const editProviderInfo = (id, serviceName, email, mobile, address, cover) => {
   return q;
 };
 
+const getProvidersByBookmarks = (userID) => {
+  const q = `query {
+    bookmark(userID:${userID}){
+      id
+      userID
+      providerID
+      provider{
+        username
+        cover
+        address
+      }
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -311,3 +327,4 @@ module.exports.addFacilities = addFacilities;
 module.exports.getFacilities = getFacilities;
 module.exports.getProducts = getProducts;
 module.exports.editProviderInfo = editProviderInfo;
+module.exports.getProvidersByBookmarks = getProvidersByBookmarks;
