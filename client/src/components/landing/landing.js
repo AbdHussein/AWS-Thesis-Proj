@@ -10,7 +10,7 @@ import {
   faPlay,
   faMapMarked,
 } from '@fortawesome/free-solid-svg-icons';
-import { faApple, faAndroid } from '@fortawesome/free-brands-svg-icons';
+import { faApple, faAndroid, faFacebook, faTwitter, faGooglePlusG, faLinkedinIn, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { Redirect } from 'react-router-dom';
 import Navbar from '../mainComp/navbar';
 import Footer from '../footer/footer';
@@ -209,11 +209,99 @@ class Landing extends React.Component {
           <div className="info">
             <h4>Our App Will Be Available Soon</h4>
             <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit.</p>
-            <button><FontAwesomeIcon icon={faApple} /> Apple Store</button>
-            <button><FontAwesomeIcon icon={faAndroid} /> Google Play</button>
+            <button><FontAwesomeIcon icon={faApple} /> <span>Apple Store</span></button>
+            <button><FontAwesomeIcon icon={faAndroid} /> <span>Google Play</span></button>
           </div>
           <div className="app-img">
             <img src={require(`../../images/api.png`)} alt="API Picture" />
+            <div className="img-animation">
+              <img src={require(`../../images/animation.jpg`)} alt="Animation Picture" />
+            </div>
+          </div>
+        </div>
+        <div className="our-team">
+          <h2>Our Team</h2>
+          <hr />
+          <p>This Is Our Developers</p>
+          <div>
+            <Container>
+              <div className="team-img">
+                <img src={require(`../../images/ibrahim.jpg`)} alt="" />
+              </div>
+              <div className="team-info">
+                <h3>Ibrahim Abu Nemer</h3>
+                <p>Back-End Developer</p>
+                <ul>
+                  <li><a className="facebook" href="http://www.facebook.com" target="_blank"><FontAwesomeIcon icon={faFacebookF} /></a></li>
+                  <li><a className="twitter" href="http://www.twitter.com" target="_blank"><FontAwesomeIcon icon={faTwitter} /></a></li>
+                  <li><a className="instagram" href="http://www.instagram.com" target="_blank"><FontAwesomeIcon icon={faInstagram} /></a></li>
+                </ul>
+              </div>
+            </Container>
+          </div>
+          <div>
+            <Container>
+              <div className="team-img">
+                <img src={require(`../../images/abd.jpg`)} alt="" />
+              </div>
+              <div className="team-info">
+                <h3>Abdulrahmaan</h3>
+                <p>Back-End Developer</p>
+                <ul>
+                  <li><a className="facebook" href="http://www.facebook.com" target="_blank"><FontAwesomeIcon icon={faFacebookF} /></a></li>
+                  <li><a className="twitter" href="http://www.twitter.com" target="_blank"><FontAwesomeIcon icon={faTwitter} /></a></li>
+                  <li><a className="instagram" href="http://www.instagram.com" target="_blank"><FontAwesomeIcon icon={faInstagram} /></a></li>
+                </ul>
+              </div>
+            </Container>
+          </div>
+          <div>
+            <Container>
+              <div className="team-img">
+                <img src={require(`../../images/azzam.jpg`)} alt="" />
+              </div>
+              <div className="team-info">
+                <h3>Ahmed E. Azzam</h3>
+                <p>Team Leader</p>
+                <ul>
+                  <li><a className="facebook" href="http://www.facebook.com" target="_blank"><FontAwesomeIcon icon={faFacebookF} /></a></li>
+                  <li><a className="twitter" href="http://www.twitter.com" target="_blank"><FontAwesomeIcon icon={faTwitter} /></a></li>
+                  <li><a className="instagram" href="http://www.instagram.com" target="_blank"><FontAwesomeIcon icon={faInstagram} /></a></li>
+                </ul>
+              </div>
+            </Container>
+          </div>
+          <div>
+            <Container>
+              <div className="team-img">
+                <img src={require(`../../images/nadera.jpg`)} alt="" />
+              </div>
+              <div className="team-info">
+                <h3>Nadera Qaoud</h3>
+                <p>Front-End Developer</p>
+                <ul>
+                  <li><a className="facebook" href="http://www.facebook.com" target="_blank"><FontAwesomeIcon icon={faFacebookF} /></a></li>
+                  <li><a className="twitter" href="http://www.twitter.com" target="_blank"><FontAwesomeIcon icon={faTwitter} /></a></li>
+                  <li><a className="instagram" href="http://www.instagram.com" target="_blank"><FontAwesomeIcon icon={faInstagram} /></a></li>
+                </ul>
+              </div>
+            </Container>
+          </div>
+          <div>
+            <Container>
+              <div className="team-img">
+                <img className="waked" src={require(`../../images/avatar.png`)} alt="" />
+              </div>
+              <div className="team-info">
+                <h3>Ahmed Abuwaked</h3>
+                <p>Front-End Developer</p>
+                <ul>
+                  <li><a className="facebook" href="http://www.facebook.com" target="_blank"><FontAwesomeIcon icon={faFacebookF} /></a></li>
+                  <li><a className="twitter" href="http://www.twitter.com" target="_blank"><FontAwesomeIcon icon={faTwitter} /></a></li>
+                  <li><a className="instagram" href="http://www.instagram.com" target="_blank"><FontAwesomeIcon icon={faInstagram} /></a></li>
+                </ul>
+              </div>
+            </Container>
           </div>
         </div>
 
