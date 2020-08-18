@@ -12,11 +12,11 @@ class Description extends React.Component {
   };
 
   componentDidMount(){
-    $('.MuiCircularProgress-svg').hide();
+    $('#descriptionProgress').hide();
   }
 
   uploadStarted(){
-    $('.MuiCircularProgress-svg').show();
+    $('#descriptionProgress').show();
     $('.upload-gallery').hide();
   }
 
@@ -24,7 +24,7 @@ class Description extends React.Component {
     this.setState({
       imgUrl: url,
     }, () => {
-      $('.MuiCircularProgress-svg').hide();
+      $('#descriptionProgress').hide();
       $('.upload-gallery').show();
     });
   }
@@ -77,7 +77,7 @@ class Description extends React.Component {
           <div className='upload-gallrey-img'>
             <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} uploadStarted={this.uploadStarted.bind(this)}/>
             <br></br>
-            <div>
+            <div id="descriptionProgress">
               <CircularProgress />
             </div>
             <br></br>

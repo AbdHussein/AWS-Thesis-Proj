@@ -5,11 +5,27 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import $ from 'jquery';
 import Constants from '../constants/Queries';
-
+import jwt from 'jsonwebtoken';
 class ProviderStore extends React.Component {
+  
   state = {
     allProducts: null,
   };
+
+  addToCart(productID, userID){
+    const addToCartMutation = Constants.addToCart(productID, userID);
+    // console.log(addToCartMutation);
+    Constants.request(addToCartMutation).then( res => {
+      if(res.data.errors){
+        console.log(res.data.errors);
+        alert('error in adding to cart');
+      }else{
+        alert('Product added successfully');
+      }
+    }).catch(err => {
+      alert('error in adding to cart');
+    })
+  }
 
   async componentDidMount() {
     const productsQuery = Constants.getProducts(this.props.id);
@@ -61,7 +77,18 @@ class ProviderStore extends React.Component {
                     <FontAwesomeIcon icon={faSearch} />
                   </span>
                   <div>
-                    <span>Add To Cart</span>
+                    <span onClick = {() => {
+                      // console.log(product);
+                      if(localStorage.getItem('xTown')){
+                        const data = jwt.verify(localStorage.getItem('xTown'),'somesuperdupersecret',{
+                          algorithms: ['HS256']
+                        });
+                        // console.log(data);
+                        this.addToCart(product.id, data.id);
+                      }else{
+                        alert('Login to buy products');
+                      }
+                    }}>Add To Cart</span>
                     <span>
                       <FontAwesomeIcon icon={faHeart} />
                     </span>
