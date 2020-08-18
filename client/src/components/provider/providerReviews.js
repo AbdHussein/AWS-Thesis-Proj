@@ -37,6 +37,12 @@ class ProviderReviews extends React.Component {
     const request = await Constants.request(allReviewsQuery);
     this.setState({
       reviews: request.data.data.getReviews,
+    }, () => {
+      var avgRating = 0;
+      this.state.reviews.map(review => {
+        avgRating += Number(review.rating);
+      })
+      this.props.getNumOfReviews(this.state.reviews.length, avgRating / this.state.reviews.length);
     });
   }
 

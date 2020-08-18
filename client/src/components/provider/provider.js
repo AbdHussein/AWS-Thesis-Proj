@@ -51,6 +51,8 @@ class Provider extends React.Component {
     provider: null,
     categoryName: '',
     user: null,
+    numOfReviews: 0,
+    avgRating : 0
   };
 
   async componentDidMount() {
@@ -74,12 +76,19 @@ class Provider extends React.Component {
     }
   }
 
+  getNumOfReviews(numOfReviews, avgRating){
+    this.setState({
+      numOfReviews,
+      avgRating
+    })
+  }
+
   render() {
     const [value] = '80';
     return (
       <div className='provider'>
         <Navbar provider={this.state.user} />
-        <div className='provider-header'>
+        <div style={{ backgroundImage: `url(${this.state.provider && this.state.provider.cover})` }} className='provider-header'>
           <div className='overlay'>
             <Container>
               <div className='provider-ui'>
@@ -109,10 +118,10 @@ class Provider extends React.Component {
                   </span>
                 </div>
                 <div className='rating'>
-                  <div className='rate-number'>5.0</div>
+                  <div className='rate-number'>{Math.round(this.state.avgRating)}</div>
                   <div>
-                    <Rating value={5} readOnly />
-                    <p>17.5K reviews</p>
+                    <Rating value={Math.round(this.state.avgRating)} readOnly />
+                    <p>{this.state.numOfReviews} reviews</p>
                   </div>
                   <div className='chat'>
                     <FontAwesomeIcon icon={faComments} />
@@ -123,11 +132,11 @@ class Provider extends React.Component {
               <div className='provider-bottom-header'>
                 <p>
                   {this.state.provider !== null &&
-                  this.state.categoryName === 'phones' ? (
-                    <FontAwesomeIcon icon={faMobileAlt} />
-                  ) : (
-                    <FontAwesomeIcon icon={faUtensils} />
-                  )}
+                    this.state.categoryName === 'phones' ? (
+                      <FontAwesomeIcon icon={faMobileAlt} />
+                    ) : (
+                      <FontAwesomeIcon icon={faUtensils} />
+                    )}
                   <span>
                     {this.state.provider !== null
                       ? this.state.categoryName
@@ -199,7 +208,7 @@ class Provider extends React.Component {
           </div>
           <div className='provider-reviews'>
             {this.state.provider && (
-              <ProviderReviews id={this.state.provider.id} />
+              <ProviderReviews id={this.state.provider.id} getNumOfReviews={this.getNumOfReviews.bind(this)}/>
             )}
           </div>
         </div>
@@ -240,7 +249,7 @@ class Provider extends React.Component {
           </Container>
           <MiniMap providerL={this.state.provider} />
         </div>
-      </div>
+      </div >
     );
   }
 }
