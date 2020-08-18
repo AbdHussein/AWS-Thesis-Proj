@@ -1147,72 +1147,6 @@ hr {
       background-color: #f9f9f9;
       border-radius: 5px;
     }
-
-    // Start ***********************
-    .inputfile {
-      display: none;
-      * {
-        box-sizing: border-box;
-      }
-    }
-    .js .inputfile {
-      width: 0.1px;
-      height: 0.1px;
-      opacity: 0;
-      overflow: hidden;
-      position: absolute;
-      z-index: -1;
-    }
-
-    .inputfile + label {
-      width: 94.3%;
-      font-size: 1.25rem;
-      /* 20px */
-      font-weight: 700;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      cursor: pointer;
-      display: inline-block;
-      overflow: hidden;
-      padding: 0.625rem 1.25rem;
-      border-radius: 5px;
-      background-color: #f9f9f9 !important;
-      border: 1px solid #e5e7f2;
-      text-align: center;
-      /* 10px 20px */
-    }
-
-    .no-js .inputfile + label {
-      display: none;
-    }
-
-    .inputfile:focus + label,
-    .inputfile.has-focus + label {
-      outline: 1px dotted #000;
-      outline: -webkit-focus-ring-color auto 5px;
-    }
-
-    .inputfile + label svg {
-      width: 1em;
-      height: 1em;
-      vertical-align: middle;
-      fill: currentColor;
-      margin-top: -0.25em;
-      /* 4px */
-      margin-right: 0.25em;
-      /* 4px */
-      color: $mainHover;
-      font-size: 20px !important;
-    }
-
-    .add-photos {
-      color: #7d93b2;
-      font-size: 10px;
-      display: block;
-    }
-
-    // End *************************
-
     button {
       background-color: $mainColor;
       color: #fff;
@@ -1547,7 +1481,6 @@ hr {
       //border: 2px solid $mainColor;
       padding: 20px;
       border-radius: 10px;
-      height: 2000px;
       > div:not(:first-child) {
         display: none;
       }
@@ -2096,7 +2029,7 @@ nav {
   padding: 30px;
 }
 .upload-cover-img {
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .dash-provider-info input[type="text"] {
@@ -2300,10 +2233,14 @@ nav {
       overflow: hidden;
       padding: 10px;
       box-shadow: 5px 5px 5px #ccc;
+      width: (100% / 2.3);
+      float: $floatLeft;
+      margin-right: 2%;
+      margin-bottom: 20px;
       position: relative;
       .item-img {
         float: $floatLeft;
-        width: 20%;
+        width: 45%;
         overflow: hidden;
         height: 110px;
         border: 1px solid #ccc;
@@ -2316,7 +2253,7 @@ nav {
       }
       .item-info {
         float: $floatLeft;
-        width: 55%;
+        width: 45%;
         h3 {
           margin-top: 0;
           color: #566985;
@@ -2400,3 +2337,72 @@ nav {
   font-weight: 500;
   margin-top: 20px;
 }
+
+/* Start File Input */
+
+// Start ***********************
+.inputfile {
+  display: none;
+  * {
+    box-sizing: border-box;
+  }
+}
+.js .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  width: 94.3%;
+  font-size: 1.25rem;
+  /* 20px */
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.625rem 1.25rem;
+  border-radius: 5px;
+  background-color: #f9f9f9 !important;
+  border: 1px solid #e5e7f2;
+  text-align: center;
+  /* 10px 20px */
+}
+
+.no-js .inputfile + label {
+  display: none;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  fill: currentColor;
+  margin-top: -0.25em;
+  /* 4px */
+  margin-right: 0.25em;
+  /* 4px */
+  color: $mainHover;
+  font-size: 20px !important;
+}
+
+.add-photos {
+  color: #7d93b2;
+  font-size: 10px;
+  display: block;
+}
+
+// End *************************
+
+/* End File Input */

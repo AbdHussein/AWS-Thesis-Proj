@@ -77,24 +77,24 @@ class DashProviderInfo extends React.Component {
               ></input>
               <br />
               <br />
+              <div className='upload-cover-img'>
+                <label htmlFor='Change-cover'>Change your cover photo : </label>
+                <br />
+                <br />
+                <div className='upload'>
+                  <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} />
+                </div>
+                <br />
+                <br />
+              </div>
               <button
                 className='button-edit'
                 onClick={this.handleClick.bind(this)}
               >
                 Edit
               </button>
-            </form>
 
-            <div className='upload-cover-img'>
-              <label htmlFor='Change-cover'>Change your cover photo : </label>
-              <br />
-              <br />
-              <div className='upload'>
-                <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} />
-              </div>
-              <br />
-              <br />
-            </div>
+            </form>
           </div>
         </div>
 
