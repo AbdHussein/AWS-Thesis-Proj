@@ -9,12 +9,14 @@ import {
   faMobileAlt,
   faPlay,
   faMapMarked,
+  faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
 import { faApple, faAndroid, faFacebook, faTwitter, faGooglePlusG, faLinkedinIn, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { Redirect } from 'react-router-dom';
 import Navbar from '../mainComp/navbar';
 import Footer from '../footer/footer';
 import Constants from '../constants/Queries';
+import $ from 'jquery';
 
 class Landing extends React.Component {
   state = {
@@ -34,6 +36,29 @@ class Landing extends React.Component {
         user,
       });
     }
+
+    $('.categories span').click(function () {
+      $('.categories').children('input').fadeToggle();
+      $('.categories').children('ul').fadeToggle();
+    })
+
+    function filterFunction() {
+      var input, filter, ul, li, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      ul = document.getElementById("myDropdown");
+      li = ul.getElementsByTagName("li");
+      for (i = 0; i < li.length; i++) {
+        txtValue = li[i].textContent || li[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+      }
+    }
+
+
   }
 
   handleChange(e) {
@@ -110,17 +135,12 @@ class Landing extends React.Component {
                 <div className='between'></div>
                 <div className='categories'>
                   <FontAwesomeIcon icon={faBars} />
-                  <select
-                    name='category'
-                    onChange={this.handleChange.bind(this)}
-                    value={this.state.category}
-                  >
-                    <option>choose...</option>
-                    <option>phones</option>
-                    <option>restaurant</option>
-                    {/* <option>PC</option>
-                    <option>FMCGs</option> */}
-                  </select>
+                  <span>All Categories <FontAwesomeIcon icon={faChevronDown} /></span>
+                  <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()" />
+                  <ul id="myDropdown">
+                    <li>Phones</li>
+                    <li>Restaurant</li>
+                  </ul>
                 </div>
                 <div className='between'></div>
                 <div className='search-button'>
