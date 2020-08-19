@@ -17,7 +17,7 @@ import { Redirect } from 'react-router-dom';
 class Dashboard extends React.Component {
   state = {
     provider: null,
-    posts: []
+    posts: [],
   };
 
   async componentDidMount() {
@@ -48,7 +48,7 @@ class Dashboard extends React.Component {
     }
   }
 
-  async getProvider(){
+  async getProvider() {
     const query = Constants.getUserByToken(localStorage.getItem('xTown'));
       const request = await Constants.request(query);
       const provider = request.data.data.user;
@@ -59,8 +59,10 @@ class Dashboard extends React.Component {
     });
   }
 
-  async getPosts(){
-    const allPostsQuery = await Constants.getPostByProviderID(this.state.provider.id);
+  async getPosts() {
+    const allPostsQuery = await Constants.getPostByProviderID(
+      this.state.provider.id
+    );
     const requestForPosts = await Constants.request(allPostsQuery);
     this.setState({
       posts: requestForPosts.data.data.posts,
@@ -142,12 +144,10 @@ class Dashboard extends React.Component {
                 )}
               </div>
               <div className='dash-add-post'>
-                <Add getProvider={this.getProvider.bind(this)}/>
+                <Add getProvider={this.getProvider.bind(this)} />
               </div>
               <div className='dash-show-post'>
-                {this.state.provider && (
-                   <Show posts={this.state.posts} />
-                )}               
+                {this.state.provider && <Show posts={this.state.posts} />}
               </div>
               <div className='dash-provider-information'>
                 {this.state.provider && (

@@ -35,6 +35,12 @@ const UserType = new GraphQLObjectType({
     facilities: { type: GraphQLString },
     categoryID: { type: GraphQLID },
     token: { type: GraphQLString },
+    posts: {
+      type: new GraphQLList(PostType),
+      async resolve(root, args) {
+        return await knex('Post').select().where({ userID: root.id });
+      },
+    },
   }),
 });
 
@@ -102,6 +108,12 @@ const PostType = new GraphQLObjectType({
     date: { type: GraphQLString },
     text: { type: GraphQLString },
     image: { type: GraphQLString },
+    user: {
+      type: UserType,
+      async resolve(root, args) {
+        return await knex('User').select().where({ id: root.userID }).first();
+      },
+    },
   }),
 });
 
