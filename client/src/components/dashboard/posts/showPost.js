@@ -5,22 +5,8 @@ import $ from 'jquery';
 import Constants from '../../constants/Queries';
 
 class Show extends React.Component {
-  state = {
-    posts: [],
-  };
-
   async componentDidMount() {
-    if (localStorage.getItem('xTown')) {
-      const query = Constants.getUserByToken(localStorage.getItem('xTown'));
-      const requestForProviderID = await Constants.request(query);
-      const provider = requestForProviderID.data.data.user;
-      const allPostsQuery = await Constants.getPostByProviderID(provider.id);
-      const requestForPosts = await Constants.request(allPostsQuery);
-      this.setState({
-        posts: requestForPosts.data.data.posts,
-      });
-    }
-
+    
     $('.edit-icon').hover(function () {
       $(this).siblings('.edit-hover').toggle();
     });
@@ -50,7 +36,7 @@ class Show extends React.Component {
     return (
       <div className='dash-show'>
         <h1>Your Posts</h1>
-        {this.state.posts.map((post, index) => {
+        {this.props.posts && this.props.posts.map((post, index) => {
           return (
             <div className='post-block' key={index}>
               <div className='post-img-div'>
@@ -78,6 +64,7 @@ class Show extends React.Component {
                   className='delete-icon'
                   onClick={() => {
                     this.handleDelete(post.id);
+                    this.props.posts.splice(index,1);
                   }}
                 />
                 <p className='delete-hover'>Delete</p>

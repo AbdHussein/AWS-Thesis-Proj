@@ -17,6 +17,7 @@ import { Redirect } from 'react-router-dom';
 class Dashboard extends React.Component {
   state = {
     provider: null,
+    posts: []
   };
 
   async componentDidMount() {
@@ -33,15 +34,36 @@ class Dashboard extends React.Component {
     });
 
     if (localStorage.getItem('xTown')) {
-      const query = Constants.getUserByToken(localStorage.getItem('xTown'));
-      const request = await Constants.request(query);
-      const provider = request.data.data.user;
-      this.setState({
-        provider,
-      });
+      // const query = Constants.getUserByToken(localStorage.getItem('xTown'));
+      // const request = await Constants.request(query);
+      // const provider = request.data.data.user;
+      // this.setState({
+      //   provider,
+      // });
+      await this.getProvider();
+      await this.getPosts();
     } else {
       this.props.history.push('/');
     }
+  }
+
+  async getProvider(){
+    const query = Constants.getUserByToken(localStorage.getItem('xTown'));
+      const request = await Constants.request(query);
+      const provider = request.data.data.user;
+    this.setState({
+      provider
+    }, async ()=>{
+      await this.getPosts();
+    });
+  }
+
+  async getPosts(){
+    const allPostsQuery = await Constants.getPostByProviderID(this.state.provider.id);
+    const requestForPosts = await Constants.request(allPostsQuery);
+    this.setState({
+      posts: requestForPosts.data.data.posts,
+    });
   }
 
   render() {
@@ -119,14 +141,16 @@ class Dashboard extends React.Component {
                 )}
               </div>
               <div className='dash-add-post'>
-                <Add />
+                <Add getProvider={this.getProvider.bind(this)}/>
               </div>
               <div className='dash-show-post'>
-                <Show />
+                {this.state.provider && (
+                   <Show posts={this.state.posts} />
+                )}               
               </div>
               <div className='dash-provider-information'>
                 {this.state.provider && (
-                  <DashProviderInfo id={this.state.provider.id} />
+                  <DashProviderInfo provider={this.state.provider} />
                 )}
               </div>
               <div className='store-dash'>

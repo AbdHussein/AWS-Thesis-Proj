@@ -118,7 +118,7 @@ class Provider extends React.Component {
                   </span>
                 </div>
                 <div className='rating'>
-                  <div className='rate-number'>{Math.round(this.state.avgRating)}</div>
+                  <div className='rate-number'>{this.state.avgRating ? Math.round(this.state.avgRating): 0}</div>
                   <div>
                     <Rating value={Math.round(this.state.avgRating)} readOnly />
                     <p>{this.state.numOfReviews} reviews</p>

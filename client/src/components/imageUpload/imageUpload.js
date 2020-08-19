@@ -92,6 +92,7 @@ class ImageUpload extends React.Component {
               className='inputfile-1'
               data-multiple-caption='{count} files selected'
               onChange={this.onFileChange.bind(this)}
+              accept="image/*"
             />
             <label htmlFor='file-1'>
               <FontAwesomeIcon icon={faImage} />{' '}

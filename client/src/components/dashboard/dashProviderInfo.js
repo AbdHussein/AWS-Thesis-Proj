@@ -17,6 +17,16 @@ class DashProviderInfo extends React.Component {
 
   componentDidMount() {  
     $('#providerInfoProgress').hide();
+    const {serviceName, email , mobile, address, cover} = this.props.provider;
+    this.setState({
+      serviceName,
+      email,
+      mobile,
+      address,
+      imgUrl : cover,
+    }, () => {
+      console.log(this.state);
+    });
   }
 
   uploadStarted(){
@@ -33,23 +43,34 @@ class DashProviderInfo extends React.Component {
     });
   }
 
-  handelChange(e) {
+  handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
     });
   }
+
   async handleClick(event) {
-    event.preventDefault();
-    const { serviceName, email, mobile, address } = this.state;
-    const editProviderInfoQuery = Constants.editProviderInfo(
-      this.props.id,
-      serviceName,
-      email,
-      mobile,
-      address,
-      this.state.imgUrl
-    );
-    const request = await Constants.request(editProviderInfoQuery);
+    try{
+        event.preventDefault();
+        const { serviceName, email, mobile, address, imgUrl } = this.state;
+        const editProviderInfoQuery = Constants.editProviderInfo(
+          this.props.provider.id,
+          serviceName,
+          email,
+          mobile,
+          address,
+          imgUrl,
+        );
+        const request = await Constants.request(editProviderInfoQuery);
+        if(request.data.Errors){
+          alert('Error in updating info');
+        }else{
+          alert('Info updated!');
+        }
+    } catch(err) {
+      console.log(err);
+      alert('Error in updating info');
+    }
   }
   render() {
     return (
@@ -64,8 +85,9 @@ class DashProviderInfo extends React.Component {
                 id='serviceName'
                 name='serviceName'
                 placeholder='Nadera Mobile'
+                required={true}
                 value={this.state.serviceName}
-                onChange={this.handelChange.bind(this)}
+                onChange={this.handleChange.bind(this)}
               ></input>
               <br />
               <br />
@@ -74,9 +96,10 @@ class DashProviderInfo extends React.Component {
                 type='text'
                 id='email'
                 name='email'
+                required={true}
                 placeholder='naderamobile@gmail.com'
                 value={this.state.email}
-                onChange={this.handelChange.bind(this)}
+                onChange={this.handleChange.bind(this)}
               ></input>
               <br />
               <br />
@@ -85,20 +108,22 @@ class DashProviderInfo extends React.Component {
                 type='text'
                 id='mobile'
                 name='mobile'
+                required={true}
                 placeholder='059994415'
-                value={this.state.phone}
-                onChange={this.handelChange.bind(this)}
+                value={this.state.mobile}
+                onChange={this.handleChange.bind(this)}
               ></input>
               <br />
               <br />
-              <label htmlFor='adress'>Adress: </label>
+              <label htmlFor='adress'>Address: </label>
               <input
                 type='text'
                 id='address'
                 name='address'
+                required={true}
                 placeholder='Palestine Gaza'
-                value={this.state.adress}
-                onChange={this.handelChange.bind(this)}
+                value={this.state.address}
+                onChange={this.handleChange.bind(this)}
               ></input>
               <br />
               <br />
@@ -136,7 +161,7 @@ class DashProviderInfo extends React.Component {
                 name="facebook"
                 placeholder="facebook.com"
                 value={this.state.facebook}
-                onChange={this.handelChange.bind(this)}
+                onChange={this.handleChange.bind(this)}
               ></input>
               <br />
               <br />

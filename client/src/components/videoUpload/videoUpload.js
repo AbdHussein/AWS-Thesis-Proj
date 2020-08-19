@@ -84,6 +84,7 @@ class VideoUpload extends React.Component {
               className='inputfile-1'
               data-multiple-caption='{count} files selected'
               onChange={this.onFileChange.bind(this)}
+              accept="video/*"
             />
             <label htmlFor='file-2'>
               <FontAwesomeIcon icon={faImage} />{' '}
