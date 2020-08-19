@@ -261,6 +261,15 @@ const addVideo = (id, videoUrl) => {
   return q;
 };
 
+const addThumbnail = (id, thumbnailUrl) => {
+  const q = `mutation{
+    editUser(id:${id}, thumbnail:"${thumbnailUrl}"){
+      id
+    }
+  }`;
+  return q;
+};
+
 const addFacilities = (id, arrOfFac) => {
   const q = `mutation{
     editUser(id:${id}, facilities:"${arrOfFac}"){
@@ -366,6 +375,7 @@ module.exports.addReview = addReview;
 module.exports.addPhoto = addPhoto;
 module.exports.addDesc = addDesc;
 module.exports.addVideo = addVideo;
+module.exports.addThumbnail = addThumbnail;
 module.exports.addProduct = addProduct;
 module.exports.addFacilities = addFacilities;
 module.exports.getFacilities = getFacilities;
