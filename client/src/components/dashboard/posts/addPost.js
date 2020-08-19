@@ -52,10 +52,11 @@ class Add extends React.Component {
       );
       constants
         .request(addPost)
-        .then((result) => {
+        .then(async (result) => {
           if (result.data.errors) {
             alert('Failed add Photo');
           }else{
+            await this.props.getProvider()
             alert('Post Added');
           }
         })
