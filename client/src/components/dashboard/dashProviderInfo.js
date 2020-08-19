@@ -30,11 +30,11 @@ class DashProviderInfo extends React.Component {
   };
 
   componentDidMount() {
-    $('.MuiCircularProgress-svg').hide();
+    $('#providerInfoProgress').hide();
   }
 
   uploadStarted() {
-    $('.MuiCircularProgress-svg').show();
+    $('#providerInfoProgress').show();
     $('#btn').hide();
   }
 
@@ -44,7 +44,7 @@ class DashProviderInfo extends React.Component {
         imgUrl: url,
       },
       () => {
-        $('.MuiCircularProgress-svg').hide();
+        $('#providerInfoProgress').hide();
         $('#btn').show();
       }
     );
@@ -129,7 +129,7 @@ class DashProviderInfo extends React.Component {
                     uploadStarted={this.uploadStarted.bind(this)}
                   />
                 </div>
-                <div id='CircularProgress'>
+                <div id='providerInfoProgress'>
                   <CircularProgress />
                 </div>
                 <br />
