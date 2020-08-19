@@ -84,7 +84,7 @@ const addToCart = (productID, userID) => {
     }
   }`;
   return mutation;
-}
+};
 
 const login = (email, password) => {
   const mutation = `mutation {
@@ -339,6 +339,15 @@ const getPostByFavProv = (userID) => {
   return q;
 };
 
+const editWorkingHours = (providerID, workingHours) => {
+  const q = `mutation {
+    editUser(id:${providerID}, workingHours:"${workingHours}"){
+      id
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -365,3 +374,4 @@ module.exports.editProviderInfo = editProviderInfo;
 module.exports.addToCart = addToCart;
 module.exports.getProvidersByBookmarks = getProvidersByBookmarks;
 module.exports.getPostByFavProv = getPostByFavProv;
+module.exports.editWorkingHours = editWorkingHours;
