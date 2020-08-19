@@ -1,6 +1,8 @@
 import React from 'react';
+import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import Constants from '../../constants/Queries';
-
+import $ from "jquery";
 class Facility extends React.Component {
   state = {
     facility: [
@@ -46,9 +48,25 @@ class Facility extends React.Component {
     }
     facilities = arrOfFac.join('');
     const addFs = Constants.addFacilities(this.props.id, facilities);
-    const request = await Constants.request(addFs);
-  }
-
+    const request = await Constants.request(addFs)
+    .then(async (result) => {
+      
+        $(".success-add-facility-main").show();
+    setTimeout(function () {
+      $(".success-add-facility-main").hide();
+    }, 1000);
+      
+    })
+    .catch((err) => {
+      $(".fail-add-facility-main").show();
+      setTimeout(function () {
+        $(".fail-add-facility-main").hide();
+      }, 1000);
+    });
+} catch (err) {
+  console.log(err);
+}
+    
   render() {
     return (
       <div className='facility'>
@@ -71,6 +89,27 @@ class Facility extends React.Component {
             <br />
             <input type='submit' value='Submit' />
           </form>
+        </div>
+        <div className="success-add-facility-main">
+          <div className="success-add-facility">
+            <h3>
+              <CheckCircleOutlinedIcon />
+              <span>Success</span>
+            </h3>
+            <hr />
+            <p>Perfect your new facility successfully added.</p>
+          </div>
+        </div>
+        <div className="fail-add-facility-main">
+          <div className="fail-add-facility">
+            <h3>
+              <ErrorOutlineIcon />
+              <span>Failing</span>
+            </h3>
+            <hr />
+            <p>
+              Error!! Your facility not added</p>
+          </div>
         </div>
       </div>
     );
