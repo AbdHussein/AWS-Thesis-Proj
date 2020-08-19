@@ -1,5 +1,7 @@
 import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
 import $ from 'jquery';
 import ImageUpload from '../imageUpload/imageUpload';
 import constants from '../constants/Queries';
@@ -60,13 +62,22 @@ class StoreDashboard extends React.Component {
            constants.request(addProductMutation)
            .then( result => {
             if(result.data.errors){
-              alert('Error in saving product');
+              $(".fail-add-product-main").show();
+              setTimeout(function () {
+                $(".fail-add-product-main").hide();
+              }, 1000);
             } else {
-              alert('product saved successfully');
+                  $(".success-add-product-main").show();
+                  setTimeout(function () {
+                    $(".success-add-product-main").hide();
+                  }, 1000);
               this.clear();
             }
            }).catch(err =>{
-            alert('Error in saving product');
+            $(".fail-add-product-main").show();
+            setTimeout(function () {
+              $(".fail-add-product-main").hide();
+            }, 1000);
            })
       }
     }).catch(err => {
@@ -117,6 +128,27 @@ class StoreDashboard extends React.Component {
               Add Product
             </button>
           </form>
+        </div>
+        <div className="success-add-product-main">
+          <div className="success-add-product">
+            <h3>
+              <CheckCircleOutlinedIcon />
+              <span>Success</span>
+            </h3>
+            <hr />
+            <p>Perfect your new product successfully added.</p>
+          </div>
+        </div>
+        <div className="fail-add-product-main">
+          <div className="fail-add-product">
+            <h3>
+              <ErrorOutlineIcon />
+              <span>Failing</span>
+            </h3>
+            <hr />
+            <p>
+              Error!! Product not added</p>
+          </div>
         </div>
       </div>
     );
