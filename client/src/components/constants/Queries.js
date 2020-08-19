@@ -111,7 +111,7 @@ const signUp = (username, email, password, mobile) => {
     addUser(username:"${username}", email:"${email}", password:"${password}",RoleID:"3", mobile: ${Number(
     mobile
   )},avatar:"${username[0]}",
-    serviceName:"", address:"", cover:"", video:"", description:""){
+    serviceName:"", address:"", cover:"", thumbnail:"", video:"", description:""){
       id
     }
   }`;
@@ -135,6 +135,7 @@ const getUserByToken = (token) => {
       location
       address
       cover
+      thumbnail
       video
       description
       workingHours
@@ -172,6 +173,7 @@ const getProviderById = (userID) => {
       location
       address
       cover
+      thumbnail
       video
       description
       workingHours
