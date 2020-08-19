@@ -1,36 +1,38 @@
-import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import $ from 'jquery';
-import ImageUpload from '../imageUpload/imageUpload';
-import Constants from '../constants/Queries';
+import React from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
+import $ from "jquery";
+import ImageUpload from "../imageUpload/imageUpload";
+import Constants from "../constants/Queries";
 class DashProviderInfo extends React.Component {
   state = {
-    serviceName: '',
-    email: '',
-    mobile: '',
-    address: '',
-    imgUrl: '',
+    serviceName: "",
+    email: "",
+    mobile: "",
+    address: "",
+    imgUrl: "",
     // facebook: '',
     // instgram: '',
     // twitter: '',
-    SatOp: 'closed',
-    SunOp: 'closed',
-    MonOp: 'closed',
-    TuesOp: 'closed',
-    WenOp: 'closed',
-    ThurOp: 'closed',
-    FrOp: 'closed',
-    SatC: 'closed',
-    SunC: 'closed',
-    MonC: 'closed',
-    TuesC: 'closed',
-    WenC: 'closed',
-    ThurC: 'closed',
-    FrC: 'closed',
+    SatOp: "closed",
+    SunOp: "closed",
+    MonOp: "closed",
+    TuesOp: "closed",
+    WenOp: "closed",
+    ThurOp: "closed",
+    FrOp: "closed",
+    SatC: "closed",
+    SunC: "closed",
+    MonC: "closed",
+    TuesC: "closed",
+    WenC: "closed",
+    ThurC: "closed",
+    FrC: "closed",
   };
 
   componentDidMount() {
-    $('#providerInfoProgress').hide();
+    $("#providerInfoProgress").hide();
     const { serviceName, email, mobile, address, cover } = this.props.provider;
     this.setState({
       serviceName,
@@ -42,8 +44,8 @@ class DashProviderInfo extends React.Component {
   }
 
   uploadStarted() {
-    $('#providerInfoProgress').show();
-    $('#btn').hide();
+    $("#providerInfoProgress").show();
+    $("#btn").hide();
   }
 
   updateImgUrl(url) {
@@ -52,8 +54,8 @@ class DashProviderInfo extends React.Component {
         imgUrl: url,
       },
       () => {
-        $('#providerInfoProgress').hide();
-        $('#btn').show();
+        $("#providerInfoProgress").hide();
+        $("#btn").show();
       }
     );
   }
@@ -78,13 +80,22 @@ class DashProviderInfo extends React.Component {
       );
       const request = await Constants.request(editProviderInfoQuery);
       if (request.data.Errors) {
-        alert('Error in updating info');
+        $(".fail-edit-dashboard-main").show();
+        setTimeout(function () {
+          $(".fail-edit-dashboard-main").hide();
+        }, 1000);
       } else {
-        alert('Info updated!');
+        $(".success-edit-dashboard-main").show();
+        setTimeout(function () {
+          $(".success-edit-dashboard-main").hide();
+        }, 1000);
       }
     } catch (err) {
       console.log(err);
-      alert('Error in updating info');
+      $(".fail-edit-dashboard-main").show();
+      setTimeout(function () {
+        $(".fail-edit-dashboard-main").hide();
+      }, 1000);
     }
   }
 
@@ -99,13 +110,13 @@ class DashProviderInfo extends React.Component {
       Friday: [this.state.FrOp, this.state.FrC],
     };
     var workHsString = JSON.stringify(o);
-    var arrOfworkHS = workHsString.split('');
+    var arrOfworkHS = workHsString.split("");
     for (let i = 0; i < arrOfworkHS.length; i++) {
       if (arrOfworkHS[i] == '"') {
         arrOfworkHS.splice(i, 1, '\\"');
       }
     }
-    workHsString = arrOfworkHS.join('');
+    workHsString = arrOfworkHS.join("");
     const editWorkingHours = Constants.editWorkingHours(
       this.props.provider.id,
       workHsString
@@ -116,77 +127,73 @@ class DashProviderInfo extends React.Component {
 
   render() {
     return (
-      <div className='dash-provider-info'>
-        <div className='your-profile'>
+      <div className="dash-provider-info">
+        <div className="your-profile">
           <h1>Your Profile</h1>
-          <div className='your-profile-div'>
+          <div className="your-profile-div">
             <form>
-              <label htmlFor='serviceName'>Service name: </label>
+              <label htmlFor="serviceName">Service name: </label>
               <input
-                type='text'
-                id='serviceName'
-                name='serviceName'
-                placeholder='Nadera Mobile'
+                type="text"
+                id="serviceName"
+                name="serviceName"
                 required={true}
                 value={this.state.serviceName}
                 onChange={this.handleChange.bind(this)}
               ></input>
               <br />
               <br />
-              <label htmlFor='email'>Email: </label>
+              <label htmlFor="email">Email: </label>
               <input
-                type='text'
-                id='email'
-                name='email'
+                type="text"
+                id="email"
+                name="email"
                 required={true}
-                placeholder='naderamobile@gmail.com'
                 value={this.state.email}
                 onChange={this.handleChange.bind(this)}
               ></input>
               <br />
               <br />
-              <label htmlFor='mobile'>Mobile: </label>
+              <label htmlFor="mobile">Mobile: </label>
               <input
-                type='text'
-                id='mobile'
-                name='mobile'
+                type="text"
+                id="mobile"
+                name="mobile"
                 required={true}
-                placeholder='059994415'
                 value={this.state.mobile}
                 onChange={this.handleChange.bind(this)}
               ></input>
               <br />
               <br />
-              <label htmlFor='adress'>Address: </label>
+              <label htmlFor="adress">Address: </label>
               <input
-                type='text'
-                id='address'
-                name='address'
+                type="text"
+                id="address"
+                name="address"
                 required={true}
-                placeholder='Palestine Gaza'
                 value={this.state.address}
                 onChange={this.handleChange.bind(this)}
               ></input>
               <br />
               <br />
-              <div className='upload-cover-img'>
-                <label htmlFor='Change-cover'>Change your cover photo : </label>
+              <div className="upload-cover-img">
+                <label htmlFor="Change-cover">Change your cover photo : </label>
                 <br />
                 <br />
-                <div className='upload'>
+                <div className="upload">
                   <ImageUpload
                     getImgUrl={this.updateImgUrl.bind(this)}
                     uploadStarted={this.uploadStarted.bind(this)}
                   />
                 </div>
-                <div id='providerInfoProgress'>
+                <div id="providerInfoProgress">
                   <CircularProgress />
                 </div>
                 <br />
               </div>
               <button
-                className='button-edit'
-                id='btn'
+                className="button-edit"
+                id="btn"
                 onClick={this.handleClick.bind(this)}
               >
                 Edit
@@ -243,10 +250,10 @@ class DashProviderInfo extends React.Component {
         {/* <label htmlFor="from">From:</label>
             <input type="time" id="from" name="from" /> */}
 
-        <div className='dash-working-hours'>
+        <div className="dash-working-hours">
           <h1>Add Your Working Hours</h1>
-          <div className='Working-hours-dash'>
-            <div className='main-enter-workHours'>
+          <div className="Working-hours-dash">
+            <div className="main-enter-workHours">
               <ul>
                 <li>
                   <span>
@@ -255,7 +262,7 @@ class DashProviderInfo extends React.Component {
                   <span>
                     <select
                       onChange={this.handleChange.bind(this)}
-                      name='SatOp'
+                      name="SatOp"
                     >
                       <option>closed</option>
                       <option>1:00 AM</option>
@@ -274,7 +281,7 @@ class DashProviderInfo extends React.Component {
                   </span>
                   <span>To</span>
                   <span>
-                    <select onChange={this.handleChange.bind(this)} name='SatC'>
+                    <select onChange={this.handleChange.bind(this)} name="SatC">
                       <option>closed</option>
                       <option>1:00 PM</option>
                       <option>2:00 PM</option>
@@ -298,7 +305,7 @@ class DashProviderInfo extends React.Component {
                   <span>
                     <select
                       onChange={this.handleChange.bind(this)}
-                      name='SunOp'
+                      name="SunOp"
                     >
                       <option>closed</option>
                       <option>1:00 AM</option>
@@ -317,7 +324,7 @@ class DashProviderInfo extends React.Component {
                   </span>
                   <span>To</span>
                   <span>
-                    <select onChange={this.handleChange.bind(this)} name='SunC'>
+                    <select onChange={this.handleChange.bind(this)} name="SunC">
                       <option>closed</option>
                       <option>1:00 PM</option>
                       <option>2:00 PM</option>
@@ -341,7 +348,7 @@ class DashProviderInfo extends React.Component {
                   <span>
                     <select
                       onChange={this.handleChange.bind(this)}
-                      name='MonOp'
+                      name="MonOp"
                     >
                       <option>closed</option>
                       <option>1:00 AM</option>
@@ -360,7 +367,7 @@ class DashProviderInfo extends React.Component {
                   </span>
                   <span>To</span>
                   <span>
-                    <select onChange={this.handleChange.bind(this)} name='MonC'>
+                    <select onChange={this.handleChange.bind(this)} name="MonC">
                       <option>closed</option>
                       <option>1:00 PM</option>
                       <option>2:00 PM</option>
@@ -384,7 +391,7 @@ class DashProviderInfo extends React.Component {
                   <span>
                     <select
                       onChange={this.handleChange.bind(this)}
-                      name='TuesOp'
+                      name="TuesOp"
                     >
                       <option>closed</option>
                       <option>1:00 AM</option>
@@ -405,7 +412,7 @@ class DashProviderInfo extends React.Component {
                   <span>
                     <select
                       onChange={this.handleChange.bind(this)}
-                      name='TuesC'
+                      name="TuesC"
                     >
                       <option>closed</option>
                       <option>1:00 PM</option>
@@ -430,7 +437,7 @@ class DashProviderInfo extends React.Component {
                   <span>
                     <select
                       onChange={this.handleChange.bind(this)}
-                      name='WenOp'
+                      name="WenOp"
                     >
                       <option>closed</option>
                       <option>1:00 AM</option>
@@ -449,7 +456,7 @@ class DashProviderInfo extends React.Component {
                   </span>
                   <span>To</span>
                   <span>
-                    <select onChange={this.handleChange.bind(this)} name='WenC'>
+                    <select onChange={this.handleChange.bind(this)} name="WenC">
                       <option>closed</option>
                       <option>1:00 PM</option>
                       <option>2:00 PM</option>
@@ -473,7 +480,7 @@ class DashProviderInfo extends React.Component {
                   <span>
                     <select
                       onChange={this.handleChange.bind(this)}
-                      name='ThurOp'
+                      name="ThurOp"
                     >
                       <option>closed</option>
                       <option>1:00 AM</option>
@@ -494,7 +501,7 @@ class DashProviderInfo extends React.Component {
                   <span>
                     <select
                       onChange={this.handleChange.bind(this)}
-                      name='ThurC'
+                      name="ThurC"
                     >
                       <option>closed</option>
                       <option>1:00 PM</option>
@@ -517,7 +524,7 @@ class DashProviderInfo extends React.Component {
                     <label>Friday:</label>
                   </span>
                   <span>
-                    <select onChange={this.handleChange.bind(this)} name='FrOp'>
+                    <select onChange={this.handleChange.bind(this)} name="FrOp">
                       <option>closed</option>
                       <option>1:00 AM</option>
                       <option>2:00 AM</option>
@@ -535,7 +542,7 @@ class DashProviderInfo extends React.Component {
                   </span>
                   <span>To</span>
                   <span>
-                    <select onChange={this.handleChange.bind(this)} name='FrC'>
+                    <select onChange={this.handleChange.bind(this)} name="FrC">
                       <option>closed</option>
                       <option>1:00 PM</option>
                       <option>2:00 PM</option>
@@ -556,6 +563,26 @@ class DashProviderInfo extends React.Component {
             </div>
             {/* add style for the Button (Ahmed Abu Waked)*/}
             <button onClick={this.saveWorkingHours.bind(this)}>Save</button>
+          </div>
+        </div>
+        <div className="success-edit-dashboard-main">
+          <div className="success-edit-dashboard">
+            <h3>
+              <CheckCircleOutlinedIcon />
+              <span>Success</span>
+            </h3>
+            <hr />
+            <p>Perfect your information successfully updated.</p>
+          </div>
+        </div>
+        <div className="fail-edit-dashboard-main">
+          <div className="fail-edit-dashboard">
+            <h3>
+              <ErrorOutlineIcon />
+              <span>Failing</span>
+            </h3>
+            <hr />
+            <p>Error!! in updating info.</p>
           </div>
         </div>
       </div>

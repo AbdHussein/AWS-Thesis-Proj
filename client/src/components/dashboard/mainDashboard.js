@@ -10,8 +10,9 @@ class MainDashboard extends React.Component {
   }
   render() {
     return (
-      <div className="dash-main-dashboard">        
-        <div className="drop-delete">
+      <div className="dash-main-dashboard">
+        
+        {/* <div className="drop-delete">
           <div className="delete-waring">
             <h3>
               <ErrorOutlineIcon />
@@ -59,6 +60,28 @@ class MainDashboard extends React.Component {
             <hr />
             <p>
               Error!! Post not added</p>
+          </div>
+        </div>
+        <div className="fail-add-facility-main">
+          <div className="fail-add-facility">
+            <h3>
+              <ErrorOutlineIcon />
+              <span>Failing</span>
+            </h3>
+            <hr />
+            <p>
+              Error!! Your facility not added</p>
+          </div>
+        </div>
+        <div className="fail-add-Photopost-main">
+          <div className="fail-add-Photopost">
+            <h3>
+              <ErrorOutlineIcon />
+              <span>Failing</span>
+            </h3>
+            <hr />
+            <p>
+            Failed add Photo</p>
           </div>
         </div>
         <div className="success-add-demo-main">
@@ -143,7 +166,7 @@ class MainDashboard extends React.Component {
             <hr />
             <p>Perfect your new product successfully added.</p>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import ImageUpload from '../../imageUpload/imageUpload';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
 import $ from 'jquery';
 import Constatnts from '../../constants/Queries';
 
@@ -40,13 +41,20 @@ class Description extends React.Component {
       this.state.description
     );
     const request = await Constatnts.request(addDescQuery);
-    alert('Description Added');
+    $(".success-description-main").show();
+          setTimeout(function () {
+            $(".success-description-main").hide();
+          }, 2000);
+        
   }
 
   async addPhoto() {
     const addPhotoQuery = Constatnts.addPhoto(this.props.id, this.state.imgUrl);
     const request = await Constatnts.request(addPhotoQuery);
-    alert('Photo Saved!');
+    $(".success-gallery-main").show();
+    setTimeout(function () {
+      $(".success-gallery-main").hide();
+    }, 2000);
   }
 
   render() {
@@ -87,6 +95,26 @@ class Description extends React.Component {
             >
               Save
             </button>
+          </div>
+        </div>
+        <div className="success-description-main">
+          <div className="success-description">
+            <h3>
+              <CheckCircleOutlinedIcon />
+              <span>Success</span>
+            </h3>
+            <hr />
+            <p>Perfect the description successfully added.</p>
+          </div>
+        </div>
+        <div className="success-gallery-main">
+          <div className="success-gallery">
+            <h3>
+              <CheckCircleOutlinedIcon />
+              <span>Success</span>
+            </h3>
+            <hr />
+            <p>Perfect photo successfully added to your gallery.</p>
           </div>
         </div>
       </div>
