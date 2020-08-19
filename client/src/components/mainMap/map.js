@@ -96,6 +96,7 @@ function MyComponent(props) {
         </span>
       </h1> */}
       {/* <h1>{props.category}</h1> */}
+      <Search />
       <Locate panTo={panTo} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
