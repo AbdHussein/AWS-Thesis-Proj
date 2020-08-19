@@ -1,4 +1,6 @@
 import React from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import $ from 'jquery';
 import ImageUpload from '../imageUpload/imageUpload';
 import Constants from '../constants/Queries';
 class DashProviderInfo extends React.Component {
@@ -8,34 +10,84 @@ class DashProviderInfo extends React.Component {
     mobile: '',
     address: '',
     imgUrl: '',
-    facebook: '',
-    instgram: '',
-    twitter: '',
+    // facebook: '',
+    // instgram: '',
+    // twitter: '',
+    SatOp: '',
+    SunOp: '',
+    MonOp: '',
+    TuesOp: '',
+    WenOp: '',
+    ThurOp: '',
+    FrOp: '',
+    SatC: '',
+    SunC: '',
+    MonC: '',
+    TuesC: '',
+    WenC: '',
+    ThurC: '',
+    FrC: '',
   };
 
-  updateImgUrl(url) {
+  componentDidMount() {
+    $('#providerInfoProgress').hide();
+    const {serviceName, email , mobile, address, cover} = this.props.provider;
     this.setState({
-      imgUrl: url,
-    });
-  }
-
-  handelChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  }
-  async handleClick(event) {
-    event.preventDefault();
-    const { serviceName, email, mobile, address } = this.state;
-    const editProviderInfoQuery = Constants.editProviderInfo(
-      this.props.id,
       serviceName,
       email,
       mobile,
       address,
-      this.state.imgUrl
+      imgUrl : cover,
+    }, () => {
+      console.log(this.state);
+    });
+  }
+
+  uploadStarted() {
+    $('#providerInfoProgress').show();
+    $('#btn').hide();
+  }
+
+  updateImgUrl(url) {
+    this.setState(
+      {
+        imgUrl: url,
+      },
+      () => {
+        $('#providerInfoProgress').hide();
+        $('#btn').show();
+      }
     );
-    const request = await Constants.request(editProviderInfoQuery);
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  async handleClick(event) {
+    try{
+        event.preventDefault();
+        const { serviceName, email, mobile, address, imgUrl } = this.state;
+        const editProviderInfoQuery = Constants.editProviderInfo(
+          this.props.provider.id,
+          serviceName,
+          email,
+          mobile,
+          address,
+          imgUrl,
+        );
+        const request = await Constants.request(editProviderInfoQuery);
+        if(request.data.Errors){
+          alert('Error in updating info');
+        }else{
+          alert('Info updated!');
+        }
+    } catch(err) {
+      console.log(err);
+      alert('Error in updating info');
+    }
   }
   render() {
     return (
@@ -50,8 +102,9 @@ class DashProviderInfo extends React.Component {
                 id='serviceName'
                 name='serviceName'
                 placeholder='Nadera Mobile'
+                required={true}
                 value={this.state.serviceName}
-                onChange={this.handelChange.bind(this)}
+                onChange={this.handleChange.bind(this)}
               ></input>
               <br />
               <br />
@@ -60,9 +113,10 @@ class DashProviderInfo extends React.Component {
                 type='text'
                 id='email'
                 name='email'
+                required={true}
                 placeholder='naderamobile@gmail.com'
                 value={this.state.email}
-                onChange={this.handelChange.bind(this)}
+                onChange={this.handleChange.bind(this)}
               ></input>
               <br />
               <br />
@@ -71,20 +125,22 @@ class DashProviderInfo extends React.Component {
                 type='text'
                 id='mobile'
                 name='mobile'
+                required={true}
                 placeholder='059994415'
-                value={this.state.phone}
-                onChange={this.handelChange.bind(this)}
+                value={this.state.mobile}
+                onChange={this.handleChange.bind(this)}
               ></input>
               <br />
               <br />
-              <label htmlFor='adress'>Adress: </label>
+              <label htmlFor='adress'>Address: </label>
               <input
                 type='text'
                 id='address'
                 name='address'
+                required={true}
                 placeholder='Palestine Gaza'
-                value={this.state.adress}
-                onChange={this.handelChange.bind(this)}
+                value={this.state.address}
+                onChange={this.handleChange.bind(this)}
               ></input>
               <br />
               <br />
@@ -93,13 +149,19 @@ class DashProviderInfo extends React.Component {
                 <br />
                 <br />
                 <div className='upload'>
-                  <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} />
+                  <ImageUpload
+                    getImgUrl={this.updateImgUrl.bind(this)}
+                    uploadStarted={this.uploadStarted.bind(this)}
+                  />
                 </div>
-                <br />
+                <div id='providerInfoProgress'>
+                  <CircularProgress />
+                </div>
                 <br />
               </div>
               <button
                 className='button-edit'
+                id='btn'
                 onClick={this.handleClick.bind(this)}
               >
                 Edit
@@ -119,7 +181,7 @@ class DashProviderInfo extends React.Component {
                 name="facebook"
                 placeholder="facebook.com"
                 value={this.state.facebook}
-                onChange={this.handelChange.bind(this)}
+                onChange={this.handleChange.bind(this)}
               ></input>
               <br />
               <br />
@@ -151,7 +213,314 @@ class DashProviderInfo extends React.Component {
               </button>
             </form>
           </div>
-        </div> */}
+        </div>
+
+        {/* <label htmlFor="from">From:</label>
+            <input type="time" id="from" name="from" /> */}
+
+        <div className='dash-working-hours'>
+          <h1>Add Your Working Hours</h1>
+          <div className='Working-hours-dash'>
+            <div className='main-enter-workHours'>
+              <ul>
+                <li>
+                  <span>
+                    <label>Saturday:</label>
+                  </span>
+                  <span>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='SatOp'
+                    >
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 AM</option>
+                    </select>
+                  </span>
+                  <span>To</span>
+                  <span>
+                    <select onChange={this.handelChange.bind(this)} name='SatC'>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
+                    </select>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <label>Sunday:</label>
+                  </span>
+                  <span>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='SunOp'
+                    >
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 AM</option>
+                    </select>
+                  </span>
+                  <span>To</span>
+                  <span>
+                    <select onChange={this.handelChange.bind(this)} name='SunC'>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
+                    </select>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <label>Monday:</label>
+                  </span>
+                  <span>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='MonOp'
+                    >
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 AM</option>
+                    </select>
+                  </span>
+                  <span>To</span>
+                  <span>
+                    <select onChange={this.handelChange.bind(this)} name='MonC'>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
+                    </select>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <label>Tuesday:</label>
+                  </span>
+                  <span>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='TuesOp'
+                    >
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 AM</option>
+                    </select>
+                  </span>
+                  <span>To</span>
+                  <span>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='TuesC'
+                    >
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
+                    </select>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <label>Wednesday:</label>
+                  </span>
+                  <span>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='WenOp'
+                    >
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 AM</option>
+                    </select>
+                  </span>
+                  <span>To</span>
+                  <span>
+                    <select onChange={this.handelChange.bind(this)} name='WenC'>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
+                    </select>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <label>Thursday:</label>
+                  </span>
+                  <span>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='ThurOp'
+                    >
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 AM</option>
+                    </select>
+                  </span>
+                  <span>To</span>
+                  <span>
+                    <select
+                      onChange={this.handelChange.bind(this)}
+                      name='ThurC'
+                    >
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
+                    </select>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <label>Friday:</label>
+                  </span>
+                  <span>
+                    <select onChange={this.handelChange.bind(this)} name='FrOp'>
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 AM</option>
+                    </select>
+                  </span>
+                  <span>To</span>
+                  <span>
+                    <select onChange={this.handelChange.bind(this)} name='FrC'>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
+                    </select>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            {/* add Button to commit the working hours */}
+            {/* <button className='button-change' onClick={this.handleClick.bind(this)}>
+              Change
+            </button> */}
+          </div>
+        </div>
       </div>
     );
   }

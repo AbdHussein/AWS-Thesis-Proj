@@ -103,7 +103,7 @@ class MiniMap extends React.Component {
             <ul>
               <li>
                 <LocationOnIcon />
-                <span>Adress:</span>
+                <span>Address:</span>
                 <span>
                   {' '}
                   {this.props.providerL && this.props.providerL.address}{' '}

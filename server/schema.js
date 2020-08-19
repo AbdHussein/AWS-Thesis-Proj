@@ -28,12 +28,19 @@ const UserType = new GraphQLObjectType({
     address: { type: GraphQLString },
     avatar: { type: GraphQLString },
     cover: { type: GraphQLString },
+    thumbnail: { type: GraphQLString },
     video: { type: GraphQLString },
     description: { type: GraphQLString },
     workingHours: { type: GraphQLString },
     facilities: { type: GraphQLString },
     categoryID: { type: GraphQLID },
     token: { type: GraphQLString },
+    posts: {
+      type: new GraphQLList(PostType),
+      async resolve(root, args) {
+        return await knex('Post').select().where({ userID: root.id });
+      },
+    },
   }),
 });
 
@@ -101,6 +108,12 @@ const PostType = new GraphQLObjectType({
     date: { type: GraphQLString },
     text: { type: GraphQLString },
     image: { type: GraphQLString },
+    user: {
+      type: UserType,
+      async resolve(root, args) {
+        return await knex('User').select().where({ id: root.userID }).first();
+      },
+    },
   }),
 });
 
@@ -119,6 +132,15 @@ const BookmarkType = new GraphQLObjectType({
     id: { type: GraphQLID, unique: true },
     userID: { type: GraphQLID },
     providerID: { type: GraphQLID },
+    provider: {
+      type: UserType,
+      async resolve(root, args) {
+        return await knex('User')
+          .select()
+          .where({ id: root.providerID })
+          .first();
+      },
+    },
   }),
 });
 
@@ -270,15 +292,12 @@ const RootQuery = new GraphQLObjectType({
       },
     },
     bookmark: {
-      type: BookmarkType,
+      type: new GraphQLList(BookmarkType),
       args: {
         userID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Bookmark')
-          .select()
-          .where({ userID: args.userID })
-          .first();
+        return await knex('Bookmark').select().where({ userID: args.userID });
       },
     },
     role: {

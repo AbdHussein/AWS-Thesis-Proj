@@ -42,7 +42,6 @@ class ImageUpload extends React.Component {
     });
   }
   onFileChange = (event) => {
-    // Update the state
     this.setState({ selectedFile: event.target.files[0] }, async () => {      
       this.props.uploadStarted();
       this.handleImageUpload();
@@ -84,18 +83,20 @@ class ImageUpload extends React.Component {
               <br></br>
             </div>
             <span>{}</span> */}
+
           <div className='box'>
             <input
               type='file'
               name='pics'
               id='file-1'
-              className='inputfile inputfile-1'
+              className='inputfile-1'
               data-multiple-caption='{count} files selected'
               onChange={this.onFileChange.bind(this)}
+              accept="image/*"
             />
             <label htmlFor='file-1'>
               <FontAwesomeIcon icon={faImage} />{' '}
-              <span className='add-photos'>Add Photos</span>
+              <span className='add-photos'>Add Photo</span>
             </label>
           </div>
         </section>
@@ -103,5 +104,4 @@ class ImageUpload extends React.Component {
     );
   }
 }
-
 export default ImageUpload;

@@ -76,21 +76,17 @@ class VideoUpload extends React.Component {
     return (
       <main className='App'>
         <section className='left-side'>
-          {/* <div className='form-group'>
-                <input type='file' onChange={this.onFileChange} />
-                <br></br>
-              </div>
-              <span>{}</span> */}
           <div className='box'>
             <input
               type='file'
               name='pics'
-              id='file-1'
-              className='inputfile inputfile-1'
+              id='file-2'
+              className='inputfile-1'
               data-multiple-caption='{count} files selected'
               onChange={this.onFileChange.bind(this)}
+              accept="video/*"
             />
-            <label htmlFor='file-1'>
+            <label htmlFor='file-2'>
               <FontAwesomeIcon icon={faImage} />{' '}
               <span className='add-photos'>Add Video</span>
             </label>

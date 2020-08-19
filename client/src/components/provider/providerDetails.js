@@ -36,6 +36,7 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import Constants from '../constants/Queries';
+import Background from '../../images/48.jpg';
 
 class ProviderDetails extends React.Component {
   state = {
@@ -67,7 +68,7 @@ class ProviderDetails extends React.Component {
     return (
       <div>
         <Container>
-          <div className='provider-promo'>
+          <div style={{ backgroundImage: `url(${Background})` }} className='provider-promo'>
             <button>
               <FontAwesomeIcon icon={faVideo} /> <span>Promo Video</span>
             </button>

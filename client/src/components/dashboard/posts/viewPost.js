@@ -27,8 +27,15 @@ class ViewPost extends React.Component {
   };
 
   async componentDidMount() {
+    if (this.props.location.state === undefined) {
+      this.props.history.push('/');
+      return;
+    }
     // get post from Redirect
     const { post } = this.props.location.state;
+    this.setState({
+      post,
+    });
     // get user info if he signed in
     if (localStorage.getItem('xTown')) {
       const getUserByToken = Constants.getUserByToken(
@@ -36,12 +43,14 @@ class ViewPost extends React.Component {
       );
       const requestForUser = await Constants.request(getUserByToken);
       var user = requestForUser.data.data.user;
+    } else {
+      this.props.history.push('/');
+      return;
     }
     // git provider info by postID
     var provider = await this.getUserNameForComment(post.userID);
     // put data in the state
     this.setState({
-      post,
       user: user || null,
       provider,
     });

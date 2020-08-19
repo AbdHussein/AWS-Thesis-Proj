@@ -70,12 +70,21 @@ const addComment = (userID, postID, text) => {
 
 const addProduct = (name, userID, category, price, pic) => {
   const mutation = `mutation {
-    addProduct(name:"${name}", userID: ${userID}, category:"${category}", price:${price}, pic:"${pic}", rating:0, quantity:0){
+    addProduct(name:"${name}", userID: ${userID}, category:"${category}", price:${price}, pic:"${pic}", rating:"0", quantity:0){
       id
     }
   }`;
   return mutation;
 };
+
+const addToCart = (productID, userID) => {
+  const mutation = `mutation{
+    addCart(userID: ${userID}, productID:${productID}, sold: false){
+      id
+    }
+  }`;
+  return mutation;
+}
 
 const login = (email, password) => {
   const mutation = `mutation {
@@ -102,7 +111,7 @@ const signUp = (username, email, password, mobile) => {
     addUser(username:"${username}", email:"${email}", password:"${password}",RoleID:"3", mobile: ${Number(
     mobile
   )},avatar:"${username[0]}",
-    serviceName:"", address:"", cover:"", video:"", description:""){
+    serviceName:"", address:"", cover:"", thumbnail:"", video:"", description:""){
       id
     }
   }`;
@@ -126,6 +135,7 @@ const getUserByToken = (token) => {
       location
       address
       cover
+      thumbnail
       video
       description
       workingHours
@@ -151,7 +161,7 @@ const getPostByProviderID = (userID) => {
 
 const getProviderById = (userID) => {
   const q = `query {
-    user(id:${userID}){
+    user(id:${userID}) {
       username
       avatar
       id
@@ -163,6 +173,7 @@ const getProviderById = (userID) => {
       location
       address
       cover
+      thumbnail
       video
       description
       workingHours
@@ -271,6 +282,7 @@ const getFacilities = (userID) => {
 const getProducts = (userID) => {
   const q = `query {
     productsByUserID(userID:${userID}){
+      id
       name
       price
       pic
@@ -283,6 +295,45 @@ const editProviderInfo = (id, serviceName, email, mobile, address, cover) => {
   const q = `mutation {
     editUser(id:${id}, serviceName:"${serviceName}",email:"${email}",mobile:${mobile},address:"${address}",cover:"${cover}"){
       id
+    }
+  }`;
+  return q;
+};
+
+const getProvidersByBookmarks = (userID) => {
+  const q = `query {
+    bookmark(userID:${userID}){
+      id
+      userID
+      providerID
+      provider{
+        username
+        cover
+        address
+      }
+    }
+  }`;
+  return q;
+};
+
+const getPostByFavProv = (userID) => {
+  const q = `query {
+    bookmark(userID:${userID}){
+      provider{
+        email
+        posts {
+          id
+          userID
+          likes
+          date
+          text
+          image
+          user{
+            avatar
+            serviceName
+          }
+        }
+      }
     }
   }`;
   return q;
@@ -311,3 +362,6 @@ module.exports.addFacilities = addFacilities;
 module.exports.getFacilities = getFacilities;
 module.exports.getProducts = getProducts;
 module.exports.editProviderInfo = editProviderInfo;
+module.exports.addToCart = addToCart;
+module.exports.getProvidersByBookmarks = getProvidersByBookmarks;
+module.exports.getPostByFavProv = getPostByFavProv;
