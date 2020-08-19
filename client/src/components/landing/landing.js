@@ -92,7 +92,6 @@ class Landing extends React.Component {
                     type='text'
                     name='search'
                     placeholder='What Are You Looking For?'
-                    disabled
                     value={this.state.search}
                     onChange={this.handleChange.bind(this)}
                   />
@@ -104,7 +103,6 @@ class Landing extends React.Component {
                     type='text'
                     name='location'
                     placeholder='Location'
-                    disabled
                     value={this.state.location}
                     onChange={this.handleChange.bind(this)}
                   />
