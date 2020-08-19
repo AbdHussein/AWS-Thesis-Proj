@@ -17,6 +17,16 @@ class DashProviderInfo extends React.Component {
 
   componentDidMount() {  
     $('#providerInfoProgress').hide();
+    const {serviceName, email , mobile, address, cover} = this.props.provider;
+    this.setState({
+      serviceName,
+      email,
+      mobile,
+      address,
+      imgUrl : cover,
+    }, () => {
+      console.log(this.state);
+    });
   }
 
   uploadStarted(){
@@ -42,14 +52,14 @@ class DashProviderInfo extends React.Component {
   async handleClick(event) {
     try{
         event.preventDefault();
-        const { serviceName, email, mobile, address } = this.state;
+        const { serviceName, email, mobile, address, imgUrl } = this.state;
         const editProviderInfoQuery = Constants.editProviderInfo(
           this.props.provider.id,
-          serviceName.length > 0 ? serviceName : this.props.provider.serviceName,
-          email.length > 0 ? email : this.props.provider.email,
-          mobile.length > 0 ? mobile : this.props.provider.mobile,
-          address.length > 0 ? address : this.props.provider.address,
-          this.state.imgUrl.length > 0 ? this.state.imgUrl : ''
+          serviceName,
+          email,
+          mobile,
+          address,
+          imgUrl,
         );
         const request = await Constants.request(editProviderInfoQuery);
         if(request.data.Errors){
@@ -100,7 +110,7 @@ class DashProviderInfo extends React.Component {
                 name='mobile'
                 required={true}
                 placeholder='059994415'
-                value={this.state.phone}
+                value={this.state.mobile}
                 onChange={this.handleChange.bind(this)}
               ></input>
               <br />
@@ -112,7 +122,7 @@ class DashProviderInfo extends React.Component {
                 name='address'
                 required={true}
                 placeholder='Palestine Gaza'
-                value={this.state.adress}
+                value={this.state.address}
                 onChange={this.handleChange.bind(this)}
               ></input>
               <br />
