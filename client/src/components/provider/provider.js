@@ -52,7 +52,8 @@ class Provider extends React.Component {
     categoryName: '',
     user: null,
     numOfReviews: 0,
-    avgRating : 0
+    avgRating: 0,
+    workingHours: null,
   };
 
   async componentDidMount() {
@@ -60,6 +61,7 @@ class Provider extends React.Component {
     const { provider } = this.props.location.state;
     this.setState({
       provider,
+      workingHours: JSON.parse(provider.workingHours),
     });
     const categoryQuery = Constants.categoryNameByID(provider.categoryID);
     const request = await Constants.request(categoryQuery);
@@ -76,11 +78,11 @@ class Provider extends React.Component {
     }
   }
 
-  getNumOfReviews(numOfReviews, avgRating){
+  getNumOfReviews(numOfReviews, avgRating) {
     this.setState({
       numOfReviews,
-      avgRating
-    })
+      avgRating,
+    });
   }
 
   render() {
@@ -88,7 +90,14 @@ class Provider extends React.Component {
     return (
       <div className='provider'>
         <Navbar provider={this.state.user} />
-        <div style={{ backgroundImage: `url(${this.state.provider && this.state.provider.cover})` }} className='provider-header'>
+        <div
+          style={{
+            backgroundImage: `url(${
+              this.state.provider && this.state.provider.cover
+            })`,
+          }}
+          className='provider-header'
+        >
           <div className='overlay'>
             <Container>
               <div className='provider-ui'>
@@ -118,7 +127,11 @@ class Provider extends React.Component {
                   </span>
                 </div>
                 <div className='rating'>
-                  <div className='rate-number'>{this.state.avgRating ? Math.round(this.state.avgRating): 0}</div>
+                  <div className='rate-number'>
+                    {this.state.avgRating
+                      ? Math.round(this.state.avgRating)
+                      : 0}
+                  </div>
                   <div>
                     <Rating value={Math.round(this.state.avgRating)} readOnly />
                     <p>{this.state.numOfReviews} reviews</p>
@@ -132,11 +145,11 @@ class Provider extends React.Component {
               <div className='provider-bottom-header'>
                 <p>
                   {this.state.provider !== null &&
-                    this.state.categoryName === 'phones' ? (
-                      <FontAwesomeIcon icon={faMobileAlt} />
-                    ) : (
-                      <FontAwesomeIcon icon={faUtensils} />
-                    )}
+                  this.state.categoryName === 'phones' ? (
+                    <FontAwesomeIcon icon={faMobileAlt} />
+                  ) : (
+                    <FontAwesomeIcon icon={faUtensils} />
+                  )}
                   <span>
                     {this.state.provider !== null
                       ? this.state.categoryName
@@ -208,7 +221,10 @@ class Provider extends React.Component {
           </div>
           <div className='provider-reviews'>
             {this.state.provider && (
-              <ProviderReviews id={this.state.provider.id} getNumOfReviews={this.getNumOfReviews.bind(this)}/>
+              <ProviderReviews
+                id={this.state.provider.id}
+                getNumOfReviews={this.getNumOfReviews.bind(this)}
+              />
             )}
           </div>
         </div>
@@ -223,25 +239,81 @@ class Provider extends React.Component {
               <div>
                 <ul>
                   <li>
-                    Saturday<pre> 9AM - 5PM</pre>
+                    Saturday
+                    <pre>
+                      {' '}
+                      {this.state.workingHours &&
+                        this.state.workingHours['Saturday'][0]}{' '}
+                      -{' '}
+                      {this.state.workingHours &&
+                        this.state.workingHours['Saturday'][1]}
+                    </pre>
                   </li>
                   <li>
-                    Sunday<pre> 9AM - 5PM</pre>
+                    Sunday
+                    <pre>
+                      {' '}
+                      {this.state.workingHours &&
+                        this.state.workingHours['Sunday'][0]}{' '}
+                      -{' '}
+                      {this.state.workingHours &&
+                        this.state.workingHours['Sunday'][1]}
+                    </pre>
                   </li>
                   <li>
-                    Monday<pre> 9AM - 5PM</pre>
+                    Monday
+                    <pre>
+                      {' '}
+                      {this.state.workingHours &&
+                        this.state.workingHours['Monday'][0]}{' '}
+                      -{' '}
+                      {this.state.workingHours &&
+                        this.state.workingHours['Monday'][1]}
+                    </pre>
                   </li>
                   <li>
-                    Tuseday<pre> 9AM - 5PM</pre>
+                    Tuseday
+                    <pre>
+                      {' '}
+                      {this.state.workingHours &&
+                        this.state.workingHours['Tuseday'][0]}{' '}
+                      -{' '}
+                      {this.state.workingHours &&
+                        this.state.workingHours['Tuseday'][1]}
+                    </pre>
                   </li>
                   <li>
-                    Wednesday<pre> 9AM - 5PM</pre>
+                    Wednesday
+                    <pre>
+                      {' '}
+                      {this.state.workingHours &&
+                        this.state.workingHours['Wednesday'][0]}{' '}
+                      -{' '}
+                      {this.state.workingHours &&
+                        this.state.workingHours['Wednesday'][1]}
+                    </pre>
                   </li>
                   <li>
-                    Thursday<pre> 9AM - 5PM</pre>
+                    Thursday
+                    <pre>
+                      {' '}
+                      {this.state.workingHours &&
+                        this.state.workingHours['Thursday'][0]}{' '}
+                      -{' '}
+                      {this.state.workingHours &&
+                        this.state.workingHours['Thursday'][1]}
+                    </pre>
                   </li>
                   <li>
-                    Friday<pre> Closed</pre>
+                    Friday
+                    <pre>
+                      {' '}
+                      {this.state.workingHours &&
+                        this.state.workingHours['Friday'][0]}{' '}
+                      -{' '}
+                      {this.state.workingHours &&
+                        this.state.workingHours['Friday'][1]}
+                    </pre>
                   </li>
                 </ul>
               </div>
@@ -249,7 +321,7 @@ class Provider extends React.Component {
           </Container>
           <MiniMap providerL={this.state.provider} />
         </div>
-      </div >
+      </div>
     );
   }
 }
