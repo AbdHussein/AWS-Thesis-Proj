@@ -42,7 +42,7 @@ class ImageUpload extends React.Component {
     });
   }
   onFileChange = (event) => {
-    this.setState({ selectedFile: event.target.files[0] }, async () => {      
+    this.setState({ selectedFile: event.target.files[0] }, async () => {
       this.props.uploadStarted();
       this.handleImageUpload();
     });

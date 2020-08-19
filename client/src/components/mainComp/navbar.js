@@ -12,7 +12,7 @@ class Navbar extends React.Component {
       <nav>
         <Container>
           <div className='brand'>
-            <a href="/"><EmojiTransportationIcon /> x<span>-town</span></a>
+            <a href="/"><img src={require(`../../images/logo.png`)} alt="Logo Image" /> <span>Town</span></a>
           </div>
           <ul>
             <li><a href="/">Home</a></li>
