@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../mainComp/navbar';
 import Filter from '../mainComp/filterComp';
 import { Redirect } from 'react-router-dom';
-import logo from '../../images/logo.png';
-//import { formatRelative } from 'data-fns';
+
 import {
   GoogleMap,
   useLoadScript,
@@ -64,7 +63,7 @@ function MyComponent(props) {
   }, []);
   const panTo = React.useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(15);
+    mapRef.current.setZoom(12);
   }, []);
 
   const center = {
@@ -115,7 +114,7 @@ function MyComponent(props) {
                 }}
                 onClick={() => {
                   setSelectedProvider(provider);
-                  console.log(selectedProvider);
+                  //console.log(selectedProvider);
                   // console.log(JSON.parse(selectedProvider.location).lat);
                 }}
               />
@@ -185,7 +184,7 @@ function Locate({ panTo }) {
   );
 }
 
-/******************   why this func is exist   ****************************/
+/****************** Geocode  ****************************/
 
 function Search({ panTo }) {
   const {
@@ -207,6 +206,8 @@ function Search({ panTo }) {
     <div className='search'>
       <Combobox
         onSelect={async (address) => {
+          setValue(address, false);
+          clearSuggestions();
           try {
             const results = await getGeocode({ address });
             const { lat, lng } = await getLatLng(results[0]);
@@ -258,11 +259,6 @@ class Map extends React.Component {
       category,
     });
 
-    // const USERS = Constants.userByCategory(category);
-    // const request = await Constants.request(USERS);
-    // this.setState({
-    //   providers: request.data.data.usersByCategory,
-    // });
     await this.getUsers(category);
     if (localStorage.getItem('xTown')) {
       const query = Constants.getUserByToken(localStorage.getItem('xTown'));
