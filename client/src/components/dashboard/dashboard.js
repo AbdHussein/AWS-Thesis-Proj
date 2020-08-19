@@ -126,7 +126,7 @@ class Dashboard extends React.Component {
               </div>
               <div className='dash-provider-information'>
                 {this.state.provider && (
-                  <DashProviderInfo id={this.state.provider.id} />
+                  <DashProviderInfo provider={this.state.provider} />
                 )}
               </div>
               <div className='store-dash'>

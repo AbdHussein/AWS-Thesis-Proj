@@ -37,9 +37,14 @@ class DemoVideo extends React.Component {
     );
     console.log(addVidQuery);
     Constatnts.request(addVidQuery).then(response => {
-      console.log(response);
+      if(response.data.Errors){
+        alert('Error in saving video')
+      }else{
+        alert('Video Saved')
+      }
     }).catch(err => {
       console.log(err);
+      alert('Error in saving video');
     })
   }
   
