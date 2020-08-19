@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../mainComp/navbar';
 import Filter from '../mainComp/filterComp';
 import { Redirect } from 'react-router-dom';
+import logo from '../../images/logo.png';
 //import { formatRelative } from 'data-fns';
 import {
   GoogleMap,
@@ -89,14 +90,7 @@ function MyComponent(props) {
   /* end of  the magic if statment*/
   return (
     <div>
-      {/* <h1 className='logo'>
-        X Town{' '}
-        <span role='img' aria-label='tent'>
-          ✖
-        </span>
-      </h1> */}
-      {/* <h1>{props.category}</h1> */}
-      <Search />
+      <Search panTo={panTo} />
       <Locate panTo={panTo} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
@@ -193,7 +187,7 @@ function Locate({ panTo }) {
 
 /******************   why this func is exist   ****************************/
 
-function Search() {
+function Search({ panTo }) {
   const {
     ready,
     value,
@@ -205,15 +199,24 @@ function Search() {
       location: {
         lat: () => 31.3547,
         lng: () => 34.3088,
-        radius: 200 * 1000,
       },
+      radius: 200 * 1000,
     },
   });
   return (
     <div className='search'>
       <Combobox
-        onSelect={(address) => {
-          console.log(address);
+        onSelect={async (address) => {
+          try {
+            const results = await getGeocode({ address });
+            const { lat, lng } = await getLatLng(results[0]);
+            panTo({ lat, lng });
+            //console.log(results[0]);
+            //console.log(lat, lng);
+          } catch (error) {
+            //console.log('error!');
+          }
+          // console.log(address);
         }}
       >
         <ComboboxInput
@@ -225,12 +228,10 @@ function Search() {
           placeholder='Enter an address'
         />
         <ComboboxPopover>
-          <ComboboxList>
-            {status === 'OK' &&
-              data.map(({ id, description }) => (
-                <ComboboxOption key={id} value={description} />
-              ))}
-          </ComboboxList>
+          {status === 'OK' &&
+            data.map(({ id, description }) => (
+              <ComboboxOption key={id} value={description} />
+            ))}
         </ComboboxPopover>
       </Combobox>
     </div>
@@ -239,6 +240,7 @@ function Search() {
 
 /**********************************************/
 
+/**********************************************/
 class Map extends React.Component {
   state = {
     category: '',
