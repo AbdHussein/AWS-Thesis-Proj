@@ -1,23 +1,25 @@
-import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import $ from 'jquery';
-import ImageUpload from '../../imageUpload/imageUpload';
-import constants from '../../constants/Queries';
-const jwt = require('jsonwebtoken');
+import React from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import $ from "jquery";
+import ImageUpload from "../../imageUpload/imageUpload";
+import constants from "../../constants/Queries";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
+const jwt = require("jsonwebtoken");
 
 class Add extends React.Component {
   state = {
-    text: '',
+    text: "",
     imgUrl: null,
   };
 
-  componentDidMount(){
-    $('.MuiCircularProgress-svg').hide();
+  componentDidMount() {
+    $(".MuiCircularProgress-svg").hide();
   }
 
-  uploadStarted(){
-    $('.MuiCircularProgress-svg').show();
-    $('.btn').hide();
+  uploadStarted() {
+    $(".MuiCircularProgress-svg").show();
+    $(".btn").hide();
   }
 
   handleChange(e) {
@@ -27,22 +29,25 @@ class Add extends React.Component {
   }
 
   updateImgUrl(url) {
-    this.setState({
-      imgUrl: url,
-    }, () => {
-      $('.MuiCircularProgress-svg').hide();
-      $('.btn').show();
-    });
+    this.setState(
+      {
+        imgUrl: url,
+      },
+      () => {
+        $(".MuiCircularProgress-svg").hide();
+        $(".btn").show();
+      }
+    );
   }
 
   async onSubmit() {
     console.log(this.state.imgUrl);
     try {
       const data = jwt.verify(
-        localStorage.getItem('xTown'),
-        'somesuperdupersecret',
+        localStorage.getItem("xTown"),
+        "somesuperdupersecret",
         {
-          algorithm: 'HS256',
+          algorithm: "HS256",
         }
       );
       const addPost = await constants.addPost(
@@ -54,13 +59,13 @@ class Add extends React.Component {
         .request(addPost)
         .then((result) => {
           if (result.data.errors) {
-            alert('Failed add Photo');
-          }else{
-            alert('Post Added');
+            alert("Failed add Photo");
+          } else {
+            alert("Post Added");
           }
         })
         .catch((err) => {
-          alert('Failed add Photo');
+          alert("Failed add Photo");
         });
     } catch (err) {
       console.log(err);
@@ -69,36 +74,59 @@ class Add extends React.Component {
 
   render() {
     return (
-      <div className='dash-add'>
+      <div className="dash-add">
         <h2>Add your Post</h2>
         <form>
           <h4>What Is New?!</h4>
           <textarea
-            className='post-area'
-            name='text'
-            cols='80'
-            rows='10'
+            className="post-area"
+            name="text"
+            cols="80"
+            rows="10"
             value={this.state.text}
             onChange={this.handleChange.bind(this)}
           ></textarea>
           {/* <input type="file" name="image"  value={this.state.image} onChange={this.handelChange.bind(this)}/> */}
           <h4>Choose Post's Image</h4>
-          <div className='upload'>
-            <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} uploadStarted={this.uploadStarted.bind(this)}/>
+          <div className="upload">
+            <ImageUpload
+              getImgUrl={this.updateImgUrl.bind(this)}
+              uploadStarted={this.uploadStarted.bind(this)}
+            />
           </div>
           <br></br>
-            <div>
-              <CircularProgress />
-            </div>
+          <div>
+            <CircularProgress />
+          </div>
           <br></br>
           <button
-            type='button'
-            className='btn'
+            type="button"
+            className="btn"
             onClick={this.onSubmit.bind(this)}
           >
             Add Post
           </button>
         </form>
+        <div className="success-add-post-main">
+          <div className="success-add-post">
+            <h3>
+              <CheckCircleOutlinedIcon />
+              <span>Success</span>
+            </h3>
+            <hr />
+            <p>Perfect the post successfully added.</p>
+          </div>
+        </div>
+        <div className="fail-add-post-main">
+          <div className="fail-add-post">
+            <h3>
+              <ErrorOutlineIcon />
+              <span>Failing</span>
+            </h3>
+            <hr />
+            <p>Error!! Post not added</p>
+          </div>
+        </div>
       </div>
     );
   }

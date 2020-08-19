@@ -1,5 +1,8 @@
 import React from 'react';
 import ImageUpload from '../imageUpload/imageUpload';
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
+import $ from "jquery";
 import Constants from '../constants/Queries';
 class DashProviderInfo extends React.Component {
   state = {
@@ -429,6 +432,16 @@ class DashProviderInfo extends React.Component {
                 </li>
               </ul>
             </div>
+          </div>
+        </div>
+        <div className="success-edit-dashboard-main">
+          <div className="success-edit-dashboard">
+            <h3>
+              <CheckCircleOutlinedIcon />
+              <span>Success</span>
+            </h3>
+            <hr />
+            <p>Perfect your information successfully updated.</p>
           </div>
         </div>
       </div>

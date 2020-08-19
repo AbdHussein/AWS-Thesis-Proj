@@ -1,6 +1,9 @@
 import React from 'react';
 import ImageUpload from '../imageUpload/imageUpload';
 import constants from '../constants/Queries';
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
+import $ from "jquery";
 
 class StoreDashboard extends React.Component {
   state = {
@@ -99,6 +102,16 @@ class StoreDashboard extends React.Component {
               Add Product
             </button>
           </form>
+        </div>
+        <div className="success-add-product-main">
+          <div className="success-add-product">
+            <h3>
+              <CheckCircleOutlinedIcon />
+              <span>Success</span>
+            </h3>
+            <hr />
+            <p>Perfect your new product successfully added.</p>
+          </div>
         </div>
       </div>
     );

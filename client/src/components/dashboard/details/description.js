@@ -2,7 +2,9 @@ import React from 'react';
 import ImageUpload from '../../imageUpload/imageUpload';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import $ from 'jquery';
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
+import $ from "jquery";
 import Constatnts from '../../constants/Queries';
 
 class Description extends React.Component {
@@ -87,6 +89,48 @@ class Description extends React.Component {
             >
               Save
             </button>
+          </div>
+        </div>
+        <div className="success-description-main">
+          <div className="success-description">
+            <h3>
+              <CheckCircleOutlinedIcon />
+              <span>Success</span>
+            </h3>
+            <hr />
+            <p>Perfect the description successfully added.</p>
+          </div>
+        </div>
+        <div className="fail-add-description-main">
+          <div className="fail-add-description">
+            <h3>
+              <ErrorOutlineIcon />
+              <span>Failing</span>
+            </h3>
+            <hr />
+            <p>
+              Error!! Description not added</p>
+          </div>
+        </div>
+        <div className="success-gallery-main">
+          <div className="success-gallery">
+            <h3>
+              <CheckCircleOutlinedIcon />
+              <span>Success</span>
+            </h3>
+            <hr />
+            <p>Perfect photo successfully added to your gallery.</p>
+          </div>
+        </div>
+        <div className="fail-add-gallery-main">
+          <div className="fail-add-gallery">
+            <h3>
+              <ErrorOutlineIcon />
+              <span>Failing</span>
+            </h3>
+            <hr />
+            <p>
+              Error!! Photo not added to your gallery.</p>
           </div>
         </div>
       </div>
