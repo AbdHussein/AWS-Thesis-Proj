@@ -1,5 +1,7 @@
 import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
 import $ from 'jquery';
 import ImageUpload from '../imageUpload/imageUpload';
 import Constants from '../constants/Queries';
@@ -63,13 +65,23 @@ class DashProviderInfo extends React.Component {
         );
         const request = await Constants.request(editProviderInfoQuery);
         if(request.data.Errors){
-          alert('Error in updating info');
+          $(".fail-edit-dashboard-main").show();
+          setTimeout(function () {
+            $(".fail-edit-dashboard-main").hide();
+          }, 1000);
         }else{
-          alert('Info updated!');
+          $(".success-edit-dashboard-main").show();
+          setTimeout(function () {
+            $(".success-edit-dashboard-main").hide();
+          }, 1000);
+       
         }
     } catch(err) {
       console.log(err);
-      alert('Error in updating info');
+      $(".fail-edit-dashboard-main").show();
+      setTimeout(function () {
+        $(".fail-edit-dashboard-main").hide();
+      }, 1000);
     }
   }
   render() {
@@ -84,7 +96,6 @@ class DashProviderInfo extends React.Component {
                 type='text'
                 id='serviceName'
                 name='serviceName'
-                placeholder='Nadera Mobile'
                 required={true}
                 value={this.state.serviceName}
                 onChange={this.handleChange.bind(this)}
@@ -97,7 +108,6 @@ class DashProviderInfo extends React.Component {
                 id='email'
                 name='email'
                 required={true}
-                placeholder='naderamobile@gmail.com'
                 value={this.state.email}
                 onChange={this.handleChange.bind(this)}
               ></input>
@@ -109,7 +119,6 @@ class DashProviderInfo extends React.Component {
                 id='mobile'
                 name='mobile'
                 required={true}
-                placeholder='059994415'
                 value={this.state.mobile}
                 onChange={this.handleChange.bind(this)}
               ></input>
@@ -121,7 +130,6 @@ class DashProviderInfo extends React.Component {
                 id='address'
                 name='address'
                 required={true}
-                placeholder='Palestine Gaza'
                 value={this.state.address}
                 onChange={this.handleChange.bind(this)}
               ></input>
@@ -471,6 +479,27 @@ class DashProviderInfo extends React.Component {
                 </li>
               </ul>
             </div>
+          </div>
+        </div>
+        <div className="success-edit-dashboard-main">
+          <div className="success-edit-dashboard">
+            <h3>
+              <CheckCircleOutlinedIcon />
+              <span>Success</span>
+            </h3>
+            <hr />
+            <p>Perfect your information successfully updated.</p>
+          </div>
+        </div>
+        <div className="fail-edit-dashboard-main">
+          <div className="fail-edit-dashboard">
+            <h3>
+              <ErrorOutlineIcon />
+              <span>Failing</span>
+            </h3>
+            <hr />
+            <p>
+              Error!!  in updating info.</p>
           </div>
         </div>
       </div>

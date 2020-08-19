@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
+import $ from "jquery";
 
 class VideoUpload extends React.Component {
   state = {
@@ -67,7 +68,10 @@ class VideoUpload extends React.Component {
       })
       .catch((err) => {
         console.log(err);
-        alert('Failed to upload file');
+        $(".fail-demo-main").show();
+        setTimeout(function () {
+          $(".fail-demo-main").hide();
+        }, 1000);
       });
   };
 
