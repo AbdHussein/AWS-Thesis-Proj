@@ -121,6 +121,7 @@ class DashProviderInfo extends React.Component {
       this.props.provider.id,
       workHsString
     );
+    console.log(workHsString);
     const editWorkingHs = await Constants.request(editWorkingHours);
   }
 
