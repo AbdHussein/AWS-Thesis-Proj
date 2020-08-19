@@ -1,7 +1,6 @@
 import React from "react";
 import ImageUpload from "../../imageUpload/imageUpload";
 import VideoUpload from "../../videoUpload/videoUpload";
-import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Constatnts from "../../constants/Queries";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
@@ -50,7 +49,8 @@ class DemoVideo extends React.Component {
       },
       () => {
         //TODO Enable button
-        $("#ImageProgress").hide();
+        console.log('state updated');
+        $("#videoProgress").hide();
         $("#uploadVideoBtn").show();
       }
     );
@@ -68,6 +68,7 @@ class DemoVideo extends React.Component {
           }, 1000);
         } else {
           $(".success-add-demo-main").show();
+          
           setTimeout(function () {
             $(".success-add-demo-main").hide();
           }, 1000);
@@ -75,18 +76,19 @@ class DemoVideo extends React.Component {
       })
       .catch((err) => {
         console.log(err);
-        // $(".fail-demo-main").show();
-        // setTimeout(function () {
-        //   $(".fail-demo-main").hide();
-        // }, 1000);
+        $(".fail-demo-main").show();
+        setTimeout(function () {
+          $(".fail-demo-main").hide();
+        }, 1000);
       });
   }
 
   onImgSubmit() {
-    const addThumbnailQuery = Constatnts.addThumbnail(this.props.id, this.state.vidUrl);
+    const addThumbnailQuery = Constatnts.addThumbnail(this.props.id, this.state.imgUrl);
     console.log(addThumbnailQuery);
     Constatnts.request(addThumbnailQuery)
       .then((response) => {
+        console.log(response);
         if (response.data.Errors) {
           $(".fail-demo-main").show();
           setTimeout(function () {
@@ -101,10 +103,10 @@ class DemoVideo extends React.Component {
       })
       .catch((err) => {
         console.log(err);
-        // $(".fail-demo-main").show();
-        // setTimeout(function () {
-        //   $(".fail-demo-main").hide();
-        // }, 1000);
+        $(".fail-demo-main").show();
+        setTimeout(function () {
+          $(".fail-demo-main").hide();
+        }, 1000);
       });
   }
 
