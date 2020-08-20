@@ -57,7 +57,6 @@ class Landing extends React.Component {
     });
   }
 
-
   filterFunction() {
     var input, filter, ul, li, i, txtValue;
     input = document.getElementById('myInput');
