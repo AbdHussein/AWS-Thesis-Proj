@@ -84,6 +84,7 @@ class ViewPost extends React.Component {
       this.getAllComments();
     } else {
       alert('Please sign in to comment');
+      // nadera
     }
   }
 

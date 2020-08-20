@@ -1964,7 +1964,7 @@ h1 {
   overflow: hidden;
   height: 60px;
   margin-right: 2%;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(179, 174, 174);
   border-radius: 10px;
 
   img {
@@ -1993,7 +1993,7 @@ h1 {
   top: 10;
   right: 0;
   padding: 7px;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(179, 174, 174);
   border-radius: 50px 0 0 50px;
   box-shadow: 5px 4px 5px #b1b1b1;
   p {
@@ -2213,7 +2213,7 @@ nav {
   overflow: hidden;
 }
 .description-btn,
-.upload-gallery {
+.upload-gallery ,.btn-workingHours{
   background: #384f95;
   position: relative;
   padding: 10px 30px;
@@ -2707,7 +2707,7 @@ nav {
   display: none;
   .delete-waring {
     width: 317px;
-    background: #ccc;
+    background: rgb(179, 174, 174);
     height: 197px;
     margin: 30vh auto;
     border: 1px solid #4db7fe;
@@ -2758,7 +2758,7 @@ nav {
   display: none;
   .fail-add-post {
     width: 317px;
-    background: #ccc;
+    background: rgb(179, 174, 174);
     height: 197px;
     margin: 30vh auto;
     border: 1px solid #4db7fe;
@@ -2795,7 +2795,7 @@ nav {
   display: none;
   .fail-add-product {
     width: 317px;
-    background: #ccc;
+    background: rgb(179, 174, 174);
     height: 197px;
     margin: 30vh auto;
     border: 1px solid #4db7fe;
@@ -2832,7 +2832,7 @@ nav {
   display: none;
   .fail-edit-dashboard {
     width: 317px;
-    background: #ccc;
+    background: rgb(179, 174, 174);
     height: 197px;
     margin: 30vh auto;
     border: 1px solid #4db7fe;
@@ -2869,7 +2869,7 @@ nav {
   display: none;
   .fail-add-Photopost {
     width: 317px;
-    background: #ccc;
+    background: rgb(179, 174, 174);
     height: 197px;
     margin: 30vh auto;
     border: 1px solid #4db7fe;
@@ -2906,7 +2906,7 @@ nav {
   display: none;
   .fail-add-facility {
     width: 317px;
-    background: #ccc;
+    background: rgb(179, 174, 174);
     height: 197px;
     margin: 30vh auto;
     border: 1px solid #4db7fe;
@@ -2943,7 +2943,7 @@ nav {
   display: none;
   .fail-demo {
     width: 317px;
-    background: #ccc;
+    background: rgb(179, 174, 174);
     height: 197px;
     margin: 30vh auto;
     border: 1px solid #4db7fe;
@@ -2981,7 +2981,7 @@ nav {
   display: none;
   .success-add-demo {
     width: 317px;
-    background: #ccc;
+    background: rgb(179, 174, 174);
     height: 159px;
     margin: 47vh auto;
     border: 1px solid rgb(67, 143, 60);
@@ -3018,7 +3018,7 @@ nav {
   display: none;
   .success-add-facility {
     width: 317px;
-    background: #ccc;
+    background: rgb(179, 174, 174);
     height: 159px;
     margin: 47vh auto;
     border: 1px solid rgb(67, 143, 60);
@@ -3055,7 +3055,7 @@ nav {
   display: none;
   .success-description {
     width: 317px;
-    background: #ccc;
+    background: rgb(179, 174, 174);;
     height: 159px;
     margin: 47vh auto;
     border: 1px solid rgb(67, 143, 60);
@@ -3092,7 +3092,7 @@ nav {
   display: none;
   .success-gallery {
     width: 317px;
-    background: #ccc;
+    background: rgb(179, 174, 174);;
     height: 159px;
     margin: 47vh auto;
     border: 1px solid rgb(67, 143, 60);
@@ -3129,7 +3129,7 @@ nav {
   display: none;
   .success-edit-dashboard {
     width: 317px;
-    background: #ccc;
+    background: rgb(179, 174, 174);;
     height: 159px;
     margin: 47vh auto;
     border: 1px solid rgb(67, 143, 60);
@@ -3166,7 +3166,7 @@ nav {
   display: none;
   .success-add-product {
     width: 317px;
-    background: #ccc;
+    background: rgb(179, 174, 174);
     height: 159px;
     margin: 47vh auto;
     border: 1px solid rgb(67, 143, 60);
@@ -3203,7 +3203,7 @@ nav {
   display: none;
   .success-edit-dashboard {
     width: 317px;
-    background: #ccc;
+    background: rgb(179, 174, 174);
     height: 159px;
     margin: 47vh auto;
     border: 1px solid rgb(67, 143, 60);
@@ -3240,7 +3240,7 @@ nav {
   display: none;
   .success-add-post {
     width: 317px;
-    background: #ccc;
+    background: rgb(179, 174, 174);
     height: 159px;
     margin: 47vh auto;
     border: 1px solid rgb(67, 143, 60);
@@ -3355,3 +3355,13 @@ nav {
 }
 
 /* End Animation */
+/*sweet Alter*/
+.swal-modal{
+border-radius: 10px;
+}
+// .swal-title{
+//   color:rgb(67, 143, 60);
+// }
+.swal-text{
+color:$mainColor;
+}

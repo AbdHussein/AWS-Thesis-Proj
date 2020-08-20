@@ -3,6 +3,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
 import $ from "jquery";
+import swal from 'sweetalert';
 import ImageUpload from "../imageUpload/imageUpload";
 import Constants from "../constants/Queries";
 class DashProviderInfo extends React.Component {
@@ -80,22 +81,26 @@ class DashProviderInfo extends React.Component {
       );
       const request = await Constants.request(editProviderInfoQuery);
       if (request.data.Errors) {
-        $(".fail-edit-dashboard-main").show();
-        setTimeout(function () {
-          $(".fail-edit-dashboard-main").hide();
-        }, 1000);
+
+        swal("OoOps!", " your working hours not added.", "error");
+        // $(".fail-edit-dashboard-main").show();
+        // setTimeout(function () {
+        //   $(".fail-edit-dashboard-main").hide();
+        // }, 1000);
       } else {
-        $(".success-edit-dashboard-main").show();
-        setTimeout(function () {
-          $(".success-edit-dashboard-main").hide();
-        }, 1000);
+        swal("Good job!", "Perfect the your working hours successfully added.", "success");
+        // $(".success-edit-dashboard-main").show();
+        // setTimeout(function () {
+        //   $(".success-edit-dashboard-main").hide();
+        // }, 1000);
       }
     } catch (err) {
       console.log(err);
-      $(".fail-edit-dashboard-main").show();
-      setTimeout(function () {
-        $(".fail-edit-dashboard-main").hide();
-      }, 1000);
+      swal("OoOps!", " your working hours not added.", "error");
+      // $(".fail-edit-dashboard-main").show();
+      // setTimeout(function () {
+      //   $(".fail-edit-dashboard-main").hide();
+      // }, 1000);
     }
   }
 
@@ -122,8 +127,34 @@ class DashProviderInfo extends React.Component {
       workHsString
     );
     console.log(workHsString);
-    const editWorkingHs = await Constants.request(editWorkingHours);
-  }
+    const editWorkingHs = await Constants.request(editWorkingHours)
+    .then(async (result) => {
+      if (result.data.errors) {
+        swal("OoOps!", " your information not ccessfully updated.", "error");
+        // $(".fail-add-Photopost-main").show();
+        // setTimeout(function () {
+        //   $(".fail-add-Photopost-main").hide();
+        // }, 3000);
+      } else {
+        await this.props.getProvider();
+        swal("Good job!", "Perfect your information successfully updated.", "success");
+        // $(".success-add-post-main").show();
+        // setTimeout(function () {
+        //   $(".success-add-post-main").hide();
+        // }, 3000);
+      }
+    })
+    .catch((err) => {
+      swal("OoOps!", "your information not ccessfully updated.", "error");
+      // $(".fail-add-post-main").show();
+      // setTimeout(function () {
+      //   $(".fail-add-post-main").hide();
+      // }, 3000);
+    });
+} catch (err) {
+  console.log(err);
+}
+  
 
   render() {
     return (
@@ -562,10 +593,10 @@ class DashProviderInfo extends React.Component {
               </ul>
             </div>
             {/* add style for the Button (Ahmed Abu Waked)*/}
-            <button onClick={this.saveWorkingHours.bind(this)}>Save</button>
+            <button  className="btn-workingHours" onClick={this.saveWorkingHours.bind(this)}>Save</button>
           </div>
         </div>
-        <div className="success-edit-dashboard-main">
+        {/* <div className="success-edit-dashboard-main">
           <div className="success-edit-dashboard">
             <h3>
               <CheckCircleOutlinedIcon />
@@ -584,7 +615,7 @@ class DashProviderInfo extends React.Component {
             <hr />
             <p>Error!! in updating info.</p>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }

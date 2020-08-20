@@ -3,6 +3,7 @@ import VideoUpload from "../../videoUpload/videoUpload";
 import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Constatnts from "../../constants/Queries";
+import swal from 'sweetalert';
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
 import $ from "jquery";
@@ -40,15 +41,17 @@ class DemoVideo extends React.Component {
     Constatnts.request(addVidQuery)
       .then((response) => {
         if (response.data.Errors) {
-          $(".fail-demo-main").show();
-          setTimeout(function () {
-            $(".fail-demo-main").hide();
-          }, 1000);
+          swal("OoOps!", " Demo video not added.", "error");
+          // $(".fail-demo-main").show();
+          // setTimeout(function () {
+          //   $(".fail-demo-main").hide();
+          // }, 1000);
         } else {
-          $(".success-add-demo-main").show();
-          setTimeout(function () {
-            $(".success-add-demo-main").hide();
-          }, 1000);
+          swal("Good job!", "Perfect the demo successfully added.", "success");
+          // $(".success-add-demo-main").show();
+          // setTimeout(function () {
+          //   $(".success-add-demo-main").hide();
+          // }, 1000);
         }
       })
       .catch((err) => {
@@ -92,7 +95,7 @@ class DemoVideo extends React.Component {
         </div>
         </div>
 
-        <div className="fail-demo-main">
+        {/* <div className="fail-demo-main">
           <div className="fail-demo">
             <h3>
               <ErrorOutlineIcon />
@@ -111,7 +114,7 @@ class DemoVideo extends React.Component {
             <hr />
             <p>Perfect the demo successfully added.</p>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }

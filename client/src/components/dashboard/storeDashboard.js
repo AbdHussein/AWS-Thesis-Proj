@@ -2,6 +2,7 @@ import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
+import swal from 'sweetalert';
 import $ from 'jquery';
 import ImageUpload from '../imageUpload/imageUpload';
 import constants from '../constants/Queries';
@@ -61,23 +62,28 @@ class StoreDashboard extends React.Component {
            console.log(addProductMutation);
            constants.request(addProductMutation)
            .then( result => {
-            if(result.data.errors){
-              $(".fail-add-product-main").show();
-              setTimeout(function () {
-                $(".fail-add-product-main").hide();
-              }, 1000);
+             if (result.data.errors) {
+              console.log("errors")
+              swal("OoOps!", " your product not added.", "error");
+              // $(".fail-add-product-main").show();
+              // setTimeout(function () {
+              //   $(".fail-add-product-main").hide();
+              // }, 1000);
             } else {
-                  $(".success-add-product-main").show();
-                  setTimeout(function () {
-                    $(".success-add-product-main").hide();
-                  }, 1000);
+              swal("Good job!", "Perfect  your product successfully added.", "success");
+                  // $(".success-add-product-main").show();
+                  // setTimeout(function () {
+                  //   $(".success-add-product-main").hide();
+                  // }, 1000);
               this.clear();
             }
-           }).catch(err =>{
-            $(".fail-add-product-main").show();
-            setTimeout(function () {
-              $(".fail-add-product-main").hide();
-            }, 1000);
+           }).catch(err => {
+             console.log(err)
+            swal("OoOps!", " your product not added.", "error");
+            // $(".fail-add-product-main").show();
+            // setTimeout(function () {
+            //   $(".fail-add-product-main").hide();
+            // }, 1000);
            })
       }
     }).catch(err => {
@@ -129,7 +135,7 @@ class StoreDashboard extends React.Component {
             </button>
           </form>
         </div>
-        <div className="success-add-product-main">
+        {/* <div className="success-add-product-main">
           <div className="success-add-product">
             <h3>
               <CheckCircleOutlinedIcon />
@@ -149,7 +155,7 @@ class StoreDashboard extends React.Component {
             <p>
               Error!! Product not added</p>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }

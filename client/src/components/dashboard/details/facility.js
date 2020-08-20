@@ -2,6 +2,7 @@ import React from 'react';
 import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import Constants from '../../constants/Queries';
+import swal from 'sweetalert'
 import $ from "jquery";
 class Facility extends React.Component {
   state = {
@@ -50,19 +51,20 @@ class Facility extends React.Component {
     const addFs = Constants.addFacilities(this.props.id, facilities);
     const request = await Constants.request(addFs)
     .then(async (result) => {
-      
-        $(".success-add-facility-main").show();
-    setTimeout(function () {
-      $(".success-add-facility-main").hide();
-    }, 1000);
+      swal("Good job!", "Perfect your new facility successfully added", "success");
+    //     $(".success-add-facility-main").show();
+    // setTimeout(function () {
+    //   $(".success-add-facility-main").hide();
+    // }, 1000);
       
     })
-    .catch((err) => {
-      $(".fail-add-facility-main").show();
-      setTimeout(function () {
-        $(".fail-add-facility-main").hide();
-      }, 1000);
-    });
+      .catch((err) => {
+        swal("OoOps!", "Error the facility not  added.", "error");
+    //   $(".fail-add-facility-main").show();
+    //   setTimeout(function () {
+    //     $(".fail-add-facility-main").hide();
+    //   }, 1000);
+     });
 } catch (err) {
   console.log(err);
 }
@@ -90,7 +92,7 @@ class Facility extends React.Component {
             <input type='submit' value='Submit' />
           </form>
         </div>
-        <div className="success-add-facility-main">
+        {/* <div className="success-add-facility-main">
           <div className="success-add-facility">
             <h3>
               <CheckCircleOutlinedIcon />
@@ -110,7 +112,7 @@ class Facility extends React.Component {
             <p>
               Error!! Your facility not added</p>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }
