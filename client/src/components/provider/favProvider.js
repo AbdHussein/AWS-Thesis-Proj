@@ -23,6 +23,7 @@ class FavProviders extends React.Component {
       const { user } = request.data.data;
       const allProvidersQuery = Constants.getProvidersByBookmarks(user.id);
       const requsetForProviders = await Constants.request(allProvidersQuery);
+      console.log(allProvidersQuery);
       const bookmarks = requsetForProviders.data.data.bookmark;
       this.setState({
         user,
