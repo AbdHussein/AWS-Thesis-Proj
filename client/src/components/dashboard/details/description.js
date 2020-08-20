@@ -3,6 +3,7 @@ import ImageUpload from '../../imageUpload/imageUpload';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
+import swal from 'sweetalert'
 import $ from 'jquery';
 import Constatnts from '../../constants/Queries';
 
@@ -41,20 +42,22 @@ class Description extends React.Component {
       this.state.description
     );
     const request = await Constatnts.request(addDescQuery);
-    $(".success-description-main").show();
-          setTimeout(function () {
-            $(".success-description-main").hide();
-          }, 2000);
+    swal("Good job!", "Perfect the description successfully added", "success");
+    // $(".success-description-main").show();
+    //       setTimeout(function () {
+    //         $(".success-description-main").hide();
+    //       }, 2000);
         
   }
 
   async addPhoto() {
     const addPhotoQuery = Constatnts.addPhoto(this.props.id, this.state.imgUrl);
     const request = await Constatnts.request(addPhotoQuery);
-    $(".success-gallery-main").show();
-    setTimeout(function () {
-      $(".success-gallery-main").hide();
-    }, 2000);
+    swal("Good job!", "Perfect photo successfully added to your gallery", "success");
+    // $(".success-gallery-main").show();
+    // setTimeout(function () {
+    //   $(".success-gallery-main").hide();
+    // }, 2000);
   }
 
   render() {
@@ -97,7 +100,7 @@ class Description extends React.Component {
             </button>
           </div>
         </div>
-        <div className="success-description-main">
+        {/* <div className="success-description-main">
           <div className="success-description">
             <h3>
               <CheckCircleOutlinedIcon />
@@ -116,7 +119,7 @@ class Description extends React.Component {
             <hr />
             <p>Perfect photo successfully added to your gallery.</p>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }

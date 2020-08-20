@@ -2,6 +2,7 @@ import React from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
+import swal from 'sweetalert';
 import $ from "jquery";
 import ImageUpload from "../../imageUpload/imageUpload";
 import constants from "../../constants/Queries";
@@ -62,23 +63,26 @@ class Add extends React.Component {
         .request(addPost)
         .then(async (result) => {
           if (result.data.errors) {
-            $(".fail-add-Photopost-main").show();
-            setTimeout(function () {
-              $(".fail-add-Photopost-main").hide();
-            }, 1000);
+            swal("OoOps!", " Post not added.", "error");
+            // $(".fail-add-Photopost-main").show();
+            // setTimeout(function () {
+            //   $(".fail-add-Photopost-main").hide();
+            // }, 3000);
           } else {
             await this.props.getProvider();
-            $(".success-add-post-main").show();
-            setTimeout(function () {
-              $(".success-add-post-main").hide();
-            }, 1000);
+            swal("Good job!", "Perfect the post successfully added.", "success");
+            // $(".success-add-post-main").show();
+            // setTimeout(function () {
+            //   $(".success-add-post-main").hide();
+            // }, 3000);
           }
         })
         .catch((err) => {
-          $(".fail-add-post-main").show();
-          setTimeout(function () {
-            $(".fail-add-post-main").hide();
-          }, 1000);
+          swal("OoOps!", " Post not added.", "error");
+          // $(".fail-add-post-main").show();
+          // setTimeout(function () {
+          //   $(".fail-add-post-main").hide();
+          // }, 3000);
         });
     } catch (err) {
       console.log(err);
@@ -121,7 +125,7 @@ class Add extends React.Component {
             Add Post
           </button>
         </form>
-        <div className="success-add-post-main">
+        {/* <div className="success-add-post-main">
           <div className="success-add-post">
             <h3>
               <CheckCircleOutlinedIcon />
@@ -150,7 +154,7 @@ class Add extends React.Component {
             <hr />
             <p>Failed add Photo</p>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }

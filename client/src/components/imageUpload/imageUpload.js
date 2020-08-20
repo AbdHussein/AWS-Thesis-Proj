@@ -64,12 +64,13 @@ class ImageUpload extends React.Component {
           },
           async () => {
             await this.props.getImgUrl(response.data.secure_url);
+            //nadera
           }
         );
       })
       .catch((err) => {
         console.log(err);
-        alert('Failed to upload file');
+        alert('Failed to upload file');//nadera
       });
   };
 
