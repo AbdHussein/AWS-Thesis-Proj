@@ -56,7 +56,8 @@ class Provider extends React.Component {
     avgRating: 0,
     workingHours: null,
     bookmarks : 0,
-    saved: false
+    saved: false,
+    bookmarkID : 0
   };
 
   async componentDidMount() {
@@ -97,6 +98,7 @@ class Provider extends React.Component {
             if(bookmark.userID === this.state.user.id && bookmark.providerID === this.state.provider.id){
               this.setState({
                 saved: true,
+                bookmarkID : bookmark.id
               })
             }
           })
@@ -123,14 +125,33 @@ class Provider extends React.Component {
           alert('Error in saving this Profile');
         } else {        
           this.setState({
-            bookmarks : this.state.bookmarks + 1,
             saved : true
+          }, () => {
+            this.getBookmarks();
           })
         }
       }).catch(err => {
         alert('Error in saving this Profile');
       })
     }    
+  }
+
+  deleteBookmark(){
+    const deleteBookmarkMutation = Constants.deleteBookmark(this.state.bookmarkID);
+    console.log(deleteBookmarkMutation);
+    Constants.request(deleteBookmarkMutation).then(res => {
+      if(res.data.Errors){
+        console.log('Error in deleteing bookmark');
+      } else {
+        this.setState({
+          saved : false
+        }, () => {
+          this.getBookmarks();
+        })
+      }
+    }).catch(err => {
+      console.log('Error in deleteing bookmark');
+    })
   }
 
   render() {
@@ -241,13 +262,16 @@ class Provider extends React.Component {
               </button>
               <button onClick = {() => {
                 if(localStorage.getItem('xTown')){
-                  // alert('Saved');
-                  this.addBookmark();
+                  if(!this.state.saved){
+                    this.addBookmark();
+                  } else {
+                    this.deleteBookmark();
+                  }
                 } else {
                   this.props.history.push('/signIn');
                 }
               }}>
-                <FontAwesomeIcon icon={faHeart} /> Save
+                <FontAwesomeIcon icon={faHeart} /> {this.state.saved ? 'Saved' : 'Save'}
               </button>
               <FontAwesomeIcon icon={faEllipsisH} />
             </div>
