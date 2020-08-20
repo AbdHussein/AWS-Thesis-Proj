@@ -294,10 +294,10 @@ const RootQuery = new GraphQLObjectType({
     bookmark: {
       type: new GraphQLList(BookmarkType),
       args: {
-        userID: { type: new GraphQLNonNull(GraphQLID) },
+        providerID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Bookmark').select().where({ userID: args.userID });
+        return await knex('Bookmark').select().where({ providerID: args.providerID });
       },
     },
     role: {
@@ -391,6 +391,7 @@ const Mutation = new GraphQLObjectType({
         address: { type: new GraphQLNonNull(GraphQLString) },
         avatar: { type: new GraphQLNonNull(GraphQLString) },
         cover: { type: new GraphQLNonNull(GraphQLString) },
+        thumbnail : { type: new GraphQLNonNull(GraphQLString) },
         video: { type: new GraphQLNonNull(GraphQLString) },
         description: { type: new GraphQLNonNull(GraphQLString) },
         facilities: { type: GraphQLString },
