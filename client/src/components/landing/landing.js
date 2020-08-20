@@ -51,7 +51,12 @@ class Landing extends React.Component {
       $('.categories').children('input').fadeToggle();
       $('.categories').children('ul').fadeToggle();
     });
+    $('.search span').click(function () {
+      $('.search').children('input').fadeToggle();
+      $('.search').children('ul').fadeToggle();
+    });
   }
+
   filterFunction() {
     var input, filter, ul, li, i, txtValue;
     input = document.getElementById('myInput');
@@ -122,15 +127,33 @@ class Landing extends React.Component {
               </h3>
 
               <div className='search-bar'>
+                {/* Ibrahim To Do */}
                 <div className='search'>
                   <FontAwesomeIcon icon={faKeyboard} />
+                  <span>
+                    {this.state.categoryPlace}{' '}
+                    <FontAwesomeIcon icon={faChevronDown} />
+                  </span>
                   <input
                     type='text'
-                    name='search'
-                    placeholder='What Are You Looking For?'
-                    value={this.state.search}
+                    placeholder='Search..'
+                    id='myInput'
+                    onKeyUp={this.filterFunction.bind(this)}
+                    name='category'
                     onChange={this.handleChange.bind(this)}
                   />
+                  <ul id='myDropdown'>
+                    <li
+                      onClick={() => {
+                        this.setState({
+                          category: 'all',
+                          categoryPlace: 'All Categories',
+                        });
+                      }}
+                    >
+                      Service Name
+                    </li>
+                  </ul>
                 </div>
                 <div className='between'></div>
                 <div className='location'>
