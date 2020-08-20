@@ -277,7 +277,8 @@ nav {
       margin: auto;
       margin-top: 60px;
       padding: 10px;
-      .categories {
+      .categories,
+      .search {
         margin-top: 10px !important;
         cursor: pointer;
         > input {
