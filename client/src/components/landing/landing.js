@@ -229,6 +229,40 @@ class Landing extends React.Component {
                   </div>
                 </div>
               </div>
+              <div className='single-popular'>
+                <img src={require(`../../images/29.jpg`)} alt='Silder Image' />
+                <div className='overlay'>
+                  <div>
+                    <h3>Gym in the center</h3>
+                    <span>
+                      <FontAwesomeIcon icon={faMapMarkerAlt} /> 70 Bright St New
+                      York, USA
+                    </span>
+                    <hr />
+                    <p>
+                      <FontAwesomeIcon icon={faMobileAlt} />{' '}
+                      <span className='categories'>Phones</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className='single-popular'>
+                <img src={require(`../../images/29.jpg`)} alt='Silder Image' />
+                <div className='overlay'>
+                  <div>
+                    <h3>Gym in the center</h3>
+                    <span>
+                      <FontAwesomeIcon icon={faMapMarkerAlt} /> 70 Bright St New
+                      York, USA
+                    </span>
+                    <hr />
+                    <p>
+                      <FontAwesomeIcon icon={faMobileAlt} />{' '}
+                      <span className='categories'>Phones</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </Container>
           <div className='landing-promo'>
