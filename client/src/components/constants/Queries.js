@@ -348,6 +348,28 @@ const editWorkingHours = (providerID, workingHours) => {
   return q;
 };
 
+const getUsersByRoleID = (RoleID) => {
+  const q = `query {
+    getUsers(RoleID: ${RoleID}){
+     id
+    username
+    email
+    mobile
+    serviceName
+    location
+    address
+    avatar
+    cover
+    video
+    description
+    workingHours
+    categoryID
+    RoleID
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -375,3 +397,4 @@ module.exports.addToCart = addToCart;
 module.exports.getProvidersByBookmarks = getProvidersByBookmarks;
 module.exports.getPostByFavProv = getPostByFavProv;
 module.exports.editWorkingHours = editWorkingHours;
+module.exports.getUsersByRoleID = getUsersByRoleID;
