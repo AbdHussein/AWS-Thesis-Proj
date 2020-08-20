@@ -82,6 +82,8 @@ class ProviderReviews extends React.Component {
         text: '',
         pic: '',
       })
+    } else {
+      // nadera put the soign in
     }
   }
 

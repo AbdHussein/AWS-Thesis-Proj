@@ -63,11 +63,13 @@ class VideoUpload extends React.Component {
           },
           async () => {
             this.props.getVidUrl(response.data.secure_url);
+            //nadera
           }
         );
       })
       .catch((err) => {
         console.log(err);
+        // nadera
         $(".fail-demo-main").show();
         setTimeout(function () {
           $(".fail-demo-main").hide();

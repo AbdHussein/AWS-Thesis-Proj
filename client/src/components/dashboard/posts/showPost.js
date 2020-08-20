@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+import swal from 'sweetalert'
 import $ from "jquery";
 import Constants from "../../constants/Queries";
 
@@ -56,6 +57,7 @@ class Show extends React.Component {
                       onClick={() => {
                         this.handleDelete(post.id);
                         this.props.posts.splice(index, 1);
+                        $(".drop-delete").hide();
                       }}
                     >
                       Yes
