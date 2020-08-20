@@ -74,19 +74,20 @@ class DemoVideo extends React.Component {
           // setTimeout(function () {
           //   $(".success-add-demo-main").hide();
           // }, 1000);
-          $(".success-add-demo-main").show();
+          // $(".success-add-demo-main").show();
 
-          setTimeout(function () {
-            $(".success-add-demo-main").hide();
-          }, 1000);
+          // setTimeout(function () {
+          //   $(".success-add-demo-main").hide();
+          // }, 1000);
         }
       })
       .catch((err) => {
         console.log(err);
-        $(".fail-demo-main").show();
-        setTimeout(function () {
-          $(".fail-demo-main").hide();
-        }, 1000);
+        swal("OoOps!", " Demo video not added.", "error");
+        // $(".fail-demo-main").show();
+        // setTimeout(function () {
+        //   $(".fail-demo-main").hide();
+        // }, 1000);
       });
   }
 
@@ -100,23 +101,14 @@ class DemoVideo extends React.Component {
       .then((response) => {
         console.log(response);
         if (response.data.Errors) {
-          $(".fail-demo-main").show();
-          setTimeout(function () {
-            $(".fail-demo-main").hide();
-          }, 1000);
+          swal("OoOps!", " Thumbnail not added.", "error");
         } else {
-          $(".success-add-demo-main").show();
-          setTimeout(function () {
-            $(".success-add-demo-main").hide();
-          }, 1000);
+          swal("Good job!", "Perfect the Thumbnail successfully added.", "success");
         }
       })
       .catch((err) => {
         console.log(err);
-        $(".fail-demo-main").show();
-        setTimeout(function () {
-          $(".fail-demo-main").hide();
-        }, 1000);
+        swal("OoOps!", " Thumbnail not added.", "error");
       });
   }
 

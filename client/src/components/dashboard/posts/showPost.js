@@ -51,6 +51,7 @@ class Show extends React.Component {
                     <p>
                       Do you want to <strong>DELETE</strong> this post?
                     </p>
+                    <div className="btn-confirm-div">
                     <button
                       className="yes-btn"
                       id="yes"
@@ -58,6 +59,9 @@ class Show extends React.Component {
                         this.handleDelete(post.id);
                         this.props.posts.splice(index, 1);
                         $(".drop-delete").hide();
+                        swal("Poof! Your post has been deleted!", {
+                          icon: "success",
+                        });
                       }}
                     >
                       Yes
@@ -67,10 +71,11 @@ class Show extends React.Component {
                       id="no"
                       onClick={() => {
                         $(".drop-delete").hide();
+                        swal("Your post is safe!");
                       }}
                     >
                       No
-                    </button>
+                    </button></div>
                   </div>
                 </div>
                 <div className="post-img-div">
