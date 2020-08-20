@@ -59,9 +59,17 @@ nav {
     a {
       text-decoration: none;
       color: $mainHover;
+      vertical-align: top;
+      width: 200px;
+      overflow: hidden;
+      img {
+        width: 12%;
+        margin-right: -20px;
+      }
     }
     span {
       color: #fff;
+      vertical-align: top;
     }
     svg {
       color: #fff;
@@ -269,6 +277,38 @@ nav {
       margin: auto;
       margin-top: 60px;
       padding: 10px;
+      .categories {
+        margin-top: 10px !important;
+        cursor: pointer;
+        > input {
+          box-sizing: border-box;
+          font-size: 16px;
+          border: none;
+          border: 1px solid #ddd;
+          padding: 10px;
+          display: block;
+          width: 100%;
+          margin-left: 0 !important;
+          display: none;
+        }
+        > ul {
+          padding: 0;
+          margin: 0;
+          list-style: none;
+          display: none;
+          li {
+            box-sizing: border-box;
+            background-color: #fff;
+            padding: 10px;
+            @extend %transition;
+            width: 100%;
+            border-bottom: 1px solid #ccc;
+            &:hover {
+              background-color: $mainHover;
+            }
+          }
+        }
+      }
       > div {
         float: left;
         width: ((100% - (0.1% * 3)) / 4);
@@ -278,11 +318,15 @@ nav {
           margin-top: 2.5vh;
           margin-left: 10px;
         }
-        select {
+        > span {
           border: none;
+          color: #7d93b2;
           width: 75%;
           margin-top: 2.5vh;
-          margin-left: 10px;
+          margin-left: 20px;
+          svg {
+            margin-left: 40px;
+          }
           &:focus {
             outline: none;
           }
@@ -418,19 +462,21 @@ nav {
     background-image: url("./images/11.jpg");
     background-size: cover !important;
     position: relative;
-    height: 55vh;
+    height: 75vh;
     margin-bottom: 70px;
-    margin-top: 70px;
+    margin-top: 100px;
     overflow: hidden;
+    transform: skewY(5deg);
     .overlay {
       @extend %overlay;
       text-align: center;
-      padding: 20px;
+      padding: 70px 20px 0;
     }
     h5 {
       font-size: 14px;
       color: #fff;
       padding-bottom: 0px;
+      transform: skewY(-5deg);
     }
     p {
       color: #fff;
@@ -440,9 +486,11 @@ nav {
       font-family: "Raleway", sans-serif;
       margin-bottom: 10px !important;
       width: 100%;
+      transform: skewY(-5deg);
     }
     button {
       background-color: #fff;
+      transform: skewY(-5deg);
       border: none;
       padding: 5px 10px;
       border-radius: 50px;
@@ -547,6 +595,7 @@ nav {
     }
   }
   .mobile-app {
+    transform: skewY(-5deg);
     * {
       box-sizing: border-box;
     }
@@ -557,6 +606,7 @@ nav {
     .info {
       float: $floatLeft;
       width: 40%;
+      transform: skewY(5deg);
       h4 {
         text-align: left;
         font-size: 30px;
@@ -610,6 +660,7 @@ nav {
       float: $floatRight;
       width: 50%;
       position: relative;
+      transform: skewY(5deg);
       .img-animation {
         position: absolute;
         border: 3px solid #fff;
@@ -2236,15 +2287,15 @@ nav {
   }
 }
 /*Demo && Thumbnail*/
-.Thumbnail{
-.upload-Thumbnail {
-  h3 {
-    color: #566985;
+.Thumbnail {
+  .upload-Thumbnail {
+    h3 {
+      color: #566985;
+    }
   }
 }
-}
-.demo-video{
-  .upload-video{
+.demo-video {
+  .upload-video {
     h3 {
       color: #566985;
     }

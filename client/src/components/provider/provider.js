@@ -45,6 +45,7 @@ import ProviderReviews from './providerReviews';
 import Footer from '../footer/footer';
 import waterMelon from '../../main';
 import Constants from '../constants/Queries';
+import jwt from 'jsonwebtoken';
 
 class Provider extends React.Component {
   state = {
@@ -54,6 +55,8 @@ class Provider extends React.Component {
     numOfReviews: 0,
     avgRating: 0,
     workingHours: null,
+    bookmarks : 0,
+    saved: false
   };
 
   async componentDidMount() {
@@ -62,20 +65,46 @@ class Provider extends React.Component {
     this.setState({
       provider,
       workingHours: JSON.parse(provider.workingHours),
-    });
+    }, async () => {
+      if (localStorage.getItem('xTown')) {
+        const query = Constants.getUserByToken(localStorage.getItem('xTown'));
+        const request = await Constants.request(query);
+        const { user } = request.data.data;
+        this.setState({
+          user,
+        }, () => {
+          this.getBookmarks();
+        });
+      }            
+    });    
     const categoryQuery = Constants.categoryNameByID(provider.categoryID);
     const request = await Constants.request(categoryQuery);
     this.setState({
       categoryName: request.data.data.getCategoryByID.category,
-    });
-    if (localStorage.getItem('xTown')) {
-      const query = Constants.getUserByToken(localStorage.getItem('xTown'));
-      const request = await Constants.request(query);
-      const { user } = request.data.data;
-      this.setState({
-        user,
-      });
-    }
+    });    
+  }
+
+  getBookmarks(){
+    const bookmarksQuery = Constants.getBookmarksByProvider(this.state.provider.id);
+    Constants.request(bookmarksQuery).then(res => {
+      if(res.data.Errors){
+        console.log('Error while getting bookmarks');
+      } else {
+        this.setState({
+          bookmarks : res.data.data.bookmark.length
+        }, () => {
+          res.data.data.bookmark.map((bookmark) => {
+            if(bookmark.userID === this.state.user.id && bookmark.providerID === this.state.provider.id){
+              this.setState({
+                saved: true,
+              })
+            }
+          })
+        })
+      }
+    }).catch(err => {
+      console.log('Error while getting bookmarks');
+    })
   }
 
   getNumOfReviews(numOfReviews, avgRating) {
@@ -83,6 +112,25 @@ class Provider extends React.Component {
       numOfReviews,
       avgRating,
     });
+  }
+
+  addBookmark(){
+    if(!this.state.saved){
+      const addBookmarkMutation = Constants.addBookmark(this.state.user.id, this.state.provider.id);
+      Constants.request(addBookmarkMutation)
+      .then(res => {
+        if(res.data.Errors){
+          alert('Error in saving this Profile');
+        } else {        
+          this.setState({
+            bookmarks : this.state.bookmarks + 1,
+            saved : true
+          })
+        }
+      }).catch(err => {
+        alert('Error in saving this Profile');
+      })
+    }    
   }
 
   render() {
@@ -157,7 +205,7 @@ class Provider extends React.Component {
                   </span>
                 </p>
                 <p>
-                  <FontAwesomeIcon icon={faHeart} /> Bookmark - 516
+                  <FontAwesomeIcon icon={faHeart} /> Bookmark - {this.state.bookmarks}
                 </p>
                 <p>
                   <FontAwesomeIcon icon={faEye} /> Viewed - 54.7K
@@ -191,7 +239,14 @@ class Provider extends React.Component {
               <button>
                 <FontAwesomeIcon icon={faShare} /> Share
               </button>
-              <button>
+              <button onClick = {() => {
+                if(localStorage.getItem('xTown')){
+                  // alert('Saved');
+                  this.addBookmark();
+                } else {
+                  this.props.history.push('/signIn');
+                }
+              }}>
                 <FontAwesomeIcon icon={faHeart} /> Save
               </button>
               <FontAwesomeIcon icon={faEllipsisH} />

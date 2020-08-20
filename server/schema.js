@@ -185,8 +185,11 @@ const RootQuery = new GraphQLObjectType({
     },
     getUsers: {
       type: new GraphQLList(UserType),
+      args: {
+        RoleID: { type: new GraphQLNonNull(GraphQLID) },
+      },
       async resolve(root, args) {
-        return await knex('User').select();
+        return await knex('User').select().where(args);
       },
     },
     carts: {
@@ -294,10 +297,10 @@ const RootQuery = new GraphQLObjectType({
     bookmark: {
       type: new GraphQLList(BookmarkType),
       args: {
-        userID: { type: new GraphQLNonNull(GraphQLID) },
+        providerID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Bookmark').select().where({ userID: args.userID });
+        return await knex('Bookmark').select().where({ providerID: args.providerID });
       },
     },
     role: {
@@ -391,6 +394,7 @@ const Mutation = new GraphQLObjectType({
         address: { type: new GraphQLNonNull(GraphQLString) },
         avatar: { type: new GraphQLNonNull(GraphQLString) },
         cover: { type: new GraphQLNonNull(GraphQLString) },
+        thumbnail : { type: new GraphQLNonNull(GraphQLString) },
         video: { type: new GraphQLNonNull(GraphQLString) },
         description: { type: new GraphQLNonNull(GraphQLString) },
         facilities: { type: GraphQLString },
@@ -426,6 +430,7 @@ const Mutation = new GraphQLObjectType({
         address: { type: GraphQLString },
         avatar: { type: GraphQLString },
         cover: { type: GraphQLString },
+        thumbnail: {type: GraphQLString},
         video: { type: GraphQLString },
         description: { type: GraphQLString },
         workingHours: { type: GraphQLString },

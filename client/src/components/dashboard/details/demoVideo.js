@@ -1,9 +1,9 @@
 import React from "react";
+import ImageUpload from "../../imageUpload/imageUpload";
 import VideoUpload from "../../videoUpload/videoUpload";
-import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Constatnts from "../../constants/Queries";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
 import $ from "jquery";
@@ -12,14 +12,35 @@ class DemoVideo extends React.Component {
   // classes = useStyles();
   state = {
     vidUrl: null,
+    imgUrl: null,
   };
+
   componentDidMount() {
     $("#videoProgress").hide();
+    $("#ImageProgress").hide();
   }
 
   uploadStarted() {
     $("#videoProgress").show();
-    $(".btn").hide();
+    $("#uploadVideoBtn").hide();
+  }
+
+  imgUploadStarted() {
+    $("#ImageProgress").show();
+    $("#uploadImageBtn").hide();
+  }
+
+  getImgUrl(url) {
+    this.setState(
+      {
+        imgUrl: url,
+      },
+      () => {
+        //TODO Enable button
+        $("#ImageProgress").hide();
+        $("#uploadImageBtn").show();
+      }
+    );
   }
 
   getVidUrl(url) {
@@ -29,13 +50,14 @@ class DemoVideo extends React.Component {
       },
       () => {
         //TODO Enable button
+        console.log("state updated");
         $("#videoProgress").hide();
-        $(".btn").show();
+        $("#uploadVideoBtn").show();
       }
     );
   }
 
-  onSubmit() {
+  onVidSubmit() {
     const addVidQuery = Constatnts.addVideo(this.props.id, this.state.vidUrl);
     console.log(addVidQuery);
     Constatnts.request(addVidQuery)
@@ -52,47 +74,101 @@ class DemoVideo extends React.Component {
           // setTimeout(function () {
           //   $(".success-add-demo-main").hide();
           // }, 1000);
+          $(".success-add-demo-main").show();
+
+          setTimeout(function () {
+            $(".success-add-demo-main").hide();
+          }, 1000);
         }
       })
       .catch((err) => {
         console.log(err);
-        // $(".fail-demo-main").show();
-        // setTimeout(function () {
-        //   $(".fail-demo-main").hide();
-        // }, 1000);
+        $(".fail-demo-main").show();
+        setTimeout(function () {
+          $(".fail-demo-main").hide();
+        }, 1000);
       });
   }
-//Add Your Thumbnail
+
+  onImgSubmit() {
+    const addThumbnailQuery = Constatnts.addThumbnail(
+      this.props.id,
+      this.state.imgUrl
+    );
+    console.log(addThumbnailQuery);
+    Constatnts.request(addThumbnailQuery)
+      .then((response) => {
+        console.log(response);
+        if (response.data.Errors) {
+          $(".fail-demo-main").show();
+          setTimeout(function () {
+            $(".fail-demo-main").hide();
+          }, 1000);
+        } else {
+          $(".success-add-demo-main").show();
+          setTimeout(function () {
+            $(".success-add-demo-main").hide();
+          }, 1000);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        $(".fail-demo-main").show();
+        setTimeout(function () {
+          $(".fail-demo-main").hide();
+        }, 1000);
+      });
+  }
+
+  //Add Your Thumbnail
   render() {
     return (
       <div className="Demo-div">
-   <div className="Thumbnail">
+        <div className="Thumbnail">
           <div className="upload-Thumbnail">
-           <h3>Add Your Thumbnail</h3>
-          {/*<ImageUpload ButtonText={"Add your Thumbnail"} /> */}
+            <h3>Add Your Thumbnail</h3>
+            <ImageUpload
+              getImgUrl={this.getImgUrl.bind(this)}
+              uploadStarted={this.imgUploadStarted.bind(this)}
+            />
+            <br />
+            <div id="ImageProgress">
+              <CircularProgress />
+            </div>
+            <br />
+            <button
+              type="button"
+              id="uploadImageBtn"
+              className="btn"
+              onClick={this.onImgSubmit.bind(this)}
+            >
+              Add Thumbnail
+            </button>
+          </div>
         </div>
-        </div>
+        <br />
+        <br />
         <div className="demo-video">
-        <div className="upload-video">
+          <div className="upload-video">
             <h3>Add Your Demo Video</h3>
             <VideoUpload
               getVidUrl={this.getVidUrl.bind(this)}
               uploadStarted={this.uploadStarted.bind(this)}
             />
-          <br></br>
-          <div id="videoProgress">
-            <CircularProgress />
+            <br></br>
+            <div id="videoProgress">
+              <CircularProgress />
+            </div>
+            <br></br>
+            <button
+              type="button"
+              id="uploadVideoBtn"
+              className="btn"
+              onClick={this.onVidSubmit.bind(this)}
+            >
+              Add Video
+            </button>
           </div>
-          <br></br>
-          <button
-            type="button"
-            id="uploadVideoBtn"
-            className="btn"
-            onClick={this.onSubmit.bind(this)}
-          >
-            Add Video
-          </button>
-        </div>
         </div>
 
         {/* <div className="fail-demo-main">

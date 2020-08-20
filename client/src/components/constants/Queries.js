@@ -108,7 +108,7 @@ const request = async (query) => {
 
 const signUp = (username, email, password, mobile) => {
   const q = `mutation{
-    addUser(username:"${username}", email:"${email}", password:"${password}",RoleID:"3", mobile: ${Number(
+    addUser(username:"${username}", email:"${email}", password:"${password}",RoleID:"3", mobile:${Number(
     mobile
   )},avatar:"${username[0]}",
     serviceName:"", address:"", cover:"", thumbnail:"", video:"", description:""){
@@ -261,6 +261,15 @@ const addVideo = (id, videoUrl) => {
   return q;
 };
 
+const addThumbnail = (id, thumbnailUrl) => {
+  const q = `mutation{
+    editUser(id:${id}, thumbnail:"${thumbnailUrl}"){
+      id
+    }
+  }`;
+  return q;
+};
+
 const addFacilities = (id, arrOfFac) => {
   const q = `mutation{
     editUser(id:${id}, facilities:"${arrOfFac}"){
@@ -268,6 +277,15 @@ const addFacilities = (id, arrOfFac) => {
     }
   }`;
   return q;
+};
+
+const addBookmark = (userID, providerID) => {
+  const mutation = `mutation{
+    addBookmark(userID:${userID}, providerID: ${providerID}){
+      id
+    }
+  }`;
+  return mutation;
 };
 
 const getFacilities = (userID) => {
@@ -302,15 +320,26 @@ const editProviderInfo = (id, serviceName, email, mobile, address, cover) => {
 
 const getProvidersByBookmarks = (userID) => {
   const q = `query {
-    bookmark(userID:${userID}){
+    bookmark (userID:${userID}) {
       id
       userID
       providerID
-      provider{
+      provider {
         username
         cover
         address
       }
+    }
+  }`;
+  return q;
+};
+
+const getBookmarksByProvider = (providerID) => {
+  const q = `query {
+    bookmark(providerID:${providerID}) {
+      id
+      userID
+      providerID   
     }
   }`;
   return q;
@@ -348,6 +377,28 @@ const editWorkingHours = (providerID, workingHours) => {
   return q;
 };
 
+const getUsersByRoleID = (RoleID) => {
+  const q = `query {
+    getUsers(RoleID: ${RoleID}){
+     id
+    username
+    email
+    mobile
+    serviceName
+    location
+    address
+    avatar
+    cover
+    video
+    description
+    workingHours
+    categoryID
+    RoleID
+    }
+  }`;
+  return q;
+};
+
 module.exports.userByCategory = userByCategory;
 module.exports.categoryNameByID = categoryNameByID;
 module.exports.request = request;
@@ -366,6 +417,7 @@ module.exports.addReview = addReview;
 module.exports.addPhoto = addPhoto;
 module.exports.addDesc = addDesc;
 module.exports.addVideo = addVideo;
+module.exports.addThumbnail = addThumbnail;
 module.exports.addProduct = addProduct;
 module.exports.addFacilities = addFacilities;
 module.exports.getFacilities = getFacilities;
@@ -375,3 +427,6 @@ module.exports.addToCart = addToCart;
 module.exports.getProvidersByBookmarks = getProvidersByBookmarks;
 module.exports.getPostByFavProv = getPostByFavProv;
 module.exports.editWorkingHours = editWorkingHours;
+module.exports.getUsersByRoleID = getUsersByRoleID;
+module.exports.getBookmarksByProvider = getBookmarksByProvider;
+module.exports.addBookmark = addBookmark;
