@@ -185,8 +185,11 @@ const RootQuery = new GraphQLObjectType({
     },
     getUsers: {
       type: new GraphQLList(UserType),
+      args: {
+        RoleID: { type: new GraphQLNonNull(GraphQLID) },
+      },
       async resolve(root, args) {
-        return await knex('User').select();
+        return await knex('User').select().where(args);
       },
     },
     carts: {

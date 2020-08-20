@@ -116,7 +116,7 @@ function MyComponent(props) {
                 }}
                 icon={{
                   url: './mapIcon.svg',
-                  scaledSize: new window.google.maps.Size(30, 30),
+                  scaledSize: new window.google.maps.Size(20, 25),
                 }}
                 onClick={() => {
                   setSelectedProvider(provider);
@@ -255,11 +255,6 @@ class Map extends React.Component {
       category,
     });
 
-    // const USERS = Constants.userByCategory(category);
-    // const request = await Constants.request(USERS);
-    // this.setState({
-    //   providers: request.data.data.usersByCategory,
-    // });
     await this.getUsers(category);
     if (localStorage.getItem('xTown')) {
       const query = Constants.getUserByToken(localStorage.getItem('xTown'));
@@ -272,11 +267,20 @@ class Map extends React.Component {
   }
 
   async getUsers(category) {
-    const USERS = Constants.userByCategory(category);
-    const request = await Constants.request(USERS);
-    this.setState({
-      providers: request.data.data.usersByCategory,
-    });
+    if (category !== 'all') {
+      const USERS = Constants.userByCategory(category);
+      const request = await Constants.request(USERS);
+      this.setState({
+        providers: request.data.data.usersByCategory,
+      });
+    } else {
+      const USERS = Constants.getUsersByRoleID(2);
+      const request = await Constants.request(USERS);
+      console.log(request.data.data.getUsers);
+      this.setState({
+        providers: request.data.data.getUsers,
+      });
+    }
   }
 
   async setCategory(category) {
