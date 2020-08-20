@@ -31,7 +31,8 @@ class Landing extends React.Component {
   state = {
     search: '',
     location: '',
-    category: 'All Categories',
+    category: 'all',
+    categoryPlace: 'All Categories',
     user: null,
     done: false,
   };
@@ -74,7 +75,11 @@ class Landing extends React.Component {
   }
 
   handleSubmit() {
-    if (this.state.category !== '') {
+    if (
+      this.state.category === 'all' ||
+      this.state.category === 'phones' ||
+      this.state.category === 'restaurant'
+    ) {
       this.setState({
         done: true,
       });
@@ -142,7 +147,7 @@ class Landing extends React.Component {
                 <div className='categories'>
                   <FontAwesomeIcon icon={faBars} />
                   <span>
-                    {this.state.category}{' '}
+                    {this.state.categoryPlace}{' '}
                     <FontAwesomeIcon icon={faChevronDown} />
                   </span>
                   <input
@@ -152,13 +157,13 @@ class Landing extends React.Component {
                     onKeyUp={this.filterFunction.bind(this)}
                     name='category'
                     onChange={this.handleChange.bind(this)}
-                    value={this.state.category}
                   />
                   <ul id='myDropdown'>
                     <li
                       onClick={() => {
                         this.setState({
-                          category: 'All Categories',
+                          category: 'all',
+                          categoryPlace: 'All Categories',
                         });
                       }}
                     >
@@ -167,7 +172,8 @@ class Landing extends React.Component {
                     <li
                       onClick={() => {
                         this.setState({
-                          category: 'Phones',
+                          category: 'phones',
+                          categoryPlace: 'Phones',
                         });
                       }}
                     >
@@ -176,7 +182,8 @@ class Landing extends React.Component {
                     <li
                       onClick={() => {
                         this.setState({
-                          category: 'Restaurant',
+                          category: 'restaurant',
+                          categoryPlace: 'Restaurant',
                         });
                       }}
                     >
@@ -205,6 +212,40 @@ class Landing extends React.Component {
               eleifend. Morbi varius, nulla sit amet rutrum elementum.
             </p>
             <div className='popular-slider'>
+              <div className='single-popular'>
+                <img src={require(`../../images/29.jpg`)} alt='Silder Image' />
+                <div className='overlay'>
+                  <div>
+                    <h3>Gym in the center</h3>
+                    <span>
+                      <FontAwesomeIcon icon={faMapMarkerAlt} /> 70 Bright St New
+                      York, USA
+                    </span>
+                    <hr />
+                    <p>
+                      <FontAwesomeIcon icon={faMobileAlt} />{' '}
+                      <span className='categories'>Phones</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className='single-popular'>
+                <img src={require(`../../images/29.jpg`)} alt='Silder Image' />
+                <div className='overlay'>
+                  <div>
+                    <h3>Gym in the center</h3>
+                    <span>
+                      <FontAwesomeIcon icon={faMapMarkerAlt} /> 70 Bright St New
+                      York, USA
+                    </span>
+                    <hr />
+                    <p>
+                      <FontAwesomeIcon icon={faMobileAlt} />{' '}
+                      <span className='categories'>Phones</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
               <div className='single-popular'>
                 <img src={require(`../../images/29.jpg`)} alt='Silder Image' />
                 <div className='overlay'>

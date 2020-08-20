@@ -141,7 +141,7 @@ class Footer extends Component {
                         </div>
                     </Container>
                 </div>
-                <div className="copyright">copyright &copy; x-town</div>
+                <div className="copyright">copyright &copy; X-Town</div>
             </div>
         );
     }
