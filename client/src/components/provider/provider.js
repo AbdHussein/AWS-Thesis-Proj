@@ -55,7 +55,8 @@ class Provider extends React.Component {
     numOfReviews: 0,
     avgRating: 0,
     workingHours: null,
-    bookmarks : 0
+    bookmarks : 0,
+    saved: false
   };
 
   async componentDidMount() {
@@ -64,22 +65,23 @@ class Provider extends React.Component {
     this.setState({
       provider,
       workingHours: JSON.parse(provider.workingHours),
-    }, () => {
-      this.getBookmarks();      
+    }, async () => {
+      if (localStorage.getItem('xTown')) {
+        const query = Constants.getUserByToken(localStorage.getItem('xTown'));
+        const request = await Constants.request(query);
+        const { user } = request.data.data;
+        this.setState({
+          user,
+        }, () => {
+          this.getBookmarks();
+        });
+      }            
     });    
     const categoryQuery = Constants.categoryNameByID(provider.categoryID);
     const request = await Constants.request(categoryQuery);
     this.setState({
       categoryName: request.data.data.getCategoryByID.category,
-    });
-    if (localStorage.getItem('xTown')) {
-      const query = Constants.getUserByToken(localStorage.getItem('xTown'));
-      const request = await Constants.request(query);
-      const { user } = request.data.data;
-      this.setState({
-        user,
-      });
-    }
+    });    
   }
 
   getBookmarks(){
@@ -90,6 +92,14 @@ class Provider extends React.Component {
       } else {
         this.setState({
           bookmarks : res.data.data.bookmark.length
+        }, () => {
+          res.data.data.bookmark.map((bookmark) => {
+            if(bookmark.userID === this.state.user.id && bookmark.providerID === this.state.provider.id){
+              this.setState({
+                saved: true,
+              })
+            }
+          })
         })
       }
     }).catch(err => {
@@ -105,19 +115,22 @@ class Provider extends React.Component {
   }
 
   addBookmark(){
-    const addBookmarkMutation = Constants.addBookmark(this.state.user.id, this.state.provider.id);
-    Constants.request(addBookmarkMutation)
-    .then(res => {
-      if(res.data.Errors){
+    if(!this.state.saved){
+      const addBookmarkMutation = Constants.addBookmark(this.state.user.id, this.state.provider.id);
+      Constants.request(addBookmarkMutation)
+      .then(res => {
+        if(res.data.Errors){
+          alert('Error in saving this Profile');
+        } else {        
+          this.setState({
+            bookmarks : this.state.bookmarks + 1,
+            saved : true
+          })
+        }
+      }).catch(err => {
         alert('Error in saving this Profile');
-      } else {
-        this.setState({
-          bookmarks : this.state.bookmarks + 1
-        })
-      }
-    }).catch(err => {
-      alert('Error in saving this Profile');
-    })
+      })
+    }    
   }
 
   render() {

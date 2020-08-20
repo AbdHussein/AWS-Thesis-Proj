@@ -338,7 +338,8 @@ const getBookmarksByProvider = (providerID) => {
   const q = `query {
     bookmark(providerID:${providerID}) {
       id
-      userID      
+      userID
+      providerID   
     }
   }`;
   return q;
