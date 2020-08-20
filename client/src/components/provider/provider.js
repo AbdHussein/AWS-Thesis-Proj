@@ -228,9 +228,9 @@ class Provider extends React.Component {
                 <p>
                   <FontAwesomeIcon icon={faHeart} /> Bookmark - {this.state.bookmarks}
                 </p>
-                <p>
+                {/* <p>
                   <FontAwesomeIcon icon={faEye} /> Viewed - 54.7K
-                </p>
+                </p> */}
               </div>
             </Container>
           </div>
