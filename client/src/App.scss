@@ -462,7 +462,7 @@ nav {
     background-image: url("./images/11.jpg");
     background-size: cover !important;
     position: relative;
-    height: 55vh;
+    height: 75vh;
     margin-bottom: 70px;
     margin-top: 100px;
     overflow: hidden;
@@ -470,12 +470,13 @@ nav {
     .overlay {
       @extend %overlay;
       text-align: center;
-      padding: 20px;
+      padding: 70px 20px 0;
     }
     h5 {
       font-size: 14px;
       color: #fff;
       padding-bottom: 0px;
+      transform: skewY(-5deg);
     }
     p {
       color: #fff;
@@ -485,9 +486,11 @@ nav {
       font-family: "Raleway", sans-serif;
       margin-bottom: 10px !important;
       width: 100%;
+      transform: skewY(-5deg);
     }
     button {
       background-color: #fff;
+      transform: skewY(-5deg);
       border: none;
       padding: 5px 10px;
       border-radius: 50px;
@@ -592,6 +595,7 @@ nav {
     }
   }
   .mobile-app {
+    transform: skewY(-5deg);
     * {
       box-sizing: border-box;
     }
@@ -602,6 +606,7 @@ nav {
     .info {
       float: $floatLeft;
       width: 40%;
+      transform: skewY(5deg);
       h4 {
         text-align: left;
         font-size: 30px;
@@ -655,6 +660,7 @@ nav {
       float: $floatRight;
       width: 50%;
       position: relative;
+      transform: skewY(5deg);
       .img-animation {
         position: absolute;
         border: 3px solid #fff;
@@ -2281,15 +2287,15 @@ nav {
   }
 }
 /*Demo && Thumbnail*/
-.Thumbnail{
-.upload-Thumbnail {
-  h3 {
-    color: #566985;
+.Thumbnail {
+  .upload-Thumbnail {
+    h3 {
+      color: #566985;
+    }
   }
 }
-}
-.demo-video{
-  .upload-video{
+.demo-video {
+  .upload-video {
     h3 {
       color: #566985;
     }

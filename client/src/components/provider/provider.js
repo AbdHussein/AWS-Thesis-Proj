@@ -45,6 +45,7 @@ import ProviderReviews from './providerReviews';
 import Footer from '../footer/footer';
 import waterMelon from '../../main';
 import Constants from '../constants/Queries';
+import jwt from 'jsonwebtoken';
 
 class Provider extends React.Component {
   state = {
@@ -54,6 +55,7 @@ class Provider extends React.Component {
     numOfReviews: 0,
     avgRating: 0,
     workingHours: null,
+    bookmarks : 0
   };
 
   async componentDidMount() {
@@ -62,7 +64,9 @@ class Provider extends React.Component {
     this.setState({
       provider,
       workingHours: JSON.parse(provider.workingHours),
-    });
+    }, () => {
+      this.getBookmarks();      
+    });    
     const categoryQuery = Constants.categoryNameByID(provider.categoryID);
     const request = await Constants.request(categoryQuery);
     this.setState({
@@ -78,11 +82,42 @@ class Provider extends React.Component {
     }
   }
 
+  getBookmarks(){
+    const bookmarksQuery = Constants.getBookmarksByProvider(this.state.provider.id);
+    Constants.request(bookmarksQuery).then(res => {
+      if(res.data.Errors){
+        console.log('Error while getting bookmarks');
+      } else {
+        this.setState({
+          bookmarks : res.data.data.bookmark.length
+        })
+      }
+    }).catch(err => {
+      console.log('Error while getting bookmarks');
+    })
+  }
+
   getNumOfReviews(numOfReviews, avgRating) {
     this.setState({
       numOfReviews,
       avgRating,
     });
+  }
+
+  addBookmark(){
+    const addBookmarkMutation = Constants.addBookmark(this.state.user.id, this.state.provider.id);
+    Constants.request(addBookmarkMutation)
+    .then(res => {
+      if(res.data.Errors){
+        alert('Error in saving this Profile');
+      } else {
+        this.setState({
+          bookmarks : this.state.bookmarks + 1
+        })
+      }
+    }).catch(err => {
+      alert('Error in saving this Profile');
+    })
   }
 
   render() {
@@ -157,7 +192,7 @@ class Provider extends React.Component {
                   </span>
                 </p>
                 <p>
-                  <FontAwesomeIcon icon={faHeart} /> Bookmark - 516
+                  <FontAwesomeIcon icon={faHeart} /> Bookmark - {this.state.bookmarks}
                 </p>
                 <p>
                   <FontAwesomeIcon icon={faEye} /> Viewed - 54.7K
@@ -191,7 +226,14 @@ class Provider extends React.Component {
               <button>
                 <FontAwesomeIcon icon={faShare} /> Share
               </button>
-              <button>
+              <button onClick = {() => {
+                if(localStorage.getItem('xTown')){
+                  // alert('Saved');
+                  this.addBookmark();
+                } else {
+                  this.props.history.push('/signIn');
+                }
+              }}>
                 <FontAwesomeIcon icon={faHeart} /> Save
               </button>
               <FontAwesomeIcon icon={faEllipsisH} />
