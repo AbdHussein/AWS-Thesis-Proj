@@ -64,7 +64,6 @@ class LoggedInNavbar extends React.Component {
         </div>
         <div className='user-details'>
           <ul>
-            <li>Edit Profile</li>
             <li><a href="/wishlist">Wish List</a></li>
             <li><a href="/favprovider">Fav Providers</a></li>
             <li onClick={this.logOut.bind(this)}>Logout</li>
