@@ -297,6 +297,24 @@ const addBookmark = (userID, providerID) => {
   return mutation;
 };
 
+const addLike = (userID, postID) => {
+  const mutation = `mutation{
+    addLike(userID:${userID}, postID: ${postID}){
+      id
+    }
+  }`;
+  return mutation;
+}
+
+const deleteLike = (id) => {
+  const mutation = `mutation{
+    deleteLike(id:${id}){
+      id
+    }
+  }`;
+  return mutation;
+}
+
 const getFacilities = (userID) => {
   const q = `query {
     user(id:${userID}){
@@ -305,6 +323,17 @@ const getFacilities = (userID) => {
   }`;
   return q;
 };
+
+const getLikesByPostID = (postID) => {
+  const query = `query {
+    getLikesByPostID(postID:${postID}){
+      id
+      postID
+      userID
+    }
+  }`;
+  return query;
+}
 
 const getProducts = (userID) => {
   const q = `query {
@@ -438,4 +467,7 @@ module.exports.getPostByFavProv = getPostByFavProv;
 module.exports.editWorkingHours = editWorkingHours;
 module.exports.getUsersByRoleID = getUsersByRoleID;
 module.exports.getBookmarksByProvider = getBookmarksByProvider;
+module.exports.getLikesByPostID = getLikesByPostID;
 module.exports.addBookmark = addBookmark;
+module.exports.addLike = addLike;
+module.exports.deleteLike = deleteLike;

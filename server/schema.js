@@ -7,6 +7,7 @@ const {
   GraphQLNonNull,
   GraphQLBoolean,
   GraphQLID,
+  GraphQLError,
 } = require('graphql');
 
 const knex = require('../database/index');
@@ -302,7 +303,7 @@ const RootQuery = new GraphQLObjectType({
         return await knex('Roles').select();
       },
     },
-    
+
     allBookmarks: {
       type: new GraphQLList(BookmarkType),
       args: {
@@ -347,12 +348,12 @@ const RootQuery = new GraphQLObjectType({
     },
 
     getLikesByPostID: {
-      type: LikeType,
+      type: new GraphQLList(LikeType),
       args : {
         postID : { type: new GraphQLNonNull(GraphQLID) }
       },
       async resolve(root, args){
-        return await knex('like')
+        return await knex('likes')
           .select()
           .where({ postID: args.postID });
       }
@@ -549,6 +550,17 @@ const Mutation = new GraphQLObjectType({
         return await knex('likes').insert(args);
       }
     },
+
+    deleteLike: {
+      type: LikeType,
+      args: {        
+        id: { type: new GraphQLNonNull(GraphQLID) }
+      },
+      async resolve(root, args){
+        return await knex('likes').where({id: args.id}).del();
+      }
+    },
+
     // for Comment table
     addComment: {
       type: CommentType,
