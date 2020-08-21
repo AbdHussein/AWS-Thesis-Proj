@@ -122,6 +122,7 @@ class Provider extends React.Component {
   addBookmark(){
     if(!this.state.saved){
       const addBookmarkMutation = Constants.addBookmark(this.state.user.id, this.state.provider.id);
+      console.log(addBookmarkMutation);
       Constants.request(addBookmarkMutation)
       .then(res => {
         if(res.data.Errors){

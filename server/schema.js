@@ -39,7 +39,7 @@ const UserType = new GraphQLObjectType({
     posts: {
       type: new GraphQLList(PostType),
       async resolve(root, args) {
-        return await knex('Post').select().where({ userID: root.id });
+        return await knex('post').select().where({ userID: root.id });
       },
     },
   }),
@@ -54,7 +54,7 @@ const LikeType = new GraphQLObjectType({
   })
 })
 
-const CartType = new GraphQLObjectType({
+const cartType = new GraphQLObjectType({
   name: 'cart',
   fields: () => ({
     id: { type: GraphQLID, unique: true },
@@ -72,13 +72,13 @@ const CategoryType = new GraphQLObjectType({
     // user: {
     //   type: new GraphQLList(UserType),
     //   async resolve(parent, args){
-    //     return await knex('User').select().where({categoryID : parent.id});
+    //     return await knex('user').select().where({categoryID : parent.id});
     //   }
     // }
   }),
 });
 
-const ProductType = new GraphQLObjectType({
+const productType = new GraphQLObjectType({
   name: 'product',
   fields: () => ({
     id: { type: GraphQLID, unique: true },
@@ -103,7 +103,7 @@ const CommentType = new GraphQLObjectType({
     user: {
       type: UserType,
       async resolve(root, args) {
-        return await knex('User').select().where({ id: root.userID }).first();
+        return await knex('user').select().where({ id: root.userID }).first();
       },
     },
   }),
@@ -120,7 +120,7 @@ const PostType = new GraphQLObjectType({
     user: {
       type: UserType,
       async resolve(root, args) {
-        return await knex('User').select().where({ id: root.userID }).first();
+        return await knex('user').select().where({ id: root.userID }).first();
       },
     },
   }),
@@ -135,7 +135,7 @@ const GalleryType = new GraphQLObjectType({
   }),
 });
 
-const BookmarkType = new GraphQLObjectType({
+const bookmarkType = new GraphQLObjectType({
   name: 'bookmark',
   fields: () => ({
     id: { type: GraphQLID, unique: true },
@@ -144,7 +144,7 @@ const BookmarkType = new GraphQLObjectType({
     provider: {
       type: UserType,
       async resolve(root, args) {
-        return await knex('User')
+        return await knex('user')
           .select()
           .where({ id: root.providerID })
           .first();
@@ -153,7 +153,7 @@ const BookmarkType = new GraphQLObjectType({
   }),
 });
 
-const RolesType = new GraphQLObjectType({
+const rolesType = new GraphQLObjectType({
   name: 'roles',
   fields: () => ({
     id: { type: GraphQLID, unique: true },
@@ -161,7 +161,7 @@ const RolesType = new GraphQLObjectType({
   }),
 });
 
-const ReviewType = new GraphQLObjectType({
+const reviewType = new GraphQLObjectType({
   name: 'review',
   fields: () => ({
     id: { type: GraphQLID, unique: true },
@@ -174,7 +174,7 @@ const ReviewType = new GraphQLObjectType({
     user: {
       type: UserType,
       async resolve(root, args) {
-        return await knex('User').select().where({ id: root.userID }).first();
+        return await knex('user').select().where({ id: root.userID }).first();
       },
     },
   }),
@@ -189,7 +189,7 @@ const RootQuery = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('User').select().where({ id: args.id }).first();
+        return await knex('user').select().where({ id: args.id }).first();
       },
     },
     getUsers: {
@@ -198,39 +198,39 @@ const RootQuery = new GraphQLObjectType({
         RoleID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('User').select().where(args);
+        return await knex('user').select().where(args);
       },
     },
     carts: {
-      type: new GraphQLList(CartType),
+      type: new GraphQLList(cartType),
       args: {
         userID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Cart')
+        return await knex('cart')
           .select()
           .where({ userID: args.userID, sold: false }); // why sold is false
       },
     },
     productsByUserID: {
-      type: new GraphQLList(ProductType),
+      type: new GraphQLList(productType),
       args: {
         userID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Product')
+        return await knex('product')
           .select()
           .where({ userID: args.userID })
           .limit(50);
       },
     },
     productsByCategory: {
-      type: new GraphQLList(ProductType),
+      type: new GraphQLList(productType),
       args: {
         category: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
-        return await knex('Product')
+        return await knex('product')
           .select()
           .where({ category: args.category })
           .limit(50);
@@ -242,7 +242,7 @@ const RootQuery = new GraphQLObjectType({
         postID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Comment').select().where({ postID: args.postID });
+        return await knex('comment').select().where({ postID: args.postID });
       },
     },
     posts: {
@@ -251,7 +251,7 @@ const RootQuery = new GraphQLObjectType({
         userID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Post').select().where({ userID: args.userID });
+        return await knex('post').select().where({ userID: args.userID });
       },
     },
     usersByCategory: {
@@ -265,7 +265,7 @@ const RootQuery = new GraphQLObjectType({
             .select()
             .where({ category: args.category })
             .first();
-          return await knex('User')
+          return await knex('user')
             .select()
             .where({ categoryID: categoryData.id });
         } catch (err) {
@@ -279,13 +279,13 @@ const RootQuery = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Category').select().where({ id: args.id }).first();
+        return await knex('category').select().where({ id: args.id }).first();
       },
     },
     getAllCategories: {
       type: new GraphQLList(CategoryType),
       async resolve(root, args) {
-        return await knex('Category').select();
+        return await knex('category').select();
       },
     },
     gallery: {
@@ -294,33 +294,33 @@ const RootQuery = new GraphQLObjectType({
         userID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Gallery').select().where({ userID: args.userID });
+        return await knex('gallery').select().where({ userID: args.userID });
       },
     },
     getRoles: {
-      type: new GraphQLList(RolesType),
+      type: new GraphQLList(rolesType),
       async resolve(root, args) {
-        return await knex('Roles').select();
+        return await knex('roles').select();
       },
     },
 
     allBookmarks: {
-      type: new GraphQLList(BookmarkType),
+      type: new GraphQLList(bookmarkType),
       args: {
         providerID : { type: new GraphQLNonNull(GraphQLID) }
       },
       async resolve(root, args) {
-        return await knex('Bookmark').select().where({providerID : args.providerID });
+        return await knex('bookmark').select().where({providerID : args.providerID });
       },
     },
     
     role: {
-      type: RolesType,
+      type: rolesType,
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Roles').select().where({ id: args.id }).first();
+        return await knex('roles').select().where({ id: args.id }).first();
       },
     },
     getCategoryByID: {
@@ -336,12 +336,12 @@ const RootQuery = new GraphQLObjectType({
       },
     },
     getReviews: {
-      type: new GraphQLList(ReviewType),
+      type: new GraphQLList(reviewType),
       args: {
         providerID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Review')
+        return await knex('review')
           .select()
           .where({ providerID: args.providerID });
       },
@@ -423,10 +423,10 @@ const Mutation = new GraphQLObjectType({
         facilities: { type: GraphQLString },
       },
       async resolve(root, args) {
-        // add User with crpted password to database
+        // add user with crpted password to database
         var crptPass = await bcrypt.hash(args.password, 10);
         args.password = crptPass;
-        return await knex('User').insert(args);
+        return await knex('user').insert(args);
       },
     },
     deleteUser: {
@@ -435,7 +435,7 @@ const Mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('User').where({ id: args.id }).del();
+        return await knex('user').where({ id: args.id }).del();
       },
     },
     editUser: {
@@ -462,12 +462,12 @@ const Mutation = new GraphQLObjectType({
       },
       async resolve(root, args) {
         // args.password = await bcrypt.hash(args.password, 10);
-        return await knex('User').where({ id: args.id }).update(args);
+        return await knex('user').where({ id: args.id }).update(args);
       },
     },
     // for product table
     addProduct: {
-      type: ProductType,
+      type: productType,
       args: {
         name: { type: new GraphQLNonNull(GraphQLString) },
         category: { type: new GraphQLNonNull(GraphQLString) },
@@ -478,20 +478,20 @@ const Mutation = new GraphQLObjectType({
         pic: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
-        return await knex('Product').insert(args);
+        return await knex('product').insert(args);
       },
     },
     deleteProduct: {
-      type: ProductType,
+      type: productType,
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Product').where({ id: args.id }).del();
+        return await knex('product').where({ id: args.id }).del();
       },
     },
     editProduct: {
-      type: ProductType,
+      type: productType,
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
         name: { type: GraphQLString },
@@ -503,32 +503,32 @@ const Mutation = new GraphQLObjectType({
         pic: { type: GraphQLString },
       },
       async resolve(root, args) {
-        return await knex('Product').where({ id: args.id }).update(args);
+        return await knex('product').where({ id: args.id }).update(args);
       },
     },
     // for cart table
     addCart: {
-      type: CartType,
+      type: cartType,
       args: {
         userID: { type: new GraphQLNonNull(GraphQLID) },
         productID: { type: new GraphQLNonNull(GraphQLID) },
         sold: { type: new GraphQLNonNull(GraphQLBoolean) },
       },
       async resolve(root, args) {
-        return await knex('Cart').insert(args);
+        return await knex('cart').insert(args);
       },
     },
     deleteCart: {
-      type: CartType,
+      type: cartType,
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Cart').where({ id: args.id }).del();
+        return await knex('cart').where({ id: args.id }).del();
       },
     },
     editCart: {
-      type: CartType,
+      type: cartType,
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
         userID: { type: GraphQLID },
@@ -536,7 +536,7 @@ const Mutation = new GraphQLObjectType({
         sold: { type: GraphQLBoolean },
       },
       async resolve(root, args) {
-        return await knex('Cart').where({ id: args.id }).update(args);
+        return await knex('cart').where({ id: args.id }).update(args);
       },
     },
     //for like table 
@@ -561,7 +561,7 @@ const Mutation = new GraphQLObjectType({
       }
     },
 
-    // for Comment table
+    // for comment table
     addComment: {
       type: CommentType,
       args: {
@@ -571,7 +571,7 @@ const Mutation = new GraphQLObjectType({
         date: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
-        return await knex('Comment').insert(args);
+        return await knex('comment').insert(args);
       },
     },
     deleteComment: {
@@ -580,7 +580,7 @@ const Mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Comment').where({ id: args.id }).del();
+        return await knex('comment').where({ id: args.id }).del();
       },
     },
     editComment: {
@@ -592,10 +592,10 @@ const Mutation = new GraphQLObjectType({
         date: { type: GraphQLString },
       },
       async resolve(root, args) {
-        return await knex('Comment').where({ id: args.id }).update(args);
+        return await knex('comment').where({ id: args.id }).update(args);
       },
     },
-    // for Post table
+    // for post table
     addPost: {
       type: PostType,
       args: {
@@ -605,7 +605,7 @@ const Mutation = new GraphQLObjectType({
         image: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
-        return await knex('Post').insert(args);
+        return await knex('post').insert(args);
       },
     },
     deletePost: {
@@ -614,7 +614,7 @@ const Mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Post').where({ id: args.id }).del();
+        return await knex('post').where({ id: args.id }).del();
       },
     },
     editPost: {
@@ -627,7 +627,7 @@ const Mutation = new GraphQLObjectType({
         image: { type: GraphQLString },
       },
       async resolve(root, args) {
-        return await knex('Post').where({ id: args.id }).update(args);
+        return await knex('post').where({ id: args.id }).update(args);
       },
     },
     addCategory: {
@@ -636,7 +636,7 @@ const Mutation = new GraphQLObjectType({
         category: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
-        return await knex('Category').insert(args);
+        return await knex('category').insert(args);
       },
     },
     deleteCategory: {
@@ -645,7 +645,7 @@ const Mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Category').where(args).del();
+        return await knex('category').where(args).del();
       },
     },
     editCategory: {
@@ -655,7 +655,7 @@ const Mutation = new GraphQLObjectType({
         category: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
-        return await knex('Category').where({ id: args.id }).update(args);
+        return await knex('category').where({ id: args.id }).update(args);
       },
     },
     addGallery: {
@@ -665,7 +665,7 @@ const Mutation = new GraphQLObjectType({
         image: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
-        return await knex('Gallery').insert(args);
+        return await knex('gallery').insert(args);
       },
     },
     deleteGallery: {
@@ -674,7 +674,7 @@ const Mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Gallery').where(args).del();
+        return await knex('gallery').where(args).del();
       },
     },
     editGallery: {
@@ -685,58 +685,58 @@ const Mutation = new GraphQLObjectType({
         image: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
-        return await knex('Gallery').where({ id: args.id }).update(args);
+        return await knex('gallery').where({ id: args.id }).update(args);
       },
     },
     addBookmark: {
-      type: BookmarkType,
+      type: bookmarkType,
       args: {
         userID: { type: new GraphQLNonNull(GraphQLID) },
         providerID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Bookmark').insert(args);
+        return await knex('bookmark').insert(args);
       },
     },
     deleteBookmark: {
-      type: BookmarkType,
+      type: bookmarkType,
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Bookmark').where(args).del();
+        return await knex('bookmark').where(args).del();
       },
     },
     addRole: {
-      type: RolesType,
+      type: rolesType,
       args: {
         Role: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
-        return await knex('Roles').insert(args);
+        return await knex('roles').insert(args);
       },
     },
     deleteRoles: {
-      type: RolesType,
+      type: rolesType,
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('Roles').where(args).del();
+        return await knex('roles').where(args).del();
       },
     },
     editRoles: {
-      type: RolesType,
+      type: rolesType,
       args: {
         id: { type: GraphQLNonNull(GraphQLID) },
         Role: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
-        return await knex('Roles').where({ id: args.id }).update(args);
+        return await knex('roles').where({ id: args.id }).update(args);
       },
     },
     addReview: {
-      type: ReviewType,
+      type: reviewType,
       args: {
         providerID: { type: new GraphQLNonNull(GraphQLID) },
         userID: { type: new GraphQLNonNull(GraphQLID) },
@@ -746,7 +746,7 @@ const Mutation = new GraphQLObjectType({
         pic: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(root, args) {
-        return await knex('Review').insert(args);
+        return await knex('review').insert(args);
       },
     },
   },
