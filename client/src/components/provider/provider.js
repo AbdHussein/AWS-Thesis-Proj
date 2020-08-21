@@ -87,15 +87,18 @@ class Provider extends React.Component {
 
   getBookmarks(){
     const bookmarksQuery = Constants.getBookmarksByProvider(this.state.provider.id);
+    console.log(bookmarksQuery);
     Constants.request(bookmarksQuery).then(res => {
-      if(res.data.Errors){
+      // console.log(res);
+      if(res.data.errors){
         console.log('Error while getting bookmarks');
       } else {
         this.setState({
-          bookmarks : res.data.data.bookmark.length
+          bookmarks : res.data.data.allBookmarks.length
         }, () => {
-          res.data.data.bookmark.map((bookmark) => {
+          res.data.data.allBookmarks.map((bookmark) => {
             if(bookmark.userID === this.state.user.id && bookmark.providerID === this.state.provider.id){
+              // console.log('found');
               this.setState({
                 saved: true,
                 bookmarkID : bookmark.id
@@ -271,7 +274,7 @@ class Provider extends React.Component {
                   this.props.history.push('/signIn');
                 }
               }}>
-                <FontAwesomeIcon icon={faHeart} /> {this.state.saved ? 'Saved' : 'Save'}
+                <FontAwesomeIcon icon={faHeart} /> {this.state.saved ? 'Unsave' : 'Save'}
               </button>
               <FontAwesomeIcon icon={faEllipsisH} />
             </div>
@@ -320,78 +323,120 @@ class Provider extends React.Component {
                   <li>
                     Saturday
                     <pre>
-                      {' '}
+                      {/* {' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Saturday'][0]}{' '}
                       -{' '}
                       {this.state.workingHours &&
-                        this.state.workingHours['Saturday'][1]}
+                        this.state.workingHours['Saturday'][1]} */}
+                      {
+                          this.state.workingHours &&
+                          this.state.workingHours['Saturday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
+                            this.state.workingHours['Saturday'][0]} - ${this.state.workingHours &&
+                              this.state.workingHours['Saturday'][1]} `
+                        }
                     </pre>
                   </li>
                   <li>
                     Sunday
                     <pre>
-                      {' '}
+                      {/* {' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Sunday'][0]}{' '}
                       -{' '}
                       {this.state.workingHours &&
-                        this.state.workingHours['Sunday'][1]}
+                        this.state.workingHours['Sunday'][1]} */}
+                      {
+                          this.state.workingHours &&
+                          this.state.workingHours['Sunday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
+                            this.state.workingHours['Sunday'][0]} - ${this.state.workingHours &&
+                              this.state.workingHours['Sunday'][1]} `
+                        }
                     </pre>
                   </li>
                   <li>
                     Monday
                     <pre>
-                      {' '}
+                      {/* {' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Monday'][0]}{' '}
                       -{' '}
                       {this.state.workingHours &&
-                        this.state.workingHours['Monday'][1]}
+                        this.state.workingHours['Monday'][1]} */}
+                        {
+                          this.state.workingHours &&
+                          this.state.workingHours['Monday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
+                            this.state.workingHours['Monday'][0]} - ${this.state.workingHours &&
+                              this.state.workingHours['Monday'][1]} `
+                        }
                     </pre>
                   </li>
                   <li>
                     Tuseday
                     <pre>
-                      {' '}
+                      {/* {' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Tuseday'][0]}{' '}
                       -{' '}
                       {this.state.workingHours &&
-                        this.state.workingHours['Tuseday'][1]}
+                        this.state.workingHours['Tuseday'][1]} */}
+                     {
+                          this.state.workingHours &&
+                          this.state.workingHours['Tuseday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
+                            this.state.workingHours['Tuseday'][0]} - ${this.state.workingHours &&
+                              this.state.workingHours['Tuseday'][1]} `
+                        }
                     </pre>
                   </li>
                   <li>
                     Wednesday
                     <pre>
-                      {' '}
+                      {/* {' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Wednesday'][0]}{' '}
                       -{' '}
                       {this.state.workingHours &&
-                        this.state.workingHours['Wednesday'][1]}
+                        this.state.workingHours['Wednesday'][1]} */}
+                      {
+                          this.state.workingHours &&
+                          this.state.workingHours['Wednesday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
+                            this.state.workingHours['Wednesday'][0]} - ${this.state.workingHours &&
+                              this.state.workingHours['Wednesday'][1]} `
+                         }
                     </pre>
                   </li>
                   <li>
                     Thursday
                     <pre>
-                      {' '}
+                      {/* {' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Thursday'][0]}{' '}
                       -{' '}
                       {this.state.workingHours &&
-                        this.state.workingHours['Thursday'][1]}
+                        this.state.workingHours['Thursday'][1]} */}
+                       {
+                          this.state.workingHours &&
+                          this.state.workingHours['Thursday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
+                            this.state.workingHours['Thursday'][0]} - ${this.state.workingHours &&
+                              this.state.workingHours['Thursday'][1]} `
+                         }
                     </pre>
                   </li>
                   <li>
                     Friday
                     <pre>
-                      {' '}
+                      {/* {' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Friday'][0]}{' '}
                       -{' '}
                       {this.state.workingHours &&
-                        this.state.workingHours['Friday'][1]}
+                        this.state.workingHours['Friday'][1]} */}
+                        {
+                          this.state.workingHours &&
+                          this.state.workingHours['Friday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
+                            this.state.workingHours['Friday'][0]} - ${this.state.workingHours &&
+                              this.state.workingHours['Friday'][1]} `
+                         }
                     </pre>
                   </li>
                 </ul>

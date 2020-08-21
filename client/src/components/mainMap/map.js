@@ -274,6 +274,7 @@ class Map extends React.Component {
   async getUsers(category) {
     if (category !== 'all') {
       const USERS = Constants.userByCategory(category);
+      console.log(USERS);
       const request = await Constants.request(USERS);
       this.setState({
         providers: request.data.data.usersByCategory,
