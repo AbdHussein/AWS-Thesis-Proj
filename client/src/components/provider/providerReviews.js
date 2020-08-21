@@ -34,6 +34,7 @@ class ProviderReviews extends React.Component {
 
   async getAllReviews() {
     const allReviewsQuery = Constants.getAllReviews(this.props.id);
+    console.log(allReviewsQuery);
     const request = await Constants.request(allReviewsQuery);
     this.setState({
       reviews: request.data.data.getReviews,
@@ -75,6 +76,7 @@ class ProviderReviews extends React.Component {
         this.state.rating,
         this.state.pic
       );
+      
       const request = await Constants.request(addReview);
       this.getAllReviews();
       this.setState({
