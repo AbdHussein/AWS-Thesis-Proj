@@ -437,38 +437,40 @@ const getUsersByRoleID = (RoleID) => {
   return q;
 };
 
-module.exports.userByCategory = userByCategory;
-module.exports.categoryNameByID = categoryNameByID;
-module.exports.request = request;
-module.exports.login = login;
-module.exports.signUp = signUp;
-module.exports.addPost = addPost;
-module.exports.getUserByToken = getUserByToken;
-module.exports.getPostByProviderID = getPostByProviderID;
-module.exports.deletePost = deletePost;
-module.exports.deleteBookmark = deleteBookmark;
-module.exports.getProviderById = getProviderById;
-module.exports.addComment = addComment;
-module.exports.getAllCommentsByPostID = getAllCommentsByPostID;
-module.exports.getAllGalary = getAllGalary;
-module.exports.getAllReviews = getAllReviews;
-module.exports.addReview = addReview;
-module.exports.addPhoto = addPhoto;
-module.exports.addDesc = addDesc;
-module.exports.addVideo = addVideo;
-module.exports.addThumbnail = addThumbnail;
-module.exports.addProduct = addProduct;
-module.exports.addFacilities = addFacilities;
-module.exports.getFacilities = getFacilities;
-module.exports.getProducts = getProducts;
-module.exports.editProviderInfo = editProviderInfo;
-module.exports.addToCart = addToCart;
-module.exports.getProvidersByBookmarks = getProvidersByBookmarks;
-module.exports.getPostByFavProv = getPostByFavProv;
-module.exports.editWorkingHours = editWorkingHours;
-module.exports.getUsersByRoleID = getUsersByRoleID;
-module.exports.getBookmarksByProvider = getBookmarksByProvider;
-module.exports.getLikesByPostID = getLikesByPostID;
-module.exports.addBookmark = addBookmark;
-module.exports.addLike = addLike;
-module.exports.deleteLike = deleteLike;
+export default {
+  userByCategory,
+ categoryNameByID,
+ request,
+ login,
+ signUp,
+ addPost,
+ getUserByToken,
+ getPostByProviderID,
+ deletePost,
+ deleteBookmark,
+ getProviderById,
+ addComment,
+ getAllCommentsByPostID,
+ getAllGalary,
+ getAllReviews,
+ addReview,
+ addPhoto,
+ addDesc,
+ addVideo,
+ addThumbnail,
+ addProduct,
+ addFacilities,
+ getFacilities,
+ getProducts,
+ editProviderInfo,
+ addToCart,
+ getProvidersByBookmarks,
+ getPostByFavProv,
+ editWorkingHours,
+ getUsersByRoleID,
+ getBookmarksByProvider,
+ getLikesByPostID,
+ addBookmark,
+ addLike,
+ deleteLike,
+}
