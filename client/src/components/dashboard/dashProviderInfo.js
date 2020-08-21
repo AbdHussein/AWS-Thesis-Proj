@@ -126,11 +126,12 @@ class DashProviderInfo extends React.Component {
       this.props.provider.id,
       workHsString
     );
-    console.log(workHsString);
-    const editWorkingHs = await Constants.request(editWorkingHours)
+    console.log(editWorkingHours);
+    Constants.request(editWorkingHours)
     .then(async (result) => {
       if (result.data.errors) {
-        swal("OoOps!", " your information not ccessfully updated.", "error");
+        console.log('here');
+        swal("OoOps!", " your information not successfully updated.", "error");
         // $(".fail-add-Photopost-main").show();
         // setTimeout(function () {
         //   $(".fail-add-Photopost-main").hide();
@@ -145,7 +146,7 @@ class DashProviderInfo extends React.Component {
       }
     })
     .catch((err) => {
-      swal("OoOps!", "your information not ccessfully updated.", "error");
+      swal("OoOps!", "your information not successfully updated.", "error");
       // $(".fail-add-post-main").show();
       // setTimeout(function () {
       //   $(".fail-add-post-main").hide();
@@ -307,7 +308,7 @@ class DashProviderInfo extends React.Component {
                       <option>9:00 AM</option>
                       <option>10:00 AM</option>
                       <option>11:00 AM</option>
-                      <option>12:00 AM</option>
+                      <option>12:00 PM</option>
                     </select>
                   </span>
                   <span>To</span>
@@ -325,7 +326,7 @@ class DashProviderInfo extends React.Component {
                       <option>9:00 PM</option>
                       <option>10:00 PM</option>
                       <option>11:00 PM</option>
-                      <option>12:00 PM</option>
+                      <option>12:00 AM</option>
                     </select>
                   </span>
                 </li>
@@ -350,7 +351,7 @@ class DashProviderInfo extends React.Component {
                       <option>9:00 AM</option>
                       <option>10:00 AM</option>
                       <option>11:00 AM</option>
-                      <option>12:00 AM</option>
+                      <option>12:00 PM</option>
                     </select>
                   </span>
                   <span>To</span>
@@ -368,7 +369,7 @@ class DashProviderInfo extends React.Component {
                       <option>9:00 PM</option>
                       <option>10:00 PM</option>
                       <option>11:00 PM</option>
-                      <option>12:00 PM</option>
+                      <option>12:00 AM</option>
                     </select>
                   </span>
                 </li>
@@ -393,7 +394,7 @@ class DashProviderInfo extends React.Component {
                       <option>9:00 AM</option>
                       <option>10:00 AM</option>
                       <option>11:00 AM</option>
-                      <option>12:00 AM</option>
+                      <option>12:00 PM</option>
                     </select>
                   </span>
                   <span>To</span>
@@ -411,7 +412,7 @@ class DashProviderInfo extends React.Component {
                       <option>9:00 PM</option>
                       <option>10:00 PM</option>
                       <option>11:00 PM</option>
-                      <option>12:00 PM</option>
+                      <option>12:00 AM</option>
                     </select>
                   </span>
                 </li>
@@ -436,7 +437,7 @@ class DashProviderInfo extends React.Component {
                       <option>9:00 AM</option>
                       <option>10:00 AM</option>
                       <option>11:00 AM</option>
-                      <option>12:00 AM</option>
+                      <option>12:00 PM</option>
                     </select>
                   </span>
                   <span>To</span>
@@ -457,7 +458,7 @@ class DashProviderInfo extends React.Component {
                       <option>9:00 PM</option>
                       <option>10:00 PM</option>
                       <option>11:00 PM</option>
-                      <option>12:00 PM</option>
+                      <option>12:00 AM</option>
                     </select>
                   </span>
                 </li>
@@ -482,7 +483,7 @@ class DashProviderInfo extends React.Component {
                       <option>9:00 AM</option>
                       <option>10:00 AM</option>
                       <option>11:00 AM</option>
-                      <option>12:00 AM</option>
+                      <option>12:00 PM</option>
                     </select>
                   </span>
                   <span>To</span>
@@ -500,7 +501,7 @@ class DashProviderInfo extends React.Component {
                       <option>9:00 PM</option>
                       <option>10:00 PM</option>
                       <option>11:00 PM</option>
-                      <option>12:00 PM</option>
+                      <option>12:00 AM</option>
                     </select>
                   </span>
                 </li>
@@ -525,7 +526,7 @@ class DashProviderInfo extends React.Component {
                       <option>9:00 AM</option>
                       <option>10:00 AM</option>
                       <option>11:00 AM</option>
-                      <option>12:00 AM</option>
+                      <option>12:00 PM</option>
                     </select>
                   </span>
                   <span>To</span>
@@ -546,7 +547,7 @@ class DashProviderInfo extends React.Component {
                       <option>9:00 PM</option>
                       <option>10:00 PM</option>
                       <option>11:00 PM</option>
-                      <option>12:00 PM</option>
+                      <option>12:00 AM</option>
                     </select>
                   </span>
                 </li>
@@ -568,7 +569,7 @@ class DashProviderInfo extends React.Component {
                       <option>9:00 AM</option>
                       <option>10:00 AM</option>
                       <option>11:00 AM</option>
-                      <option>12:00 AM</option>
+                      <option>12:00 PM</option>
                     </select>
                   </span>
                   <span>To</span>
@@ -586,7 +587,7 @@ class DashProviderInfo extends React.Component {
                       <option>9:00 PM</option>
                       <option>10:00 PM</option>
                       <option>11:00 PM</option>
-                      <option>12:00 PM</option>
+                      <option>12:00 AM</option>
                     </select>
                   </span>
                 </li>
