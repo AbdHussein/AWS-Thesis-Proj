@@ -47,24 +47,28 @@ export default function SignUp(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const query = Constants.signUp(
-      state.username,
-      state.email,
-      state.password,
-      state.mobile
-    );
-
-    console.log(query);
-    Constants.request(query).then(response => {
-      if(response.data.data.addUser) {
-        props.history.push('/signIn');
-      } else if (response.data.errors){
-        alert('Error in sign up');
-      }
-    }).catch(err => {
-      console.log(err);
-      alert('Error in sign up');
-    });    
+    if(state.username.length > 0 && state.email.length > 0 &&
+       state.password.length > 0 && state.mobile.length > 0){
+      const query = Constants.signUp(
+        state.username,
+        state.email,
+        state.password,
+        state.mobile
+      );  
+      // console.log(query);
+      Constants.request(query).then(response => {
+        if(response.data.data.addUser) {
+          props.history.push('/signIn');
+        } else if (response.data.errors){
+          alert('Error in signing up');
+        }
+      }).catch(err => {
+        console.log(err);
+        alert('Error in signing up');
+      });   
+    } else {
+      alert(`There's some empty fields`);
+    }
   };
 
   return (
@@ -81,7 +85,7 @@ export default function SignUp(props) {
                 autoComplete='username'
                 name='username'
                 variant='outlined'
-                required
+                required = {true}
                 fullWidth
                 onChange={handleChange}
                 value={state.userName}
@@ -93,7 +97,7 @@ export default function SignUp(props) {
             <Grid item xs={12}>
               <TextField
                 variant='outlined'
-                required
+                required = {true}
                 fullWidth
                 id='email'
                 onChange={handleChange}
@@ -107,13 +111,13 @@ export default function SignUp(props) {
             <Grid item xs={12}>
               <TextField
                 variant='outlined'
-                required
+                required = {true}
                 fullWidth
                 name='mobile'
                 label='Mobile Number'
                 onChange={handleChange}
                 value={state.mobile}
-                type='text'
+                type='number'
                 id='mobile'
                 autoComplete='current-password'
               />
@@ -121,7 +125,7 @@ export default function SignUp(props) {
             <Grid item xs={12}>
               <TextField
                 variant='outlined'
-                required
+                required = {true}
                 fullWidth
                 name='password'
                 label='Password'

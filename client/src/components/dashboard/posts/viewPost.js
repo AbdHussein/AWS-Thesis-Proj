@@ -24,6 +24,7 @@ class ViewPost extends React.Component {
     comment: '',
     allComments: [],
     commentUser: null,
+    likes: 0
   };
 
   async componentDidMount() {
@@ -64,6 +65,10 @@ class ViewPost extends React.Component {
     this.setState({
       allComments: allComments.data.data.comments,
     });
+  }
+
+  getAllLikes(){
+    
   }
 
   handleChange(e) {

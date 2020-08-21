@@ -44,7 +44,7 @@ const getDate = () => {
 
 const addPost = (id, imageUrl, postText) => {
   const mutation = `mutation{
-    addPost(userID: ${id}, likes: 0, date: "${getDate()}", text: "${postText}", image: "${imageUrl}"){
+    addPost(userID: ${id}, date: "${getDate()}", text: "${postText}", image: "${imageUrl}"){
       id
     }
   }`;
@@ -161,7 +161,6 @@ const getPostByProviderID = (userID) => {
     posts(userID:${userID}){
       id
       userID
-      likes
       date
       text
       image
@@ -347,7 +346,7 @@ const getProvidersByBookmarks = (userID) => {
 
 const getBookmarksByProvider = (providerID) => {
   const q = `query {
-    bookmark(providerID:${providerID}) {
+    allBookmarks(providerID:${providerID}) {
       id
       userID
       providerID   
@@ -364,7 +363,6 @@ const getPostByFavProv = (userID) => {
         posts {
           id
           userID
-          likes
           date
           text
           image
