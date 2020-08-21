@@ -55,7 +55,7 @@ export default function SignUp(props) {
         state.password,
         state.mobile
       );  
-      // console.log(query);
+      console.log(query);
       Constants.request(query).then(response => {
         if(response.data.data.addUser) {
           props.history.push('/signIn');
