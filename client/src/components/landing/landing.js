@@ -32,6 +32,10 @@ class Landing extends React.Component {
     categoryPlace: 'All Categories',
     user: null,
     done: false,
+    providers: null,
+    serviceName: '',
+    loc: null,
+    serviceNamePlace: '',
   };
 
   async componentDidMount() {
@@ -43,7 +47,7 @@ class Landing extends React.Component {
         user,
       });
     }
-
+    await this.getUsers(this.state.category);
     $('.categories span').click(function () {
       $('.categories').children('input').fadeToggle();
       $('.categories').children('ul').fadeToggle();
@@ -67,6 +71,22 @@ class Landing extends React.Component {
       } else {
         li[i].style.display = 'none';
       }
+    }
+  }
+
+  async getUsers(category) {
+    if (category !== 'all') {
+      const USERS = Constants.userByCategory(category);
+      const request = await Constants.request(USERS);
+      this.setState({
+        providers: request.data.data.usersByCategory,
+      });
+    } else {
+      const USERS = Constants.getUsersByRoleID(2);
+      const request = await Constants.request(USERS);
+      this.setState({
+        providers: request.data.data.getUsers,
+      });
     }
   }
 
@@ -96,6 +116,7 @@ class Landing extends React.Component {
             pathname: '/map',
             state: {
               category: this.state.category,
+              loc: this.state.loc,
             },
           }}
         />
@@ -128,7 +149,9 @@ class Landing extends React.Component {
                 <div className='search'>
                   <FontAwesomeIcon icon={faKeyboard} />
                   <span>
-                    {this.state.categoryPlace}{' '}
+                    {this.state.serviceNamePlace === ''
+                      ? 'looking for ?'
+                      : this.state.serviceNamePlace}{' '}
                     <FontAwesomeIcon icon={faChevronDown} />
                   </span>
                   <input
@@ -136,20 +159,31 @@ class Landing extends React.Component {
                     placeholder='Search..'
                     id='myInput'
                     onKeyUp={this.filterFunction.bind(this)}
-                    name='category'
+                    name='serviceNamePlace'
                     onChange={this.handleChange.bind(this)}
                   />
                   <ul id='myDropdown'>
-                    <li
-                      onClick={() => {
-                        this.setState({
-                          category: 'all',
-                          categoryPlace: 'All Categories',
-                        });
-                      }}
-                    >
-                      Service Name
-                    </li>
+                    {this.state.providers &&
+                      this.state.providers.map((provider, i) => {
+                        var loc = JSON.parse(provider.location);
+                        loc.lat = Number(loc.lat);
+                        loc.lng = Number(loc.lng);
+
+                        return (
+                          <li
+                            key={i}
+                            onClick={() => {
+                              this.setState({
+                                serviceName: provider.serviceName,
+                                serviceNamePlace: provider.serviceName,
+                                loc,
+                              });
+                            }}
+                          >
+                            {provider.serviceName}
+                          </li>
+                        );
+                      })}
                   </ul>
                 </div>
                 <div className='between'></div>
@@ -181,30 +215,45 @@ class Landing extends React.Component {
                   <ul id='myDropdown'>
                     <li
                       onClick={() => {
-                        this.setState({
-                          category: 'all',
-                          categoryPlace: 'All Categories',
-                        });
+                        this.setState(
+                          {
+                            category: 'all',
+                            categoryPlace: 'All Categories',
+                          },
+                          async () => {
+                            await this.getUsers(this.state.category);
+                          }
+                        );
                       }}
                     >
                       All Categories
                     </li>
                     <li
                       onClick={() => {
-                        this.setState({
-                          category: 'phones',
-                          categoryPlace: 'Phones',
-                        });
+                        this.setState(
+                          {
+                            category: 'phones',
+                            categoryPlace: 'Phones',
+                          },
+                          async () => {
+                            await this.getUsers(this.state.category);
+                          }
+                        );
                       }}
                     >
                       Phones
                     </li>
                     <li
                       onClick={() => {
-                        this.setState({
-                          category: 'restaurant',
-                          categoryPlace: 'Restaurant',
-                        });
+                        this.setState(
+                          {
+                            category: 'restaurant',
+                            categoryPlace: 'Restaurant',
+                          },
+                          async () => {
+                            await this.getUsers(this.state.category);
+                          }
+                        );
                       }}
                     >
                       Restaurant

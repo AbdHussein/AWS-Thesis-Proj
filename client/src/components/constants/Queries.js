@@ -69,7 +69,6 @@ const deleteBookmark = (id) => {
   return mutation;
 };
 
-
 const addComment = (userID, postID, text) => {
   const q = `mutation {
     addComment(userID:${userID}, postID:${postID}, text:"${text}", date:"${getDate()}"){
