@@ -14,12 +14,9 @@ import {
 import {
   faApple,
   faAndroid,
-  faFacebook,
   faTwitter,
-  faGooglePlusG,
   faLinkedinIn,
-  faFacebookF,
-  faInstagram,
+  faGithub,
 } from '@fortawesome/free-brands-svg-icons';
 import { Redirect } from 'react-router-dom';
 import Navbar from '../mainComp/navbar';
@@ -384,11 +381,11 @@ class Landing extends React.Component {
                 <ul>
                   <li>
                     <a
-                      className='facebook'
-                      href='http://www.facebook.com'
+                      className='linkedin'
+                      href='http://www.linkedin.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faFacebookF} />
+                      <FontAwesomeIcon icon={faLinkedinIn} />
                     </a>
                   </li>
                   <li>
@@ -402,11 +399,11 @@ class Landing extends React.Component {
                   </li>
                   <li>
                     <a
-                      className='instagram'
-                      href='http://www.instagram.com'
+                      className='github'
+                      href='http://www.github.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faInstagram} />
+                      <FontAwesomeIcon icon={faGithub} />
                     </a>
                   </li>
                 </ul>
@@ -424,11 +421,11 @@ class Landing extends React.Component {
                 <ul>
                   <li>
                     <a
-                      className='facebook'
-                      href='http://www.facebook.com'
+                      className='linkedin'
+                      href='http://www.linkedin.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faFacebookF} />
+                      <FontAwesomeIcon icon={faLinkedinIn} />
                     </a>
                   </li>
                   <li>
@@ -442,11 +439,11 @@ class Landing extends React.Component {
                   </li>
                   <li>
                     <a
-                      className='instagram'
-                      href='http://www.instagram.com'
+                      className='github'
+                      href='http://www.github.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faInstagram} />
+                      <FontAwesomeIcon icon={faGithub} />
                     </a>
                   </li>
                 </ul>
@@ -464,11 +461,11 @@ class Landing extends React.Component {
                 <ul>
                   <li>
                     <a
-                      className='facebook'
-                      href='http://www.facebook.com'
+                      className='linkedin'
+                      href='http://www.linkedin.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faFacebookF} />
+                      <FontAwesomeIcon icon={faLinkedinIn} />
                     </a>
                   </li>
                   <li>
@@ -482,11 +479,11 @@ class Landing extends React.Component {
                   </li>
                   <li>
                     <a
-                      className='instagram'
-                      href='http://www.instagram.com'
+                      className='github'
+                      href='http://www.github.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faInstagram} />
+                      <FontAwesomeIcon icon={faGithub} />
                     </a>
                   </li>
                 </ul>
@@ -504,11 +501,11 @@ class Landing extends React.Component {
                 <ul>
                   <li>
                     <a
-                      className='facebook'
-                      href='http://www.facebook.com'
+                      className='linkedin'
+                      href='http://www.linkedin.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faFacebookF} />
+                      <FontAwesomeIcon icon={faLinkedinIn} />
                     </a>
                   </li>
                   <li>
@@ -522,11 +519,11 @@ class Landing extends React.Component {
                   </li>
                   <li>
                     <a
-                      className='instagram'
-                      href='http://www.instagram.com'
+                      className='github'
+                      href='http://www.github.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faInstagram} />
+                      <FontAwesomeIcon icon={faGithub} />
                     </a>
                   </li>
                 </ul>
@@ -548,11 +545,11 @@ class Landing extends React.Component {
                 <ul>
                   <li>
                     <a
-                      className='facebook'
-                      href='http://www.facebook.com'
+                      className='linkedin'
+                      href='http://www.linkedin.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faFacebookF} />
+                      <FontAwesomeIcon icon={faLinkedinIn} />
                     </a>
                   </li>
                   <li>
@@ -566,11 +563,11 @@ class Landing extends React.Component {
                   </li>
                   <li>
                     <a
-                      className='instagram'
-                      href='http://www.instagram.com'
+                      className='github'
+                      href='http://www.github.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faInstagram} />
+                      <FontAwesomeIcon icon={faGithub} />
                     </a>
                   </li>
                 </ul>
