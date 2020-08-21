@@ -55,9 +55,9 @@ class Provider extends React.Component {
     numOfReviews: 0,
     avgRating: 0,
     workingHours: null,
-    bookmarks : 0,
+    bookmarks: 0,
     saved: false,
-    bookmarkID : 0
+    bookmarkID: 0
   };
 
   async componentDidMount() {
@@ -76,32 +76,32 @@ class Provider extends React.Component {
         }, () => {
           this.getBookmarks();
         });
-      }            
-    });    
+      }
+    });
     const categoryQuery = Constants.categoryNameByID(provider.categoryID);
     const request = await Constants.request(categoryQuery);
     this.setState({
       categoryName: request.data.data.getCategoryByID.category,
-    });    
+    });
   }
 
-  getBookmarks(){
+  getBookmarks() {
     const bookmarksQuery = Constants.getBookmarksByProvider(this.state.provider.id);
     console.log(bookmarksQuery);
     Constants.request(bookmarksQuery).then(res => {
       // console.log(res);
-      if(res.data.errors){
+      if (res.data.errors) {
         console.log('Error while getting bookmarks');
       } else {
         this.setState({
-          bookmarks : res.data.data.allBookmarks.length
+          bookmarks: res.data.data.allBookmarks.length
         }, () => {
           res.data.data.allBookmarks.map((bookmark) => {
-            if(bookmark.userID === this.state.user.id && bookmark.providerID === this.state.provider.id){
+            if (bookmark.userID === this.state.user.id && bookmark.providerID === this.state.provider.id) {
               // console.log('found');
               this.setState({
                 saved: true,
-                bookmarkID : bookmark.id
+                bookmarkID: bookmark.id
               })
             }
           })
@@ -119,36 +119,36 @@ class Provider extends React.Component {
     });
   }
 
-  addBookmark(){
-    if(!this.state.saved){
+  addBookmark() {
+    if (!this.state.saved) {
       const addBookmarkMutation = Constants.addBookmark(this.state.user.id, this.state.provider.id);
       console.log(addBookmarkMutation);
       Constants.request(addBookmarkMutation)
-      .then(res => {
-        if(res.data.Errors){
+        .then(res => {
+          if (res.data.Errors) {
+            alert('Error in saving this Profile');
+          } else {
+            this.setState({
+              saved: true
+            }, () => {
+              this.getBookmarks();
+            })
+          }
+        }).catch(err => {
           alert('Error in saving this Profile');
-        } else {        
-          this.setState({
-            saved : true
-          }, () => {
-            this.getBookmarks();
-          })
-        }
-      }).catch(err => {
-        alert('Error in saving this Profile');
-      })
-    }    
+        })
+    }
   }
 
-  deleteBookmark(){
+  deleteBookmark() {
     const deleteBookmarkMutation = Constants.deleteBookmark(this.state.bookmarkID);
     console.log(deleteBookmarkMutation);
     Constants.request(deleteBookmarkMutation).then(res => {
-      if(res.data.Errors){
+      if (res.data.Errors) {
         console.log('Error in deleteing bookmark');
       } else {
         this.setState({
-          saved : false
+          saved: false
         }, () => {
           this.getBookmarks();
         })
@@ -167,7 +167,7 @@ class Provider extends React.Component {
           style={{
             backgroundImage: `url(${
               this.state.provider && this.state.provider.cover
-            })`,
+              })`,
           }}
           className='provider-header'
         >
@@ -218,11 +218,11 @@ class Provider extends React.Component {
               <div className='provider-bottom-header'>
                 <p>
                   {this.state.provider !== null &&
-                  this.state.categoryName === 'phones' ? (
-                    <FontAwesomeIcon icon={faMobileAlt} />
-                  ) : (
-                    <FontAwesomeIcon icon={faUtensils} />
-                  )}
+                    this.state.categoryName === 'phones' ? (
+                      <FontAwesomeIcon icon={faMobileAlt} />
+                    ) : (
+                      <FontAwesomeIcon icon={faUtensils} />
+                    )}
                   <span>
                     {this.state.provider !== null
                       ? this.state.categoryName
@@ -261,12 +261,12 @@ class Provider extends React.Component {
               </ul>
             </div>
             <div className='sharing'>
-              <button>
+              {/* <button>
                 <FontAwesomeIcon icon={faShare} /> Share
-              </button>
-              <button onClick = {() => {
-                if(localStorage.getItem('xTown')){
-                  if(!this.state.saved){
+              </button> */}
+              <button onClick={() => {
+                if (localStorage.getItem('xTown')) {
+                  if (!this.state.saved) {
                     this.addBookmark();
                   } else {
                     this.deleteBookmark();
@@ -331,11 +331,11 @@ class Provider extends React.Component {
                       {this.state.workingHours &&
                         this.state.workingHours['Saturday'][1]} */}
                       {
-                          this.state.workingHours &&
+                        this.state.workingHours &&
                           this.state.workingHours['Saturday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
-                            this.state.workingHours['Saturday'][0]} - ${this.state.workingHours &&
-                              this.state.workingHours['Saturday'][1]} `
-                        }
+                          this.state.workingHours['Saturday'][0]} - ${this.state.workingHours &&
+                          this.state.workingHours['Saturday'][1]} `
+                      }
                     </pre>
                   </li>
                   <li>
@@ -348,11 +348,11 @@ class Provider extends React.Component {
                       {this.state.workingHours &&
                         this.state.workingHours['Sunday'][1]} */}
                       {
-                          this.state.workingHours &&
+                        this.state.workingHours &&
                           this.state.workingHours['Sunday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
-                            this.state.workingHours['Sunday'][0]} - ${this.state.workingHours &&
-                              this.state.workingHours['Sunday'][1]} `
-                        }
+                          this.state.workingHours['Sunday'][0]} - ${this.state.workingHours &&
+                          this.state.workingHours['Sunday'][1]} `
+                      }
                     </pre>
                   </li>
                   <li>
@@ -364,12 +364,12 @@ class Provider extends React.Component {
                       -{' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Monday'][1]} */}
-                        {
-                          this.state.workingHours &&
+                      {
+                        this.state.workingHours &&
                           this.state.workingHours['Monday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
-                            this.state.workingHours['Monday'][0]} - ${this.state.workingHours &&
-                              this.state.workingHours['Monday'][1]} `
-                        }
+                          this.state.workingHours['Monday'][0]} - ${this.state.workingHours &&
+                          this.state.workingHours['Monday'][1]} `
+                      }
                     </pre>
                   </li>
                   <li>
@@ -381,12 +381,12 @@ class Provider extends React.Component {
                       -{' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Tuseday'][1]} */}
-                     {
-                          this.state.workingHours &&
+                      {
+                        this.state.workingHours &&
                           this.state.workingHours['Tuseday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
-                            this.state.workingHours['Tuseday'][0]} - ${this.state.workingHours &&
-                              this.state.workingHours['Tuseday'][1]} `
-                        }
+                          this.state.workingHours['Tuseday'][0]} - ${this.state.workingHours &&
+                          this.state.workingHours['Tuseday'][1]} `
+                      }
                     </pre>
                   </li>
                   <li>
@@ -399,11 +399,11 @@ class Provider extends React.Component {
                       {this.state.workingHours &&
                         this.state.workingHours['Wednesday'][1]} */}
                       {
-                          this.state.workingHours &&
+                        this.state.workingHours &&
                           this.state.workingHours['Wednesday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
-                            this.state.workingHours['Wednesday'][0]} - ${this.state.workingHours &&
-                              this.state.workingHours['Wednesday'][1]} `
-                         }
+                          this.state.workingHours['Wednesday'][0]} - ${this.state.workingHours &&
+                          this.state.workingHours['Wednesday'][1]} `
+                      }
                     </pre>
                   </li>
                   <li>
@@ -415,12 +415,12 @@ class Provider extends React.Component {
                       -{' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Thursday'][1]} */}
-                       {
-                          this.state.workingHours &&
+                      {
+                        this.state.workingHours &&
                           this.state.workingHours['Thursday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
-                            this.state.workingHours['Thursday'][0]} - ${this.state.workingHours &&
-                              this.state.workingHours['Thursday'][1]} `
-                         }
+                          this.state.workingHours['Thursday'][0]} - ${this.state.workingHours &&
+                          this.state.workingHours['Thursday'][1]} `
+                      }
                     </pre>
                   </li>
                   <li>
@@ -432,12 +432,12 @@ class Provider extends React.Component {
                       -{' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Friday'][1]} */}
-                        {
-                          this.state.workingHours &&
+                      {
+                        this.state.workingHours &&
                           this.state.workingHours['Friday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
-                            this.state.workingHours['Friday'][0]} - ${this.state.workingHours &&
-                              this.state.workingHours['Friday'][1]} `
-                         }
+                          this.state.workingHours['Friday'][0]} - ${this.state.workingHours &&
+                          this.state.workingHours['Friday'][1]} `
+                      }
                     </pre>
                   </li>
                 </ul>

@@ -162,7 +162,7 @@ class Landing extends React.Component {
                     name='serviceNamePlace'
                     onChange={this.handleChange.bind(this)}
                   />
-                  <ul id='myDropdown'>
+                  <ul id='myDropdown' style={{ overflowY: 'auto', height: '20vh' }}>
                     {this.state.providers &&
                       this.state.providers.map((provider, i) => {
                         var loc = JSON.parse(provider.location);
