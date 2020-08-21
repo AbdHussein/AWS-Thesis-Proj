@@ -47,6 +47,7 @@ $ratingHover: rgba(6, 27, 65, 0.45);
 
 // Navbar
 nav {
+  overflow: hidden;
   * {
     box-sizing: border-box;
   }
@@ -855,6 +856,7 @@ nav {
       padding: 10px 25px;
       border-radius: 8px;
       cursor: pointer;
+      outline: none;
       @extend %transition;
       &:not(:last-child) {
         margin-right: 10px;
@@ -1477,6 +1479,7 @@ hr {
 .provider-sidebar {
   float: $floatRight;
   width: 35%;
+  margin-bottom: 70px;
   .working-hours {
     margin-bottom: 30px;
     div:first-child {
