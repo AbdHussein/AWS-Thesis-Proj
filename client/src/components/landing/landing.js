@@ -310,7 +310,9 @@ class Landing extends React.Component {
                     <p>
                       <FontAwesomeIcon icon={faMobileAlt} />{' '}
                       <span className='categories'>
-                        {providerOne && providerOne.categoryName.category}
+                        {providerOne &&
+                          providerOne.categoryName &&
+                          providerOne.categoryName.category}
                       </span>
                     </p>
                   </div>
@@ -318,21 +320,23 @@ class Landing extends React.Component {
               </div>
               <div className='single-popular'>
                 <img
-                  src={providerOne && providerOne.cover}
+                  src={providerTwo && providerTwo.cover}
                   alt='Silder Image'
                 />
                 <div className='overlay'>
                   <div>
-                    <h3>{providerOne && providerOne.serviceName}</h3>
+                    <h3>{providerTwo && providerTwo.serviceName}</h3>
                     <span>
                       <FontAwesomeIcon icon={faMapMarkerAlt} />{' '}
-                      {providerOne && providerOne.address}
+                      {providerTwo && providerTwo.address}
                     </span>
                     <hr />
                     <p>
                       <FontAwesomeIcon icon={faMobileAlt} />{' '}
                       <span className='categories'>
-                        {providerOne && providerOne.categoryName.category}
+                        {providerTwo &&
+                          providerTwo.categoryName &&
+                          providerTwo.categoryName.category}
                       </span>
                     </p>
                   </div>
@@ -340,21 +344,23 @@ class Landing extends React.Component {
               </div>
               <div className='single-popular'>
                 <img
-                  src={providerOne && providerOne.cover}
+                  src={providerThree && providerThree.cover}
                   alt='Silder Image'
                 />
                 <div className='overlay'>
                   <div>
-                    <h3>{providerOne && providerOne.serviceName}</h3>
+                    <h3>{providerThree && providerThree.serviceName}</h3>
                     <span>
                       <FontAwesomeIcon icon={faMapMarkerAlt} />{' '}
-                      {providerOne && providerOne.address}
+                      {providerThree && providerThree.address}
                     </span>
                     <hr />
                     <p>
                       <FontAwesomeIcon icon={faMobileAlt} />{' '}
                       <span className='categories'>
-                        {providerOne && providerOne.categoryName.category}
+                        {providerThree &&
+                          providerThree.categoryName &&
+                          providerThree.categoryName.category}
                       </span>
                     </p>
                   </div>
