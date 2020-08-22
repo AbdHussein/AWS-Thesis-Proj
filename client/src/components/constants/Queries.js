@@ -363,9 +363,19 @@ const getProvidersByBookmarks = (userID) => {
       userID
       providerID
       provider {
+        id
         username
-        cover
+        email
+        mobile
+        serviceName
+        location
         address
+        avatar
+        cover
+        video
+        description
+        workingHours
+        categoryID
       }
     }
   }`;

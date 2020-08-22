@@ -36,6 +36,7 @@ class Landing extends React.Component {
     serviceName: '',
     loc: null,
     serviceNamePlace: '',
+    prov: null,
   };
 
   async componentDidMount() {
@@ -128,6 +129,18 @@ class Landing extends React.Component {
         <Redirect
           to={{
             pathname: '/dashboard',
+          }}
+        />
+      );
+    }
+    if (this.state.prov) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/provider',
+            state: {
+              provider: this.state.prov,
+            },
           }}
         />
       );
@@ -294,7 +307,14 @@ class Landing extends React.Component {
               eleifend. Morbi varius, nulla sit amet rutrum elementum.
             </p>
             <div className='popular-slider'>
-              <div className='single-popular'>
+              <div
+                className='single-popular'
+                onClick={() => {
+                  this.setState({
+                    prov: providerOne,
+                  });
+                }}
+              >
                 <img
                   src={providerOne && providerOne.cover}
                   alt='Silder Image'
@@ -318,7 +338,14 @@ class Landing extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className='single-popular'>
+              <div
+                className='single-popular'
+                onClick={() => {
+                  this.setState({
+                    prov: providerOne,
+                  });
+                }}
+              >
                 <img
                   src={providerTwo && providerTwo.cover}
                   alt='Silder Image'
@@ -342,7 +369,14 @@ class Landing extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className='single-popular'>
+              <div
+                className='single-popular'
+                onClick={() => {
+                  this.setState({
+                    prov: providerOne,
+                  });
+                }}
+              >
                 <img
                   src={providerThree && providerThree.cover}
                   alt='Silder Image'
