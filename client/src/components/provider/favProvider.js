@@ -85,7 +85,9 @@ class FavProviders extends React.Component {
                   );
                 })}
             </div>
-            <div className='fav-sidebar'>Test From SideBar</div>
+            <div className='fav-sidebar'>
+              <img src={require(`../../images/ads2.jpg`)} alt="Ads Photo" />
+            </div>
           </Container>
         </div>
         <Footer />
