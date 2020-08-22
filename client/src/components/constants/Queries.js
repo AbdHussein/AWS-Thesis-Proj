@@ -445,6 +445,7 @@ const getUsersByRoleID = (RoleID) => {
     workingHours
     categoryID
     RoleID
+    thumbnail
     categoryName{
       category
     }
