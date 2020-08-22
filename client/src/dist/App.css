@@ -3289,7 +3289,7 @@ nav ul li a:hover {
 /*sweet*/
 .provider-single-fact {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-bottom: 40px;
 }
 .provider-single-fact > div {
@@ -3382,6 +3382,12 @@ nav ul li a:hover {
 
 /* End Map View */
 /* Dash Gallery */
+.show-gallery {
+  border: 1px solid #4db7fe;
+  border-radius: 10px;
+  padding: 30px;
+  overflow: hidden;
+}
 .show-gallery .gallery {
   width: 32.3333333333%;
   overflow: hidden;
@@ -3410,7 +3416,7 @@ nav ul li a:hover {
   padding: 4px 5px 5px 9px;
   position: absolute;
   top: 13vh;
-  left: 9vw;
+  left: 8vw;
 }
 .show-gallery .gallery .overlay-gallery span svg {
   color: #fff;
