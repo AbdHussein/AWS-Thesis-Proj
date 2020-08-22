@@ -3359,6 +3359,7 @@ nav ul li a:hover {
   margin: 10px 0;
   font-size: 17px;
   font-weight: 600;
+  outline: none;
 }
 .map-view button svg {
   color: #4db7fe;
