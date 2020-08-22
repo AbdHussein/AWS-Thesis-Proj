@@ -6,6 +6,8 @@ import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
 import swal from 'sweetalert'
 import $ from 'jquery';
 import Constatnts from '../../constants/Queries';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 class Description extends React.Component {
   state = {
@@ -13,11 +15,14 @@ class Description extends React.Component {
     imgUrl: '',
   };
 
-  componentDidMount(){
+  componentDidMount() {
     $('#descriptionProgress').hide();
+    $('.gallery').hover(function () {
+      $(this).children('.overlay-gallery').toggle(200);
+    })
   }
 
-  uploadStarted(){
+  uploadStarted() {
     $('#descriptionProgress').show();
     $('.upload-gallery').hide();
   }
@@ -47,7 +52,7 @@ class Description extends React.Component {
     //       setTimeout(function () {
     //         $(".success-description-main").hide();
     //       }, 2000);
-        
+
   }
 
   async addPhoto() {
@@ -86,7 +91,7 @@ class Description extends React.Component {
         <div className='gallrey'>
           <h2>Add Photos To Your Gallrey</h2>
           <div className='upload-gallrey-img'>
-            <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} uploadStarted={this.uploadStarted.bind(this)}/>
+            <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} uploadStarted={this.uploadStarted.bind(this)} />
             <br></br>
             <div id="descriptionProgress">
               <CircularProgress />
@@ -120,6 +125,15 @@ class Description extends React.Component {
             <p>Perfect photo successfully added to your gallery.</p>
           </div>
         </div> */}
+        <div className="show-gallery">
+          <h2>Show Gallery</h2>
+          <div className="gallery">
+            <img src={require(`../../../images/1.jpg`)} alt="Dash Gallery" />
+            <div className="overlay-gallery">
+              <span><FontAwesomeIcon icon={faTrashAlt} /></span>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
