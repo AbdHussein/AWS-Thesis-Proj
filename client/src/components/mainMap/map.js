@@ -104,7 +104,7 @@ function MyComponent(props) {
       <Locate panTo={panTo} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={16}
+        zoom={15}
         center={centerProvider || center}
         options={options}
         onLoad={onMapload}

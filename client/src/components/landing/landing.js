@@ -77,6 +77,7 @@ class Landing extends React.Component {
   async getUsers(category) {
     if (category !== 'all') {
       const USERS = Constants.userByCategory(category);
+      console.log(USERS);
       const request = await Constants.request(USERS);
       this.setState({
         providers: request.data.data.usersByCategory,
@@ -131,6 +132,15 @@ class Landing extends React.Component {
         />
       );
     }
+    const providers = this.state.providers;
+    // get 3 provider random
+    var providerOne =
+      providers && providers[Math.floor(Math.random() * providers.length)];
+    var providerTwo =
+      providers && providers[Math.floor(Math.random() * providers.length)];
+    var providerThree =
+      providers && providers[Math.floor(Math.random() * providers.length)];
+
     return (
       <div className='landing'>
         <Navbar provider={this.state.user} />
@@ -162,7 +172,10 @@ class Landing extends React.Component {
                     name='serviceNamePlace'
                     onChange={this.handleChange.bind(this)}
                   />
-                  <ul id='myDropdown' style={{ overflowY: 'auto', height: '20vh' }}>
+                  <ul
+                    id='myDropdown'
+                    style={{ overflowY: 'auto', height: '20vh' }}
+                  >
                     {this.state.providers &&
                       this.state.providers.map((provider, i) => {
                         var loc = JSON.parse(provider.location);
@@ -282,52 +295,67 @@ class Landing extends React.Component {
             </p>
             <div className='popular-slider'>
               <div className='single-popular'>
-                <img src={require(`../../images/29.jpg`)} alt='Silder Image' />
+                <img
+                  src={providerOne && providerOne.cover}
+                  alt='Silder Image'
+                />
                 <div className='overlay'>
                   <div>
-                    <h3>Gym in the center</h3>
+                    <h3>{providerOne && providerOne.serviceName}</h3>
                     <span>
-                      <FontAwesomeIcon icon={faMapMarkerAlt} /> 70 Bright St New
-                      York, USA
+                      <FontAwesomeIcon icon={faMapMarkerAlt} />{' '}
+                      {providerOne && providerOne.address}
                     </span>
                     <hr />
                     <p>
                       <FontAwesomeIcon icon={faMobileAlt} />{' '}
-                      <span className='categories'>Phones</span>
+                      <span className='categories'>
+                        {providerOne && providerOne.categoryName.category}
+                      </span>
                     </p>
                   </div>
                 </div>
               </div>
               <div className='single-popular'>
-                <img src={require(`../../images/29.jpg`)} alt='Silder Image' />
+                <img
+                  src={providerOne && providerOne.cover}
+                  alt='Silder Image'
+                />
                 <div className='overlay'>
                   <div>
-                    <h3>Gym in the center</h3>
+                    <h3>{providerOne && providerOne.serviceName}</h3>
                     <span>
-                      <FontAwesomeIcon icon={faMapMarkerAlt} /> 70 Bright St New
-                      York, USA
+                      <FontAwesomeIcon icon={faMapMarkerAlt} />{' '}
+                      {providerOne && providerOne.address}
                     </span>
                     <hr />
                     <p>
                       <FontAwesomeIcon icon={faMobileAlt} />{' '}
-                      <span className='categories'>Phones</span>
+                      <span className='categories'>
+                        {providerOne && providerOne.categoryName.category}
+                      </span>
                     </p>
                   </div>
                 </div>
               </div>
               <div className='single-popular'>
-                <img src={require(`../../images/29.jpg`)} alt='Silder Image' />
+                <img
+                  src={providerOne && providerOne.cover}
+                  alt='Silder Image'
+                />
                 <div className='overlay'>
                   <div>
-                    <h3>Gym in the center</h3>
+                    <h3>{providerOne && providerOne.serviceName}</h3>
                     <span>
-                      <FontAwesomeIcon icon={faMapMarkerAlt} /> 70 Bright St New
-                      York, USA
+                      <FontAwesomeIcon icon={faMapMarkerAlt} />{' '}
+                      {providerOne && providerOne.address}
                     </span>
                     <hr />
                     <p>
                       <FontAwesomeIcon icon={faMobileAlt} />{' '}
-                      <span className='categories'>Phones</span>
+                      <span className='categories'>
+                        {providerOne && providerOne.categoryName.category}
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -449,7 +477,7 @@ class Landing extends React.Component {
                   <li>
                     <a
                       className='github'
-                      href='http://www.github.com'
+                      href='https://github.com/IbrahemAtef'
                       target='_blank'
                     >
                       <FontAwesomeIcon icon={faGithub} />
@@ -489,7 +517,7 @@ class Landing extends React.Component {
                   <li>
                     <a
                       className='github'
-                      href='http://www.github.com'
+                      href='https://github.com/AbdHussein'
                       target='_blank'
                     >
                       <FontAwesomeIcon icon={faGithub} />
@@ -529,7 +557,7 @@ class Landing extends React.Component {
                   <li>
                     <a
                       className='github'
-                      href='http://www.github.com'
+                      href='https://github.com/ahmed-azzam'
                       target='_blank'
                     >
                       <FontAwesomeIcon icon={faGithub} />
@@ -569,7 +597,7 @@ class Landing extends React.Component {
                   <li>
                     <a
                       className='github'
-                      href='http://www.github.com'
+                      href='https://github.com/Naderaqaoud20'
                       target='_blank'
                     >
                       <FontAwesomeIcon icon={faGithub} />
@@ -613,7 +641,7 @@ class Landing extends React.Component {
                   <li>
                     <a
                       className='github'
-                      href='http://www.github.com'
+                      href='https://github.com/dolphen05'
                       target='_blank'
                     >
                       <FontAwesomeIcon icon={faGithub} />
