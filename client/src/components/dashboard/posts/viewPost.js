@@ -15,6 +15,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import Constants from '../../constants/Queries';
+import Loading from '../../mainComp/loading';
 import { Redirect } from 'react-router-dom';
 import swal from 'sweetalert';
 
@@ -191,6 +192,7 @@ class ViewPost extends React.Component {
     }
     return (
       <div className='view-post'>
+        <Loading />
         <Navbar provider={this.state.user} />
         <Container>
           <div className='main-view-post'>

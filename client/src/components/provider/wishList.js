@@ -6,6 +6,7 @@ import Constants from '../constants/Queries';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
+import Loading from '../mainComp/loading';
 
 class WishList extends React.Component {
   state = {
@@ -36,6 +37,7 @@ class WishList extends React.Component {
     }
     return (
       <div className='wish-list'>
+        <Loading />
         <Navbar provider={this.state.user} />
         <div className='clear'></div>
         <Container>

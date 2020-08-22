@@ -6,6 +6,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '../mainComp/navbar';
 import Constants from '../constants/Queries';
 import { Redirect } from 'react-router-dom';
+import Loading from '../mainComp/loading';
 
 class Feeds extends React.Component {
   state = {
@@ -65,6 +66,7 @@ class Feeds extends React.Component {
     }
     return (
       <div className='feeds'>
+        <Loading />
         <Navbar provider={this.state.user} />
         <header>
           <div className='overlay'>
