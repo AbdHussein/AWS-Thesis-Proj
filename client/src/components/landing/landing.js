@@ -477,7 +477,7 @@ class Landing extends React.Component {
                   <li>
                     <a
                       className='github'
-                      href='http://www.github.com'
+                      href='https://github.com/IbrahemAtef'
                       target='_blank'
                     >
                       <FontAwesomeIcon icon={faGithub} />
@@ -517,7 +517,7 @@ class Landing extends React.Component {
                   <li>
                     <a
                       className='github'
-                      href='http://www.github.com'
+                      href='https://github.com/AbdHussein'
                       target='_blank'
                     >
                       <FontAwesomeIcon icon={faGithub} />
@@ -557,7 +557,7 @@ class Landing extends React.Component {
                   <li>
                     <a
                       className='github'
-                      href='http://www.github.com'
+                      href='https://github.com/ahmed-azzam'
                       target='_blank'
                     >
                       <FontAwesomeIcon icon={faGithub} />
@@ -597,7 +597,7 @@ class Landing extends React.Component {
                   <li>
                     <a
                       className='github'
-                      href='http://www.github.com'
+                      href='https://github.com/Naderaqaoud20'
                       target='_blank'
                     >
                       <FontAwesomeIcon icon={faGithub} />
@@ -641,7 +641,7 @@ class Landing extends React.Component {
                   <li>
                     <a
                       className='github'
-                      href='http://www.github.com'
+                      href='https://github.com/dolphen05'
                       target='_blank'
                     >
                       <FontAwesomeIcon icon={faGithub} />
