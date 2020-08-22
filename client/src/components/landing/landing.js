@@ -304,7 +304,7 @@ class Landing extends React.Component {
 
         <div className='popular-palces'>
           <Container>
-            <h2>Popular Palces</h2>
+            <h2>Popular Places</h2>
             <hr className='landing-hr' />
             <p>
               Mauris ac maximus neque. Nam in mauris quis libero sodales
