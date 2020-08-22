@@ -445,9 +445,19 @@ const getUsersByRoleID = (RoleID) => {
     workingHours
     categoryID
     RoleID
+    thumbnail
     categoryName{
       category
     }
+    }
+  }`;
+  return q;
+};
+
+const deleteImage = (imgID) => {
+  const q = `mutation {
+    deleteGallery(id:${imgID}){
+      id
     }
   }`;
   return q;
@@ -489,4 +499,5 @@ export default {
   addBookmark,
   addLike,
   deleteLike,
+  deleteImage,
 };

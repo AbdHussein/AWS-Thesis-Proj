@@ -14,13 +14,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Constants from '../constants/Queries';
 import { Redirect } from 'react-router-dom';
+import swal from 'sweetalert';
 
 function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
       <Link color='inherit' href='https://material-ui.com/'>
-        x-town
+        X Town
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -65,23 +66,23 @@ export default function SignIn(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const Login = Constants.login(state.email, state.password);
-    Constants.request(Login).then(response => {
-      console.log(response.data.data.login);
-      if(response.data.data.login) {
-        localStorage.removeItem('xTown');
-        localStorage.setItem('xTown', response.data.data.login.token);
-        const n = response.data.data.login.RoleID;
-        setState({
-          RoleID: n,
-        });
-      }else{
-        console.log(response);
-        alert('Error in sign up');
-      }
-    }).catch(err =>{
-      alert('access denied');
-      console.log(err);
-    });    
+    Constants.request(Login)
+      .then((response) => {
+        console.log(response.data.data.login);
+        if (response.data.data.login) {
+          localStorage.removeItem('xTown');
+          localStorage.setItem('xTown', response.data.data.login.token);
+          const n = response.data.data.login.RoleID;
+          setState({
+            RoleID: n,
+          });
+        } else {
+          throw new Error('The email or password are not correct');
+        }
+      })
+      .catch((err) => {
+        swal('OoOps!', err.message, 'error');
+      });
     // if (n == 1) {
     //   // props.history.push("/admin")
     // } else if (n == 2) {
@@ -155,10 +156,10 @@ export default function SignIn(props) {
               onChange={handelChange}
               autoComplete='current-password'
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value='remember' color='primary' />}
               label='Remember me'
-            />
+            /> */}
             <Button
               type='submit'
               fullWidth
