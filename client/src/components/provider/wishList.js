@@ -54,7 +54,7 @@ class WishList extends React.Component {
             </div>
           </div>
           <div className='wish-list-sidebar'>
-            <img src={require(`../../images/ads.jpg`)} alt="Ads Photo" />
+            <img src={require(`../../images/ads2.png`)} alt="Ads Photo" />
           </div>
         </Container>
         <div className='clear'></div>

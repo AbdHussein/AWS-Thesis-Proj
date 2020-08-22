@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../mainComp/navbar';
 import Filter from '../mainComp/filterComp';
 import { Redirect } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import { formatRelative } from 'data-fns';
 import {
   GoogleMap,
@@ -25,6 +26,7 @@ import {
 import mapStyles from './mapStyle';
 
 import Constants from '../constants/Queries';
+import { faMapMarkerAlt, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -151,15 +153,18 @@ function MyComponent(props) {
               setSelectedProvider(null);
             }}
           >
-            <div>
+            <div className="map-view">
+              <div className="img-view-map">
+                <img src={require(`../../images/29.jpg`)} alt="Map Cover" />
+              </div>
               <h2>{selectedProvider.serviceName}</h2>
-              <h4>phone: {selectedProvider.mobile}</h4>
+              <p><FontAwesomeIcon icon={faMapMarkerAlt} /> <span>W 85th St, New York, USA</span></p>
               <button
                 onClick={() => {
                   setProvider(selectedProvider);
                 }}
               >
-                Details
+                Details <FontAwesomeIcon icon={faChevronRight} />
               </button>
             </div>
           </InfoWindow>

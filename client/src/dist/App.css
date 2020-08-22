@@ -6,7 +6,7 @@
 
 /* End Main Var */
 /* Start Classes For Extends */
-.fav-provider .fav-content .fav .fav-options button, nav ul li a, .view-post .main-view-post .add-comments button, .provider-content .provider-store .main-store .store-overlay span, .provider-content .gallery .img-popup svg, .provider-content .posts .post-describe .post-info button, .provider-content .provider-promo button svg, .provider-ui .rating, .provider-nav .sharing > svg, .provider-nav .sharing button, .provider-nav .categories ul li, .landing .our-team .team-img, .landing .our-team > div, .landing .mobile-app .info button svg, .landing .mobile-app .info button, .landing .landing-promo button svg, .landing header .search-bar > div button, .landing header .search-bar .categories > ul li,
+.map-view button svg, .map-view button, .fav-provider .fav-content .fav .fav-options button, nav ul li a, .view-post .main-view-post .add-comments button, .provider-content .provider-store .main-store .store-overlay span, .provider-content .gallery .img-popup svg, .provider-content .posts .post-describe .post-info button, .provider-content .provider-promo button svg, .provider-ui .rating, .provider-nav .sharing > svg, .provider-nav .sharing button, .provider-nav .categories ul li, .landing .our-team .team-img, .landing .our-team > div, .landing .mobile-app .info button svg, .landing .mobile-app .info button, .landing .landing-promo button svg, .landing header .search-bar > div button, .landing header .search-bar .categories > ul li,
 .landing header .search-bar .search > ul li, .filter-search .second > div button, nav .auth a {
   transition: all 0.3s linear;
 }
@@ -1031,34 +1031,6 @@ hr {
 }
 .provider-content .provider-features div ul li svg {
   color: #4db7fe;
-}
-.provider-content .provider-single-fact {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 40px;
-}
-.provider-content .provider-single-fact > div {
-  background-color: #4db7fe;
-  border-radius: 10px;
-  width: 26%;
-  padding: 20px;
-}
-.provider-content .provider-single-fact > div .fac {
-  float: left;
-  width: 73%;
-  color: #fff;
-}
-.provider-content .provider-single-fact > div .fac p {
-  font-size: 40px;
-  font-weight: 700;
-  margin: -10px 0 -15px;
-}
-.provider-content .provider-single-fact > div .icon {
-  float: left;
-  width: 24%;
-  color: rgba(255, 255, 255, 0.21);
-  font-size: 50px;
-  margin-left: 3%;
 }
 .provider-content .provider-content > div:not(:first-child) {
   display: none;
@@ -2455,7 +2427,12 @@ nav ul li a:hover {
 .fav-provider .fav-sidebar {
   float: right;
   width: 29%;
-  background-color: #ccc;
+  height: 700px;
+  overflow: hidden;
+}
+.fav-provider .fav-sidebar img {
+  width: 100%;
+  height: 700px;
 }
 
 /* End FavProviders Page */
@@ -2642,7 +2619,7 @@ nav ul li a:hover {
 }
 .drop-delete .delete-waring {
   width: 317px;
-  background: #b3aeae;
+  background: #fff;
   height: 197px;
   margin: 30vh auto;
   border: 1px solid #4db7fe;
@@ -3301,3 +3278,98 @@ nav ul li a:hover {
 .swal-text {
   color: #2e3f6e;
 }
+
+/*sweet*/
+.provider-single-fact {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+.provider-single-fact > div {
+  background-color: #4db7fe;
+  border-radius: 10px;
+  width: 26%;
+  padding: 20px;
+}
+.provider-single-fact > div .fac {
+  float: left;
+  width: 73%;
+  color: #fff;
+}
+.provider-single-fact > div .fac p {
+  font-size: 40px;
+  font-weight: 700;
+  margin: -10px 0 -15px;
+}
+.provider-single-fact > div .icon {
+  float: left;
+  width: 24%;
+  color: rgba(255, 255, 255, 0.21);
+  font-size: 50px;
+  margin-left: 3%;
+}
+.provider-single-fact .num-views {
+  margin-right: 142px;
+}
+.provider-single-fact .num-post {
+  margin-left: 80px;
+}
+
+/* Start Map View */
+.gm-style-iw {
+  max-height: 300px !important;
+  max-width: 250px !important;
+  padding: 0 !important;
+}
+
+.gm-style-iw-d {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.map-view .img-view-map {
+  width: 100%;
+  overflow: hidden;
+  height: 150px;
+}
+.map-view .img-view-map img {
+  width: 100%;
+  height: 150px;
+}
+.map-view h2 {
+  color: #888da0;
+  font-size: 13px;
+  padding: 10px;
+  margin: 0;
+}
+.map-view p {
+  color: #888da0;
+  font-size: 11px;
+  padding: 10px;
+  margin: 0;
+}
+.map-view p svg {
+  color: #4db7fe;
+}
+.map-view button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888da0;
+  margin: 10px 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+.map-view button svg {
+  color: #4db7fe;
+  margin-left: 3px;
+  font-size: 13px;
+}
+.map-view button:hover {
+  color: #2e3f6e;
+}
+.map-view button:hover svg {
+  color: #2e3f6e;
+}
+
+/* End Map View */
