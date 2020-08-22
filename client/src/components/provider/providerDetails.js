@@ -67,6 +67,9 @@ class ProviderDetails extends React.Component {
     return (
       <div>
         <Container>
+          {
+            console.log(provider)
+          }
           <div
             style={{ backgroundImage: `url(${provider.thumbnail})` }}
             className='provider-promo'
