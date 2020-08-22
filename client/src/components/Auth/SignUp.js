@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Constants from '../constants/Queries';
+import swal from 'sweetalert';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,7 +36,7 @@ export default function SignUp(props) {
     email: '',
     password: '',
     username: '',
-    mobile: '',    
+    mobile: '',
   });
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -47,27 +48,31 @@ export default function SignUp(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(state.username.length > 0 && state.email.length > 0 &&
-       state.password.length > 0 && state.mobile.length > 0){
+    if (
+      state.username.length > 0 &&
+      state.email.length > 0 &&
+      state.password.length > 0 &&
+      state.mobile.length > 0
+    ) {
       const query = Constants.signUp(
         state.username,
         state.email,
         state.password,
         state.mobile
-      );  
-      console.log(query);
-      Constants.request(query).then(response => {
-        if(response.data.data.addUser) {
-          props.history.push('/signIn');
-        } else if (response.data.errors){
-          alert('Error in signing up');
-        }
-      }).catch(err => {
-        console.log(err);
-        alert('Error in signing up');
-      });   
+      );
+      Constants.request(query)
+        .then((response) => {
+          if (response.data.data.addUser) {
+            props.history.push('/signIn');
+          } else if (response.data.errors) {
+            throw new Error('The email or password are not correct');
+          }
+        })
+        .catch((err) => {
+          swal('OoOps!', err.message, 'error');
+        });
     } else {
-      alert(`There's some empty fields`);
+      swal('OoOps!', `There's some empty fields`, 'error');
     }
   };
 
@@ -85,7 +90,7 @@ export default function SignUp(props) {
                 autoComplete='username'
                 name='username'
                 variant='outlined'
-                required = {true}
+                required={true}
                 fullWidth
                 onChange={handleChange}
                 value={state.userName}
@@ -97,7 +102,7 @@ export default function SignUp(props) {
             <Grid item xs={12}>
               <TextField
                 variant='outlined'
-                required = {true}
+                required={true}
                 fullWidth
                 id='email'
                 onChange={handleChange}
@@ -111,7 +116,7 @@ export default function SignUp(props) {
             <Grid item xs={12}>
               <TextField
                 variant='outlined'
-                required = {true}
+                required={true}
                 fullWidth
                 name='mobile'
                 label='Mobile Number'
@@ -125,7 +130,7 @@ export default function SignUp(props) {
             <Grid item xs={12}>
               <TextField
                 variant='outlined'
-                required = {true}
+                required={true}
                 fullWidth
                 name='password'
                 label='Password'

@@ -79,11 +79,17 @@ class Dashboard extends React.Component {
     return (
       <div className='dashboard'>
         <Navbar provider={this.state.provider} />
-        <div className='dashboard-header'>
-          <h3>
-            Welcome:{' '}
-            {this.state.provider !== null ? this.state.provider.username : ''}
-          </h3>
+        <div className='dashboard-header' style={{
+          backgroundImage: `url(${
+            this.state.provider && this.state.provider.cover
+            })`,
+        }}>
+          <div className="overlay">
+            <h3>
+              Welcome:{' '}
+              {this.state.provider !== null ? this.state.provider.username : ''}
+            </h3>
+          </div>
         </div>
         <div className='dashboard-nav'>
           <div className='dashboard-avatar'>

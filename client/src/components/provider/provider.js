@@ -277,7 +277,7 @@ class Provider extends React.Component {
               }}>
                 <FontAwesomeIcon icon={faHeart} /> {this.state.saved ? 'Unsave' : 'Save'}
               </button>
-              <FontAwesomeIcon icon={faEllipsisH} />
+              {/* <FontAwesomeIcon icon={faEllipsisH} /> */}
             </div>
           </Container>
         </div>

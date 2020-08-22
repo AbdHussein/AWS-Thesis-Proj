@@ -10,6 +10,8 @@ import {
   faPlay,
   faMapMarked,
   faChevronDown,
+  faUserTie,
+  faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faApple,
@@ -423,7 +425,7 @@ class Landing extends React.Component {
           <Container>
             <div className='content'>
               <div>
-                <FontAwesomeIcon icon={faMapMarked} />
+                <FontAwesomeIcon icon={faMapMarkerAlt} />
                 <h4>Find Interesting Place</h4>
                 <p>
                   Proin dapibus nisl ornare diam varius tempus. Aenean a quam
@@ -434,8 +436,8 @@ class Landing extends React.Component {
             </div>
             <div className='content'>
               <div>
-                <FontAwesomeIcon icon={faMapMarked} />
-                <h4>Find Interesting Place</h4>
+                <FontAwesomeIcon icon={faUsers} />
+                <h4>Discover New Owners</h4>
                 <p>
                   Proin dapibus nisl ornare diam varius tempus. Aenean a quam
                   luctus, finibus tellus ut, convallis eros sollicitudin turpis.
@@ -446,7 +448,7 @@ class Landing extends React.Component {
             <div className='content'>
               <div>
                 <FontAwesomeIcon icon={faMapMarked} />
-                <h4>Find Interesting Place</h4>
+                <h4>See Latest News</h4>
                 <p>
                   Proin dapibus nisl ornare diam varius tempus. Aenean a quam
                   luctus, finibus tellus ut, convallis eros sollicitudin turpis.
