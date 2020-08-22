@@ -15,6 +15,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import Constants from '../../constants/Queries';
+import { Redirect } from 'react-router-dom';
+import swal from 'sweetalert';
 
 class ViewPost extends React.Component {
   state = {
@@ -25,16 +27,18 @@ class ViewPost extends React.Component {
     allComments: [],
     commentUser: null,
     likes: 0,
-    likeID : 0,
-    liked: ''
+    likeID: 0,
+    liked: '',
+    isSigned: false,
   };
 
   async componentDidMount() {
     if (this.props.location.state === undefined) {
+      console.log('errrrror');
       this.props.history.push('/');
       return;
     }
-    
+
     // get post from Redirect
     const { post } = this.props.location.state;
     this.setState({
@@ -47,19 +51,19 @@ class ViewPost extends React.Component {
       );
       const requestForUser = await Constants.request(getUserByToken);
       var user = requestForUser.data.data.user;
-    } else {
-      this.props.history.push('/');
-      return;
     }
     // git provider info by postID
     var provider = await this.getUserNameForComment(post.userID);
     // put data in the state
-    this.setState({
-      user: user || null,
-      provider,
-    }, () => {
-      this.getAllLikes();
-    });    
+    this.setState(
+      {
+        user: user || null,
+        provider,
+      },
+      () => {
+        this.getAllLikes();
+      }
+    );
     await this.getAllComments();
   }
 
@@ -72,31 +76,35 @@ class ViewPost extends React.Component {
     });
   }
 
-  getAllLikes(){
+  getAllLikes() {
     const getLikesQuery = Constants.getLikesByPostID(this.state.post.id);
-    Constants.request(getLikesQuery).then(res => {
-      console.log(res);
-      if(res.data.errors){
-        console.log('Error in retriving this post likes');
-      }else{
-        console.log(res.data.data.getLikesByPostID.length);
-        this.setState({
-          likes: res.data.data.getLikesByPostID.length
-        }, () => {
-          res.data.data.getLikesByPostID.map(like => {
-            if(like.userID === this.state.user.id){
-              this.setState({
-                likeID: like.id,
-                liked: true
-              })
+    Constants.request(getLikesQuery)
+      .then((res) => {
+        console.log(res);
+        if (res.data.errors) {
+          console.log('Error in retriving this post likes');
+        } else {
+          console.log(res.data.data.getLikesByPostID.length);
+          this.setState(
+            {
+              likes: res.data.data.getLikesByPostID.length,
+            },
+            () => {
+              res.data.data.getLikesByPostID.map((like) => {
+                if (like.userID === this.state.user.id) {
+                  this.setState({
+                    likeID: like.id,
+                    liked: true,
+                  });
+                }
+              });
             }
-          })
-        })
-      }
-    })
-    .catch(err => {      
-      console.log('Error in retriving this post likes');
-    });
+          );
+        }
+      })
+      .catch((err) => {
+        console.log('Error in retriving this post likes');
+      });
   }
 
   handleChange(e) {
@@ -114,47 +122,54 @@ class ViewPost extends React.Component {
         this.state.comment
       );
       const request = await Constants.request(addComment);
+      swal('Good job!', 'Perfect the review successfully added.', 'success');
       this.getAllComments();
     } else {
-      alert('Please sign in to comment');
-      // nadera
+      this.setState({
+        isSigned: true,
+      });
     }
   }
 
-  addLike(){
+  addLike() {
     // console.log('executed');
-    if(localStorage.getItem('xTown')){
-      const addLikeMutation = Constants.addLike(this.state.user.id, this.state.post.id);
+    if (localStorage.getItem('xTown')) {
+      const addLikeMutation = Constants.addLike(
+        this.state.user.id,
+        this.state.post.id
+      );
       console.log(addLikeMutation);
       Constants.request(addLikeMutation)
-      .then(res => {
-        if(res.data.errors){
+        .then((res) => {
+          if (res.data.errors) {
+            console.log('error in adding like to this post');
+          } else {
+            this.getAllLikes();
+          }
+        })
+        .catch((err) => {
           console.log('error in adding like to this post');
-        }else{
-          this.getAllLikes();
-        }
-      })
-      .catch(err =>{
-        console.log('error in adding like to this post');
-      });
-    }else{
+        });
+    } else {
       this.props.history.push('/signIn');
     }
   }
 
-  removeLike(){
+  removeLike() {
     const deleteLikeMutation = Constants.deleteLike(this.state.likeID);
     console.log(deleteLikeMutation);
-    Constants.request(deleteLikeMutation).then(res => {
-      console.log(res);
-      if(res.data.errors) {
+    Constants.request(deleteLikeMutation)
+      .then((res) => {
+        console.log(res);
+        if (res.data.errors) {
+          console.log('Error in removing like');
+        } else {
+          this.getAllLikes();
+        }
+      })
+      .catch((err) => {
         console.log('Error in removing like');
-      } else {
-        this.getAllLikes();
-      }
-    }).catch(err => {      
-      console.log('Error in removing like');
-    })
+      });
   }
 
   async getUserNameForComment(userID) {
@@ -165,6 +180,15 @@ class ViewPost extends React.Component {
   }
 
   render() {
+    if (this.state.isSigned) {
+      return (
+        <Redirect
+          to={{
+            pathname: `/signIn`,
+          }}
+        />
+      );
+    }
     return (
       <div className='view-post'>
         <Navbar provider={this.state.user} />
@@ -201,13 +225,13 @@ class ViewPost extends React.Component {
                         checkedIcon={<Favorite />}
                         name='checkedH'
                         id='checkedH'
-                        onClick = { () => {
-                          if(!this.state.liked){
+                        onClick={() => {
+                          if (!this.state.liked) {
                             this.addLike();
-                          }else{
+                          } else {
                             this.removeLike();
                           }
-                        } }
+                        }}
                       />
                     }
                     label={this.state.likes + ' Likes'}
