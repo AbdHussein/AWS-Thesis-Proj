@@ -1089,34 +1089,7 @@ hr {
       }
     }
   }
-  .provider-single-fact {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
-    > div {
-      background-color: #4db7fe;
-      border-radius: 10px;
-      width: 26%;
-      padding: 20px;
-      .fac {
-        float: $floatLeft;
-        width: 73%;
-        color: #fff;
-        p {
-          font-size: 40px;
-          font-weight: 700;
-          margin: -10px 0 -15px;
-        }
-      }
-      .icon {
-        float: $floatLeft;
-        width: 24%;
-        color: rgba(255, 255, 255, 0.21);
-        font-size: 50px;
-        margin-left: 3%;
-      }
-    }
-  }
+ 
   .provider-content > div:not(:first-child) {
     display: none;
   }
@@ -2766,7 +2739,7 @@ nav {
   display: none;
   .delete-waring {
     width: 317px;
-    background: rgb(179, 174, 174);
+    background: #fff;
     height: 197px;
     margin: 30vh auto;
     border: 1px solid #4db7fe;
@@ -3421,6 +3394,41 @@ nav {
 // .swal-title{
 //   color:rgb(67, 143, 60);
 // }
-.swal-text {
-  color: $mainColor;
+.swal-text{
+color:$mainColor;
+}
+/*sweet*/
+.provider-single-fact {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  > div {
+    background-color: #4db7fe;
+    border-radius: 10px;
+    width: 26%;
+    padding: 20px;
+    .fac {
+      float: $floatLeft;
+      width: 73%;
+      color: #fff;
+      p {
+        font-size: 40px;
+        font-weight: 700;
+        margin: -10px 0 -15px;
+      }
+    }
+    .icon {
+      float: $floatLeft;
+      width: 24%;
+      color: rgba(255, 255, 255, 0.21);
+      font-size: 50px;
+      margin-left: 3%;
+    }
+  }
+  .num-views{
+    margin-right: 142px;
+  }
+  .num-post{
+    margin-left: 80px;
+  }
 }
