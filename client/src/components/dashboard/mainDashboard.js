@@ -1,7 +1,7 @@
 import React from "react";
-import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
-import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
-import $ from "jquery";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSmile, faUsers, faAward } from "@fortawesome/free-solid-svg-icons";
+
 class MainDashboard extends React.Component {
   componentDidMount() {
     // $('.delete-waring button').click(function () {
@@ -10,7 +10,27 @@ class MainDashboard extends React.Component {
   }
   render() {
     return (
-      <div className="dash-main-dashboard">        
+      <div className="dash-main-dashboard">
+        <div className="provider-single-fact">
+          <div className="num-post">
+            <div className="fac">
+              <p>245</p>
+              <h6>Post</h6>
+            </div>
+            <div className="icon">
+              <FontAwesomeIcon icon={faSmile} />
+            </div>
+          </div>
+          <div className="num-views">
+            <div className="fac">
+              <p>3251</p>
+              <h6>views</h6>
+            </div>
+            <div className="icon">
+              <FontAwesomeIcon icon={faUsers} />
+            </div>
+          </div>
+        </div>
         {/* <div className="drop-delete">
           <div className="delete-waring">
             <h3>
