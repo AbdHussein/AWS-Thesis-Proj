@@ -65,7 +65,10 @@ function MyComponent(props) {
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(15);
   }, []);
-
+  const centerProvider = props.loc && {
+    lat: Number(props.loc.lat),
+    lng: Number(props.loc.lng),
+  };
   const center = {
     lat: lat,
     lng: lng,
@@ -99,8 +102,8 @@ function MyComponent(props) {
       <Locate panTo={panTo} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={13}
-        center={center}
+        zoom={16}
+        center={centerProvider || center}
         options={options}
         onLoad={onMapload}
       >
@@ -243,6 +246,7 @@ class Map extends React.Component {
     category: '',
     providers: [],
     user: null,
+    loc: null,
   };
 
   async componentDidMount() {
@@ -254,7 +258,6 @@ class Map extends React.Component {
     this.setState({
       category,
     });
-
     await this.getUsers(category);
     if (localStorage.getItem('xTown')) {
       const query = Constants.getUserByToken(localStorage.getItem('xTown'));
@@ -264,11 +267,14 @@ class Map extends React.Component {
         user,
       });
     }
+    const loc = this.props.location && this.props.location.state.loc;
+    this.setState({ loc });
   }
 
   async getUsers(category) {
     if (category !== 'all') {
       const USERS = Constants.userByCategory(category);
+      console.log(USERS);
       const request = await Constants.request(USERS);
       this.setState({
         providers: request.data.data.usersByCategory,
@@ -276,7 +282,6 @@ class Map extends React.Component {
     } else {
       const USERS = Constants.getUsersByRoleID(2);
       const request = await Constants.request(USERS);
-      console.log(request.data.data.getUsers);
       this.setState({
         providers: request.data.data.getUsers,
       });
@@ -294,7 +299,7 @@ class Map extends React.Component {
     return (
       <div className='map'>
         <Navbar provider={this.state.user} />
-        <MyComponent providers={this.state.providers} />
+        <MyComponent providers={this.state.providers} loc={this.state.loc} />
         <Filter setCategory={this.setCategory.bind(this)} />
       </div>
     );

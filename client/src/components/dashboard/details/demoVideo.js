@@ -50,7 +50,6 @@ class DemoVideo extends React.Component {
       },
       () => {
         //TODO Enable button
-        console.log("state updated");
         $("#videoProgress").hide();
         $("#uploadVideoBtn").show();
       }

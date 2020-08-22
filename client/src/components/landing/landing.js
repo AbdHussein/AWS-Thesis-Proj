@@ -14,12 +14,9 @@ import {
 import {
   faApple,
   faAndroid,
-  faFacebook,
   faTwitter,
-  faGooglePlusG,
   faLinkedinIn,
-  faFacebookF,
-  faInstagram,
+  faGithub,
 } from '@fortawesome/free-brands-svg-icons';
 import { Redirect } from 'react-router-dom';
 import Navbar from '../mainComp/navbar';
@@ -35,6 +32,10 @@ class Landing extends React.Component {
     categoryPlace: 'All Categories',
     user: null,
     done: false,
+    providers: null,
+    serviceName: '',
+    loc: null,
+    serviceNamePlace: '',
   };
 
   async componentDidMount() {
@@ -46,12 +47,17 @@ class Landing extends React.Component {
         user,
       });
     }
-
+    await this.getUsers(this.state.category);
     $('.categories span').click(function () {
       $('.categories').children('input').fadeToggle();
       $('.categories').children('ul').fadeToggle();
     });
+    $('.search span').click(function () {
+      $('.search').children('input').fadeToggle();
+      $('.search').children('ul').fadeToggle();
+    });
   }
+
   filterFunction() {
     var input, filter, ul, li, i, txtValue;
     input = document.getElementById('myInput');
@@ -65,6 +71,22 @@ class Landing extends React.Component {
       } else {
         li[i].style.display = 'none';
       }
+    }
+  }
+
+  async getUsers(category) {
+    if (category !== 'all') {
+      const USERS = Constants.userByCategory(category);
+      const request = await Constants.request(USERS);
+      this.setState({
+        providers: request.data.data.usersByCategory,
+      });
+    } else {
+      const USERS = Constants.getUsersByRoleID(2);
+      const request = await Constants.request(USERS);
+      this.setState({
+        providers: request.data.data.getUsers,
+      });
     }
   }
 
@@ -94,6 +116,7 @@ class Landing extends React.Component {
             pathname: '/map',
             state: {
               category: this.state.category,
+              loc: this.state.loc,
             },
           }}
         />
@@ -122,15 +145,46 @@ class Landing extends React.Component {
               </h3>
 
               <div className='search-bar'>
+                {/* Ibrahim To Do */}
                 <div className='search'>
                   <FontAwesomeIcon icon={faKeyboard} />
+                  <span>
+                    {this.state.serviceNamePlace === ''
+                      ? 'looking for ?'
+                      : this.state.serviceNamePlace}{' '}
+                    <FontAwesomeIcon icon={faChevronDown} />
+                  </span>
                   <input
                     type='text'
-                    name='search'
-                    placeholder='What Are You Looking For?'
-                    value={this.state.search}
+                    placeholder='Search..'
+                    id='myInput'
+                    onKeyUp={this.filterFunction.bind(this)}
+                    name='serviceNamePlace'
                     onChange={this.handleChange.bind(this)}
                   />
+                  <ul id='myDropdown' style={{ overflowY: 'auto', height: '20vh' }}>
+                    {this.state.providers &&
+                      this.state.providers.map((provider, i) => {
+                        var loc = JSON.parse(provider.location);
+                        loc.lat = Number(loc.lat);
+                        loc.lng = Number(loc.lng);
+
+                        return (
+                          <li
+                            key={i}
+                            onClick={() => {
+                              this.setState({
+                                serviceName: provider.serviceName,
+                                serviceNamePlace: provider.serviceName,
+                                loc,
+                              });
+                            }}
+                          >
+                            {provider.serviceName}
+                          </li>
+                        );
+                      })}
+                  </ul>
                 </div>
                 <div className='between'></div>
                 <div className='location'>
@@ -161,30 +215,45 @@ class Landing extends React.Component {
                   <ul id='myDropdown'>
                     <li
                       onClick={() => {
-                        this.setState({
-                          category: 'all',
-                          categoryPlace: 'All Categories',
-                        });
+                        this.setState(
+                          {
+                            category: 'all',
+                            categoryPlace: 'All Categories',
+                          },
+                          async () => {
+                            await this.getUsers(this.state.category);
+                          }
+                        );
                       }}
                     >
                       All Categories
                     </li>
                     <li
                       onClick={() => {
-                        this.setState({
-                          category: 'phones',
-                          categoryPlace: 'Phones',
-                        });
+                        this.setState(
+                          {
+                            category: 'phones',
+                            categoryPlace: 'Phones',
+                          },
+                          async () => {
+                            await this.getUsers(this.state.category);
+                          }
+                        );
                       }}
                     >
                       Phones
                     </li>
                     <li
                       onClick={() => {
-                        this.setState({
-                          category: 'restaurant',
-                          categoryPlace: 'Restaurant',
-                        });
+                        this.setState(
+                          {
+                            category: 'restaurant',
+                            categoryPlace: 'Restaurant',
+                          },
+                          async () => {
+                            await this.getUsers(this.state.category);
+                          }
+                        );
                       }}
                     >
                       Restaurant
@@ -361,11 +430,11 @@ class Landing extends React.Component {
                 <ul>
                   <li>
                     <a
-                      className='facebook'
-                      href='http://www.facebook.com'
+                      className='linkedin'
+                      href='http://www.linkedin.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faFacebookF} />
+                      <FontAwesomeIcon icon={faLinkedinIn} />
                     </a>
                   </li>
                   <li>
@@ -379,11 +448,11 @@ class Landing extends React.Component {
                   </li>
                   <li>
                     <a
-                      className='instagram'
-                      href='http://www.instagram.com'
+                      className='github'
+                      href='http://www.github.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faInstagram} />
+                      <FontAwesomeIcon icon={faGithub} />
                     </a>
                   </li>
                 </ul>
@@ -401,11 +470,11 @@ class Landing extends React.Component {
                 <ul>
                   <li>
                     <a
-                      className='facebook'
-                      href='http://www.facebook.com'
+                      className='linkedin'
+                      href='http://www.linkedin.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faFacebookF} />
+                      <FontAwesomeIcon icon={faLinkedinIn} />
                     </a>
                   </li>
                   <li>
@@ -419,11 +488,11 @@ class Landing extends React.Component {
                   </li>
                   <li>
                     <a
-                      className='instagram'
-                      href='http://www.instagram.com'
+                      className='github'
+                      href='http://www.github.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faInstagram} />
+                      <FontAwesomeIcon icon={faGithub} />
                     </a>
                   </li>
                 </ul>
@@ -441,11 +510,11 @@ class Landing extends React.Component {
                 <ul>
                   <li>
                     <a
-                      className='facebook'
-                      href='http://www.facebook.com'
+                      className='linkedin'
+                      href='http://www.linkedin.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faFacebookF} />
+                      <FontAwesomeIcon icon={faLinkedinIn} />
                     </a>
                   </li>
                   <li>
@@ -459,11 +528,11 @@ class Landing extends React.Component {
                   </li>
                   <li>
                     <a
-                      className='instagram'
-                      href='http://www.instagram.com'
+                      className='github'
+                      href='http://www.github.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faInstagram} />
+                      <FontAwesomeIcon icon={faGithub} />
                     </a>
                   </li>
                 </ul>
@@ -481,11 +550,11 @@ class Landing extends React.Component {
                 <ul>
                   <li>
                     <a
-                      className='facebook'
-                      href='http://www.facebook.com'
+                      className='linkedin'
+                      href='http://www.linkedin.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faFacebookF} />
+                      <FontAwesomeIcon icon={faLinkedinIn} />
                     </a>
                   </li>
                   <li>
@@ -499,11 +568,11 @@ class Landing extends React.Component {
                   </li>
                   <li>
                     <a
-                      className='instagram'
-                      href='http://www.instagram.com'
+                      className='github'
+                      href='http://www.github.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faInstagram} />
+                      <FontAwesomeIcon icon={faGithub} />
                     </a>
                   </li>
                 </ul>
@@ -525,11 +594,11 @@ class Landing extends React.Component {
                 <ul>
                   <li>
                     <a
-                      className='facebook'
-                      href='http://www.facebook.com'
+                      className='linkedin'
+                      href='http://www.linkedin.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faFacebookF} />
+                      <FontAwesomeIcon icon={faLinkedinIn} />
                     </a>
                   </li>
                   <li>
@@ -543,11 +612,11 @@ class Landing extends React.Component {
                   </li>
                   <li>
                     <a
-                      className='instagram'
-                      href='http://www.instagram.com'
+                      className='github'
+                      href='http://www.github.com'
                       target='_blank'
                     >
-                      <FontAwesomeIcon icon={faInstagram} />
+                      <FontAwesomeIcon icon={faGithub} />
                     </a>
                   </li>
                 </ul>

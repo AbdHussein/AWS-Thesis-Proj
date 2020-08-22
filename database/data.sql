@@ -162,7 +162,6 @@ DROP TABLE IF EXISTS `post`;
 CREATE TABLE `post` (
   `id` int NOT NULL AUTO_INCREMENT,
   `userID` int NOT NULL,
-  `likes` int NOT NULL,
   `date` varchar(50) NOT NULL,
   `text` varchar(3000) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
   `image` varchar(200) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
@@ -180,6 +179,24 @@ LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `likes`
+--
+
+DROP TABLE IF EXISTS `likes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `likes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userID` int NOT NULL,
+  `postID` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userID` (`userID`),
+  KEY `postID` (`postID`),
+  CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`id`),
+  CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`postID`) REFERENCES `post` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Table structure for table `product`

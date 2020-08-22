@@ -24,6 +24,9 @@ class ViewPost extends React.Component {
     comment: '',
     allComments: [],
     commentUser: null,
+    likes: 0,
+    likeID : 0,
+    liked: ''
   };
 
   async componentDidMount() {
@@ -31,6 +34,7 @@ class ViewPost extends React.Component {
       this.props.history.push('/');
       return;
     }
+    
     // get post from Redirect
     const { post } = this.props.location.state;
     this.setState({
@@ -53,7 +57,9 @@ class ViewPost extends React.Component {
     this.setState({
       user: user || null,
       provider,
-    });
+    }, () => {
+      this.getAllLikes();
+    });    
     await this.getAllComments();
   }
 
@@ -66,13 +72,40 @@ class ViewPost extends React.Component {
     });
   }
 
+  getAllLikes(){
+    const getLikesQuery = Constants.getLikesByPostID(this.state.post.id);
+    Constants.request(getLikesQuery).then(res => {
+      console.log(res);
+      if(res.data.errors){
+        console.log('Error in retriving this post likes');
+      }else{
+        console.log(res.data.data.getLikesByPostID.length);
+        this.setState({
+          likes: res.data.data.getLikesByPostID.length
+        }, () => {
+          res.data.data.getLikesByPostID.map(like => {
+            if(like.userID === this.state.user.id){
+              this.setState({
+                likeID: like.id,
+                liked: true
+              })
+            }
+          })
+        })
+      }
+    })
+    .catch(err => {      
+      console.log('Error in retriving this post likes');
+    });
+  }
+
   handleChange(e) {
     this.setState({
       comment: e.target.value,
     });
   }
 
-  async hanldeSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
     if (localStorage.getItem('xTown')) {
       const addComment = Constants.addComment(
@@ -86,6 +119,42 @@ class ViewPost extends React.Component {
       alert('Please sign in to comment');
       // nadera
     }
+  }
+
+  addLike(){
+    // console.log('executed');
+    if(localStorage.getItem('xTown')){
+      const addLikeMutation = Constants.addLike(this.state.user.id, this.state.post.id);
+      console.log(addLikeMutation);
+      Constants.request(addLikeMutation)
+      .then(res => {
+        if(res.data.errors){
+          console.log('error in adding like to this post');
+        }else{
+          this.getAllLikes();
+        }
+      })
+      .catch(err =>{
+        console.log('error in adding like to this post');
+      });
+    }else{
+      this.props.history.push('/signIn');
+    }
+  }
+
+  removeLike(){
+    const deleteLikeMutation = Constants.deleteLike(this.state.likeID);
+    console.log(deleteLikeMutation);
+    Constants.request(deleteLikeMutation).then(res => {
+      console.log(res);
+      if(res.data.errors) {
+        console.log('Error in removing like');
+      } else {
+        this.getAllLikes();
+      }
+    }).catch(err => {      
+      console.log('Error in removing like');
+    })
   }
 
   async getUserNameForComment(userID) {
@@ -131,9 +200,17 @@ class ViewPost extends React.Component {
                         icon={<FavoriteBorder />}
                         checkedIcon={<Favorite />}
                         name='checkedH'
+                        id='checkedH'
+                        onClick = { () => {
+                          if(!this.state.liked){
+                            this.addLike();
+                          }else{
+                            this.removeLike();
+                          }
+                        } }
                       />
                     }
-                    label={this.state.post && this.state.post.likes + ' Like'}
+                    label={this.state.likes + ' Likes'}
                   />
                 </div>
               </div>
@@ -173,7 +250,7 @@ class ViewPost extends React.Component {
                     rows='10'
                     onChange={this.handleChange.bind(this)}
                   ></textarea>
-                  <button onClick={this.hanldeSubmit.bind(this)}>
+                  <button onClick={this.handleSubmit.bind(this)}>
                     Submit Comment <FontAwesomeIcon icon={faPaperPlane} />{' '}
                   </button>
                 </form>

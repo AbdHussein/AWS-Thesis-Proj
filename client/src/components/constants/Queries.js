@@ -44,7 +44,7 @@ const getDate = () => {
 
 const addPost = (id, imageUrl, postText) => {
   const mutation = `mutation{
-    addPost(userID: ${id}, likes: 0, date: "${getDate()}", text: "${postText}", image: "${imageUrl}"){
+    addPost(userID: ${id}, date: "${getDate()}", text: "${postText}", image: "${imageUrl}"){
       id
     }
   }`;
@@ -59,6 +59,16 @@ const deletePost = (id) => {
   }`;
   return mutation;
 };
+
+const deleteBookmark = (id) => {
+  const mutation = `mutation{
+    deleteBookmark(id: ${id}){
+      id
+    }
+  }`;
+  return mutation;
+};
+
 const addComment = (userID, postID, text) => {
   const q = `mutation {
     addComment(userID:${userID}, postID:${postID}, text:"${text}", date:"${getDate()}"){
@@ -150,7 +160,6 @@ const getPostByProviderID = (userID) => {
     posts(userID:${userID}){
       id
       userID
-      likes
       date
       text
       image
@@ -288,6 +297,24 @@ const addBookmark = (userID, providerID) => {
   return mutation;
 };
 
+const addLike = (userID, postID) => {
+  const mutation = `mutation{
+    addLike(userID:${userID}, postID: ${postID}){
+      id
+    }
+  }`;
+  return mutation;
+}
+
+const deleteLike = (id) => {
+  const mutation = `mutation{
+    deleteLike(id:${id}){
+      id
+    }
+  }`;
+  return mutation;
+}
+
 const getFacilities = (userID) => {
   const q = `query {
     user(id:${userID}){
@@ -296,6 +323,17 @@ const getFacilities = (userID) => {
   }`;
   return q;
 };
+
+const getLikesByPostID = (postID) => {
+  const query = `query {
+    getLikesByPostID(postID:${postID}){
+      id
+      postID
+      userID
+    }
+  }`;
+  return query;
+}
 
 const getProducts = (userID) => {
   const q = `query {
@@ -336,7 +374,7 @@ const getProvidersByBookmarks = (userID) => {
 
 const getBookmarksByProvider = (providerID) => {
   const q = `query {
-    bookmark(providerID:${providerID}) {
+    allBookmarks(providerID:${providerID}) {
       id
       userID
       providerID   
@@ -353,7 +391,6 @@ const getPostByFavProv = (userID) => {
         posts {
           id
           userID
-          likes
           date
           text
           image
@@ -399,34 +436,40 @@ const getUsersByRoleID = (RoleID) => {
   return q;
 };
 
-module.exports.userByCategory = userByCategory;
-module.exports.categoryNameByID = categoryNameByID;
-module.exports.request = request;
-module.exports.login = login;
-module.exports.signUp = signUp;
-module.exports.addPost = addPost;
-module.exports.getUserByToken = getUserByToken;
-module.exports.getPostByProviderID = getPostByProviderID;
-module.exports.deletePost = deletePost;
-module.exports.getProviderById = getProviderById;
-module.exports.addComment = addComment;
-module.exports.getAllCommentsByPostID = getAllCommentsByPostID;
-module.exports.getAllGalary = getAllGalary;
-module.exports.getAllReviews = getAllReviews;
-module.exports.addReview = addReview;
-module.exports.addPhoto = addPhoto;
-module.exports.addDesc = addDesc;
-module.exports.addVideo = addVideo;
-module.exports.addThumbnail = addThumbnail;
-module.exports.addProduct = addProduct;
-module.exports.addFacilities = addFacilities;
-module.exports.getFacilities = getFacilities;
-module.exports.getProducts = getProducts;
-module.exports.editProviderInfo = editProviderInfo;
-module.exports.addToCart = addToCart;
-module.exports.getProvidersByBookmarks = getProvidersByBookmarks;
-module.exports.getPostByFavProv = getPostByFavProv;
-module.exports.editWorkingHours = editWorkingHours;
-module.exports.getUsersByRoleID = getUsersByRoleID;
-module.exports.getBookmarksByProvider = getBookmarksByProvider;
-module.exports.addBookmark = addBookmark;
+export default {
+  userByCategory,
+ categoryNameByID,
+ request,
+ login,
+ signUp,
+ addPost,
+ getUserByToken,
+ getPostByProviderID,
+ deletePost,
+ deleteBookmark,
+ getProviderById,
+ addComment,
+ getAllCommentsByPostID,
+ getAllGalary,
+ getAllReviews,
+ addReview,
+ addPhoto,
+ addDesc,
+ addVideo,
+ addThumbnail,
+ addProduct,
+ addFacilities,
+ getFacilities,
+ getProducts,
+ editProviderInfo,
+ addToCart,
+ getProvidersByBookmarks,
+ getPostByFavProv,
+ editWorkingHours,
+ getUsersByRoleID,
+ getBookmarksByProvider,
+ getLikesByPostID,
+ addBookmark,
+ addLike,
+ deleteLike,
+}

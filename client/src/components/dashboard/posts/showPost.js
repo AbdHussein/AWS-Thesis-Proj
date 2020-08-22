@@ -90,14 +90,14 @@ class Show extends React.Component {
                   <p>{post.date}</p>
                 </div>
                 <div className="post-edit-delete">
-                  <FontAwesomeIcon
+                  {/* <FontAwesomeIcon
                     icon={faEdit}
                     className="edit-icon"
                     onClick={() => {
                       this.handleEdit(post.id);
                     }}
                   />
-                  <p className="edit-hover">Edit</p>
+                  <p className="edit-hover">Edit</p> */}
                   <FontAwesomeIcon
                     icon={faTrash}
                     className="delete-icon"

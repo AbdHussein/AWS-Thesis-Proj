@@ -55,8 +55,9 @@ class Provider extends React.Component {
     numOfReviews: 0,
     avgRating: 0,
     workingHours: null,
-    bookmarks : 0,
-    saved: false
+    bookmarks: 0,
+    saved: false,
+    bookmarkID: 0
   };
 
   async componentDidMount() {
@@ -75,28 +76,32 @@ class Provider extends React.Component {
         }, () => {
           this.getBookmarks();
         });
-      }            
-    });    
+      }
+    });
     const categoryQuery = Constants.categoryNameByID(provider.categoryID);
     const request = await Constants.request(categoryQuery);
     this.setState({
       categoryName: request.data.data.getCategoryByID.category,
-    });    
+    });
   }
 
-  getBookmarks(){
+  getBookmarks() {
     const bookmarksQuery = Constants.getBookmarksByProvider(this.state.provider.id);
+    console.log(bookmarksQuery);
     Constants.request(bookmarksQuery).then(res => {
-      if(res.data.Errors){
+      // console.log(res);
+      if (res.data.errors) {
         console.log('Error while getting bookmarks');
       } else {
         this.setState({
-          bookmarks : res.data.data.bookmark.length
+          bookmarks: res.data.data.allBookmarks.length
         }, () => {
-          res.data.data.bookmark.map((bookmark) => {
-            if(bookmark.userID === this.state.user.id && bookmark.providerID === this.state.provider.id){
+          res.data.data.allBookmarks.map((bookmark) => {
+            if (bookmark.userID === this.state.user.id && bookmark.providerID === this.state.provider.id) {
+              // console.log('found');
               this.setState({
                 saved: true,
+                bookmarkID: bookmark.id
               })
             }
           })
@@ -114,23 +119,43 @@ class Provider extends React.Component {
     });
   }
 
-  addBookmark(){
-    if(!this.state.saved){
+  addBookmark() {
+    if (!this.state.saved) {
       const addBookmarkMutation = Constants.addBookmark(this.state.user.id, this.state.provider.id);
+      console.log(addBookmarkMutation);
       Constants.request(addBookmarkMutation)
-      .then(res => {
-        if(res.data.Errors){
+        .then(res => {
+          if (res.data.Errors) {
+            alert('Error in saving this Profile');
+          } else {
+            this.setState({
+              saved: true
+            }, () => {
+              this.getBookmarks();
+            })
+          }
+        }).catch(err => {
           alert('Error in saving this Profile');
-        } else {        
-          this.setState({
-            bookmarks : this.state.bookmarks + 1,
-            saved : true
-          })
-        }
-      }).catch(err => {
-        alert('Error in saving this Profile');
-      })
-    }    
+        })
+    }
+  }
+
+  deleteBookmark() {
+    const deleteBookmarkMutation = Constants.deleteBookmark(this.state.bookmarkID);
+    console.log(deleteBookmarkMutation);
+    Constants.request(deleteBookmarkMutation).then(res => {
+      if (res.data.Errors) {
+        console.log('Error in deleteing bookmark');
+      } else {
+        this.setState({
+          saved: false
+        }, () => {
+          this.getBookmarks();
+        })
+      }
+    }).catch(err => {
+      console.log('Error in deleteing bookmark');
+    })
   }
 
   render() {
@@ -142,7 +167,7 @@ class Provider extends React.Component {
           style={{
             backgroundImage: `url(${
               this.state.provider && this.state.provider.cover
-            })`,
+              })`,
           }}
           className='provider-header'
         >
@@ -193,11 +218,11 @@ class Provider extends React.Component {
               <div className='provider-bottom-header'>
                 <p>
                   {this.state.provider !== null &&
-                  this.state.categoryName === 'phones' ? (
-                    <FontAwesomeIcon icon={faMobileAlt} />
-                  ) : (
-                    <FontAwesomeIcon icon={faUtensils} />
-                  )}
+                    this.state.categoryName === 'phones' ? (
+                      <FontAwesomeIcon icon={faMobileAlt} />
+                    ) : (
+                      <FontAwesomeIcon icon={faUtensils} />
+                    )}
                   <span>
                     {this.state.provider !== null
                       ? this.state.categoryName
@@ -207,9 +232,9 @@ class Provider extends React.Component {
                 <p>
                   <FontAwesomeIcon icon={faHeart} /> Bookmark - {this.state.bookmarks}
                 </p>
-                <p>
+                {/* <p>
                   <FontAwesomeIcon icon={faEye} /> Viewed - 54.7K
-                </p>
+                </p> */}
               </div>
             </Container>
           </div>
@@ -236,18 +261,21 @@ class Provider extends React.Component {
               </ul>
             </div>
             <div className='sharing'>
-              <button>
+              {/* <button>
                 <FontAwesomeIcon icon={faShare} /> Share
-              </button>
-              <button onClick = {() => {
-                if(localStorage.getItem('xTown')){
-                  // alert('Saved');
-                  this.addBookmark();
+              </button> */}
+              <button onClick={() => {
+                if (localStorage.getItem('xTown')) {
+                  if (!this.state.saved) {
+                    this.addBookmark();
+                  } else {
+                    this.deleteBookmark();
+                  }
                 } else {
                   this.props.history.push('/signIn');
                 }
               }}>
-                <FontAwesomeIcon icon={faHeart} /> Save
+                <FontAwesomeIcon icon={faHeart} /> {this.state.saved ? 'Unsave' : 'Save'}
               </button>
               <FontAwesomeIcon icon={faEllipsisH} />
             </div>
@@ -296,78 +324,120 @@ class Provider extends React.Component {
                   <li>
                     Saturday
                     <pre>
-                      {' '}
+                      {/* {' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Saturday'][0]}{' '}
                       -{' '}
                       {this.state.workingHours &&
-                        this.state.workingHours['Saturday'][1]}
+                        this.state.workingHours['Saturday'][1]} */}
+                      {
+                        this.state.workingHours &&
+                          this.state.workingHours['Saturday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
+                          this.state.workingHours['Saturday'][0]} - ${this.state.workingHours &&
+                          this.state.workingHours['Saturday'][1]} `
+                      }
                     </pre>
                   </li>
                   <li>
                     Sunday
                     <pre>
-                      {' '}
+                      {/* {' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Sunday'][0]}{' '}
                       -{' '}
                       {this.state.workingHours &&
-                        this.state.workingHours['Sunday'][1]}
+                        this.state.workingHours['Sunday'][1]} */}
+                      {
+                        this.state.workingHours &&
+                          this.state.workingHours['Sunday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
+                          this.state.workingHours['Sunday'][0]} - ${this.state.workingHours &&
+                          this.state.workingHours['Sunday'][1]} `
+                      }
                     </pre>
                   </li>
                   <li>
                     Monday
                     <pre>
-                      {' '}
+                      {/* {' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Monday'][0]}{' '}
                       -{' '}
                       {this.state.workingHours &&
-                        this.state.workingHours['Monday'][1]}
+                        this.state.workingHours['Monday'][1]} */}
+                      {
+                        this.state.workingHours &&
+                          this.state.workingHours['Monday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
+                          this.state.workingHours['Monday'][0]} - ${this.state.workingHours &&
+                          this.state.workingHours['Monday'][1]} `
+                      }
                     </pre>
                   </li>
                   <li>
                     Tuseday
                     <pre>
-                      {' '}
+                      {/* {' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Tuseday'][0]}{' '}
                       -{' '}
                       {this.state.workingHours &&
-                        this.state.workingHours['Tuseday'][1]}
+                        this.state.workingHours['Tuseday'][1]} */}
+                      {
+                        this.state.workingHours &&
+                          this.state.workingHours['Tuseday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
+                          this.state.workingHours['Tuseday'][0]} - ${this.state.workingHours &&
+                          this.state.workingHours['Tuseday'][1]} `
+                      }
                     </pre>
                   </li>
                   <li>
                     Wednesday
                     <pre>
-                      {' '}
+                      {/* {' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Wednesday'][0]}{' '}
                       -{' '}
                       {this.state.workingHours &&
-                        this.state.workingHours['Wednesday'][1]}
+                        this.state.workingHours['Wednesday'][1]} */}
+                      {
+                        this.state.workingHours &&
+                          this.state.workingHours['Wednesday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
+                          this.state.workingHours['Wednesday'][0]} - ${this.state.workingHours &&
+                          this.state.workingHours['Wednesday'][1]} `
+                      }
                     </pre>
                   </li>
                   <li>
                     Thursday
                     <pre>
-                      {' '}
+                      {/* {' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Thursday'][0]}{' '}
                       -{' '}
                       {this.state.workingHours &&
-                        this.state.workingHours['Thursday'][1]}
+                        this.state.workingHours['Thursday'][1]} */}
+                      {
+                        this.state.workingHours &&
+                          this.state.workingHours['Thursday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
+                          this.state.workingHours['Thursday'][0]} - ${this.state.workingHours &&
+                          this.state.workingHours['Thursday'][1]} `
+                      }
                     </pre>
                   </li>
                   <li>
                     Friday
                     <pre>
-                      {' '}
+                      {/* {' '}
                       {this.state.workingHours &&
                         this.state.workingHours['Friday'][0]}{' '}
                       -{' '}
                       {this.state.workingHours &&
-                        this.state.workingHours['Friday'][1]}
+                        this.state.workingHours['Friday'][1]} */}
+                      {
+                        this.state.workingHours &&
+                          this.state.workingHours['Friday'].includes('closed') ? 'closed' : `${this.state.workingHours &&
+                          this.state.workingHours['Friday'][0]} - ${this.state.workingHours &&
+                          this.state.workingHours['Friday'][1]} `
+                      }
                     </pre>
                   </li>
                 </ul>

@@ -47,6 +47,7 @@ $ratingHover: rgba(6, 27, 65, 0.45);
 
 // Navbar
 nav {
+  overflow: hidden;
   * {
     box-sizing: border-box;
   }
@@ -768,16 +769,16 @@ nav {
               margin: 7px 0px 0px 8px;
             }
           }
-          .facebook {
-            background-color: #3b5998;
+          .linkedin {
+            background-color: #0077b5;
             color: #fff;
           }
           .twitter {
             background-color: #1da1f2;
             color: #fff;
           }
-          .instagram {
-            background-color: #c32aa3;
+          .github {
+            background-color: #333;
             color: #fff;
           }
         }
@@ -855,6 +856,7 @@ nav {
       padding: 10px 25px;
       border-radius: 8px;
       cursor: pointer;
+      outline: none;
       @extend %transition;
       &:not(:last-child) {
         margin-right: 10px;
@@ -904,9 +906,12 @@ nav {
     div:first-child {
       border-radius: 50%;
       background-color: $mainColor;
-      padding: 15px;
       font-weight: 700;
       margin-right: 20px;
+      padding: 9px 10px 16px 16px;
+      height: 15px;
+      margin-top: 6px;
+      width: 15px;
     }
     border-radius: 50px;
     padding: 10px 10px 0;
@@ -1447,6 +1452,7 @@ hr {
 .provider-sidebar {
   float: $floatRight;
   width: 35%;
+  margin-bottom: 70px;
   .working-hours {
     margin-bottom: 30px;
     div:first-child {
@@ -2238,7 +2244,8 @@ nav {
   overflow: hidden;
 }
 .description-btn,
-.upload-gallery ,.btn-workingHours{
+.upload-gallery,
+.btn-workingHours {
   background: #384f95;
   position: relative;
   padding: 10px 30px;
@@ -3080,7 +3087,7 @@ nav {
   display: none;
   .success-description {
     width: 317px;
-    background: rgb(179, 174, 174);;
+    background: rgb(179, 174, 174);
     height: 159px;
     margin: 47vh auto;
     border: 1px solid rgb(67, 143, 60);
@@ -3117,7 +3124,7 @@ nav {
   display: none;
   .success-gallery {
     width: 317px;
-    background: rgb(179, 174, 174);;
+    background: rgb(179, 174, 174);
     height: 159px;
     margin: 47vh auto;
     border: 1px solid rgb(67, 143, 60);
@@ -3154,7 +3161,7 @@ nav {
   display: none;
   .success-edit-dashboard {
     width: 317px;
-    background: rgb(179, 174, 174);;
+    background: rgb(179, 174, 174);
     height: 159px;
     margin: 47vh auto;
     border: 1px solid rgb(67, 143, 60);
@@ -3381,8 +3388,8 @@ nav {
 
 /* End Animation */
 /*sweet Alter*/
-.swal-modal{
-border-radius: 10px;
+.swal-modal {
+  border-radius: 10px;
 }
 // .swal-title{
 //   color:rgb(67, 143, 60);
