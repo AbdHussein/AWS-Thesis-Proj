@@ -35,12 +35,6 @@ class Dashboard extends React.Component {
     });
 
     if (localStorage.getItem('xTown')) {
-      // const query = Constants.getUserByToken(localStorage.getItem('xTown'));
-      // const request = await Constants.request(query);
-      // const provider = request.data.data.user;
-      // this.setState({
-      //   provider,      
-      // });
       await this.getProvider();
       await this.getPosts();
     } else {
@@ -52,11 +46,14 @@ class Dashboard extends React.Component {
     const query = Constants.getUserByToken(localStorage.getItem('xTown'));
     const request = await Constants.request(query);
     const provider = request.data.data.user;
-    this.setState({
-      provider
-    }, async () => {
-      await this.getPosts();
-    });
+    this.setState(
+      {
+        provider,
+      },
+      async () => {
+        await this.getPosts();
+      }
+    );
   }
 
   async getPosts() {

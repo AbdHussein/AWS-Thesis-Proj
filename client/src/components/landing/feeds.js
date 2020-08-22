@@ -23,7 +23,7 @@ class Feeds extends React.Component {
       const postsQuery = Constants.getPostByFavProv(user.id);
       const postsRequest = await Constants.request(postsQuery);
       const providers = [];
-      postsRequest.data.data.bookmark.map((bookmark) => {
+      postsRequest.data.data.bookmarks.map((bookmark) => {
         providers.push(bookmark.provider);
       });
       const ps = [];
