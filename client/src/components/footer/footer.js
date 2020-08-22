@@ -36,11 +36,11 @@ class Footer extends Component {
               <ul className='cotact-list'>
                 <li>
                   <MailOutlineIcon />
-                  <span>Mail: xtown@gmail.com</span>
+                  <span>Mail: info@xtown.com</span>
                 </li>
                 <li>
                   <LocationOnIcon />
-                  <span>Address: Palestine Gaza Remal </span>
+                  <span>Address: Palestine Gaza Remal</span>
                 </li>
                 <li>
                   <PhoneEnabledIcon />
