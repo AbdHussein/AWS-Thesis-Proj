@@ -14,6 +14,7 @@ class FavProviders extends React.Component {
   state = {
     user: null,
     bookmarks: null,
+    prov: null,
   };
 
   async componentDidMount() {
@@ -26,12 +27,15 @@ class FavProviders extends React.Component {
       console.log(allProvidersQuery);
       console.log(requsetForProviders.data);
       const bookmarks = requsetForProviders.data.data.bookmarks;
-      this.setState({
-        user,
-        bookmarks,
-      }, () => {
-        console.log(this.state);
-      });
+      this.setState(
+        {
+          user,
+          bookmarks,
+        },
+        () => {
+          console.log(this.state);
+        }
+      );
     } else {
       this.props.history.push('/');
     }
@@ -43,6 +47,18 @@ class FavProviders extends React.Component {
         <Redirect
           to={{
             pathname: '/dashboard',
+          }}
+        />
+      );
+    }
+    if (this.state.prov) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/provider',
+            state: {
+              provider: this.state.prov,
+            },
           }}
         />
       );
@@ -76,8 +92,14 @@ class FavProviders extends React.Component {
                         </span>
                       </div>
                       <div className='fav-options'>
-                        <button>unsaved</button>
-                        <button>
+                        {/* <button>unsaved</button> */}
+                        <button
+                          onClick={() => {
+                            this.setState({
+                              prov: bookmark.provider,
+                            });
+                          }}
+                        >
                           Visit <FontAwesomeIcon icon={faChevronRight} />
                         </button>
                       </div>
@@ -86,7 +108,7 @@ class FavProviders extends React.Component {
                 })}
             </div>
             <div className='fav-sidebar'>
-              <img src={require(`../../images/ads2.jpg`)} alt="Ads Photo" />
+              <img src={require(`../../images/ads2.jpg`)} alt='Ads Photo' />
             </div>
           </Container>
         </div>
