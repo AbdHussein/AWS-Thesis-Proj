@@ -42,6 +42,15 @@ const UserType = new GraphQLObjectType({
         return await knex('post').select().where({ userID: root.id });
       },
     },
+    categoryName: {
+      type: CategoryType,
+      async resolve(root, args) {
+        return await knex('category')
+          .select()
+          .where({ id: root.categoryID })
+          .first();
+      },
+    },
   }),
 });
 
@@ -51,8 +60,8 @@ const LikeType = new GraphQLObjectType({
     id: { type: GraphQLID, unique: true },
     userID: { type: GraphQLID },
     postID: { type: GraphQLID },
-  })
-})
+  }),
+});
 
 const cartType = new GraphQLObjectType({
   name: 'cart',
@@ -306,23 +315,25 @@ const RootQuery = new GraphQLObjectType({
     bookmarks: {
       type: new GraphQLList(bookmarkType),
       args: {
-        userID : { type: new GraphQLNonNull(GraphQLID) }
+        userID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('bookmark').select().where({userID : args.userID });
+        return await knex('bookmark').select().where({ userID: args.userID });
       },
     },
 
     allBookmarks: {
       type: new GraphQLList(bookmarkType),
       args: {
-        providerID : { type: new GraphQLNonNull(GraphQLID) }
+        providerID: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(root, args) {
-        return await knex('bookmark').select().where({providerID : args.providerID });
+        return await knex('bookmark')
+          .select()
+          .where({ providerID: args.providerID });
       },
     },
-    
+
     role: {
       type: rolesType,
       args: {
@@ -358,15 +369,13 @@ const RootQuery = new GraphQLObjectType({
 
     getLikesByPostID: {
       type: new GraphQLList(LikeType),
-      args : {
-        postID : { type: new GraphQLNonNull(GraphQLID) }
+      args: {
+        postID: { type: new GraphQLNonNull(GraphQLID) },
       },
-      async resolve(root, args){
-        return await knex('likes')
-          .select()
-          .where({ postID: args.postID });
-      }
-    }
+      async resolve(root, args) {
+        return await knex('likes').select().where({ postID: args.postID });
+      },
+    },
   },
 });
 
@@ -548,26 +557,26 @@ const Mutation = new GraphQLObjectType({
         return await knex('cart').where({ id: args.id }).update(args);
       },
     },
-    //for like table 
+    //for like table
     addLike: {
       type: LikeType,
-      args: {        
+      args: {
         userID: { type: new GraphQLNonNull(GraphQLID) },
         postID: { type: new GraphQLNonNull(GraphQLID) },
       },
-      async resolve(root, args){
+      async resolve(root, args) {
         return await knex('likes').insert(args);
-      }
+      },
     },
 
     deleteLike: {
       type: LikeType,
-      args: {        
-        id: { type: new GraphQLNonNull(GraphQLID) }
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
       },
-      async resolve(root, args){
-        return await knex('likes').where({id: args.id}).del();
-      }
+      async resolve(root, args) {
+        return await knex('likes').where({ id: args.id }).del();
+      },
     },
 
     // for comment table

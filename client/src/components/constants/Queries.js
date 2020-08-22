@@ -304,7 +304,7 @@ const addLike = (userID, postID) => {
     }
   }`;
   return mutation;
-}
+};
 
 const deleteLike = (id) => {
   const mutation = `mutation{
@@ -313,7 +313,7 @@ const deleteLike = (id) => {
     }
   }`;
   return mutation;
-}
+};
 
 const getFacilities = (userID) => {
   const q = `query {
@@ -333,7 +333,7 @@ const getLikesByPostID = (postID) => {
     }
   }`;
   return query;
-}
+};
 
 const getProducts = (userID) => {
   const q = `query {
@@ -431,6 +431,9 @@ const getUsersByRoleID = (RoleID) => {
     workingHours
     categoryID
     RoleID
+    categoryName{
+      category
+    }
     }
   }`;
   return q;
@@ -438,38 +441,38 @@ const getUsersByRoleID = (RoleID) => {
 
 export default {
   userByCategory,
- categoryNameByID,
- request,
- login,
- signUp,
- addPost,
- getUserByToken,
- getPostByProviderID,
- deletePost,
- deleteBookmark,
- getProviderById,
- addComment,
- getAllCommentsByPostID,
- getAllGalary,
- getAllReviews,
- addReview,
- addPhoto,
- addDesc,
- addVideo,
- addThumbnail,
- addProduct,
- addFacilities,
- getFacilities,
- getProducts,
- editProviderInfo,
- addToCart,
- getProvidersByBookmarks,
- getPostByFavProv,
- editWorkingHours,
- getUsersByRoleID,
- getBookmarksByProvider,
- getLikesByPostID,
- addBookmark,
- addLike,
- deleteLike,
-}
+  categoryNameByID,
+  request,
+  login,
+  signUp,
+  addPost,
+  getUserByToken,
+  getPostByProviderID,
+  deletePost,
+  deleteBookmark,
+  getProviderById,
+  addComment,
+  getAllCommentsByPostID,
+  getAllGalary,
+  getAllReviews,
+  addReview,
+  addPhoto,
+  addDesc,
+  addVideo,
+  addThumbnail,
+  addProduct,
+  addFacilities,
+  getFacilities,
+  getProducts,
+  editProviderInfo,
+  addToCart,
+  getProvidersByBookmarks,
+  getPostByFavProv,
+  editWorkingHours,
+  getUsersByRoleID,
+  getBookmarksByProvider,
+  getLikesByPostID,
+  addBookmark,
+  addLike,
+  deleteLike,
+};
