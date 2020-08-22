@@ -125,8 +125,8 @@ class Description extends React.Component {
             <p>Perfect photo successfully added to your gallery.</p>
           </div>
         </div> */}
+        <h2>Show Gallery</h2>
         <div className="show-gallery">
-          <h2>Show Gallery</h2>
           <div className="gallery">
             <img src={require(`../../../images/1.jpg`)} alt="Dash Gallery" />
             <div className="overlay-gallery">

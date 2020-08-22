@@ -3422,7 +3422,7 @@ nav {
 /*sweet*/
 .provider-single-fact {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-bottom: 40px;
   > div {
     background-color: #4db7fe;
@@ -3519,6 +3519,10 @@ nav {
 
 /* Dash Gallery */
 .show-gallery {
+  border: 1px solid $mainHover;
+  border-radius: 10px;
+  padding: 30px;
+  overflow: hidden;
   .gallery {
     width: ((100% - 3%)/ 3);
     overflow: hidden;
@@ -3546,7 +3550,7 @@ nav {
         padding: 4px 5px 5px 9px;
         position: absolute;
         top: 13vh;
-        left: 9vw;
+        left: 8vw;
         svg {
           color: #fff;
         }
