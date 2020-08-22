@@ -26,7 +26,10 @@ import {
 import mapStyles from './mapStyle';
 
 import Constants from '../constants/Queries';
-import { faMapMarkerAlt, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  faMapMarkerAlt,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -153,12 +156,15 @@ function MyComponent(props) {
               setSelectedProvider(null);
             }}
           >
-            <div className="map-view">
-              <div className="img-view-map">
-                <img src={require(`../../images/29.jpg`)} alt="Map Cover" />
+            <div className='map-view'>
+              <div className='img-view-map'>
+                <img src={selectedProvider.cover} alt='Map Cover' />
               </div>
               <h2>{selectedProvider.serviceName}</h2>
-              <p><FontAwesomeIcon icon={faMapMarkerAlt} /> <span>W 85th St, New York, USA</span></p>
+              <p>
+                <FontAwesomeIcon icon={faMapMarkerAlt} />{' '}
+                <span>{selectedProvider.address}</span>
+              </p>
               <button
                 onClick={() => {
                   setProvider(selectedProvider);
