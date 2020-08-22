@@ -128,7 +128,6 @@ function MyComponent(props) {
                 }}
                 onClick={() => {
                   setSelectedProvider(provider);
-                  console.log(selectedProvider);
                   // console.log(JSON.parse(selectedProvider.location).lat);
                 }}
               />

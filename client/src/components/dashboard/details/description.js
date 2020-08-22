@@ -2,8 +2,8 @@ import React from 'react';
 import ImageUpload from '../../imageUpload/imageUpload';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
-import swal from 'sweetalert'
+import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
+import swal from 'sweetalert';
 import $ from 'jquery';
 import Constatnts from '../../constants/Queries';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,13 +13,23 @@ class Description extends React.Component {
   state = {
     description: '',
     imgUrl: '',
+    allGallery: null,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    await this.getGallery();
     $('#descriptionProgress').hide();
     $('.gallery').hover(function () {
       $(this).children('.overlay-gallery').toggle(200);
-    })
+    });
+  }
+
+  async getGallery() {
+    const allGalleryQuery = Constatnts.getAllGalary(this.props.id);
+    const request = await Constatnts.request(allGalleryQuery);
+    this.setState({
+      allGallery: request.data.data.gallery,
+    });
   }
 
   uploadStarted() {
@@ -28,12 +38,15 @@ class Description extends React.Component {
   }
 
   updateImgUrl(url) {
-    this.setState({
-      imgUrl: url,
-    }, () => {
-      $('#descriptionProgress').hide();
-      $('.upload-gallery').show();
-    });
+    this.setState(
+      {
+        imgUrl: url,
+      },
+      () => {
+        $('#descriptionProgress').hide();
+        $('.upload-gallery').show();
+      }
+    );
   }
 
   handelChange(e) {
@@ -47,22 +60,18 @@ class Description extends React.Component {
       this.state.description
     );
     const request = await Constatnts.request(addDescQuery);
-    swal("Good job!", "Perfect the description successfully added", "success");
-    // $(".success-description-main").show();
-    //       setTimeout(function () {
-    //         $(".success-description-main").hide();
-    //       }, 2000);
-
+    swal('Good job!', 'Perfect the description successfully added', 'success');
   }
 
   async addPhoto() {
     const addPhotoQuery = Constatnts.addPhoto(this.props.id, this.state.imgUrl);
     const request = await Constatnts.request(addPhotoQuery);
-    swal("Good job!", "Perfect photo successfully added to your gallery", "success");
-    // $(".success-gallery-main").show();
-    // setTimeout(function () {
-    //   $(".success-gallery-main").hide();
-    // }, 2000);
+    await this.getGallery();
+    swal(
+      'Good job!',
+      'Perfect photo successfully added to your gallery',
+      'success'
+    );
   }
 
   render() {
@@ -91,9 +100,12 @@ class Description extends React.Component {
         <div className='gallrey'>
           <h2>Add Photos To Your Gallrey</h2>
           <div className='upload-gallrey-img'>
-            <ImageUpload getImgUrl={this.updateImgUrl.bind(this)} uploadStarted={this.uploadStarted.bind(this)} />
+            <ImageUpload
+              getImgUrl={this.updateImgUrl.bind(this)}
+              uploadStarted={this.uploadStarted.bind(this)}
+            />
             <br></br>
-            <div id="descriptionProgress">
+            <div id='descriptionProgress'>
               <CircularProgress />
             </div>
             <br></br>
@@ -126,13 +138,34 @@ class Description extends React.Component {
           </div>
         </div> */}
         <h2>Show Gallery</h2>
-        <div className="show-gallery">
-          <div className="gallery">
-            <img src={require(`../../../images/1.jpg`)} alt="Dash Gallery" />
-            <div className="overlay-gallery">
-              <span><FontAwesomeIcon icon={faTrashAlt} /></span>
-            </div>
-          </div>
+        <div className='show-gallery'>
+          {this.state.allGallery &&
+            this.state.allGallery.map((gallery, i) => (
+              <div className='gallery' key={i}>
+                <img src={gallery.image} alt='Dash Gallery' />
+                <div className='overlay-gallery'>
+                  <span
+                    onClick={async () => {
+                      const deleteImg = Constatnts.deleteImage(gallery.id);
+
+                      try {
+                        const request = await Constatnts.request(deleteImg);
+                        await this.getGallery();
+                        swal(
+                          'Good job!',
+                          'Perfect the delete successfully done',
+                          'success'
+                        );
+                      } catch (error) {
+                        swal('OoOps!', 'The operation failed', 'error');
+                      }
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faTrashAlt} />
+                  </span>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     );

@@ -454,6 +454,15 @@ const getUsersByRoleID = (RoleID) => {
   return q;
 };
 
+const deleteImage = (imgID) => {
+  const q = `mutation {
+    deleteGallery(id:${imgID}){
+      id
+    }
+  }`;
+  return q;
+};
+
 export default {
   userByCategory,
   categoryNameByID,
@@ -490,4 +499,5 @@ export default {
   addBookmark,
   addLike,
   deleteLike,
+  deleteImage,
 };
