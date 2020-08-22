@@ -11,7 +11,7 @@
   transition: all 0.3s linear;
 }
 
-.feeds header .overlay, .provider-header .overlay, .landing .landing-promo .overlay, .landing header .overlay {
+.show-gallery .gallery .overlay-gallery, .feeds header .overlay, .dashboard .dashboard-header .overlay, .provider-header .overlay, .landing .landing-promo .overlay, .landing header .overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -373,6 +373,7 @@ nav .logged-nav .user-details ul li:hover {
   box-sizing: border-box;
 }
 .landing .popular-palces .popular-slider .single-popular {
+  cursor: pointer;
   float: left;
   width: 32%;
   overflow: hidden;
@@ -381,9 +382,13 @@ nav .logged-nav .user-details ul li:hover {
   height: 300px;
   position: relative;
 }
+.landing .popular-palces .popular-slider .single-popular:hover img {
+  transform: scale(2.2);
+}
 .landing .popular-palces .popular-slider .single-popular img {
   width: 100%;
   height: 300px;
+  transition: all 7s ease-out;
 }
 .landing .popular-palces .popular-slider .single-popular:not(:last-child) {
   margin-right: 2%;
@@ -1629,8 +1634,8 @@ hr {
   box-sizing: border-box;
 }
 .dashboard .dashboard-header {
-  background-color: #6db6fd;
-  height: 40vh;
+  background-size: cover;
+  height: 60vh;
   position: relative;
 }
 .dashboard .dashboard-header h3 {
@@ -2410,6 +2415,8 @@ nav ul li a:hover {
   color: #fff;
   cursor: pointer;
   border-radius: 5px;
+  outline: none;
+  margin-bottom: 10px;
 }
 .fav-provider .fav-content .fav .fav-options button:last-child {
   float: right;
@@ -3374,3 +3381,37 @@ nav ul li a:hover {
 }
 
 /* End Map View */
+/* Dash Gallery */
+.show-gallery .gallery {
+  width: 32.3333333333%;
+  overflow: hidden;
+  height: 200px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 1%;
+  float: left;
+  position: relative;
+}
+.show-gallery .gallery img {
+  width: 100%;
+  height: 200px;
+}
+.show-gallery .gallery .overlay-gallery {
+  display: none;
+}
+.show-gallery .gallery .overlay-gallery span {
+  display: block;
+  background-color: #4db7fe;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.3);
+  padding: 4px 5px 5px 9px;
+  position: absolute;
+  top: 13vh;
+  left: 9vw;
+}
+.show-gallery .gallery .overlay-gallery span svg {
+  color: #fff;
+}

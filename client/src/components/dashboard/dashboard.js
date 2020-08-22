@@ -24,7 +24,7 @@ class Dashboard extends React.Component {
     $('.dash-posts').click(function () {
       $('.dash-show-add').slideToggle();
     });
-    
+
     $('.dash-details').click(function () {
       $('.dash-des').slideToggle();
     });
@@ -50,8 +50,8 @@ class Dashboard extends React.Component {
 
   async getProvider() {
     const query = Constants.getUserByToken(localStorage.getItem('xTown'));
-      const request = await Constants.request(query);
-      const provider = request.data.data.user;
+    const request = await Constants.request(query);
+    const provider = request.data.data.user;
     this.setState({
       provider
     }, async () => {
@@ -82,11 +82,17 @@ class Dashboard extends React.Component {
     return (
       <div className='dashboard'>
         <Navbar provider={this.state.provider} />
-        <div className='dashboard-header'>
-          <h3>
-            Welcome:{' '}
-            {this.state.provider !== null ? this.state.provider.username : ''}
-          </h3>
+        <div className='dashboard-header' style={{
+          backgroundImage: `url(${
+            this.state.provider && this.state.provider.cover
+            })`,
+        }}>
+          <div className="overlay">
+            <h3>
+              Welcome:{' '}
+              {this.state.provider !== null ? this.state.provider.username : ''}
+            </h3>
+          </div>
         </div>
         <div className='dashboard-nav'>
           <div className='dashboard-avatar'>

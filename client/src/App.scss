@@ -390,6 +390,7 @@ nav {
         box-sizing: border-box;
       }
       .single-popular {
+        cursor: pointer;
         float: $floatLeft;
         width: ((100% - 4%) / 3);
         overflow: hidden;
@@ -397,9 +398,15 @@ nav {
         border-radius: 10px;
         height: 300px;
         position: relative;
+        &:hover {
+          img {
+            transform: scale(2.2);
+          }
+        }
         img {
           width: 100%;
           height: 300px;
+          transition: all 7s ease-out;
         }
         &:not(:last-child) {
           margin-right: 2%;
@@ -1706,9 +1713,12 @@ hr {
     box-sizing: border-box;
   }
   .dashboard-header {
-    background-color: #6db6fd;
-    height: 40vh;
+    background-size: cover;
+    height: 60vh;
     position: relative;
+    .overlay {
+      @extend %overlay;
+    }
     h3 {
       margin-top: 0;
       position: absolute;
@@ -2498,6 +2508,8 @@ nav {
           color: #fff;
           cursor: pointer;
           border-radius: 5px;
+          outline: none;
+          margin-bottom: 10px;
           @extend %transition;
           &:last-child {
             float: $floatRight;
@@ -3504,3 +3516,41 @@ nav {
   }
 }
 /* End Map View */
+
+/* Dash Gallery */
+.show-gallery {
+  .gallery {
+    width: ((100% - 3%)/ 3);
+    overflow: hidden;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 1%;
+    float: $floatLeft;
+    position: relative;
+    img {
+      width: 100%;
+      height: 200px;
+    }
+    .overlay-gallery {
+      @extend %overlay;
+      display: none;
+      span {
+        display: block;
+        background-color: $mainHover;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        border-radius: 50%;
+        @include boxShadow(4px);
+        padding: 4px 5px 5px 9px;
+        position: absolute;
+        top: 13vh;
+        left: 9vw;
+        svg {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
