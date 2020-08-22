@@ -15,6 +15,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import Constants from '../../constants/Queries';
+import Loading from '../../mainComp/loading';
 
 class ViewPost extends React.Component {
   state = {
@@ -25,7 +26,7 @@ class ViewPost extends React.Component {
     allComments: [],
     commentUser: null,
     likes: 0,
-    likeID : 0,
+    likeID: 0,
     liked: ''
   };
 
@@ -34,7 +35,7 @@ class ViewPost extends React.Component {
       this.props.history.push('/');
       return;
     }
-    
+
     // get post from Redirect
     const { post } = this.props.location.state;
     this.setState({
@@ -59,7 +60,7 @@ class ViewPost extends React.Component {
       provider,
     }, () => {
       this.getAllLikes();
-    });    
+    });
     await this.getAllComments();
   }
 
@@ -72,19 +73,19 @@ class ViewPost extends React.Component {
     });
   }
 
-  getAllLikes(){
+  getAllLikes() {
     const getLikesQuery = Constants.getLikesByPostID(this.state.post.id);
     Constants.request(getLikesQuery).then(res => {
       console.log(res);
-      if(res.data.errors){
+      if (res.data.errors) {
         console.log('Error in retriving this post likes');
-      }else{
+      } else {
         console.log(res.data.data.getLikesByPostID.length);
         this.setState({
           likes: res.data.data.getLikesByPostID.length
         }, () => {
           res.data.data.getLikesByPostID.map(like => {
-            if(like.userID === this.state.user.id){
+            if (like.userID === this.state.user.id) {
               this.setState({
                 likeID: like.id,
                 liked: true
@@ -94,9 +95,9 @@ class ViewPost extends React.Component {
         })
       }
     })
-    .catch(err => {      
-      console.log('Error in retriving this post likes');
-    });
+      .catch(err => {
+        console.log('Error in retriving this post likes');
+      });
   }
 
   handleChange(e) {
@@ -121,38 +122,38 @@ class ViewPost extends React.Component {
     }
   }
 
-  addLike(){
+  addLike() {
     // console.log('executed');
-    if(localStorage.getItem('xTown')){
+    if (localStorage.getItem('xTown')) {
       const addLikeMutation = Constants.addLike(this.state.user.id, this.state.post.id);
       console.log(addLikeMutation);
       Constants.request(addLikeMutation)
-      .then(res => {
-        if(res.data.errors){
+        .then(res => {
+          if (res.data.errors) {
+            console.log('error in adding like to this post');
+          } else {
+            this.getAllLikes();
+          }
+        })
+        .catch(err => {
           console.log('error in adding like to this post');
-        }else{
-          this.getAllLikes();
-        }
-      })
-      .catch(err =>{
-        console.log('error in adding like to this post');
-      });
-    }else{
+        });
+    } else {
       this.props.history.push('/signIn');
     }
   }
 
-  removeLike(){
+  removeLike() {
     const deleteLikeMutation = Constants.deleteLike(this.state.likeID);
     console.log(deleteLikeMutation);
     Constants.request(deleteLikeMutation).then(res => {
       console.log(res);
-      if(res.data.errors) {
+      if (res.data.errors) {
         console.log('Error in removing like');
       } else {
         this.getAllLikes();
       }
-    }).catch(err => {      
+    }).catch(err => {
       console.log('Error in removing like');
     })
   }
@@ -167,6 +168,7 @@ class ViewPost extends React.Component {
   render() {
     return (
       <div className='view-post'>
+        <Loading />
         <Navbar provider={this.state.user} />
         <Container>
           <div className='main-view-post'>
@@ -201,13 +203,13 @@ class ViewPost extends React.Component {
                         checkedIcon={<Favorite />}
                         name='checkedH'
                         id='checkedH'
-                        onClick = { () => {
-                          if(!this.state.liked){
+                        onClick={() => {
+                          if (!this.state.liked) {
                             this.addLike();
-                          }else{
+                          } else {
                             this.removeLike();
                           }
-                        } }
+                        }}
                       />
                     }
                     label={this.state.likes + ' Likes'}

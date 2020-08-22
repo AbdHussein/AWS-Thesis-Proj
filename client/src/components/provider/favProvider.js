@@ -9,6 +9,7 @@ import {
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
+import Loading from '../mainComp/loading';
 
 class FavProviders extends React.Component {
   state = {
@@ -65,6 +66,7 @@ class FavProviders extends React.Component {
     }
     return (
       <div>
+        <Loading />
         <Navbar provider={this.state.user} />
         <div className='fav-provider'>
           <Container>

@@ -46,6 +46,7 @@ import Footer from '../footer/footer';
 import waterMelon from '../../main';
 import Constants from '../constants/Queries';
 import jwt from 'jsonwebtoken';
+import Loading from '../mainComp/loading';
 
 class Provider extends React.Component {
   state = {
@@ -162,6 +163,7 @@ class Provider extends React.Component {
     const [value] = '80';
     return (
       <div className='provider'>
+        <Loading />
         <Navbar provider={this.state.user} />
         <div
           style={{

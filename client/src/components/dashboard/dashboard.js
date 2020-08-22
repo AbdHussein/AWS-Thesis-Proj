@@ -13,6 +13,7 @@ import Navbar from '../mainComp/navbar';
 import Constants from '../constants/Queries';
 import StoreDashboard from './storeDashboard';
 import { Redirect } from 'react-router-dom';
+import Loading from '../mainComp/loading';
 
 class Dashboard extends React.Component {
   state = {
@@ -78,6 +79,7 @@ class Dashboard extends React.Component {
     }
     return (
       <div className='dashboard'>
+        <Loading />
         <Navbar provider={this.state.provider} />
         <div className='dashboard-header' style={{
           backgroundImage: `url(${

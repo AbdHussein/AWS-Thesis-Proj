@@ -30,6 +30,7 @@ import {
   faMapMarkerAlt,
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
+import Loading from '../mainComp/loading';
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -309,6 +310,7 @@ class Map extends React.Component {
   render() {
     return (
       <div className='map'>
+        <Loading />
         <Navbar provider={this.state.user} />
         <MyComponent providers={this.state.providers} loc={this.state.loc} />
         <Filter setCategory={this.setCategory.bind(this)} />
