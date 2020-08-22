@@ -19,6 +19,7 @@ const userByCategory = (category) => {
             description
             workingHours
             categoryID
+            thumbnail
         }
       }`;
   return us;
@@ -150,6 +151,7 @@ const getUserByToken = (token) => {
       description
       workingHours
       categoryID
+      thumbnail
     }
   }`;
   return q;
@@ -186,6 +188,7 @@ const getProviderById = (userID) => {
       video
       description
       workingHours
+      thumbnail
     }
   }`;
   return q;
@@ -376,6 +379,7 @@ const getProvidersByBookmarks = (userID) => {
         description
         workingHours
         categoryID
+        thumbnail
       }
     }
   }`;
@@ -395,7 +399,7 @@ const getBookmarksByProvider = (providerID) => {
 
 const getPostByFavProv = (userID) => {
   const q = `query {
-    bookmark(userID:${userID}){
+    bookmarks(userID:${userID}){
       provider{
         email
         posts {
