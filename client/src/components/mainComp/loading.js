@@ -5,7 +5,7 @@ class Loading extends React.Component {
 
     componentDidMount() {
         $(window).on('load', function () {
-            $('.dots-container').fadeOut();
+            $('.dots-container').fadeOut(2000);
         })
     }
 
