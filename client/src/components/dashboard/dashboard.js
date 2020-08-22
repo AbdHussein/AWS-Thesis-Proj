@@ -24,7 +24,7 @@ class Dashboard extends React.Component {
     $('.dash-posts').click(function () {
       $('.dash-show-add').slideToggle();
     });
-    
+
     $('.dash-details').click(function () {
       $('.dash-des').slideToggle();
     });
@@ -35,12 +35,6 @@ class Dashboard extends React.Component {
     });
 
     if (localStorage.getItem('xTown')) {
-      // const query = Constants.getUserByToken(localStorage.getItem('xTown'));
-      // const request = await Constants.request(query);
-      // const provider = request.data.data.user;
-      // this.setState({
-      //   provider,      
-      // });
       await this.getProvider();
       await this.getPosts();
     } else {
@@ -50,13 +44,16 @@ class Dashboard extends React.Component {
 
   async getProvider() {
     const query = Constants.getUserByToken(localStorage.getItem('xTown'));
-      const request = await Constants.request(query);
-      const provider = request.data.data.user;
-    this.setState({
-      provider
-    }, async () => {
-      await this.getPosts();
-    });
+    const request = await Constants.request(query);
+    const provider = request.data.data.user;
+    this.setState(
+      {
+        provider,
+      },
+      async () => {
+        await this.getPosts();
+      }
+    );
   }
 
   async getPosts() {

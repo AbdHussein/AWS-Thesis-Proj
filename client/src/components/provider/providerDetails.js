@@ -57,7 +57,6 @@ class ProviderDetails extends React.Component {
   async componentDidMount() {
     const getAllFsQuery = Constants.getFacilities(this.props.provider.id);
     const request = await Constants.request(getAllFsQuery);
-    // console.log();
     this.setState({
       allFs: JSON.parse(request.data.data.user.facilities),
     });
@@ -68,7 +67,10 @@ class ProviderDetails extends React.Component {
     return (
       <div>
         <Container>
-          <div style={{ backgroundImage: `url(${Background})` }} className='provider-promo'>
+          <div
+            style={{ backgroundImage: `url(${provider.thumbnail})` }}
+            className='provider-promo'
+          >
             <button>
               <FontAwesomeIcon icon={faVideo} /> <span>Promo Video</span>
             </button>
