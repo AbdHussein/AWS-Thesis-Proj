@@ -358,7 +358,7 @@ const editProviderInfo = (id, serviceName, email, mobile, address, cover) => {
 
 const getProvidersByBookmarks = (userID) => {
   const q = `query {
-    bookmark (userID:${userID}) {
+    bookmarks(userID:${userID}) {
       id
       userID
       providerID

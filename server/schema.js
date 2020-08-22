@@ -303,6 +303,15 @@ const RootQuery = new GraphQLObjectType({
         return await knex('roles').select();
       },
     },
+    bookmarks: {
+      type: new GraphQLList(bookmarkType),
+      args: {
+        userID : { type: new GraphQLNonNull(GraphQLID) }
+      },
+      async resolve(root, args) {
+        return await knex('bookmark').select().where({userID : args.userID });
+      },
+    },
 
     allBookmarks: {
       type: new GraphQLList(bookmarkType),
