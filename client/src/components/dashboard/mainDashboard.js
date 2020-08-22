@@ -1,6 +1,6 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSmile, faUsers, faAward } from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSmile, faUsers, faAward } from '@fortawesome/free-solid-svg-icons';
 
 class MainDashboard extends React.Component {
   componentDidMount() {
@@ -10,8 +10,8 @@ class MainDashboard extends React.Component {
   }
   render() {
     return (
-      <div className="dash-main-dashboard">
-        <div className="provider-single-fact">
+      <div className='dash-main-dashboard'>
+        {/* <div className="provider-single-fact">
           <div className="num-post">
             <div className="fac">
               <p>245</p>
@@ -30,7 +30,8 @@ class MainDashboard extends React.Component {
               <FontAwesomeIcon icon={faUsers} />
             </div>
           </div>
-        </div>
+        </div> */}
+
         {/* <div className="drop-delete">
           <div className="delete-waring">
             <h3>
