@@ -83,13 +83,6 @@ export default function SignIn(props) {
       .catch((err) => {
         swal('OoOps!', err.message, 'error');
       });
-    // if (n == 1) {
-    //   // props.history.push("/admin")
-    // } else if (n == 2) {
-    //   props.history.push('/dashboard');
-    // } else if (n == 3) {
-    //   props.history.push('/');
-    // }
   };
 
   const classes = useStyles();
